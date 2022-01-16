@@ -1,0 +1,295 @@
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6uPyVm.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.arch armv7e-m
+   3              		.fpu fpv5-d16
+   4              		.eabi_attribute 28, 1
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.file	"ZXingReader.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.rodata.main.str1.4,"aMS",%progbits,1
+  19              		.align	2
+  20              	.LC0:
+  21 0000 2E2F696D 		.ascii	"./images/01.png\000"
+  21      61676573 
+  21      2F30312E 
+  21      706E6700 
+  22              		.align	2
+  23              	.LC1:
+  24 0010 3D3D3D3D 		.ascii	"======TIME to decode=====\000"
+  24      3D3D5449 
+  24      4D452074 
+  24      6F206465 
+  24      636F6465 
+  25 002a 0000     		.align	2
+  26              	.LC2:
+  27 002c 25640A00 		.ascii	"%d\012\000"
+  28              		.align	2
+  29              	.LC3:
+  30 0030 546F7461 		.ascii	"Total Time = %3.2f msec.\015\012\000"
+  30      6C205469 
+  30      6D65203D 
+  30      2025332E 
+  30      3266206D 
+  31 004b 00       		.align	2
+  32              	.LC4:
+  33 004c 3D3D3D3D 		.ascii	"=========================\012\000"
+  33      3D3D3D3D 
+  33      3D3D3D3D 
+  33      3D3D3D3D 
+  33      3D3D3D3D 
+  34 0067 00       		.align	2
+  35              	.LC5:
+  36 0068 257300   		.ascii	"%s\000"
+  37              		.section	.text.main,"ax",%progbits
+  38              		.align	1
+  39              		.global	main
+  40              		.syntax unified
+  41              		.thumb
+  42              		.thumb_func
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6uPyVm.s 			page 2
+
+
+  44              	main:
+  45              	.LFB3:
+  46              		.file 1 "ZXingReader.c"
+   1:ZXingReader.c **** /*
+   2:ZXingReader.c **** * Copyright 2016 Nu-book Inc.
+   3:ZXingReader.c **** *
+   4:ZXingReader.c **** * Licensed under the Apache License, Version 2.0 (the "License");
+   5:ZXingReader.c **** * you may not use this file except in compliance with the License.
+   6:ZXingReader.c **** * You may obtain a copy of the License at
+   7:ZXingReader.c **** *
+   8:ZXingReader.c **** *      http://www.apache.org/licenses/LICENSE-2.0
+   9:ZXingReader.c **** *
+  10:ZXingReader.c **** * Unless required by applicable law or agreed to in writing, software
+  11:ZXingReader.c **** * distributed under the License is distributed on an "AS IS" BASIS,
+  12:ZXingReader.c **** * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  13:ZXingReader.c **** * See the License for the specific language governing permissions and
+  14:ZXingReader.c **** * limitations under the License.
+  15:ZXingReader.c **** */
+  16:ZXingReader.c **** 
+  17:ZXingReader.c **** #include <stdio.h>
+  18:ZXingReader.c **** #include <time.h>
+  19:ZXingReader.c **** 
+  20:ZXingReader.c **** #include "stb_image.h"
+  21:ZXingReader.c **** #include "test.h"
+  22:ZXingReader.c **** 
+  23:ZXingReader.c **** char filepath[200];
+  24:ZXingReader.c **** 
+  25:ZXingReader.c **** #define FILE_TEST 		(1)
+  26:ZXingReader.c **** 
+  27:ZXingReader.c **** static void ReadBarCode(void);
+  28:ZXingReader.c **** 
+  29:ZXingReader.c **** int main()
+  30:ZXingReader.c **** {
+  47              		.loc 1 30 1 view -0
+  48              		.cfi_startproc
+  49              		@ args = 0, pretend = 0, frame = 0
+  50              		@ frame_needed = 0, uses_anonymous_args = 0
+  51 0000 10B5     		push	{r4, lr}
+  52              	.LCFI0:
+  53              		.cfi_def_cfa_offset 8
+  54              		.cfi_offset 4, -8
+  55              		.cfi_offset 14, -4
+  56 0002 2DED028B 		vpush.64	{d8}
+  57              	.LCFI1:
+  58              		.cfi_def_cfa_offset 16
+  59              		.cfi_offset 80, -16
+  60              		.cfi_offset 81, -12
+  31:ZXingReader.c **** 	double startClock;
+  61              		.loc 1 31 2 view .LVU1
+  32:ZXingReader.c ****     int width, height, channels;
+  62              		.loc 1 32 5 view .LVU2
+  33:ZXingReader.c **** 	int *buffer = NULL;
+  63              		.loc 1 33 2 view .LVU3
+  64              	.LVL0:
+  34:ZXingReader.c ****     // need to Test 7 images
+  35:ZXingReader.c ****     #if   (FILE_TEST == 1)
+  36:ZXingReader.c ****     sprintf(filepath,"./images/01.png");
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6uPyVm.s 			page 3
+
+
+  65              		.loc 1 36 5 view .LVU4
+  66 0006 194C     		ldr	r4, .L5
+  67 0008 194B     		ldr	r3, .L5+4
+  68 000a 0FCB     		ldm	r3, {r0, r1, r2, r3}
+  69 000c 84E80F00 		stm	r4, {r0, r1, r2, r3}
+  37:ZXingReader.c ****     #elif (FILE_TEST == 2)
+  38:ZXingReader.c ****     sprintf(filepath,"./images/07.png");
+  39:ZXingReader.c ****     #elif (FILE_TEST == 3)
+  40:ZXingReader.c ****     sprintf(filepath,"./images/10.png");
+  41:ZXingReader.c ****     #elif (FILE_TEST == 4)
+  42:ZXingReader.c ****     sprintf(filepath,"./images/14.png");
+  43:ZXingReader.c ****     #elif (FILE_TEST == 5)
+  44:ZXingReader.c ****     sprintf(filepath,"./images/20.bmp");
+  45:ZXingReader.c ****     #elif (FILE_TEST == 6)
+  46:ZXingReader.c ****     sprintf(filepath,"./images/21.jpg"); // Sample of No Decode
+  47:ZXingReader.c ****     #elif (FILE_TEST == 7)
+  48:ZXingReader.c ****     sprintf(filepath,"./images/22.jpg"); // Ecc Zero - Error with Trans
+  49:ZXingReader.c ****     #endif
+  50:ZXingReader.c **** 
+  51:ZXingReader.c ****     //buffer = stbi_load(filepath,&width, &height, &channels, 4);
+  52:ZXingReader.c **** 
+  53:ZXingReader.c **** 	//if (buffer == NULL)
+  54:ZXingReader.c **** 	//{
+  55:ZXingReader.c **** 		//printf("Failed to read image: %s\n", filepath);
+  56:ZXingReader.c **** 		//return -1;
+  57:ZXingReader.c **** 	//}
+  58:ZXingReader.c **** 	printf("======TIME to decode=====\n");
+  70              		.loc 1 58 2 view .LVU5
+  71 0010 1848     		ldr	r0, .L5+8
+  72 0012 FFF7FEFF 		bl	puts
+  73              	.LVL1:
+  59:ZXingReader.c **** 	startClock = clock();
+  74              		.loc 1 59 2 view .LVU6
+  75              		.loc 1 59 15 is_stmt 0 view .LVU7
+  76 0016 FFF7FEFF 		bl	clock
+  77              	.LVL2:
+  78 001a 08EE100A 		vmov	s16, r0	@ int
+  79              		.loc 1 59 13 view .LVU8
+  80 001e B8EE488B 		vcvt.f64.u32	d8, s16
+  81              	.LVL3:
+  60:ZXingReader.c **** 
+  61:ZXingReader.c ****     for(long i =0;i<500;i++)
+  82              		.loc 1 61 5 is_stmt 1 view .LVU9
+  83              	.LBB2:
+  84              		.loc 1 61 9 view .LVU10
+  85              		.loc 1 61 14 is_stmt 0 view .LVU11
+  86 0022 0024     		movs	r4, #0
+  87              		.loc 1 61 5 view .LVU12
+  88 0024 04E0     		b	.L2
+  89              	.LVL4:
+  90              	.L3:
+  62:ZXingReader.c ****     {
+  63:ZXingReader.c ****         printf("%d\n",i);
+  91              		.loc 1 63 9 is_stmt 1 discriminator 3 view .LVU13
+  92 0026 2146     		mov	r1, r4
+  93 0028 1348     		ldr	r0, .L5+12
+  94 002a FFF7FEFF 		bl	printf
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6uPyVm.s 			page 4
+
+
+  95              	.LVL5:
+  61:ZXingReader.c ****     {
+  96              		.loc 1 61 25 discriminator 3 view .LVU14
+  61:ZXingReader.c ****     {
+  97              		.loc 1 61 26 is_stmt 0 discriminator 3 view .LVU15
+  98 002e 0134     		adds	r4, r4, #1
+  99              	.LVL6:
+ 100              	.L2:
+  61:ZXingReader.c ****     {
+ 101              		.loc 1 61 19 is_stmt 1 discriminator 1 view .LVU16
+  61:ZXingReader.c ****     {
+ 102              		.loc 1 61 5 is_stmt 0 discriminator 1 view .LVU17
+ 103 0030 B4F5FA7F 		cmp	r4, #500
+ 104 0034 F7DB     		blt	.L3
+ 105              	.LBE2:
+  64:ZXingReader.c ****     }
+  65:ZXingReader.c **** 
+  66:ZXingReader.c **** 	printf("Total Time = %3.2f msec.\r\n", clock() - startClock);
+ 106              		.loc 1 66 2 is_stmt 1 view .LVU18
+ 107              		.loc 1 66 41 is_stmt 0 view .LVU19
+ 108 0036 FFF7FEFF 		bl	clock
+ 109              	.LVL7:
+ 110 003a 07EE100A 		vmov	s14, r0	@ int
+ 111              		.loc 1 66 2 view .LVU20
+ 112 003e B8EE477B 		vcvt.f64.u32	d7, s14
+ 113 0042 37EE487B 		vsub.f64	d7, d7, d8
+ 114 0046 53EC172B 		vmov	r2, r3, d7
+ 115 004a 0C48     		ldr	r0, .L5+16
+ 116 004c FFF7FEFF 		bl	printf
+ 117              	.LVL8:
+  67:ZXingReader.c **** 	printf("=========================\n\n");
+ 118              		.loc 1 67 2 is_stmt 1 view .LVU21
+ 119 0050 0B48     		ldr	r0, .L5+20
+ 120 0052 FFF7FEFF 		bl	puts
+ 121              	.LVL9:
+  68:ZXingReader.c ****     //while(1)
+  69:ZXingReader.c ****     //{
+  70:ZXingReader.c ****     printf("%s",filepath);
+ 122              		.loc 1 70 5 view .LVU22
+ 123 0056 0549     		ldr	r1, .L5
+ 124 0058 0A48     		ldr	r0, .L5+24
+ 125 005a FFF7FEFF 		bl	printf
+ 126              	.LVL10:
+  71:ZXingReader.c ****         //system("pause");
+  72:ZXingReader.c ****     //}
+  73:ZXingReader.c ****     test_function();
+ 127              		.loc 1 73 5 view .LVU23
+ 128 005e FFF7FEFF 		bl	test_function
+ 129              	.LVL11:
+  74:ZXingReader.c ****     return 0;
+ 130              		.loc 1 74 5 view .LVU24
+  75:ZXingReader.c **** }
+ 131              		.loc 1 75 1 is_stmt 0 view .LVU25
+ 132 0062 0020     		movs	r0, #0
+ 133 0064 BDEC028B 		vldm	sp!, {d8}
+ 134              	.LCFI2:
+ 135              		.cfi_restore 80
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6uPyVm.s 			page 5
+
+
+ 136              		.cfi_restore 81
+ 137              		.cfi_def_cfa_offset 8
+ 138              	.LVL12:
+ 139              		.loc 1 75 1 view .LVU26
+ 140 0068 10BD     		pop	{r4, pc}
+ 141              	.LVL13:
+ 142              	.L6:
+ 143              		.loc 1 75 1 view .LVU27
+ 144 006a 00BF     		.align	2
+ 145              	.L5:
+ 146 006c 00000000 		.word	.LANCHOR0
+ 147 0070 00000000 		.word	.LC0
+ 148 0074 10000000 		.word	.LC1
+ 149 0078 2C000000 		.word	.LC2
+ 150 007c 30000000 		.word	.LC3
+ 151 0080 4C000000 		.word	.LC4
+ 152 0084 68000000 		.word	.LC5
+ 153              		.cfi_endproc
+ 154              	.LFE3:
+ 156              		.global	filepath
+ 157              		.section	.bss.filepath,"aw",%nobits
+ 158              		.align	2
+ 159              		.set	.LANCHOR0,. + 0
+ 162              	filepath:
+ 163 0000 00000000 		.space	200
+ 163      00000000 
+ 163      00000000 
+ 163      00000000 
+ 163      00000000 
+ 164              		.text
+ 165              	.Letext0:
+ 166              		.file 2 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\stdio.h"
+ 167              		.file 3 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\time.h"
+ 168              		.file 4 "test.h"
+ 169              		.file 5 "<built-in>"
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6uPyVm.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 ZXingReader.c
+C:\Users\jisu8\AppData\Local\Temp\cc6uPyVm.s:19     .rodata.main.str1.4:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cc6uPyVm.s:38     .text.main:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc6uPyVm.s:44     .text.main:00000000 main
+C:\Users\jisu8\AppData\Local\Temp\cc6uPyVm.s:146    .text.main:0000006c $d
+C:\Users\jisu8\AppData\Local\Temp\cc6uPyVm.s:162    .bss.filepath:00000000 filepath
+C:\Users\jisu8\AppData\Local\Temp\cc6uPyVm.s:158    .bss.filepath:00000000 $d
+
+UNDEFINED SYMBOLS
+puts
+clock
+printf
+test_function

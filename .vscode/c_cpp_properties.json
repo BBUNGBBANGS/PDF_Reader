@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "name": "PDF_BARCODE",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/thirdparty/**"                
+            ],            
+            "forcedInclude": [
+                "D:/1.Project_workspace/PDF_BARCODE/thirdparty/stb_image.h"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "compilerPath": "D:\\3.tools\\mingw\\mingw32\\bin\\gcc.exe"    
+        }
+    ],
+    "version": 4
+}
