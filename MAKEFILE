@@ -1,0 +1,84 @@
+######################################
+# target
+######################################
+TARGET = PDF
+
+######################################
+# building variables
+######################################
+# debug build?
+DEBUG = 1
+# optimization
+OPT = -Og
+
+#######################################
+# paths
+#######################################
+# Build path
+BUILD_DIR = build
+
+######################################
+# source
+######################################
+# C sources
+C_SOURCES =  \
+PDF.c \
+thirdparty/stb_image.c \
+src/ReadBarcode.c \
+src/GenericLuminanceSource.c 
+
+#######################################
+# binaries
+#######################################
+CC = gcc
+
+#######################################
+# CFLAGS
+#######################################
+# C includes
+C_INCLUDES =  \
+-Ithirdparty \
+-Isrc
+
+# C++ 컴파일러 옵션
+CFLAGS = $(C_INCLUDES) $(OPT) -Wall
+CFLAGS += -g -gdwarf-2
+
+ifeq ($(DEBUG), 1)
+CFLAGS += -g -gdwarf-2
+endif
+
+# Generate dependency information
+CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
+
+#######################################
+# LDFLAGS
+#######################################
+LDFLAGS =
+
+all: $(BUILD_DIR)/$(TARGET)
+#######################################
+# build the application
+#######################################
+OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(C_SOURCES:.c=.o)))
+vpath %.c $(sort $(dir $(C_SOURCES)))
+
+$(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR) 
+	$(CC) -c $(CFLAGS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.c=.lst)) $< -o $@
+
+$(BUILD_DIR)/$(TARGET) : $(OBJECTS)
+	$(CC) $(CFLAGS) $(OBJECTS) -o $(TARGET) $(LDFLAGS)
+
+$(BUILD_DIR):
+	mkdir $@
+
+#######################################
+# clean up
+#######################################
+clean:
+	-rm -fR $(BUILD_DIR)
+
+#######################################
+# dependencies
+#######################################
+-include $(wildcard $(BUILD_DIR)/*.d)

@@ -1,2 +1,3 @@
-build/stb_image.o: stb_image.c stb_image.h
-stb_image.h:
+build/stb_image.o: thirdparty/stb_image.c thirdparty/stb_image.h
+
+thirdparty/stb_image.h:

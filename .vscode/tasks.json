@@ -1,26 +1,27 @@
 {
-	"version": "2.0.0",
 	"tasks": [
-		{
-			"type": "cppbuild",
-			"label": "C/C++: gcc.exe 활성 파일 빌드",
-			"command": "D:\\3.tools\\mingw\\mingw32\\bin\\gcc.exe",
-			"args": [
-				"-fdiagnostics-color=always",
-				"-g",
-				"ZXingReader.c",
-				"thirdparty\\stb_image.c",
-				"-o",
-				"${fileDirname}\\${fileBasenameNoExtension}.exe"
-			],
-			"options": {
-				"cwd": "${fileDirname}"
-			},
-			"problemMatcher": [
-				"$gcc"
-			],
-			"group": "build",
-			"detail": "컴파일러: D:\\3.tools\\mingw\\mingw32\\bin\\gcc.exe"
+	  {
+		// type를 shell로 설정
+		"type": "shell",
+		// custom label를 설정
+		"label": "PDF Project Build",
+		// make 명령어를 실행!
+		"command": "/usr/bin/make",
+		// 현재 workspace를 기준으로 re, debug_make 작업을 수행함
+		"args": ["-C", "${workspaceFolder}", "re", "debug_make"],
+		"options": {
+		  "cwd": "/usr/bin",
+		  // 환경 변수로 DEBUG: ture로 설정함
+		  "env": {
+			"DEBUG": "true"
+		  }
+		},
+		"problemMatcher": ["$gcc"],
+		"group": {
+		  "kind": "build",
+		  "isDefault": true
 		}
-	]
-}
+	  }
+	],
+	"version": "2.0.0"
+  }

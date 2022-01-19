@@ -1,0 +1,1801 @@
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 1
+
+
+   1              		.file	"PDF.c"
+   2              		.text
+   3              	Ltext0:
+   5              		.section .rdata,"dr"
+   6              	LC0:
+   7 0000 25642C25 		.ascii "%d,%d,%d\0"
+   7      642C2564 
+   7      00
+   8              	LC1:
+   9 0009 4661696C 		.ascii "Failed to read image: %s\12\0"
+   9      65642074 
+   9      6F207265 
+   9      61642069 
+   9      6D616765 
+  10              	LC2:
+  11 0023 3D3D3D3D 		.ascii "======TIME to decode=====\0"
+  11      3D3D5449 
+  11      4D452074 
+  11      6F206465 
+  11      636F6465 
+  12              	LC3:
+  13 003d 61646472 		.ascii "address : %#x \12\0"
+  13      65737320 
+  13      3A202523 
+  13      78200A00 
+  14              	LC4:
+  15 004d 546F7461 		.ascii "Total Time = %3.2f msec.\15\12\0"
+  15      6C205469 
+  15      6D65203D 
+  15      2025332E 
+  15      3266206D 
+  16              	LC5:
+  17 0068 3D3D3D3D 		.ascii "=========================\12\0"
+  17      3D3D3D3D 
+  17      3D3D3D3D 
+  17      3D3D3D3D 
+  17      3D3D3D3D 
+  18              	LC6:
+  19 0083 257300   		.ascii "%s\0"
+  20 0086 0000     		.text
+  21              		.globl	_main
+  23              	_main:
+  24              	LFB37:
+  25              		.file 1 "PDF.c"
+   1:PDF.c         **** /*
+   2:PDF.c         **** * Copyright 2016 Nu-book Inc.
+   3:PDF.c         **** *
+   4:PDF.c         **** * Licensed under the Apache License, Version 2.0 (the "License");
+   5:PDF.c         **** * you may not use this file except in compliance with the License.
+   6:PDF.c         **** * You may obtain a copy of the License at
+   7:PDF.c         **** *
+   8:PDF.c         **** *      http://www.apache.org/licenses/LICENSE-2.0
+   9:PDF.c         **** *
+  10:PDF.c         **** * Unless required by applicable law or agreed to in writing, software
+  11:PDF.c         **** * distributed under the License is distributed on an "AS IS" BASIS,
+  12:PDF.c         **** * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  13:PDF.c         **** * See the License for the specific language governing permissions and
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 2
+
+
+  14:PDF.c         **** * limitations under the License.
+  15:PDF.c         **** */
+  16:PDF.c         **** 
+  17:PDF.c         **** #include <stdio.h>
+  18:PDF.c         **** #include <time.h>
+  19:PDF.c         **** 
+  20:PDF.c         **** #include "thirdparty/stb_image.h"
+  21:PDF.c         **** #include "src/ReadBarcode.h"
+  22:PDF.c         **** 
+  23:PDF.c         **** char filepath[200];
+  24:PDF.c         **** 
+  25:PDF.c         **** #define FILE_TEST 		(1)
+  26:PDF.c         **** 
+  27:PDF.c         **** int main()
+  28:PDF.c         **** {
+  26              		.loc 1 28 1 view -0
+  27              		.cfi_startproc
+  28 0000 55       		pushl	%ebp
+  29              	LCFI0:
+  30              		.cfi_def_cfa_offset 8
+  31              		.cfi_offset 5, -8
+  32 0001 89E5     		movl	%esp, %ebp
+  33              	LCFI1:
+  34              		.cfi_def_cfa_register 5
+  35 0003 53       		pushl	%ebx
+  36 0004 83E4F0   		andl	$-16, %esp
+  37 0007 83EC40   		subl	$64, %esp
+  38              		.cfi_offset 3, -12
+  39              		.loc 1 28 1 is_stmt 0 view LVU1
+  40 000a E8000000 		call	___main
+  40      00
+  41              	LVL0:
+  29:PDF.c         **** 	double startClock;
+  42              		.loc 1 29 2 is_stmt 1 view LVU2
+  30:PDF.c         ****     int width, height, channels;
+  43              		.loc 1 30 5 view LVU3
+  31:PDF.c         **** 	unsigned char *buffer = NULL;
+  44              		.loc 1 31 2 view LVU4
+  32:PDF.c         ****     const unsigned int *result;
+  45              		.loc 1 32 5 view LVU5
+  33:PDF.c         ****     // need to Test 7 images
+  34:PDF.c         ****     #if   (FILE_TEST == 1)
+  35:PDF.c         ****     sprintf(filepath,"./images/01.png");
+  46              		.loc 1 35 5 view LVU6
+  47 000f C7050000 		movl	$1835609902, _filepath
+  47      00002E2F 
+  47      696D
+  48 0019 C7050400 		movl	$1936025441, _filepath+4
+  48      00006167 
+  48      6573
+  49 0023 C7050800 		movl	$774975535, _filepath+8
+  49      00002F30 
+  49      312E
+  50 002d C7050C00 		movl	$6778480, _filepath+12
+  50      0000706E 
+  50      6700
+  36:PDF.c         ****     #elif (FILE_TEST == 2)
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 3
+
+
+  37:PDF.c         ****     sprintf(filepath,"./images/07.png");
+  38:PDF.c         ****     #elif (FILE_TEST == 3)
+  39:PDF.c         ****     sprintf(filepath,"./images/10.png");
+  40:PDF.c         ****     #elif (FILE_TEST == 4)
+  41:PDF.c         ****     sprintf(filepath,"./images/14.png");
+  42:PDF.c         ****     #elif (FILE_TEST == 5)
+  43:PDF.c         ****     sprintf(filepath,"./images/20.bmp");
+  44:PDF.c         ****     #elif (FILE_TEST == 6)
+  45:PDF.c         ****     sprintf(filepath,"./images/21.jpg"); // Sample of No Decode
+  46:PDF.c         ****     #elif (FILE_TEST == 7)
+  47:PDF.c         ****     sprintf(filepath,"./images/22.jpg"); // Ecc Zero - Error with Trans
+  48:PDF.c         ****     #endif
+  49:PDF.c         **** 
+  50:PDF.c         ****     buffer = stbi_load(filepath,&width, &height, &channels, 4);
+  51              		.loc 1 50 5 view LVU7
+  52              		.loc 1 50 14 is_stmt 0 view LVU8
+  53 0037 C7442410 		movl	$4, 16(%esp)
+  53      04000000 
+  54 003f 8D442434 		leal	52(%esp), %eax
+  55 0043 8944240C 		movl	%eax, 12(%esp)
+  56 0047 8D442438 		leal	56(%esp), %eax
+  57 004b 89442408 		movl	%eax, 8(%esp)
+  58 004f 8D44243C 		leal	60(%esp), %eax
+  59 0053 89442404 		movl	%eax, 4(%esp)
+  60 0057 C7042400 		movl	$_filepath, (%esp)
+  60      000000
+  61 005e E8000000 		call	_stbi_load
+  61      00
+  62              	LVL1:
+  63 0063 89C3     		movl	%eax, %ebx
+  64              	LVL2:
+  51:PDF.c         **** 
+  52:PDF.c         ****     printf("%d,%d,%d",width,height,channels);
+  65              		.loc 1 52 5 is_stmt 1 view LVU9
+  66 0065 8B442434 		movl	52(%esp), %eax
+  67              	LVL3:
+  68              		.loc 1 52 5 is_stmt 0 view LVU10
+  69 0069 8944240C 		movl	%eax, 12(%esp)
+  70 006d 8B442438 		movl	56(%esp), %eax
+  71 0071 89442408 		movl	%eax, 8(%esp)
+  72 0075 8B44243C 		movl	60(%esp), %eax
+  73 0079 89442404 		movl	%eax, 4(%esp)
+  74 007d C7042400 		movl	$LC0, (%esp)
+  74      000000
+  75 0084 E8000000 		call	_printf
+  75      00
+  76              	LVL4:
+  53:PDF.c         **** 
+  54:PDF.c         **** 	if (buffer == NULL)
+  77              		.loc 1 54 2 is_stmt 1 view LVU11
+  78              		.loc 1 54 5 is_stmt 0 view LVU12
+  79 0089 85DB     		testl	%ebx, %ebx
+  80 008b 0F849800 		je	L5
+  80      0000
+  55:PDF.c         **** 	{
+  56:PDF.c         **** 		printf("Failed to read image: %s\n", filepath);
+  57:PDF.c         **** 		return -1;
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 4
+
+
+  58:PDF.c         **** 	}
+  59:PDF.c         **** 
+  60:PDF.c         **** 	printf("======TIME to decode=====\n");
+  81              		.loc 1 60 2 is_stmt 1 view LVU13
+  82 0091 C7042423 		movl	$LC2, (%esp)
+  82      000000
+  83 0098 E8000000 		call	_puts
+  83      00
+  84              	LVL5:
+  61:PDF.c         **** 	startClock = clock();
+  85              		.loc 1 61 2 view LVU14
+  86              		.loc 1 61 15 is_stmt 0 view LVU15
+  87 009d E8000000 		call	_clock
+  87      00
+  88              	LVL6:
+  89 00a2 8944242C 		movl	%eax, 44(%esp)
+  90              		.loc 1 61 13 view LVU16
+  91 00a6 DB44242C 		fildl	44(%esp)
+  92 00aa DD5C2420 		fstpl	32(%esp)
+  93              	LVL7:
+  62:PDF.c         **** 
+  63:PDF.c         ****     result = ReadBarcode(buffer,width,height,RGBX);
+  94              		.loc 1 63 5 is_stmt 1 view LVU17
+  95              		.loc 1 63 14 is_stmt 0 view LVU18
+  96 00ae C744240C 		movl	$67109122, 12(%esp)
+  96      02010004 
+  97 00b6 8B442438 		movl	56(%esp), %eax
+  98 00ba 89442408 		movl	%eax, 8(%esp)
+  99 00be 8B44243C 		movl	60(%esp), %eax
+ 100 00c2 89442404 		movl	%eax, 4(%esp)
+ 101 00c6 891C24   		movl	%ebx, (%esp)
+ 102 00c9 E8000000 		call	_ReadBarcode
+ 102      00
+ 103              	LVL8:
+  64:PDF.c         ****     printf("address : %#x \n",result);
+ 104              		.loc 1 64 5 is_stmt 1 view LVU19
+ 105 00ce 89442404 		movl	%eax, 4(%esp)
+ 106 00d2 C704243D 		movl	$LC3, (%esp)
+ 106      000000
+ 107 00d9 E8000000 		call	_printf
+ 107      00
+ 108              	LVL9:
+  65:PDF.c         **** 
+  66:PDF.c         **** 	printf("Total Time = %3.2f msec.\r\n", clock() - startClock);
+ 109              		.loc 1 66 2 view LVU20
+ 110              		.loc 1 66 41 is_stmt 0 view LVU21
+ 111 00de E8000000 		call	_clock
+ 111      00
+ 112              	LVL10:
+ 113 00e3 8944242C 		movl	%eax, 44(%esp)
+ 114              		.loc 1 66 2 view LVU22
+ 115 00e7 DB44242C 		fildl	44(%esp)
+ 116 00eb DC642420 		fsubl	32(%esp)
+ 117 00ef DD5C2404 		fstpl	4(%esp)
+ 118 00f3 C704244D 		movl	$LC4, (%esp)
+ 118      000000
+ 119 00fa E8000000 		call	_printf
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 5
+
+
+ 119      00
+ 120              	LVL11:
+  67:PDF.c         **** 	printf("=========================\n\n");
+ 121              		.loc 1 67 2 is_stmt 1 view LVU23
+ 122 00ff C7042468 		movl	$LC5, (%esp)
+ 122      000000
+ 123 0106 E8000000 		call	_puts
+ 123      00
+ 124              	LVL12:
+  68:PDF.c         ****     //while(1)
+  69:PDF.c         ****     //{
+  70:PDF.c         ****     printf("%s",filepath);
+ 125              		.loc 1 70 5 view LVU24
+ 126 010b C7442404 		movl	$_filepath, 4(%esp)
+ 126      00000000 
+ 127 0113 C7042483 		movl	$LC6, (%esp)
+ 127      000000
+ 128 011a E8000000 		call	_printf
+ 128      00
+ 129              	LVL13:
+  71:PDF.c         ****         //system("pause");
+  72:PDF.c         ****     //}
+  73:PDF.c         ****     return 0;
+ 130              		.loc 1 73 5 view LVU25
+ 131              		.loc 1 73 12 is_stmt 0 view LVU26
+ 132 011f B8000000 		movl	$0, %eax
+ 132      00
+ 133              	LVL14:
+ 134              	L1:
+  74:PDF.c         **** }
+ 135              		.loc 1 74 1 view LVU27
+ 136 0124 8B5DFC   		movl	-4(%ebp), %ebx
+ 137              	LVL15:
+ 138              		.loc 1 74 1 view LVU28
+ 139 0127 C9       		leave
+ 140              	LCFI2:
+ 141              		.cfi_remember_state
+ 142              		.cfi_restore 5
+ 143              		.cfi_restore 3
+ 144              		.cfi_def_cfa 4, 4
+ 145 0128 C3       		ret
+ 146              	LVL16:
+ 147              	L5:
+ 148              	LCFI3:
+ 149              		.cfi_restore_state
+  56:PDF.c         **** 		return -1;
+ 150              		.loc 1 56 3 is_stmt 1 view LVU29
+ 151 0129 C7442404 		movl	$_filepath, 4(%esp)
+ 151      00000000 
+ 152 0131 C7042409 		movl	$LC1, (%esp)
+ 152      000000
+ 153 0138 E8000000 		call	_printf
+ 153      00
+ 154              	LVL17:
+  57:PDF.c         **** 	}
+ 155              		.loc 1 57 3 view LVU30
+  57:PDF.c         **** 	}
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 6
+
+
+ 156              		.loc 1 57 10 is_stmt 0 view LVU31
+ 157 013d B8FFFFFF 		movl	$-1, %eax
+ 157      FF
+ 158 0142 EBE0     		jmp	L1
+ 159              		.cfi_endproc
+ 160              	LFE37:
+ 161              		.comm	_filepath, 200, 5
+ 162              	Letext0:
+ 163              		.file 2 "D:/3.tools/mingw/mingw32/i686-w64-mingw32/include/stdio.h"
+ 164              		.file 3 "D:/3.tools/mingw/mingw32/i686-w64-mingw32/include/crtdefs.h"
+ 165              		.file 4 "D:/3.tools/mingw/mingw32/i686-w64-mingw32/include/time.h"
+ 166              		.file 5 "D:/3.tools/mingw/mingw32/i686-w64-mingw32/include/stdlib.h"
+ 167              		.file 6 "D:/3.tools/mingw/mingw32/i686-w64-mingw32/include/malloc.h"
+ 168              		.file 7 "thirdparty/stb_image.h"
+ 169              		.file 8 "src/ReadBarcode.h"
+ 170              		.file 9 "<built-in>"
+ 171              		.section	.debug_info,"dr"
+ 172              	Ldebug_info0:
+ 173 0000 44070000 		.long	0x744
+ 174 0004 0200     		.word	0x2
+ 175 0006 00000000 		.secrel32	Ldebug_abbrev0
+ 176 000a 04       		.byte	0x4
+ 177 000b 01       		.uleb128 0x1
+ 178 000c 474E5520 		.ascii "GNU C17 8.1.0 -mtune=generic -march=i686 -g -gdwarf-2 -g -gdwarf-2 -Og\0"
+ 178      43313720 
+ 178      382E312E 
+ 178      30202D6D 
+ 178      74756E65 
+ 179 0053 0C       		.byte	0xc
+ 180 0054 5044462E 		.ascii "PDF.c\0"
+ 180      6300
+ 181 005a 443A5C31 		.ascii "D:\\1.Project_workspace\\PDF_BARCODE\0"
+ 181      2E50726F 
+ 181      6A656374 
+ 181      5F776F72 
+ 181      6B737061 
+ 182 007d 00000000 		.long	Ltext0
+ 183 0081 44010000 		.long	Letext0
+ 184 0085 00000000 		.secrel32	Ldebug_line0
+ 185 0089 02       		.uleb128 0x2
+ 186 008a 08       		.byte	0x8
+ 187 008b 04       		.byte	0x4
+ 188 008c 646F7562 		.ascii "double\0"
+ 188      6C6500
+ 189 0093 02       		.uleb128 0x2
+ 190 0094 04       		.byte	0x4
+ 191 0095 05       		.byte	0x5
+ 192 0096 696E7400 		.ascii "int\0"
+ 193 009a 02       		.uleb128 0x2
+ 194 009b 01       		.byte	0x1
+ 195 009c 06       		.byte	0x6
+ 196 009d 63686172 		.ascii "char\0"
+ 196      00
+ 197 00a2 02       		.uleb128 0x2
+ 198 00a3 04       		.byte	0x4
+ 199 00a4 07       		.byte	0x7
+ 200 00a5 756E7369 		.ascii "unsigned int\0"
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 7
+
+
+ 200      676E6564 
+ 200      20696E74 
+ 200      00
+ 201 00b2 03       		.uleb128 0x3
+ 202 00b3 A2000000 		.long	0xa2
+ 203 00b7 04       		.uleb128 0x4
+ 204 00b8 77636861 		.ascii "wchar_t\0"
+ 204      725F7400 
+ 205 00c0 03       		.byte	0x3
+ 206 00c1 62       		.byte	0x62
+ 207 00c2 18       		.byte	0x18
+ 208 00c3 C7000000 		.long	0xc7
+ 209 00c7 02       		.uleb128 0x2
+ 210 00c8 02       		.byte	0x2
+ 211 00c9 07       		.byte	0x7
+ 212 00ca 73686F72 		.ascii "short unsigned int\0"
+ 212      7420756E 
+ 212      7369676E 
+ 212      65642069 
+ 212      6E7400
+ 213 00dd 02       		.uleb128 0x2
+ 214 00de 04       		.byte	0x4
+ 215 00df 05       		.byte	0x5
+ 216 00e0 6C6F6E67 		.ascii "long int\0"
+ 216      20696E74 
+ 216      00
+ 217 00e9 02       		.uleb128 0x2
+ 218 00ea 08       		.byte	0x8
+ 219 00eb 05       		.byte	0x5
+ 220 00ec 6C6F6E67 		.ascii "long long int\0"
+ 220      206C6F6E 
+ 220      6720696E 
+ 220      7400
+ 221 00fa 05       		.uleb128 0x5
+ 222 00fb 04       		.byte	0x4
+ 223 00fc 9A000000 		.long	0x9a
+ 224 0100 05       		.uleb128 0x5
+ 225 0101 04       		.byte	0x4
+ 226 0102 B7000000 		.long	0xb7
+ 227 0106 05       		.uleb128 0x5
+ 228 0107 04       		.byte	0x4
+ 229 0108 93000000 		.long	0x93
+ 230 010c 02       		.uleb128 0x2
+ 231 010d 04       		.byte	0x4
+ 232 010e 07       		.byte	0x7
+ 233 010f 6C6F6E67 		.ascii "long unsigned int\0"
+ 233      20756E73 
+ 233      69676E65 
+ 233      6420696E 
+ 233      7400
+ 234 0121 02       		.uleb128 0x2
+ 235 0122 01       		.byte	0x1
+ 236 0123 08       		.byte	0x8
+ 237 0124 756E7369 		.ascii "unsigned char\0"
+ 237      676E6564 
+ 237      20636861 
+ 237      7200
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 8
+
+
+ 238 0132 06       		.uleb128 0x6
+ 239 0133 5F696F62 		.ascii "_iobuf\0"
+ 239      756600
+ 240 013a 20       		.byte	0x20
+ 241 013b 02       		.byte	0x2
+ 242 013c 1A       		.byte	0x1a
+ 243 013d 0A       		.byte	0xa
+ 244 013e D2010000 		.long	0x1d2
+ 245 0142 07       		.uleb128 0x7
+ 246 0143 5F707472 		.ascii "_ptr\0"
+ 246      00
+ 247 0148 02       		.byte	0x2
+ 248 0149 1B       		.byte	0x1b
+ 249 014a 0B       		.byte	0xb
+ 250 014b FA000000 		.long	0xfa
+ 251 014f 02       		.byte	0x2
+ 252 0150 23       		.byte	0x23
+ 253 0151 00       		.uleb128 0
+ 254 0152 07       		.uleb128 0x7
+ 255 0153 5F636E74 		.ascii "_cnt\0"
+ 255      00
+ 256 0158 02       		.byte	0x2
+ 257 0159 1C       		.byte	0x1c
+ 258 015a 09       		.byte	0x9
+ 259 015b 93000000 		.long	0x93
+ 260 015f 02       		.byte	0x2
+ 261 0160 23       		.byte	0x23
+ 262 0161 04       		.uleb128 0x4
+ 263 0162 07       		.uleb128 0x7
+ 264 0163 5F626173 		.ascii "_base\0"
+ 264      6500
+ 265 0169 02       		.byte	0x2
+ 266 016a 1D       		.byte	0x1d
+ 267 016b 0B       		.byte	0xb
+ 268 016c FA000000 		.long	0xfa
+ 269 0170 02       		.byte	0x2
+ 270 0171 23       		.byte	0x23
+ 271 0172 08       		.uleb128 0x8
+ 272 0173 07       		.uleb128 0x7
+ 273 0174 5F666C61 		.ascii "_flag\0"
+ 273      6700
+ 274 017a 02       		.byte	0x2
+ 275 017b 1E       		.byte	0x1e
+ 276 017c 09       		.byte	0x9
+ 277 017d 93000000 		.long	0x93
+ 278 0181 02       		.byte	0x2
+ 279 0182 23       		.byte	0x23
+ 280 0183 0C       		.uleb128 0xc
+ 281 0184 07       		.uleb128 0x7
+ 282 0185 5F66696C 		.ascii "_file\0"
+ 282      6500
+ 283 018b 02       		.byte	0x2
+ 284 018c 1F       		.byte	0x1f
+ 285 018d 09       		.byte	0x9
+ 286 018e 93000000 		.long	0x93
+ 287 0192 02       		.byte	0x2
+ 288 0193 23       		.byte	0x23
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 9
+
+
+ 289 0194 10       		.uleb128 0x10
+ 290 0195 07       		.uleb128 0x7
+ 291 0196 5F636861 		.ascii "_charbuf\0"
+ 291      72627566 
+ 291      00
+ 292 019f 02       		.byte	0x2
+ 293 01a0 20       		.byte	0x20
+ 294 01a1 09       		.byte	0x9
+ 295 01a2 93000000 		.long	0x93
+ 296 01a6 02       		.byte	0x2
+ 297 01a7 23       		.byte	0x23
+ 298 01a8 14       		.uleb128 0x14
+ 299 01a9 07       		.uleb128 0x7
+ 300 01aa 5F627566 		.ascii "_bufsiz\0"
+ 300      73697A00 
+ 301 01b2 02       		.byte	0x2
+ 302 01b3 21       		.byte	0x21
+ 303 01b4 09       		.byte	0x9
+ 304 01b5 93000000 		.long	0x93
+ 305 01b9 02       		.byte	0x2
+ 306 01ba 23       		.byte	0x23
+ 307 01bb 18       		.uleb128 0x18
+ 308 01bc 07       		.uleb128 0x7
+ 309 01bd 5F746D70 		.ascii "_tmpfname\0"
+ 309      666E616D 
+ 309      6500
+ 310 01c7 02       		.byte	0x2
+ 311 01c8 22       		.byte	0x22
+ 312 01c9 0B       		.byte	0xb
+ 313 01ca FA000000 		.long	0xfa
+ 314 01ce 02       		.byte	0x2
+ 315 01cf 23       		.byte	0x23
+ 316 01d0 1C       		.uleb128 0x1c
+ 317 01d1 00       		.byte	0
+ 318 01d2 04       		.uleb128 0x4
+ 319 01d3 46494C45 		.ascii "FILE\0"
+ 319      00
+ 320 01d8 02       		.byte	0x2
+ 321 01d9 24       		.byte	0x24
+ 322 01da 19       		.byte	0x19
+ 323 01db 32010000 		.long	0x132
+ 324 01df 08       		.uleb128 0x8
+ 325 01e0 D2010000 		.long	0x1d2
+ 326 01e4 EA010000 		.long	0x1ea
+ 327 01e8 09       		.uleb128 0x9
+ 328 01e9 00       		.byte	0
+ 329 01ea 0A       		.uleb128 0xa
+ 330 01eb 5F696D70 		.ascii "_imp___iob\0"
+ 330      5F5F5F69 
+ 330      6F6200
+ 331 01f6 02       		.byte	0x2
+ 332 01f7 5C       		.byte	0x5c
+ 333 01f8 10       		.byte	0x10
+ 334 01f9 FF010000 		.long	0x1ff
+ 335 01fd 01       		.byte	0x1
+ 336 01fe 01       		.byte	0x1
+ 337 01ff 05       		.uleb128 0x5
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 10
+
+
+ 338 0200 04       		.byte	0x4
+ 339 0201 DF010000 		.long	0x1df
+ 340 0205 0A       		.uleb128 0xa
+ 341 0206 5F646179 		.ascii "_daylight\0"
+ 341      6C696768 
+ 341      7400
+ 342 0210 04       		.byte	0x4
+ 343 0211 7A       		.byte	0x7a
+ 344 0212 16       		.byte	0x16
+ 345 0213 93000000 		.long	0x93
+ 346 0217 01       		.byte	0x1
+ 347 0218 01       		.byte	0x1
+ 348 0219 0A       		.uleb128 0xa
+ 349 021a 5F647374 		.ascii "_dstbias\0"
+ 349      62696173 
+ 349      00
+ 350 0223 04       		.byte	0x4
+ 351 0224 7B       		.byte	0x7b
+ 352 0225 17       		.byte	0x17
+ 353 0226 DD000000 		.long	0xdd
+ 354 022a 01       		.byte	0x1
+ 355 022b 01       		.byte	0x1
+ 356 022c 0A       		.uleb128 0xa
+ 357 022d 5F74696D 		.ascii "_timezone\0"
+ 357      657A6F6E 
+ 357      6500
+ 358 0237 04       		.byte	0x4
+ 359 0238 7C       		.byte	0x7c
+ 360 0239 17       		.byte	0x17
+ 361 023a DD000000 		.long	0xdd
+ 362 023e 01       		.byte	0x1
+ 363 023f 01       		.byte	0x1
+ 364 0240 08       		.uleb128 0x8
+ 365 0241 FA000000 		.long	0xfa
+ 366 0245 50020000 		.long	0x250
+ 367 0249 0B       		.uleb128 0xb
+ 368 024a A2000000 		.long	0xa2
+ 369 024e 01       		.byte	0x1
+ 370 024f 00       		.byte	0
+ 371 0250 0A       		.uleb128 0xa
+ 372 0251 5F747A6E 		.ascii "_tzname\0"
+ 372      616D6500 
+ 373 0259 04       		.byte	0x4
+ 374 025a 7D       		.byte	0x7d
+ 375 025b 19       		.byte	0x19
+ 376 025c 40020000 		.long	0x240
+ 377 0260 01       		.byte	0x1
+ 378 0261 01       		.byte	0x1
+ 379 0262 0C       		.uleb128 0xc
+ 380 0263 6461796C 		.ascii "daylight\0"
+ 380      69676874 
+ 380      00
+ 381 026c 04       		.byte	0x4
+ 382 026d 1601     		.word	0x116
+ 383 026f 16       		.byte	0x16
+ 384 0270 93000000 		.long	0x93
+ 385 0274 01       		.byte	0x1
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 11
+
+
+ 386 0275 01       		.byte	0x1
+ 387 0276 0C       		.uleb128 0xc
+ 388 0277 74696D65 		.ascii "timezone\0"
+ 388      7A6F6E65 
+ 388      00
+ 389 0280 04       		.byte	0x4
+ 390 0281 1901     		.word	0x119
+ 391 0283 17       		.byte	0x17
+ 392 0284 DD000000 		.long	0xdd
+ 393 0288 01       		.byte	0x1
+ 394 0289 01       		.byte	0x1
+ 395 028a 0C       		.uleb128 0xc
+ 396 028b 747A6E61 		.ascii "tzname\0"
+ 396      6D6500
+ 397 0292 04       		.byte	0x4
+ 398 0293 1A01     		.word	0x11a
+ 399 0295 18       		.byte	0x18
+ 400 0296 40020000 		.long	0x240
+ 401 029a 01       		.byte	0x1
+ 402 029b 01       		.byte	0x1
+ 403 029c 02       		.uleb128 0x2
+ 404 029d 02       		.byte	0x2
+ 405 029e 05       		.byte	0x5
+ 406 029f 73686F72 		.ascii "short int\0"
+ 406      7420696E 
+ 406      7400
+ 407 02a9 02       		.uleb128 0x2
+ 408 02aa 04       		.byte	0x4
+ 409 02ab 04       		.byte	0x4
+ 410 02ac 666C6F61 		.ascii "float\0"
+ 410      7400
+ 411 02b2 02       		.uleb128 0x2
+ 412 02b3 0C       		.byte	0xc
+ 413 02b4 04       		.byte	0x4
+ 414 02b5 6C6F6E67 		.ascii "long double\0"
+ 414      20646F75 
+ 414      626C6500 
+ 415 02c1 0A       		.uleb128 0xa
+ 416 02c2 5F696D70 		.ascii "_imp____mb_cur_max\0"
+ 416      5F5F5F5F 
+ 416      6D625F63 
+ 416      75725F6D 
+ 416      617800
+ 417 02d5 05       		.byte	0x5
+ 418 02d6 73       		.byte	0x73
+ 419 02d7 10       		.byte	0x10
+ 420 02d8 06010000 		.long	0x106
+ 421 02dc 01       		.byte	0x1
+ 422 02dd 01       		.byte	0x1
+ 423 02de 08       		.uleb128 0x8
+ 424 02df FA000000 		.long	0xfa
+ 425 02e3 EE020000 		.long	0x2ee
+ 426 02e7 0B       		.uleb128 0xb
+ 427 02e8 A2000000 		.long	0xa2
+ 428 02ec 00       		.byte	0
+ 429 02ed 00       		.byte	0
+ 430 02ee 0A       		.uleb128 0xa
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 12
+
+
+ 431 02ef 5F737973 		.ascii "_sys_errlist\0"
+ 431      5F657272 
+ 431      6C697374 
+ 431      00
+ 432 02fc 05       		.byte	0x5
+ 433 02fd AC       		.byte	0xac
+ 434 02fe 26       		.byte	0x26
+ 435 02ff DE020000 		.long	0x2de
+ 436 0303 01       		.byte	0x1
+ 437 0304 01       		.byte	0x1
+ 438 0305 0A       		.uleb128 0xa
+ 439 0306 5F737973 		.ascii "_sys_nerr\0"
+ 439      5F6E6572 
+ 439      7200
+ 440 0310 05       		.byte	0x5
+ 441 0311 AD       		.byte	0xad
+ 442 0312 24       		.byte	0x24
+ 443 0313 93000000 		.long	0x93
+ 444 0317 01       		.byte	0x1
+ 445 0318 01       		.byte	0x1
+ 446 0319 0C       		.uleb128 0xc
+ 447 031a 5F696D70 		.ascii "_imp____argc\0"
+ 447      5F5F5F5F 
+ 447      61726763 
+ 447      00
+ 448 0327 05       		.byte	0x5
+ 449 0328 1901     		.word	0x119
+ 450 032a 10       		.byte	0x10
+ 451 032b 06010000 		.long	0x106
+ 452 032f 01       		.byte	0x1
+ 453 0330 01       		.byte	0x1
+ 454 0331 0C       		.uleb128 0xc
+ 455 0332 5F696D70 		.ascii "_imp____argv\0"
+ 455      5F5F5F5F 
+ 455      61726776 
+ 455      00
+ 456 033f 05       		.byte	0x5
+ 457 0340 1D01     		.word	0x11d
+ 458 0342 13       		.byte	0x13
+ 459 0343 49030000 		.long	0x349
+ 460 0347 01       		.byte	0x1
+ 461 0348 01       		.byte	0x1
+ 462 0349 05       		.uleb128 0x5
+ 463 034a 04       		.byte	0x4
+ 464 034b 4F030000 		.long	0x34f
+ 465 034f 05       		.uleb128 0x5
+ 466 0350 04       		.byte	0x4
+ 467 0351 FA000000 		.long	0xfa
+ 468 0355 0C       		.uleb128 0xc
+ 469 0356 5F696D70 		.ascii "_imp____wargv\0"
+ 469      5F5F5F5F 
+ 469      77617267 
+ 469      7600
+ 470 0364 05       		.byte	0x5
+ 471 0365 2101     		.word	0x121
+ 472 0367 16       		.byte	0x16
+ 473 0368 6E030000 		.long	0x36e
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 13
+
+
+ 474 036c 01       		.byte	0x1
+ 475 036d 01       		.byte	0x1
+ 476 036e 05       		.uleb128 0x5
+ 477 036f 04       		.byte	0x4
+ 478 0370 74030000 		.long	0x374
+ 479 0374 05       		.uleb128 0x5
+ 480 0375 04       		.byte	0x4
+ 481 0376 00010000 		.long	0x100
+ 482 037a 0C       		.uleb128 0xc
+ 483 037b 5F696D70 		.ascii "_imp___environ\0"
+ 483      5F5F5F65 
+ 483      6E766972 
+ 483      6F6E00
+ 484 038a 05       		.byte	0x5
+ 485 038b 2701     		.word	0x127
+ 486 038d 13       		.byte	0x13
+ 487 038e 49030000 		.long	0x349
+ 488 0392 01       		.byte	0x1
+ 489 0393 01       		.byte	0x1
+ 490 0394 0C       		.uleb128 0xc
+ 491 0395 5F696D70 		.ascii "_imp___wenviron\0"
+ 491      5F5F5F77 
+ 491      656E7669 
+ 491      726F6E00 
+ 492 03a5 05       		.byte	0x5
+ 493 03a6 2C01     		.word	0x12c
+ 494 03a8 16       		.byte	0x16
+ 495 03a9 6E030000 		.long	0x36e
+ 496 03ad 01       		.byte	0x1
+ 497 03ae 01       		.byte	0x1
+ 498 03af 0C       		.uleb128 0xc
+ 499 03b0 5F696D70 		.ascii "_imp___pgmptr\0"
+ 499      5F5F5F70 
+ 499      676D7074 
+ 499      7200
+ 500 03be 05       		.byte	0x5
+ 501 03bf 3201     		.word	0x132
+ 502 03c1 12       		.byte	0x12
+ 503 03c2 4F030000 		.long	0x34f
+ 504 03c6 01       		.byte	0x1
+ 505 03c7 01       		.byte	0x1
+ 506 03c8 0C       		.uleb128 0xc
+ 507 03c9 5F696D70 		.ascii "_imp___wpgmptr\0"
+ 507      5F5F5F77 
+ 507      70676D70 
+ 507      747200
+ 508 03d8 05       		.byte	0x5
+ 509 03d9 3701     		.word	0x137
+ 510 03db 15       		.byte	0x15
+ 511 03dc 74030000 		.long	0x374
+ 512 03e0 01       		.byte	0x1
+ 513 03e1 01       		.byte	0x1
+ 514 03e2 0C       		.uleb128 0xc
+ 515 03e3 5F696D70 		.ascii "_imp___osplatform\0"
+ 515      5F5F5F6F 
+ 515      73706C61 
+ 515      74666F72 
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 14
+
+
+ 515      6D00
+ 516 03f5 05       		.byte	0x5
+ 517 03f6 3C01     		.word	0x13c
+ 518 03f8 19       		.byte	0x19
+ 519 03f9 FF030000 		.long	0x3ff
+ 520 03fd 01       		.byte	0x1
+ 521 03fe 01       		.byte	0x1
+ 522 03ff 05       		.uleb128 0x5
+ 523 0400 04       		.byte	0x4
+ 524 0401 A2000000 		.long	0xa2
+ 525 0405 0C       		.uleb128 0xc
+ 526 0406 5F696D70 		.ascii "_imp___osver\0"
+ 526      5F5F5F6F 
+ 526      73766572 
+ 526      00
+ 527 0413 05       		.byte	0x5
+ 528 0414 4101     		.word	0x141
+ 529 0416 19       		.byte	0x19
+ 530 0417 FF030000 		.long	0x3ff
+ 531 041b 01       		.byte	0x1
+ 532 041c 01       		.byte	0x1
+ 533 041d 0C       		.uleb128 0xc
+ 534 041e 5F696D70 		.ascii "_imp___winver\0"
+ 534      5F5F5F77 
+ 534      696E7665 
+ 534      7200
+ 535 042c 05       		.byte	0x5
+ 536 042d 4601     		.word	0x146
+ 537 042f 19       		.byte	0x19
+ 538 0430 FF030000 		.long	0x3ff
+ 539 0434 01       		.byte	0x1
+ 540 0435 01       		.byte	0x1
+ 541 0436 0C       		.uleb128 0xc
+ 542 0437 5F696D70 		.ascii "_imp___winmajor\0"
+ 542      5F5F5F77 
+ 542      696E6D61 
+ 542      6A6F7200 
+ 543 0447 05       		.byte	0x5
+ 544 0448 4B01     		.word	0x14b
+ 545 044a 19       		.byte	0x19
+ 546 044b FF030000 		.long	0x3ff
+ 547 044f 01       		.byte	0x1
+ 548 0450 01       		.byte	0x1
+ 549 0451 0C       		.uleb128 0xc
+ 550 0452 5F696D70 		.ascii "_imp___winminor\0"
+ 550      5F5F5F77 
+ 550      696E6D69 
+ 550      6E6F7200 
+ 551 0462 05       		.byte	0x5
+ 552 0463 5001     		.word	0x150
+ 553 0465 19       		.byte	0x19
+ 554 0466 FF030000 		.long	0x3ff
+ 555 046a 01       		.byte	0x1
+ 556 046b 01       		.byte	0x1
+ 557 046c 0A       		.uleb128 0xa
+ 558 046d 5F616D62 		.ascii "_amblksiz\0"
+ 558      6C6B7369 
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 15
+
+
+ 558      7A00
+ 559 0477 06       		.byte	0x6
+ 560 0478 35       		.byte	0x35
+ 561 0479 17       		.byte	0x17
+ 562 047a A2000000 		.long	0xa2
+ 563 047e 01       		.byte	0x1
+ 564 047f 01       		.byte	0x1
+ 565 0480 0D       		.uleb128 0xd
+ 566 0481 496D6167 		.ascii "ImageFormat\0"
+ 566      65466F72 
+ 566      6D617400 
+ 567 048d 07       		.byte	0x7
+ 568 048e 04       		.byte	0x4
+ 569 048f A2000000 		.long	0xa2
+ 570 0493 08       		.byte	0x8
+ 571 0494 02       		.byte	0x2
+ 572 0495 06       		.byte	0x6
+ 573 0496 E5040000 		.long	0x4e5
+ 574 049a 0E       		.uleb128 0xe
+ 575 049b 4E6F6E65 		.ascii "None\0"
+ 575      00
+ 576 04a0 00       		.byte	0
+ 577 04a1 0F       		.uleb128 0xf
+ 578 04a2 4C756D00 		.ascii "Lum\0"
+ 579 04a6 00000001 		.long	0x1000000
+ 580 04aa 0F       		.uleb128 0xf
+ 581 04ab 52474200 		.ascii "RGB\0"
+ 582 04af 02010003 		.long	0x3000102
+ 583 04b3 0F       		.uleb128 0xf
+ 584 04b4 42475200 		.ascii "BGR\0"
+ 585 04b8 00010203 		.long	0x3020100
+ 586 04bc 0F       		.uleb128 0xf
+ 587 04bd 52474258 		.ascii "RGBX\0"
+ 587      00
+ 588 04c2 02010004 		.long	0x4000102
+ 589 04c6 0F       		.uleb128 0xf
+ 590 04c7 58524742 		.ascii "XRGB\0"
+ 590      00
+ 591 04cc 03020104 		.long	0x4010203
+ 592 04d0 0F       		.uleb128 0xf
+ 593 04d1 42475258 		.ascii "BGRX\0"
+ 593      00
+ 594 04d6 00010204 		.long	0x4020100
+ 595 04da 0F       		.uleb128 0xf
+ 596 04db 58424752 		.ascii "XBGR\0"
+ 596      00
+ 597 04e0 01020304 		.long	0x4030201
+ 598 04e4 00       		.byte	0
+ 599 04e5 08       		.uleb128 0x8
+ 600 04e6 9A000000 		.long	0x9a
+ 601 04ea F5040000 		.long	0x4f5
+ 602 04ee 0B       		.uleb128 0xb
+ 603 04ef A2000000 		.long	0xa2
+ 604 04f3 C7       		.byte	0xc7
+ 605 04f4 00       		.byte	0
+ 606 04f5 10       		.uleb128 0x10
+ 607 04f6 66696C65 		.ascii "filepath\0"
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 16
+
+
+ 607      70617468 
+ 607      00
+ 608 04ff 01       		.byte	0x1
+ 609 0500 17       		.byte	0x17
+ 610 0501 06       		.byte	0x6
+ 611 0502 E5040000 		.long	0x4e5
+ 612 0506 01       		.byte	0x1
+ 613 0507 05       		.byte	0x5
+ 614 0508 03       		.byte	0x3
+ 615 0509 00000000 		.long	_filepath
+ 616 050d 11       		.uleb128 0x11
+ 617 050e 01       		.byte	0x1
+ 618 050f 6D61696E 		.ascii "main\0"
+ 618      00
+ 619 0514 01       		.byte	0x1
+ 620 0515 1B       		.byte	0x1b
+ 621 0516 05       		.byte	0x5
+ 622 0517 93000000 		.long	0x93
+ 623 051b 00000000 		.long	LFB37
+ 624 051f 44010000 		.long	LFE37
+ 625 0523 00000000 		.secrel32	LLST0
+ 626 0527 01       		.byte	0x1
+ 627 0528 DE060000 		.long	0x6de
+ 628 052c 12       		.uleb128 0x12
+ 629 052d 73746172 		.ascii "startClock\0"
+ 629      74436C6F 
+ 629      636B00
+ 630 0538 01       		.byte	0x1
+ 631 0539 1D       		.byte	0x1d
+ 632 053a 09       		.byte	0x9
+ 633 053b 89000000 		.long	0x89
+ 634 053f 48000000 		.secrel32	LLST1
+ 635 0543 44000000 		.secrel32	LVUS1
+ 636 0547 13       		.uleb128 0x13
+ 637 0548 77696474 		.ascii "width\0"
+ 637      6800
+ 638 054e 01       		.byte	0x1
+ 639 054f 1E       		.byte	0x1e
+ 640 0550 09       		.byte	0x9
+ 641 0551 93000000 		.long	0x93
+ 642 0555 02       		.byte	0x2
+ 643 0556 74       		.byte	0x74
+ 644 0557 3C       		.sleb128 60
+ 645 0558 13       		.uleb128 0x13
+ 646 0559 68656967 		.ascii "height\0"
+ 646      687400
+ 647 0560 01       		.byte	0x1
+ 648 0561 1E       		.byte	0x1e
+ 649 0562 10       		.byte	0x10
+ 650 0563 93000000 		.long	0x93
+ 651 0567 02       		.byte	0x2
+ 652 0568 74       		.byte	0x74
+ 653 0569 38       		.sleb128 56
+ 654 056a 13       		.uleb128 0x13
+ 655 056b 6368616E 		.ascii "channels\0"
+ 655      6E656C73 
+ 655      00
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 17
+
+
+ 656 0574 01       		.byte	0x1
+ 657 0575 1E       		.byte	0x1e
+ 658 0576 18       		.byte	0x18
+ 659 0577 93000000 		.long	0x93
+ 660 057b 02       		.byte	0x2
+ 661 057c 74       		.byte	0x74
+ 662 057d 34       		.sleb128 52
+ 663 057e 12       		.uleb128 0x12
+ 664 057f 62756666 		.ascii "buffer\0"
+ 664      657200
+ 665 0586 01       		.byte	0x1
+ 666 0587 1F       		.byte	0x1f
+ 667 0588 11       		.byte	0x11
+ 668 0589 DE060000 		.long	0x6de
+ 669 058d 6F000000 		.secrel32	LLST2
+ 670 0591 67000000 		.secrel32	LVUS2
+ 671 0595 12       		.uleb128 0x12
+ 672 0596 72657375 		.ascii "result\0"
+ 672      6C7400
+ 673 059d 01       		.byte	0x1
+ 674 059e 20       		.byte	0x20
+ 675 059f 19       		.byte	0x19
+ 676 05a0 E4060000 		.long	0x6e4
+ 677 05a4 A6000000 		.secrel32	LLST3
+ 678 05a8 A4000000 		.secrel32	LVUS3
+ 679 05ac 14       		.uleb128 0x14
+ 680 05ad 63000000 		.long	LVL1
+ 681 05b1 EA060000 		.long	0x6ea
+ 682 05b5 DF050000 		.long	0x5df
+ 683 05b9 15       		.uleb128 0x15
+ 684 05ba 02       		.byte	0x2
+ 685 05bb 74       		.byte	0x74
+ 686 05bc 00       		.sleb128 0
+ 687 05bd 05       		.byte	0x5
+ 688 05be 03       		.byte	0x3
+ 689 05bf 00000000 		.long	_filepath
+ 690 05c3 15       		.uleb128 0x15
+ 691 05c4 02       		.byte	0x2
+ 692 05c5 74       		.byte	0x74
+ 693 05c6 04       		.sleb128 4
+ 694 05c7 02       		.byte	0x2
+ 695 05c8 74       		.byte	0x74
+ 696 05c9 3C       		.sleb128 60
+ 697 05ca 15       		.uleb128 0x15
+ 698 05cb 02       		.byte	0x2
+ 699 05cc 74       		.byte	0x74
+ 700 05cd 08       		.sleb128 8
+ 701 05ce 02       		.byte	0x2
+ 702 05cf 74       		.byte	0x74
+ 703 05d0 38       		.sleb128 56
+ 704 05d1 15       		.uleb128 0x15
+ 705 05d2 02       		.byte	0x2
+ 706 05d3 74       		.byte	0x74
+ 707 05d4 0C       		.sleb128 12
+ 708 05d5 02       		.byte	0x2
+ 709 05d6 74       		.byte	0x74
+ 710 05d7 34       		.sleb128 52
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 18
+
+
+ 711 05d8 15       		.uleb128 0x15
+ 712 05d9 02       		.byte	0x2
+ 713 05da 74       		.byte	0x74
+ 714 05db 10       		.sleb128 16
+ 715 05dc 01       		.byte	0x1
+ 716 05dd 34       		.byte	0x34
+ 717 05de 00       		.byte	0
+ 718 05df 14       		.uleb128 0x14
+ 719 05e0 89000000 		.long	LVL4
+ 720 05e4 F9060000 		.long	0x6f9
+ 721 05e8 F7050000 		.long	0x5f7
+ 722 05ec 15       		.uleb128 0x15
+ 723 05ed 02       		.byte	0x2
+ 724 05ee 74       		.byte	0x74
+ 725 05ef 00       		.sleb128 0
+ 726 05f0 05       		.byte	0x5
+ 727 05f1 03       		.byte	0x3
+ 728 05f2 00000000 		.long	LC0
+ 729 05f6 00       		.byte	0
+ 730 05f7 14       		.uleb128 0x14
+ 731 05f8 9D000000 		.long	LVL5
+ 732 05fc 0E070000 		.long	0x70e
+ 733 0600 0F060000 		.long	0x60f
+ 734 0604 15       		.uleb128 0x15
+ 735 0605 02       		.byte	0x2
+ 736 0606 74       		.byte	0x74
+ 737 0607 00       		.sleb128 0
+ 738 0608 05       		.byte	0x5
+ 739 0609 03       		.byte	0x3
+ 740 060a 23000000 		.long	LC2
+ 741 060e 00       		.byte	0
+ 742 060f 16       		.uleb128 0x16
+ 743 0610 A2000000 		.long	LVL6
+ 744 0614 27070000 		.long	0x727
+ 745 0618 14       		.uleb128 0x14
+ 746 0619 CE000000 		.long	LVL8
+ 747 061d 39070000 		.long	0x739
+ 748 0621 37060000 		.long	0x637
+ 749 0625 15       		.uleb128 0x15
+ 750 0626 02       		.byte	0x2
+ 751 0627 74       		.byte	0x74
+ 752 0628 00       		.sleb128 0
+ 753 0629 02       		.byte	0x2
+ 754 062a 73       		.byte	0x73
+ 755 062b 00       		.sleb128 0
+ 756 062c 15       		.uleb128 0x15
+ 757 062d 02       		.byte	0x2
+ 758 062e 74       		.byte	0x74
+ 759 062f 0C       		.sleb128 12
+ 760 0630 05       		.byte	0x5
+ 761 0631 0C       		.byte	0xc
+ 762 0632 02010004 		.long	0x4000102
+ 763 0636 00       		.byte	0
+ 764 0637 14       		.uleb128 0x14
+ 765 0638 DE000000 		.long	LVL9
+ 766 063c F9060000 		.long	0x6f9
+ 767 0640 4F060000 		.long	0x64f
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 19
+
+
+ 768 0644 15       		.uleb128 0x15
+ 769 0645 02       		.byte	0x2
+ 770 0646 74       		.byte	0x74
+ 771 0647 00       		.sleb128 0
+ 772 0648 05       		.byte	0x5
+ 773 0649 03       		.byte	0x3
+ 774 064a 3D000000 		.long	LC3
+ 775 064e 00       		.byte	0
+ 776 064f 16       		.uleb128 0x16
+ 777 0650 E3000000 		.long	LVL10
+ 778 0654 27070000 		.long	0x727
+ 779 0658 14       		.uleb128 0x14
+ 780 0659 FF000000 		.long	LVL11
+ 781 065d F9060000 		.long	0x6f9
+ 782 0661 85060000 		.long	0x685
+ 783 0665 15       		.uleb128 0x15
+ 784 0666 02       		.byte	0x2
+ 785 0667 74       		.byte	0x74
+ 786 0668 00       		.sleb128 0
+ 787 0669 05       		.byte	0x5
+ 788 066a 03       		.byte	0x3
+ 789 066b 4D000000 		.long	LC4
+ 790 066f 15       		.uleb128 0x15
+ 791 0670 02       		.byte	0x2
+ 792 0671 74       		.byte	0x74
+ 793 0672 04       		.sleb128 4
+ 794 0673 10       		.byte	0x10
+ 795 0674 74       		.byte	0x74
+ 796 0675 2C       		.sleb128 44
+ 797 0676 06       		.byte	0x6
+ 798 0677 F7       		.byte	0xf7
+ 799 0678 9301     		.uleb128 0x93
+ 800 067a F7       		.byte	0xf7
+ 801 067b 8901     		.uleb128 0x89
+ 802 067d 74       		.byte	0x74
+ 803 067e 20       		.sleb128 32
+ 804 067f F6       		.byte	0xf6
+ 805 0680 08       		.byte	0x8
+ 806 0681 8901     		.uleb128 0x89
+ 807 0683 1C       		.byte	0x1c
+ 808 0684 00       		.byte	0
+ 809 0685 14       		.uleb128 0x14
+ 810 0686 0B010000 		.long	LVL12
+ 811 068a 0E070000 		.long	0x70e
+ 812 068e 9D060000 		.long	0x69d
+ 813 0692 15       		.uleb128 0x15
+ 814 0693 02       		.byte	0x2
+ 815 0694 74       		.byte	0x74
+ 816 0695 00       		.sleb128 0
+ 817 0696 05       		.byte	0x5
+ 818 0697 03       		.byte	0x3
+ 819 0698 68000000 		.long	LC5
+ 820 069c 00       		.byte	0
+ 821 069d 14       		.uleb128 0x14
+ 822 069e 1F010000 		.long	LVL13
+ 823 06a2 F9060000 		.long	0x6f9
+ 824 06a6 BF060000 		.long	0x6bf
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 20
+
+
+ 825 06aa 15       		.uleb128 0x15
+ 826 06ab 02       		.byte	0x2
+ 827 06ac 74       		.byte	0x74
+ 828 06ad 00       		.sleb128 0
+ 829 06ae 05       		.byte	0x5
+ 830 06af 03       		.byte	0x3
+ 831 06b0 83000000 		.long	LC6
+ 832 06b4 15       		.uleb128 0x15
+ 833 06b5 02       		.byte	0x2
+ 834 06b6 74       		.byte	0x74
+ 835 06b7 04       		.sleb128 4
+ 836 06b8 05       		.byte	0x5
+ 837 06b9 03       		.byte	0x3
+ 838 06ba 00000000 		.long	_filepath
+ 839 06be 00       		.byte	0
+ 840 06bf 17       		.uleb128 0x17
+ 841 06c0 3D010000 		.long	LVL17
+ 842 06c4 F9060000 		.long	0x6f9
+ 843 06c8 15       		.uleb128 0x15
+ 844 06c9 02       		.byte	0x2
+ 845 06ca 74       		.byte	0x74
+ 846 06cb 00       		.sleb128 0
+ 847 06cc 05       		.byte	0x5
+ 848 06cd 03       		.byte	0x3
+ 849 06ce 09000000 		.long	LC1
+ 850 06d2 15       		.uleb128 0x15
+ 851 06d3 02       		.byte	0x2
+ 852 06d4 74       		.byte	0x74
+ 853 06d5 04       		.sleb128 4
+ 854 06d6 05       		.byte	0x5
+ 855 06d7 03       		.byte	0x3
+ 856 06d8 00000000 		.long	_filepath
+ 857 06dc 00       		.byte	0
+ 858 06dd 00       		.byte	0
+ 859 06de 05       		.uleb128 0x5
+ 860 06df 04       		.byte	0x4
+ 861 06e0 21010000 		.long	0x121
+ 862 06e4 05       		.uleb128 0x5
+ 863 06e5 04       		.byte	0x4
+ 864 06e6 B2000000 		.long	0xb2
+ 865 06ea 18       		.uleb128 0x18
+ 866 06eb 01       		.byte	0x1
+ 867 06ec 01       		.byte	0x1
+ 868 06ed 0C000000 		.secrel32	LASF0
+ 869 06f1 0C000000 		.secrel32	LASF0
+ 870 06f5 07       		.byte	0x7
+ 871 06f6 0C01     		.word	0x10c
+ 872 06f8 12       		.byte	0x12
+ 873 06f9 19       		.uleb128 0x19
+ 874 06fa 01       		.byte	0x1
+ 875 06fb 01       		.byte	0x1
+ 876 06fc 7072696E 		.ascii "printf\0"
+ 876      746600
+ 877 0703 7072696E 		.ascii "printf\0"
+ 877      746600
+ 878 070a 02       		.byte	0x2
+ 879 070b FD01     		.word	0x1fd
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 21
+
+
+ 880 070d 0F       		.byte	0xf
+ 881 070e 1A       		.uleb128 0x1a
+ 882 070f 01       		.byte	0x1
+ 883 0710 01       		.byte	0x1
+ 884 0711 70757473 		.ascii "puts\0"
+ 884      00
+ 885 0716 5F5F6275 		.ascii "__builtin_puts\0"
+ 885      696C7469 
+ 885      6E5F7075 
+ 885      747300
+ 886 0725 09       		.byte	0x9
+ 887 0726 00       		.byte	0
+ 888 0727 1B       		.uleb128 0x1b
+ 889 0728 01       		.byte	0x1
+ 890 0729 01       		.byte	0x1
+ 891 072a 636C6F63 		.ascii "clock\0"
+ 891      6B00
+ 892 0730 636C6F63 		.ascii "clock\0"
+ 892      6B00
+ 893 0736 04       		.byte	0x4
+ 894 0737 88       		.byte	0x88
+ 895 0738 13       		.byte	0x13
+ 896 0739 1C       		.uleb128 0x1c
+ 897 073a 01       		.byte	0x1
+ 898 073b 01       		.byte	0x1
+ 899 073c 00000000 		.secrel32	LASF1
+ 900 0740 00000000 		.secrel32	LASF1
+ 901 0744 08       		.byte	0x8
+ 902 0745 0E       		.byte	0xe
+ 903 0746 17       		.byte	0x17
+ 904 0747 00       		.byte	0
+ 905              		.section	.debug_abbrev,"dr"
+ 906              	Ldebug_abbrev0:
+ 907 0000 01       		.uleb128 0x1
+ 908 0001 11       		.uleb128 0x11
+ 909 0002 01       		.byte	0x1
+ 910 0003 25       		.uleb128 0x25
+ 911 0004 08       		.uleb128 0x8
+ 912 0005 13       		.uleb128 0x13
+ 913 0006 0B       		.uleb128 0xb
+ 914 0007 03       		.uleb128 0x3
+ 915 0008 08       		.uleb128 0x8
+ 916 0009 1B       		.uleb128 0x1b
+ 917 000a 08       		.uleb128 0x8
+ 918 000b 11       		.uleb128 0x11
+ 919 000c 01       		.uleb128 0x1
+ 920 000d 12       		.uleb128 0x12
+ 921 000e 01       		.uleb128 0x1
+ 922 000f 10       		.uleb128 0x10
+ 923 0010 06       		.uleb128 0x6
+ 924 0011 00       		.byte	0
+ 925 0012 00       		.byte	0
+ 926 0013 02       		.uleb128 0x2
+ 927 0014 24       		.uleb128 0x24
+ 928 0015 00       		.byte	0
+ 929 0016 0B       		.uleb128 0xb
+ 930 0017 0B       		.uleb128 0xb
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 22
+
+
+ 931 0018 3E       		.uleb128 0x3e
+ 932 0019 0B       		.uleb128 0xb
+ 933 001a 03       		.uleb128 0x3
+ 934 001b 08       		.uleb128 0x8
+ 935 001c 00       		.byte	0
+ 936 001d 00       		.byte	0
+ 937 001e 03       		.uleb128 0x3
+ 938 001f 26       		.uleb128 0x26
+ 939 0020 00       		.byte	0
+ 940 0021 49       		.uleb128 0x49
+ 941 0022 13       		.uleb128 0x13
+ 942 0023 00       		.byte	0
+ 943 0024 00       		.byte	0
+ 944 0025 04       		.uleb128 0x4
+ 945 0026 16       		.uleb128 0x16
+ 946 0027 00       		.byte	0
+ 947 0028 03       		.uleb128 0x3
+ 948 0029 08       		.uleb128 0x8
+ 949 002a 3A       		.uleb128 0x3a
+ 950 002b 0B       		.uleb128 0xb
+ 951 002c 3B       		.uleb128 0x3b
+ 952 002d 0B       		.uleb128 0xb
+ 953 002e 39       		.uleb128 0x39
+ 954 002f 0B       		.uleb128 0xb
+ 955 0030 49       		.uleb128 0x49
+ 956 0031 13       		.uleb128 0x13
+ 957 0032 00       		.byte	0
+ 958 0033 00       		.byte	0
+ 959 0034 05       		.uleb128 0x5
+ 960 0035 0F       		.uleb128 0xf
+ 961 0036 00       		.byte	0
+ 962 0037 0B       		.uleb128 0xb
+ 963 0038 0B       		.uleb128 0xb
+ 964 0039 49       		.uleb128 0x49
+ 965 003a 13       		.uleb128 0x13
+ 966 003b 00       		.byte	0
+ 967 003c 00       		.byte	0
+ 968 003d 06       		.uleb128 0x6
+ 969 003e 13       		.uleb128 0x13
+ 970 003f 01       		.byte	0x1
+ 971 0040 03       		.uleb128 0x3
+ 972 0041 08       		.uleb128 0x8
+ 973 0042 0B       		.uleb128 0xb
+ 974 0043 0B       		.uleb128 0xb
+ 975 0044 3A       		.uleb128 0x3a
+ 976 0045 0B       		.uleb128 0xb
+ 977 0046 3B       		.uleb128 0x3b
+ 978 0047 0B       		.uleb128 0xb
+ 979 0048 39       		.uleb128 0x39
+ 980 0049 0B       		.uleb128 0xb
+ 981 004a 01       		.uleb128 0x1
+ 982 004b 13       		.uleb128 0x13
+ 983 004c 00       		.byte	0
+ 984 004d 00       		.byte	0
+ 985 004e 07       		.uleb128 0x7
+ 986 004f 0D       		.uleb128 0xd
+ 987 0050 00       		.byte	0
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 23
+
+
+ 988 0051 03       		.uleb128 0x3
+ 989 0052 08       		.uleb128 0x8
+ 990 0053 3A       		.uleb128 0x3a
+ 991 0054 0B       		.uleb128 0xb
+ 992 0055 3B       		.uleb128 0x3b
+ 993 0056 0B       		.uleb128 0xb
+ 994 0057 39       		.uleb128 0x39
+ 995 0058 0B       		.uleb128 0xb
+ 996 0059 49       		.uleb128 0x49
+ 997 005a 13       		.uleb128 0x13
+ 998 005b 38       		.uleb128 0x38
+ 999 005c 0A       		.uleb128 0xa
+ 1000 005d 00       		.byte	0
+ 1001 005e 00       		.byte	0
+ 1002 005f 08       		.uleb128 0x8
+ 1003 0060 01       		.uleb128 0x1
+ 1004 0061 01       		.byte	0x1
+ 1005 0062 49       		.uleb128 0x49
+ 1006 0063 13       		.uleb128 0x13
+ 1007 0064 01       		.uleb128 0x1
+ 1008 0065 13       		.uleb128 0x13
+ 1009 0066 00       		.byte	0
+ 1010 0067 00       		.byte	0
+ 1011 0068 09       		.uleb128 0x9
+ 1012 0069 21       		.uleb128 0x21
+ 1013 006a 00       		.byte	0
+ 1014 006b 00       		.byte	0
+ 1015 006c 00       		.byte	0
+ 1016 006d 0A       		.uleb128 0xa
+ 1017 006e 34       		.uleb128 0x34
+ 1018 006f 00       		.byte	0
+ 1019 0070 03       		.uleb128 0x3
+ 1020 0071 08       		.uleb128 0x8
+ 1021 0072 3A       		.uleb128 0x3a
+ 1022 0073 0B       		.uleb128 0xb
+ 1023 0074 3B       		.uleb128 0x3b
+ 1024 0075 0B       		.uleb128 0xb
+ 1025 0076 39       		.uleb128 0x39
+ 1026 0077 0B       		.uleb128 0xb
+ 1027 0078 49       		.uleb128 0x49
+ 1028 0079 13       		.uleb128 0x13
+ 1029 007a 3F       		.uleb128 0x3f
+ 1030 007b 0C       		.uleb128 0xc
+ 1031 007c 3C       		.uleb128 0x3c
+ 1032 007d 0C       		.uleb128 0xc
+ 1033 007e 00       		.byte	0
+ 1034 007f 00       		.byte	0
+ 1035 0080 0B       		.uleb128 0xb
+ 1036 0081 21       		.uleb128 0x21
+ 1037 0082 00       		.byte	0
+ 1038 0083 49       		.uleb128 0x49
+ 1039 0084 13       		.uleb128 0x13
+ 1040 0085 2F       		.uleb128 0x2f
+ 1041 0086 0B       		.uleb128 0xb
+ 1042 0087 00       		.byte	0
+ 1043 0088 00       		.byte	0
+ 1044 0089 0C       		.uleb128 0xc
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 24
+
+
+ 1045 008a 34       		.uleb128 0x34
+ 1046 008b 00       		.byte	0
+ 1047 008c 03       		.uleb128 0x3
+ 1048 008d 08       		.uleb128 0x8
+ 1049 008e 3A       		.uleb128 0x3a
+ 1050 008f 0B       		.uleb128 0xb
+ 1051 0090 3B       		.uleb128 0x3b
+ 1052 0091 05       		.uleb128 0x5
+ 1053 0092 39       		.uleb128 0x39
+ 1054 0093 0B       		.uleb128 0xb
+ 1055 0094 49       		.uleb128 0x49
+ 1056 0095 13       		.uleb128 0x13
+ 1057 0096 3F       		.uleb128 0x3f
+ 1058 0097 0C       		.uleb128 0xc
+ 1059 0098 3C       		.uleb128 0x3c
+ 1060 0099 0C       		.uleb128 0xc
+ 1061 009a 00       		.byte	0
+ 1062 009b 00       		.byte	0
+ 1063 009c 0D       		.uleb128 0xd
+ 1064 009d 04       		.uleb128 0x4
+ 1065 009e 01       		.byte	0x1
+ 1066 009f 03       		.uleb128 0x3
+ 1067 00a0 08       		.uleb128 0x8
+ 1068 00a1 3E       		.uleb128 0x3e
+ 1069 00a2 0B       		.uleb128 0xb
+ 1070 00a3 0B       		.uleb128 0xb
+ 1071 00a4 0B       		.uleb128 0xb
+ 1072 00a5 49       		.uleb128 0x49
+ 1073 00a6 13       		.uleb128 0x13
+ 1074 00a7 3A       		.uleb128 0x3a
+ 1075 00a8 0B       		.uleb128 0xb
+ 1076 00a9 3B       		.uleb128 0x3b
+ 1077 00aa 0B       		.uleb128 0xb
+ 1078 00ab 39       		.uleb128 0x39
+ 1079 00ac 0B       		.uleb128 0xb
+ 1080 00ad 01       		.uleb128 0x1
+ 1081 00ae 13       		.uleb128 0x13
+ 1082 00af 00       		.byte	0
+ 1083 00b0 00       		.byte	0
+ 1084 00b1 0E       		.uleb128 0xe
+ 1085 00b2 28       		.uleb128 0x28
+ 1086 00b3 00       		.byte	0
+ 1087 00b4 03       		.uleb128 0x3
+ 1088 00b5 08       		.uleb128 0x8
+ 1089 00b6 1C       		.uleb128 0x1c
+ 1090 00b7 0B       		.uleb128 0xb
+ 1091 00b8 00       		.byte	0
+ 1092 00b9 00       		.byte	0
+ 1093 00ba 0F       		.uleb128 0xf
+ 1094 00bb 28       		.uleb128 0x28
+ 1095 00bc 00       		.byte	0
+ 1096 00bd 03       		.uleb128 0x3
+ 1097 00be 08       		.uleb128 0x8
+ 1098 00bf 1C       		.uleb128 0x1c
+ 1099 00c0 06       		.uleb128 0x6
+ 1100 00c1 00       		.byte	0
+ 1101 00c2 00       		.byte	0
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 25
+
+
+ 1102 00c3 10       		.uleb128 0x10
+ 1103 00c4 34       		.uleb128 0x34
+ 1104 00c5 00       		.byte	0
+ 1105 00c6 03       		.uleb128 0x3
+ 1106 00c7 08       		.uleb128 0x8
+ 1107 00c8 3A       		.uleb128 0x3a
+ 1108 00c9 0B       		.uleb128 0xb
+ 1109 00ca 3B       		.uleb128 0x3b
+ 1110 00cb 0B       		.uleb128 0xb
+ 1111 00cc 39       		.uleb128 0x39
+ 1112 00cd 0B       		.uleb128 0xb
+ 1113 00ce 49       		.uleb128 0x49
+ 1114 00cf 13       		.uleb128 0x13
+ 1115 00d0 3F       		.uleb128 0x3f
+ 1116 00d1 0C       		.uleb128 0xc
+ 1117 00d2 02       		.uleb128 0x2
+ 1118 00d3 0A       		.uleb128 0xa
+ 1119 00d4 00       		.byte	0
+ 1120 00d5 00       		.byte	0
+ 1121 00d6 11       		.uleb128 0x11
+ 1122 00d7 2E       		.uleb128 0x2e
+ 1123 00d8 01       		.byte	0x1
+ 1124 00d9 3F       		.uleb128 0x3f
+ 1125 00da 0C       		.uleb128 0xc
+ 1126 00db 03       		.uleb128 0x3
+ 1127 00dc 08       		.uleb128 0x8
+ 1128 00dd 3A       		.uleb128 0x3a
+ 1129 00de 0B       		.uleb128 0xb
+ 1130 00df 3B       		.uleb128 0x3b
+ 1131 00e0 0B       		.uleb128 0xb
+ 1132 00e1 39       		.uleb128 0x39
+ 1133 00e2 0B       		.uleb128 0xb
+ 1134 00e3 49       		.uleb128 0x49
+ 1135 00e4 13       		.uleb128 0x13
+ 1136 00e5 11       		.uleb128 0x11
+ 1137 00e6 01       		.uleb128 0x1
+ 1138 00e7 12       		.uleb128 0x12
+ 1139 00e8 01       		.uleb128 0x1
+ 1140 00e9 40       		.uleb128 0x40
+ 1141 00ea 06       		.uleb128 0x6
+ 1142 00eb 9642     		.uleb128 0x2116
+ 1143 00ed 0C       		.uleb128 0xc
+ 1144 00ee 01       		.uleb128 0x1
+ 1145 00ef 13       		.uleb128 0x13
+ 1146 00f0 00       		.byte	0
+ 1147 00f1 00       		.byte	0
+ 1148 00f2 12       		.uleb128 0x12
+ 1149 00f3 34       		.uleb128 0x34
+ 1150 00f4 00       		.byte	0
+ 1151 00f5 03       		.uleb128 0x3
+ 1152 00f6 08       		.uleb128 0x8
+ 1153 00f7 3A       		.uleb128 0x3a
+ 1154 00f8 0B       		.uleb128 0xb
+ 1155 00f9 3B       		.uleb128 0x3b
+ 1156 00fa 0B       		.uleb128 0xb
+ 1157 00fb 39       		.uleb128 0x39
+ 1158 00fc 0B       		.uleb128 0xb
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 26
+
+
+ 1159 00fd 49       		.uleb128 0x49
+ 1160 00fe 13       		.uleb128 0x13
+ 1161 00ff 02       		.uleb128 0x2
+ 1162 0100 06       		.uleb128 0x6
+ 1163 0101 B742     		.uleb128 0x2137
+ 1164 0103 06       		.uleb128 0x6
+ 1165 0104 00       		.byte	0
+ 1166 0105 00       		.byte	0
+ 1167 0106 13       		.uleb128 0x13
+ 1168 0107 34       		.uleb128 0x34
+ 1169 0108 00       		.byte	0
+ 1170 0109 03       		.uleb128 0x3
+ 1171 010a 08       		.uleb128 0x8
+ 1172 010b 3A       		.uleb128 0x3a
+ 1173 010c 0B       		.uleb128 0xb
+ 1174 010d 3B       		.uleb128 0x3b
+ 1175 010e 0B       		.uleb128 0xb
+ 1176 010f 39       		.uleb128 0x39
+ 1177 0110 0B       		.uleb128 0xb
+ 1178 0111 49       		.uleb128 0x49
+ 1179 0112 13       		.uleb128 0x13
+ 1180 0113 02       		.uleb128 0x2
+ 1181 0114 0A       		.uleb128 0xa
+ 1182 0115 00       		.byte	0
+ 1183 0116 00       		.byte	0
+ 1184 0117 14       		.uleb128 0x14
+ 1185 0118 898201   		.uleb128 0x4109
+ 1186 011b 01       		.byte	0x1
+ 1187 011c 11       		.uleb128 0x11
+ 1188 011d 01       		.uleb128 0x1
+ 1189 011e 31       		.uleb128 0x31
+ 1190 011f 13       		.uleb128 0x13
+ 1191 0120 01       		.uleb128 0x1
+ 1192 0121 13       		.uleb128 0x13
+ 1193 0122 00       		.byte	0
+ 1194 0123 00       		.byte	0
+ 1195 0124 15       		.uleb128 0x15
+ 1196 0125 8A8201   		.uleb128 0x410a
+ 1197 0128 00       		.byte	0
+ 1198 0129 02       		.uleb128 0x2
+ 1199 012a 0A       		.uleb128 0xa
+ 1200 012b 9142     		.uleb128 0x2111
+ 1201 012d 0A       		.uleb128 0xa
+ 1202 012e 00       		.byte	0
+ 1203 012f 00       		.byte	0
+ 1204 0130 16       		.uleb128 0x16
+ 1205 0131 898201   		.uleb128 0x4109
+ 1206 0134 00       		.byte	0
+ 1207 0135 11       		.uleb128 0x11
+ 1208 0136 01       		.uleb128 0x1
+ 1209 0137 31       		.uleb128 0x31
+ 1210 0138 13       		.uleb128 0x13
+ 1211 0139 00       		.byte	0
+ 1212 013a 00       		.byte	0
+ 1213 013b 17       		.uleb128 0x17
+ 1214 013c 898201   		.uleb128 0x4109
+ 1215 013f 01       		.byte	0x1
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 27
+
+
+ 1216 0140 11       		.uleb128 0x11
+ 1217 0141 01       		.uleb128 0x1
+ 1218 0142 31       		.uleb128 0x31
+ 1219 0143 13       		.uleb128 0x13
+ 1220 0144 00       		.byte	0
+ 1221 0145 00       		.byte	0
+ 1222 0146 18       		.uleb128 0x18
+ 1223 0147 2E       		.uleb128 0x2e
+ 1224 0148 00       		.byte	0
+ 1225 0149 3F       		.uleb128 0x3f
+ 1226 014a 0C       		.uleb128 0xc
+ 1227 014b 3C       		.uleb128 0x3c
+ 1228 014c 0C       		.uleb128 0xc
+ 1229 014d 8740     		.uleb128 0x2007
+ 1230 014f 0E       		.uleb128 0xe
+ 1231 0150 03       		.uleb128 0x3
+ 1232 0151 0E       		.uleb128 0xe
+ 1233 0152 3A       		.uleb128 0x3a
+ 1234 0153 0B       		.uleb128 0xb
+ 1235 0154 3B       		.uleb128 0x3b
+ 1236 0155 05       		.uleb128 0x5
+ 1237 0156 39       		.uleb128 0x39
+ 1238 0157 0B       		.uleb128 0xb
+ 1239 0158 00       		.byte	0
+ 1240 0159 00       		.byte	0
+ 1241 015a 19       		.uleb128 0x19
+ 1242 015b 2E       		.uleb128 0x2e
+ 1243 015c 00       		.byte	0
+ 1244 015d 3F       		.uleb128 0x3f
+ 1245 015e 0C       		.uleb128 0xc
+ 1246 015f 3C       		.uleb128 0x3c
+ 1247 0160 0C       		.uleb128 0xc
+ 1248 0161 8740     		.uleb128 0x2007
+ 1249 0163 08       		.uleb128 0x8
+ 1250 0164 03       		.uleb128 0x3
+ 1251 0165 08       		.uleb128 0x8
+ 1252 0166 3A       		.uleb128 0x3a
+ 1253 0167 0B       		.uleb128 0xb
+ 1254 0168 3B       		.uleb128 0x3b
+ 1255 0169 05       		.uleb128 0x5
+ 1256 016a 39       		.uleb128 0x39
+ 1257 016b 0B       		.uleb128 0xb
+ 1258 016c 00       		.byte	0
+ 1259 016d 00       		.byte	0
+ 1260 016e 1A       		.uleb128 0x1a
+ 1261 016f 2E       		.uleb128 0x2e
+ 1262 0170 00       		.byte	0
+ 1263 0171 3F       		.uleb128 0x3f
+ 1264 0172 0C       		.uleb128 0xc
+ 1265 0173 3C       		.uleb128 0x3c
+ 1266 0174 0C       		.uleb128 0xc
+ 1267 0175 8740     		.uleb128 0x2007
+ 1268 0177 08       		.uleb128 0x8
+ 1269 0178 03       		.uleb128 0x3
+ 1270 0179 08       		.uleb128 0x8
+ 1271 017a 3A       		.uleb128 0x3a
+ 1272 017b 0B       		.uleb128 0xb
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 28
+
+
+ 1273 017c 3B       		.uleb128 0x3b
+ 1274 017d 0B       		.uleb128 0xb
+ 1275 017e 00       		.byte	0
+ 1276 017f 00       		.byte	0
+ 1277 0180 1B       		.uleb128 0x1b
+ 1278 0181 2E       		.uleb128 0x2e
+ 1279 0182 00       		.byte	0
+ 1280 0183 3F       		.uleb128 0x3f
+ 1281 0184 0C       		.uleb128 0xc
+ 1282 0185 3C       		.uleb128 0x3c
+ 1283 0186 0C       		.uleb128 0xc
+ 1284 0187 8740     		.uleb128 0x2007
+ 1285 0189 08       		.uleb128 0x8
+ 1286 018a 03       		.uleb128 0x3
+ 1287 018b 08       		.uleb128 0x8
+ 1288 018c 3A       		.uleb128 0x3a
+ 1289 018d 0B       		.uleb128 0xb
+ 1290 018e 3B       		.uleb128 0x3b
+ 1291 018f 0B       		.uleb128 0xb
+ 1292 0190 39       		.uleb128 0x39
+ 1293 0191 0B       		.uleb128 0xb
+ 1294 0192 00       		.byte	0
+ 1295 0193 00       		.byte	0
+ 1296 0194 1C       		.uleb128 0x1c
+ 1297 0195 2E       		.uleb128 0x2e
+ 1298 0196 00       		.byte	0
+ 1299 0197 3F       		.uleb128 0x3f
+ 1300 0198 0C       		.uleb128 0xc
+ 1301 0199 3C       		.uleb128 0x3c
+ 1302 019a 0C       		.uleb128 0xc
+ 1303 019b 8740     		.uleb128 0x2007
+ 1304 019d 0E       		.uleb128 0xe
+ 1305 019e 03       		.uleb128 0x3
+ 1306 019f 0E       		.uleb128 0xe
+ 1307 01a0 3A       		.uleb128 0x3a
+ 1308 01a1 0B       		.uleb128 0xb
+ 1309 01a2 3B       		.uleb128 0x3b
+ 1310 01a3 0B       		.uleb128 0xb
+ 1311 01a4 39       		.uleb128 0x39
+ 1312 01a5 0B       		.uleb128 0xb
+ 1313 01a6 00       		.byte	0
+ 1314 01a7 00       		.byte	0
+ 1315 01a8 00       		.byte	0
+ 1316              		.section	.debug_loc,"dr"
+ 1317              	Ldebug_loc0:
+ 1318              	LLST0:
+ 1319 0000 00000000 		.long	LFB37-Ltext0
+ 1320 0004 01000000 		.long	LCFI0-Ltext0
+ 1321 0008 0200     		.word	0x2
+ 1322 000a 74       		.byte	0x74
+ 1323 000b 04       		.sleb128 4
+ 1324 000c 01000000 		.long	LCFI0-Ltext0
+ 1325 0010 03000000 		.long	LCFI1-Ltext0
+ 1326 0014 0200     		.word	0x2
+ 1327 0016 74       		.byte	0x74
+ 1328 0017 08       		.sleb128 8
+ 1329 0018 03000000 		.long	LCFI1-Ltext0
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 29
+
+
+ 1330 001c 28010000 		.long	LCFI2-Ltext0
+ 1331 0020 0200     		.word	0x2
+ 1332 0022 75       		.byte	0x75
+ 1333 0023 08       		.sleb128 8
+ 1334 0024 28010000 		.long	LCFI2-Ltext0
+ 1335 0028 29010000 		.long	LCFI3-Ltext0
+ 1336 002c 0200     		.word	0x2
+ 1337 002e 74       		.byte	0x74
+ 1338 002f 04       		.sleb128 4
+ 1339 0030 29010000 		.long	LCFI3-Ltext0
+ 1340 0034 44010000 		.long	LFE37-Ltext0
+ 1341 0038 0200     		.word	0x2
+ 1342 003a 75       		.byte	0x75
+ 1343 003b 08       		.sleb128 8
+ 1344 003c 00000000 		.long	0
+ 1345 0040 00000000 		.long	0
+ 1346              	LVUS1:
+ 1347 0044 00       		.uleb128 LVU17
+ 1348 0045 00       		.uleb128 LVU19
+ 1349 0046 00       		.uleb128 LVU19
+ 1350 0047 00       		.uleb128 LVU27
+ 1351              	LLST1:
+ 1352 0048 AE000000 		.long	LVL7-Ltext0
+ 1353 004c CD000000 		.long	LVL8-1-Ltext0
+ 1354 0050 0100     		.word	0x1
+ 1355 0052 5B       		.byte	0x5b
+ 1356 0053 CD000000 		.long	LVL8-1-Ltext0
+ 1357 0057 24010000 		.long	LVL14-Ltext0
+ 1358 005b 0200     		.word	0x2
+ 1359 005d 74       		.byte	0x74
+ 1360 005e 20       		.sleb128 32
+ 1361 005f 00000000 		.long	0
+ 1362 0063 00000000 		.long	0
+ 1363              	LVUS2:
+ 1364 0067 03       		.uleb128 LVU5
+ 1365 0068 00       		.uleb128 LVU9
+ 1366 0069 00       		.uleb128 LVU9
+ 1367 006a 00       		.uleb128 LVU10
+ 1368 006b 00       		.uleb128 LVU10
+ 1369 006c 00       		.uleb128 LVU28
+ 1370 006d 00       		.uleb128 LVU29
+ 1371 006e 00       		.uleb128 0
+ 1372              	LLST2:
+ 1373 006f 0F000000 		.long	LVL0-Ltext0
+ 1374 0073 65000000 		.long	LVL2-Ltext0
+ 1375 0077 0200     		.word	0x2
+ 1376 0079 30       		.byte	0x30
+ 1377 007a 9F       		.byte	0x9f
+ 1378 007b 65000000 		.long	LVL2-Ltext0
+ 1379 007f 69000000 		.long	LVL3-Ltext0
+ 1380 0083 0100     		.word	0x1
+ 1381 0085 50       		.byte	0x50
+ 1382 0086 69000000 		.long	LVL3-Ltext0
+ 1383 008a 27010000 		.long	LVL15-Ltext0
+ 1384 008e 0100     		.word	0x1
+ 1385 0090 53       		.byte	0x53
+ 1386 0091 29010000 		.long	LVL16-Ltext0
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 30
+
+
+ 1387 0095 44010000 		.long	LFE37-Ltext0
+ 1388 0099 0100     		.word	0x1
+ 1389 009b 53       		.byte	0x53
+ 1390 009c 00000000 		.long	0
+ 1391 00a0 00000000 		.long	0
+ 1392              	LVUS3:
+ 1393 00a4 00       		.uleb128 LVU19
+ 1394 00a5 00       		.uleb128 LVU20
+ 1395              	LLST3:
+ 1396 00a6 CE000000 		.long	LVL8-Ltext0
+ 1397 00aa DD000000 		.long	LVL9-1-Ltext0
+ 1398 00ae 0100     		.word	0x1
+ 1399 00b0 50       		.byte	0x50
+ 1400 00b1 00000000 		.long	0
+ 1401 00b5 00000000 		.long	0
+ 1402              		.section	.debug_aranges,"dr"
+ 1403 0000 1C000000 		.long	0x1c
+ 1404 0004 0200     		.word	0x2
+ 1405 0006 00000000 		.secrel32	Ldebug_info0
+ 1406 000a 04       		.byte	0x4
+ 1407 000b 00       		.byte	0
+ 1408 000c 0000     		.word	0
+ 1409 000e 0000     		.word	0
+ 1410 0010 00000000 		.long	Ltext0
+ 1411 0014 44010000 		.long	Letext0-Ltext0
+ 1412 0018 00000000 		.long	0
+ 1413 001c 00000000 		.long	0
+ 1414              		.section	.debug_line,"dr"
+ 1415              	Ldebug_line0:
+ 1416 0000 45010000 		.section	.debug_str,"dr"
+ 1416      0200C500 
+ 1416      00000101 
+ 1416      FB0E0D00 
+ 1416      01010101 
+ 1417              	LASF1:
+ 1418 0000 52656164 		.ascii "ReadBarcode\0"
+ 1418      42617263 
+ 1418      6F646500 
+ 1419              	LASF0:
+ 1420 000c 73746269 		.ascii "stbi_load\0"
+ 1420      5F6C6F61 
+ 1420      6400
+ 1421              		.ident	"GCC: (i686-posix-dwarf-rev0, Built by MinGW-W64 project) 8.1.0"
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s 			page 31
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 PDF.c
+C:\Users\jisu8\AppData\Local\Temp\ccPPr3r1.s:23     .text:00000000 _main
+                            *COM*:000000c8 _filepath
+
+UNDEFINED SYMBOLS
+___main
+_stbi_load
+_printf
+_puts
+_clock
+_ReadBarcode
