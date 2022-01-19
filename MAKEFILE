@@ -27,6 +27,7 @@ thirdparty/stb_image.c \
 src/ReadBarcode.c \
 src/GenericLuminanceSource.c 
 
+
 #######################################
 # binaries
 #######################################
@@ -42,7 +43,6 @@ C_INCLUDES =  \
 
 # C++ 컴파일러 옵션
 CFLAGS = $(C_INCLUDES) $(OPT) -Wall
-CFLAGS += -g -gdwarf-2
 
 ifeq ($(DEBUG), 1)
 CFLAGS += -g -gdwarf-2

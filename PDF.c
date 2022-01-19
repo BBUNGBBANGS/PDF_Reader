@@ -21,7 +21,6 @@
 #include "src/ReadBarcode.h"
 
 char filepath[200];
-
 #define FILE_TEST 		(1)
 
 int main()
@@ -61,7 +60,7 @@ int main()
 	startClock = clock();
 
     result = ReadBarcode(buffer,width,height,RGBX);
-    printf("address : %#x \n",result);
+    printf("address : %x \n",result);
 
 	printf("Total Time = %3.2f msec.\r\n", clock() - startClock);
 	printf("=========================\n\n");

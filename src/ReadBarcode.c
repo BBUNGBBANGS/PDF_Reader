@@ -15,52 +15,61 @@
 */
 
 #include "ReadBarcode.h"
-#include "DecodeHints.h"
-#include <stdio.h>
 
+ImageView_t ImageView;
 DecodeHints_t DecodeHints;
-
-int test_val;
+GenericLuminanceSource_t GenericLuminanceSource_;
 
 static void DecodeHints_Init(void);
+static int PixStride(unsigned int format);  
+static int RedIndex(unsigned int format);   
+static int GreenIndex(unsigned int format); 
+static int BlueIndex(unsigned int format);  
+static void ReadBarcode_Internal(GenericLuminanceSource_t *source,const DecodeHints_t *hints);
 
 unsigned int * ReadBarcode(unsigned char *iv, int width,int height, unsigned int ImageFormat)
 {
-	DecodeHints_t hints;
-    unsigned int * ret ;
+	DecodeHints_t *hints;
+	unsigned int rowStride,pixStride;
+	uint32_t idxRed,idxGreen,idxBlue;
 
 	DecodeHints_Init();
+	hints = &DecodeHints;
 
-	ret = &test_val;
-    printf("Result ReadBarcode : iv= %#x", &iv);
-	printf(" hints= %#x\n",&hints);
+    printf("Result ReadBarcode : iv= %x", &iv);
+	printf(" hints= %x\n",hints);
 
-    printf("address : %#x , Width : %d , height : %d , format :  %#x \n",iv,width,height,ImageFormat);
-	//GenericLuminanceSource(0, 0, width, height, const void* bytes, int rowBytes, int pixelBytes, int redIndex, int greenIndex, int blueIndex, void*);
-    #if 0
-	return ReadBarcode(
-			{
-				0,
-				0,
-				iv._width,
-				iv._height,
-				iv._data,
-				iv._rowStride,
-				iv._pixStride,
-				RedIndex(iv._format),
-				GreenIndex(iv._format),
-				BlueIndex(iv._format),
-				nullptr
-			},
-			hints);
-    #endif
-    return (ret);
+	pixStride = PixStride(ImageFormat);
+	rowStride = width * pixStride;
+	idxRed = RedIndex(ImageFormat);
+	idxGreen = GreenIndex(ImageFormat);
+	idxBlue = BlueIndex(ImageFormat);
+
+    printf("address : %x , Width : %d , height : %d , format :  %x \n",iv,width,height,ImageFormat);
+ 
+	ImageView.data = GenericLuminanceSource(0, 0, width, height, iv, rowStride, pixStride, idxRed, idxGreen, idxBlue);
+	ImageView.width = width; 
+	ImageView.height = height;
+	ImageView.format = ImageFormat; 
+	ImageView.rowStride = rowStride; 
+	ImageView.pixStride = pixStride;
+
+	ReadBarcode_Internal(&GenericLuminanceSource_,hints);
+	
+    return (&ImageView);
 }
 
-static void ReadBarcode_Internal(void)
+static void ReadBarcode_Internal(GenericLuminanceSource_t *source,const DecodeHints_t *hints)
 {
-	//printf("static Result ReadBarcode : source=",source);
-	//printf(" hints=\n",hints);
+	source->pixels = ImageView.data;
+	source->left = 0;
+	source->top = 0;
+	source->width = ImageView.width;
+	source->height = ImageView.height;
+	source->rowBytes = ImageView.width;
+	printf("static Result ReadBarcode : source= %x",source);
+	printf(" hints= %x \n",hints);
+
 }
 
 static void DecodeHints_Init(void)
@@ -71,3 +80,19 @@ static void DecodeHints_Init(void)
 	DecodeHints.returnCodabarStartEnd = 0;
 }
 
+static int PixStride(unsigned int format)  
+{ 
+	return ((uint32_t)(format) >> 3*8) & 0xFF; 
+}
+static int RedIndex(unsigned int format)   
+{ 
+	return ((uint32_t)(format) >> 2*8) & 0xFF; 
+}
+static int GreenIndex(unsigned int format) 
+{ 
+	return ((uint32_t)(format) >> 1*8) & 0xFF; 
+}
+static int BlueIndex(unsigned int format)  
+{ 
+	return ((uint32_t)(format) >> 0*8) & 0xFF; 
+}
