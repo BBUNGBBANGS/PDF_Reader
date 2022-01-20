@@ -1,0 +1,1039 @@
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccBZlNqa.s 			page 1
+
+
+   1              		.file	"MultiFormatReader.c"
+   2              		.text
+   3              	Ltext0:
+   4              		.globl	_MultiFormatReader
+   6              	_MultiFormatReader:
+   7              	LVL0:
+   8              	LFB13:
+   9              		.file 1 "src/MultiFormatReader.c"
+   1:src/MultiFormatReader.c **** /*
+   2:src/MultiFormatReader.c **** * Copyright 2016 Nu-book Inc.
+   3:src/MultiFormatReader.c **** * Copyright 2016 ZXing authors
+   4:src/MultiFormatReader.c **** *
+   5:src/MultiFormatReader.c **** * Licensed under the Apache License, Version 2.0 (the "License");
+   6:src/MultiFormatReader.c **** * you may not use this file except in compliance with the License.
+   7:src/MultiFormatReader.c **** * You may obtain a copy of the License at
+   8:src/MultiFormatReader.c **** *
+   9:src/MultiFormatReader.c **** *      http://www.apache.org/licenses/LICENSE-2.0
+  10:src/MultiFormatReader.c **** *
+  11:src/MultiFormatReader.c **** * Unless required by applicable law or agreed to in writing, software
+  12:src/MultiFormatReader.c **** * distributed under the License is distributed on an "AS IS" BASIS,
+  13:src/MultiFormatReader.c **** * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  14:src/MultiFormatReader.c **** * See the License for the specific language governing permissions and
+  15:src/MultiFormatReader.c **** * limitations under the License.
+  16:src/MultiFormatReader.c **** */
+  17:src/MultiFormatReader.c **** 
+  18:src/MultiFormatReader.c **** #include "MultiFormatReader.h"
+  19:src/MultiFormatReader.c **** 
+  20:src/MultiFormatReader.c **** void MultiFormatReader(DecodeHints_t * hints)
+  21:src/MultiFormatReader.c **** {
+  10              		.loc 1 21 1 view -0
+  11              		.cfi_startproc
+  22:src/MultiFormatReader.c **** 	uint8_t tryHarder;
+  12              		.loc 1 22 2 view LVU1
+  23:src/MultiFormatReader.c **** 	tryHarder = hints->tryHarder;
+  13              		.loc 1 23 2 view LVU2
+  24:src/MultiFormatReader.c **** 	
+  25:src/MultiFormatReader.c **** 	//_readers.emplace_back(new Pdf417::Reader(hints)); //뭘 읽는거지?
+  26:src/MultiFormatReader.c **** }
+  14              		.loc 1 26 1 is_stmt 0 view LVU3
+  15 0000 C3       		ret
+  16              		.cfi_endproc
+  17              	LFE13:
+  18              		.globl	_MultiFormatReader_Read
+  20              	_MultiFormatReader_Read:
+  21              	LVL1:
+  22              	LFB14:
+  27:src/MultiFormatReader.c **** 
+  28:src/MultiFormatReader.c **** unsigned char * MultiFormatReader_Read(unsigned char * image) 
+  29:src/MultiFormatReader.c **** {
+  23              		.loc 1 29 1 is_stmt 1 view -0
+  24              		.cfi_startproc
+  30:src/MultiFormatReader.c **** 	uint8_t readers = 1;
+  25              		.loc 1 30 2 view LVU5
+  31:src/MultiFormatReader.c **** 	// If we have only one reader in our list, just return whatever that decoded.
+  32:src/MultiFormatReader.c **** 	// This preserves information (e.g. ChecksumError) instead of just returning 'NotFound'.
+  33:src/MultiFormatReader.c **** 	if (readers == 1)//readers 사이즈가 1일때 진입
+  26              		.loc 1 33 2 view LVU6
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccBZlNqa.s 			page 2
+
+
+  34:src/MultiFormatReader.c **** 	{
+  35:src/MultiFormatReader.c **** 		//return decode(image);
+  36:src/MultiFormatReader.c **** 	}
+  27              		.loc 1 36 2 view LVU7
+  37:src/MultiFormatReader.c **** 
+  38:src/MultiFormatReader.c **** 	#if 0
+  39:src/MultiFormatReader.c **** 	for (const auto& reader : _readers) {
+  40:src/MultiFormatReader.c **** 		Result r = reader->decode(image);
+  41:src/MultiFormatReader.c ****   		if (r.isValid())
+  42:src/MultiFormatReader.c **** 			return r;
+  43:src/MultiFormatReader.c **** 	}
+  44:src/MultiFormatReader.c **** 	#endif
+  45:src/MultiFormatReader.c **** 	return NULL;
+  28              		.loc 1 45 2 view LVU8
+  46:src/MultiFormatReader.c **** }...
+  29              		.loc 1 46 1 is_stmt 0 view LVU9
+  30 0001 B8000000 		movl	$0, %eax
+  30      00
+  31 0006 C3       		ret
+  32              		.cfi_endproc
+  33              	LFE14:
+  34              	Letext0:
+  35              		.file 2 "D:/3.tools/mingw/mingw32/i686-w64-mingw32/include/stdint.h"
+  36              		.file 3 "D:/3.tools/mingw/mingw32/i686-w64-mingw32/include/stdio.h"
+  37              		.file 4 "src/BarcodeFormat.h"
+  38              		.file 5 "src/DecodeHints.h"
+  39 0007 90       		.section	.debug_info,"dr"
+  40              	Ldebug_info0:
+  41 0000 13050000 		.long	0x513
+  42 0004 0200     		.word	0x2
+  43 0006 00000000 		.secrel32	Ldebug_abbrev0
+  44 000a 04       		.byte	0x4
+  45 000b 01       		.uleb128 0x1
+  46 000c 474E5520 		.ascii "GNU C17 8.1.0 -mtune=generic -march=i686 -g -gdwarf-2 -Og\0"
+  46      43313720 
+  46      382E312E 
+  46      30202D6D 
+  46      74756E65 
+  47 0046 0C       		.byte	0xc
+  48 0047 7372632F 		.ascii "src/MultiFormatReader.c\0"
+  48      4D756C74 
+  48      69466F72 
+  48      6D617452 
+  48      65616465 
+  49 005f 443A5C31 		.ascii "D:\\1.Project_workspace\\PDF_BARCODE\0"
+  49      2E50726F 
+  49      6A656374 
+  49      5F776F72 
+  49      6B737061 
+  50 0082 00000000 		.long	Ltext0
+  51 0086 07000000 		.long	Letext0
+  52 008a 00000000 		.secrel32	Ldebug_line0
+  53 008e 02       		.uleb128 0x2
+  54 008f 01       		.byte	0x1
+  55 0090 06       		.byte	0x6
+  56 0091 63686172 		.ascii "char\0"
+  56      00
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccBZlNqa.s 			page 3
+
+
+  57 0096 02       		.uleb128 0x2
+  58 0097 04       		.byte	0x4
+  59 0098 07       		.byte	0x7
+  60 0099 756E7369 		.ascii "unsigned int\0"
+  60      676E6564 
+  60      20696E74 
+  60      00
+  61 00a6 02       		.uleb128 0x2
+  62 00a7 04       		.byte	0x4
+  63 00a8 05       		.byte	0x5
+  64 00a9 696E7400 		.ascii "int\0"
+  65 00ad 02       		.uleb128 0x2
+  66 00ae 02       		.byte	0x2
+  67 00af 07       		.byte	0x7
+  68 00b0 73686F72 		.ascii "short unsigned int\0"
+  68      7420756E 
+  68      7369676E 
+  68      65642069 
+  68      6E7400
+  69 00c3 02       		.uleb128 0x2
+  70 00c4 04       		.byte	0x4
+  71 00c5 05       		.byte	0x5
+  72 00c6 6C6F6E67 		.ascii "long int\0"
+  72      20696E74 
+  72      00
+  73 00cf 02       		.uleb128 0x2
+  74 00d0 08       		.byte	0x8
+  75 00d1 05       		.byte	0x5
+  76 00d2 6C6F6E67 		.ascii "long long int\0"
+  76      206C6F6E 
+  76      6720696E 
+  76      7400
+  77 00e0 03       		.uleb128 0x3
+  78 00e1 04       		.byte	0x4
+  79 00e2 8E000000 		.long	0x8e
+  80 00e6 02       		.uleb128 0x2
+  81 00e7 04       		.byte	0x4
+  82 00e8 07       		.byte	0x7
+  83 00e9 6C6F6E67 		.ascii "long unsigned int\0"
+  83      20756E73 
+  83      69676E65 
+  83      6420696E 
+  83      7400
+  84 00fb 02       		.uleb128 0x2
+  85 00fc 01       		.byte	0x1
+  86 00fd 08       		.byte	0x8
+  87 00fe 756E7369 		.ascii "unsigned char\0"
+  87      676E6564 
+  87      20636861 
+  87      7200
+  88 010c 02       		.uleb128 0x2
+  89 010d 0C       		.byte	0xc
+  90 010e 04       		.byte	0x4
+  91 010f 6C6F6E67 		.ascii "long double\0"
+  91      20646F75 
+  91      626C6500 
+  92 011b 02       		.uleb128 0x2
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccBZlNqa.s 			page 4
+
+
+  93 011c 10       		.byte	0x10
+  94 011d 04       		.byte	0x4
+  95 011e 5F466C6F 		.ascii "_Float128\0"
+  95      61743132 
+  95      3800
+  96 0128 02       		.uleb128 0x2
+  97 0129 01       		.byte	0x1
+  98 012a 06       		.byte	0x6
+  99 012b 7369676E 		.ascii "signed char\0"
+  99      65642063 
+  99      68617200 
+ 100 0137 04       		.uleb128 0x4
+ 101 0138 75696E74 		.ascii "uint8_t\0"
+ 101      385F7400 
+ 102 0140 02       		.byte	0x2
+ 103 0141 24       		.byte	0x24
+ 104 0142 19       		.byte	0x19
+ 105 0143 FB000000 		.long	0xfb
+ 106 0147 02       		.uleb128 0x2
+ 107 0148 02       		.byte	0x2
+ 108 0149 05       		.byte	0x5
+ 109 014a 73686F72 		.ascii "short int\0"
+ 109      7420696E 
+ 109      7400
+ 110 0154 04       		.uleb128 0x4
+ 111 0155 75696E74 		.ascii "uint64_t\0"
+ 111      36345F74 
+ 111      00
+ 112 015e 02       		.byte	0x2
+ 113 015f 2A       		.byte	0x2a
+ 114 0160 30       		.byte	0x30
+ 115 0161 65010000 		.long	0x165
+ 116 0165 02       		.uleb128 0x2
+ 117 0166 08       		.byte	0x8
+ 118 0167 07       		.byte	0x7
+ 119 0168 6C6F6E67 		.ascii "long long unsigned int\0"
+ 119      206C6F6E 
+ 119      6720756E 
+ 119      7369676E 
+ 119      65642069 
+ 120 017f 05       		.uleb128 0x5
+ 121 0180 5F696F62 		.ascii "_iobuf\0"
+ 121      756600
+ 122 0187 20       		.byte	0x20
+ 123 0188 03       		.byte	0x3
+ 124 0189 1A       		.byte	0x1a
+ 125 018a 0A       		.byte	0xa
+ 126 018b 1F020000 		.long	0x21f
+ 127 018f 06       		.uleb128 0x6
+ 128 0190 5F707472 		.ascii "_ptr\0"
+ 128      00
+ 129 0195 03       		.byte	0x3
+ 130 0196 1B       		.byte	0x1b
+ 131 0197 0B       		.byte	0xb
+ 132 0198 E0000000 		.long	0xe0
+ 133 019c 02       		.byte	0x2
+ 134 019d 23       		.byte	0x23
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccBZlNqa.s 			page 5
+
+
+ 135 019e 00       		.uleb128 0
+ 136 019f 06       		.uleb128 0x6
+ 137 01a0 5F636E74 		.ascii "_cnt\0"
+ 137      00
+ 138 01a5 03       		.byte	0x3
+ 139 01a6 1C       		.byte	0x1c
+ 140 01a7 09       		.byte	0x9
+ 141 01a8 A6000000 		.long	0xa6
+ 142 01ac 02       		.byte	0x2
+ 143 01ad 23       		.byte	0x23
+ 144 01ae 04       		.uleb128 0x4
+ 145 01af 06       		.uleb128 0x6
+ 146 01b0 5F626173 		.ascii "_base\0"
+ 146      6500
+ 147 01b6 03       		.byte	0x3
+ 148 01b7 1D       		.byte	0x1d
+ 149 01b8 0B       		.byte	0xb
+ 150 01b9 E0000000 		.long	0xe0
+ 151 01bd 02       		.byte	0x2
+ 152 01be 23       		.byte	0x23
+ 153 01bf 08       		.uleb128 0x8
+ 154 01c0 06       		.uleb128 0x6
+ 155 01c1 5F666C61 		.ascii "_flag\0"
+ 155      6700
+ 156 01c7 03       		.byte	0x3
+ 157 01c8 1E       		.byte	0x1e
+ 158 01c9 09       		.byte	0x9
+ 159 01ca A6000000 		.long	0xa6
+ 160 01ce 02       		.byte	0x2
+ 161 01cf 23       		.byte	0x23
+ 162 01d0 0C       		.uleb128 0xc
+ 163 01d1 06       		.uleb128 0x6
+ 164 01d2 5F66696C 		.ascii "_file\0"
+ 164      6500
+ 165 01d8 03       		.byte	0x3
+ 166 01d9 1F       		.byte	0x1f
+ 167 01da 09       		.byte	0x9
+ 168 01db A6000000 		.long	0xa6
+ 169 01df 02       		.byte	0x2
+ 170 01e0 23       		.byte	0x23
+ 171 01e1 10       		.uleb128 0x10
+ 172 01e2 06       		.uleb128 0x6
+ 173 01e3 5F636861 		.ascii "_charbuf\0"
+ 173      72627566 
+ 173      00
+ 174 01ec 03       		.byte	0x3
+ 175 01ed 20       		.byte	0x20
+ 176 01ee 09       		.byte	0x9
+ 177 01ef A6000000 		.long	0xa6
+ 178 01f3 02       		.byte	0x2
+ 179 01f4 23       		.byte	0x23
+ 180 01f5 14       		.uleb128 0x14
+ 181 01f6 06       		.uleb128 0x6
+ 182 01f7 5F627566 		.ascii "_bufsiz\0"
+ 182      73697A00 
+ 183 01ff 03       		.byte	0x3
+ 184 0200 21       		.byte	0x21
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccBZlNqa.s 			page 6
+
+
+ 185 0201 09       		.byte	0x9
+ 186 0202 A6000000 		.long	0xa6
+ 187 0206 02       		.byte	0x2
+ 188 0207 23       		.byte	0x23
+ 189 0208 18       		.uleb128 0x18
+ 190 0209 06       		.uleb128 0x6
+ 191 020a 5F746D70 		.ascii "_tmpfname\0"
+ 191      666E616D 
+ 191      6500
+ 192 0214 03       		.byte	0x3
+ 193 0215 22       		.byte	0x22
+ 194 0216 0B       		.byte	0xb
+ 195 0217 E0000000 		.long	0xe0
+ 196 021b 02       		.byte	0x2
+ 197 021c 23       		.byte	0x23
+ 198 021d 1C       		.uleb128 0x1c
+ 199 021e 00       		.byte	0
+ 200 021f 04       		.uleb128 0x4
+ 201 0220 46494C45 		.ascii "FILE\0"
+ 201      00
+ 202 0225 03       		.byte	0x3
+ 203 0226 24       		.byte	0x24
+ 204 0227 19       		.byte	0x19
+ 205 0228 7F010000 		.long	0x17f
+ 206 022c 07       		.uleb128 0x7
+ 207 022d 1F020000 		.long	0x21f
+ 208 0231 37020000 		.long	0x237
+ 209 0235 08       		.uleb128 0x8
+ 210 0236 00       		.byte	0
+ 211 0237 09       		.uleb128 0x9
+ 212 0238 5F696D70 		.ascii "_imp___iob\0"
+ 212      5F5F5F69 
+ 212      6F6200
+ 213 0243 03       		.byte	0x3
+ 214 0244 5C       		.byte	0x5c
+ 215 0245 10       		.byte	0x10
+ 216 0246 4C020000 		.long	0x24c
+ 217 024a 01       		.byte	0x1
+ 218 024b 01       		.byte	0x1
+ 219 024c 03       		.uleb128 0x3
+ 220 024d 04       		.byte	0x4
+ 221 024e 2C020000 		.long	0x22c
+ 222 0252 0A       		.uleb128 0xa
+ 223 0253 07       		.byte	0x7
+ 224 0254 04       		.byte	0x4
+ 225 0255 96000000 		.long	0x96
+ 226 0259 04       		.byte	0x4
+ 227 025a 03       		.byte	0x3
+ 228 025b 01       		.byte	0x1
+ 229 025c 28030000 		.long	0x328
+ 230 0260 0B       		.uleb128 0xb
+ 231 0261 4E4F4E45 		.ascii "NONE\0"
+ 231      00
+ 232 0266 00       		.byte	0
+ 233 0267 0B       		.uleb128 0xb
+ 234 0268 417A7465 		.ascii "Aztec\0"
+ 234      6300
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccBZlNqa.s 			page 7
+
+
+ 235 026e 01       		.byte	0x1
+ 236 026f 0B       		.uleb128 0xb
+ 237 0270 436F6461 		.ascii "Codabar\0"
+ 237      62617200 
+ 238 0278 02       		.byte	0x2
+ 239 0279 0B       		.uleb128 0xb
+ 240 027a 436F6465 		.ascii "Code39\0"
+ 240      333900
+ 241 0281 04       		.byte	0x4
+ 242 0282 0B       		.uleb128 0xb
+ 243 0283 436F6465 		.ascii "Code93\0"
+ 243      393300
+ 244 028a 08       		.byte	0x8
+ 245 028b 0B       		.uleb128 0xb
+ 246 028c 436F6465 		.ascii "Code128\0"
+ 246      31323800 
+ 247 0294 10       		.byte	0x10
+ 248 0295 0B       		.uleb128 0xb
+ 249 0296 44617461 		.ascii "DataBar\0"
+ 249      42617200 
+ 250 029e 20       		.byte	0x20
+ 251 029f 0B       		.uleb128 0xb
+ 252 02a0 44617461 		.ascii "DataBarExpanded\0"
+ 252      42617245 
+ 252      7870616E 
+ 252      64656400 
+ 253 02b0 40       		.byte	0x40
+ 254 02b1 0B       		.uleb128 0xb
+ 255 02b2 44617461 		.ascii "DataMatrix\0"
+ 255      4D617472 
+ 255      697800
+ 256 02bd 80       		.byte	0x80
+ 257 02be 0C       		.uleb128 0xc
+ 258 02bf 45414E38 		.ascii "EAN8\0"
+ 258      00
+ 259 02c4 0001     		.word	0x100
+ 260 02c6 0C       		.uleb128 0xc
+ 261 02c7 45414E31 		.ascii "EAN13\0"
+ 261      3300
+ 262 02cd 0002     		.word	0x200
+ 263 02cf 0C       		.uleb128 0xc
+ 264 02d0 49544600 		.ascii "ITF\0"
+ 265 02d4 0004     		.word	0x400
+ 266 02d6 0C       		.uleb128 0xc
+ 267 02d7 4D617869 		.ascii "MaxiCode\0"
+ 267      436F6465 
+ 267      00
+ 268 02e0 0008     		.word	0x800
+ 269 02e2 0C       		.uleb128 0xc
+ 270 02e3 50444634 		.ascii "PDF417\0"
+ 270      313700
+ 271 02ea 0010     		.word	0x1000
+ 272 02ec 0C       		.uleb128 0xc
+ 273 02ed 5152436F 		.ascii "QRCode\0"
+ 273      646500
+ 274 02f4 0020     		.word	0x2000
+ 275 02f6 0C       		.uleb128 0xc
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccBZlNqa.s 			page 8
+
+
+ 276 02f7 55504341 		.ascii "UPCA\0"
+ 276      00
+ 277 02fc 0040     		.word	0x4000
+ 278 02fe 0C       		.uleb128 0xc
+ 279 02ff 55504345 		.ascii "UPCE\0"
+ 279      00
+ 280 0304 0080     		.word	0x8000
+ 281 0306 0C       		.uleb128 0xc
+ 282 0307 4F6E6544 		.ascii "OneDCodes\0"
+ 282      436F6465 
+ 282      7300
+ 283 0311 7EC7     		.word	0xc77e
+ 284 0313 0C       		.uleb128 0xc
+ 285 0314 54776F44 		.ascii "TwoDCodes\0"
+ 285      436F6465 
+ 285      7300
+ 286 031e 8138     		.word	0x3881
+ 287 0320 0C       		.uleb128 0xc
+ 288 0321 416E7900 		.ascii "Any\0"
+ 289 0325 FFFF     		.word	0xffff
+ 290 0327 00       		.byte	0
+ 291 0328 04       		.uleb128 0x4
+ 292 0329 42617263 		.ascii "BarcodeFormats_t\0"
+ 292      6F646546 
+ 292      6F726D61 
+ 292      74735F74 
+ 292      00
+ 293 033a 04       		.byte	0x4
+ 294 033b 1C       		.byte	0x1c
+ 295 033c 02       		.byte	0x2
+ 296 033d 52020000 		.long	0x252
+ 297 0341 0A       		.uleb128 0xa
+ 298 0342 07       		.byte	0x7
+ 299 0343 04       		.byte	0x4
+ 300 0344 96000000 		.long	0x96
+ 301 0348 05       		.byte	0x5
+ 302 0349 06       		.byte	0x6
+ 303 034a 01       		.byte	0x1
+ 304 034b 71030000 		.long	0x371
+ 305 034f 0B       		.uleb128 0xb
+ 306 0350 4C6F6361 		.ascii "LocalAverage\0"
+ 306      6C417665 
+ 306      72616765 
+ 306      00
+ 307 035d 00       		.byte	0
+ 308 035e 0B       		.uleb128 0xb
+ 309 035f 476C6F62 		.ascii "GlobalHistogram\0"
+ 309      616C4869 
+ 309      73746F67 
+ 309      72616D00 
+ 310 036f 01       		.byte	0x1
+ 311 0370 00       		.byte	0
+ 312 0371 04       		.uleb128 0x4
+ 313 0372 42696E61 		.ascii "Binarizer_t\0"
+ 313      72697A65 
+ 313      725F7400 
+ 314 037e 05       		.byte	0x5
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccBZlNqa.s 			page 9
+
+
+ 315 037f 09       		.byte	0x9
+ 316 0380 02       		.byte	0x2
+ 317 0381 41030000 		.long	0x341
+ 318 0385 05       		.uleb128 0x5
+ 319 0386 4465636F 		.ascii "DecodeHints\0"
+ 319      64654869 
+ 319      6E747300 
+ 320 0392 14       		.byte	0x14
+ 321 0393 05       		.byte	0x5
+ 322 0394 0B       		.byte	0xb
+ 323 0395 10       		.byte	0x10
+ 324 0396 4C040000 		.long	0x44c
+ 325 039a 0D       		.uleb128 0xd
+ 326 039b 00000000 		.secrel32	LASF0
+ 327 039f 05       		.byte	0x5
+ 328 03a0 0D       		.byte	0xd
+ 329 03a1 0A       		.byte	0xa
+ 330 03a2 37010000 		.long	0x137
+ 331 03a6 02       		.byte	0x2
+ 332 03a7 23       		.byte	0x23
+ 333 03a8 00       		.uleb128 0
+ 334 03a9 06       		.uleb128 0x6
+ 335 03aa 74727952 		.ascii "tryRotate\0"
+ 335      6F746174 
+ 335      6500
+ 336 03b4 05       		.byte	0x5
+ 337 03b5 0E       		.byte	0xe
+ 338 03b6 0A       		.byte	0xa
+ 339 03b7 37010000 		.long	0x137
+ 340 03bb 02       		.byte	0x2
+ 341 03bc 23       		.byte	0x23
+ 342 03bd 01       		.uleb128 0x1
+ 343 03be 06       		.uleb128 0x6
+ 344 03bf 69735075 		.ascii "isPure\0"
+ 344      726500
+ 345 03c6 05       		.byte	0x5
+ 346 03c7 0F       		.byte	0xf
+ 347 03c8 0A       		.byte	0xa
+ 348 03c9 37010000 		.long	0x137
+ 349 03cd 02       		.byte	0x2
+ 350 03ce 23       		.byte	0x23
+ 351 03cf 02       		.uleb128 0x2
+ 352 03d0 06       		.uleb128 0x6
+ 353 03d1 72657475 		.ascii "returnCodabarStartEnd\0"
+ 353      726E436F 
+ 353      64616261 
+ 353      72537461 
+ 353      7274456E 
+ 354 03e7 05       		.byte	0x5
+ 355 03e8 10       		.byte	0x10
+ 356 03e9 0A       		.byte	0xa
+ 357 03ea 37010000 		.long	0x137
+ 358 03ee 02       		.byte	0x2
+ 359 03ef 23       		.byte	0x23
+ 360 03f0 03       		.uleb128 0x3
+ 361 03f1 06       		.uleb128 0x6
+ 362 03f2 42696E61 		.ascii "Binarizer\0"
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccBZlNqa.s 			page 10
+
+
+ 362      72697A65 
+ 362      7200
+ 363 03fc 05       		.byte	0x5
+ 364 03fd 11       		.byte	0x11
+ 365 03fe 0E       		.byte	0xe
+ 366 03ff 71030000 		.long	0x371
+ 367 0403 02       		.byte	0x2
+ 368 0404 23       		.byte	0x23
+ 369 0405 04       		.uleb128 0x4
+ 370 0406 06       		.uleb128 0x6
+ 371 0407 666F726D 		.ascii "formats\0"
+ 371      61747300 
+ 372 040f 05       		.byte	0x5
+ 373 0410 12       		.byte	0x12
+ 374 0411 13       		.byte	0x13
+ 375 0412 28030000 		.long	0x328
+ 376 0416 02       		.byte	0x2
+ 377 0417 23       		.byte	0x23
+ 378 0418 08       		.uleb128 0x8
+ 379 0419 06       		.uleb128 0x6
+ 380 041a 63686172 		.ascii "characterSet\0"
+ 380      61637465 
+ 380      72536574 
+ 380      00
+ 381 0427 05       		.byte	0x5
+ 382 0428 13       		.byte	0x13
+ 383 0429 0D       		.byte	0xd
+ 384 042a 4C040000 		.long	0x44c
+ 385 042e 02       		.byte	0x2
+ 386 042f 23       		.byte	0x23
+ 387 0430 0C       		.uleb128 0xc
+ 388 0431 06       		.uleb128 0x6
+ 389 0432 616C6C6F 		.ascii "allowedLengths\0"
+ 389      7765644C 
+ 389      656E6774 
+ 389      687300
+ 390 0441 05       		.byte	0x5
+ 391 0442 14       		.byte	0x14
+ 392 0443 0D       		.byte	0xd
+ 393 0444 4C040000 		.long	0x44c
+ 394 0448 02       		.byte	0x2
+ 395 0449 23       		.byte	0x23
+ 396 044a 10       		.uleb128 0x10
+ 397 044b 00       		.byte	0
+ 398 044c 03       		.uleb128 0x3
+ 399 044d 04       		.byte	0x4
+ 400 044e 54010000 		.long	0x154
+ 401 0452 04       		.uleb128 0x4
+ 402 0453 4465636F 		.ascii "DecodeHints_t\0"
+ 402      64654869 
+ 402      6E74735F 
+ 402      7400
+ 403 0461 05       		.byte	0x5
+ 404 0462 15       		.byte	0x15
+ 405 0463 02       		.byte	0x2
+ 406 0464 85030000 		.long	0x385
+ 407 0468 0E       		.uleb128 0xe
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccBZlNqa.s 			page 11
+
+
+ 408 0469 01       		.byte	0x1
+ 409 046a 4D756C74 		.ascii "MultiFormatReader_Read\0"
+ 409      69466F72 
+ 409      6D617452 
+ 409      65616465 
+ 409      725F5265 
+ 410 0481 01       		.byte	0x1
+ 411 0482 1C       		.byte	0x1c
+ 412 0483 11       		.byte	0x11
+ 413 0484 01       		.byte	0x1
+ 414 0485 BC040000 		.long	0x4bc
+ 415 0489 01000000 		.long	LFB14
+ 416 048d 07000000 		.long	LFE14
+ 417 0491 02       		.byte	0x2
+ 418 0492 74       		.byte	0x74
+ 419 0493 04       		.sleb128 4
+ 420 0494 01       		.byte	0x1
+ 421 0495 BC040000 		.long	0x4bc
+ 422 0499 0F       		.uleb128 0xf
+ 423 049a 696D6167 		.ascii "image\0"
+ 423      6500
+ 424 04a0 01       		.byte	0x1
+ 425 04a1 1C       		.byte	0x1c
+ 426 04a2 38       		.byte	0x38
+ 427 04a3 BC040000 		.long	0x4bc
+ 428 04a7 02       		.byte	0x2
+ 429 04a8 91       		.byte	0x91
+ 430 04a9 00       		.sleb128 0
+ 431 04aa 10       		.uleb128 0x10
+ 432 04ab 72656164 		.ascii "readers\0"
+ 432      65727300 
+ 433 04b3 01       		.byte	0x1
+ 434 04b4 1E       		.byte	0x1e
+ 435 04b5 0A       		.byte	0xa
+ 436 04b6 37010000 		.long	0x137
+ 437 04ba 01       		.byte	0x1
+ 438 04bb 00       		.byte	0
+ 439 04bc 03       		.uleb128 0x3
+ 440 04bd 04       		.byte	0x4
+ 441 04be FB000000 		.long	0xfb
+ 442 04c2 11       		.uleb128 0x11
+ 443 04c3 01       		.byte	0x1
+ 444 04c4 4D756C74 		.ascii "MultiFormatReader\0"
+ 444      69466F72 
+ 444      6D617452 
+ 444      65616465 
+ 444      7200
+ 445 04d6 01       		.byte	0x1
+ 446 04d7 14       		.byte	0x14
+ 447 04d8 06       		.byte	0x6
+ 448 04d9 01       		.byte	0x1
+ 449 04da 00000000 		.long	LFB13
+ 450 04de 01000000 		.long	LFE13
+ 451 04e2 02       		.byte	0x2
+ 452 04e3 74       		.byte	0x74
+ 453 04e4 04       		.sleb128 4
+ 454 04e5 01       		.byte	0x1
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccBZlNqa.s 			page 12
+
+
+ 455 04e6 10050000 		.long	0x510
+ 456 04ea 0F       		.uleb128 0xf
+ 457 04eb 68696E74 		.ascii "hints\0"
+ 457      7300
+ 458 04f1 01       		.byte	0x1
+ 459 04f2 14       		.byte	0x14
+ 460 04f3 28       		.byte	0x28
+ 461 04f4 10050000 		.long	0x510
+ 462 04f8 02       		.byte	0x2
+ 463 04f9 91       		.byte	0x91
+ 464 04fa 00       		.sleb128 0
+ 465 04fb 12       		.uleb128 0x12
+ 466 04fc 00000000 		.secrel32	LASF0
+ 467 0500 01       		.byte	0x1
+ 468 0501 16       		.byte	0x16
+ 469 0502 0A       		.byte	0xa
+ 470 0503 37010000 		.long	0x137
+ 471 0507 02000000 		.secrel32	LLST0
+ 472 050b 00000000 		.secrel32	LVUS0
+ 473 050f 00       		.byte	0
+ 474 0510 03       		.uleb128 0x3
+ 475 0511 04       		.byte	0x4
+ 476 0512 52040000 		.long	0x452
+ 477 0516 00       		.byte	0
+ 478              		.section	.debug_abbrev,"dr"
+ 479              	Ldebug_abbrev0:
+ 480 0000 01       		.uleb128 0x1
+ 481 0001 11       		.uleb128 0x11
+ 482 0002 01       		.byte	0x1
+ 483 0003 25       		.uleb128 0x25
+ 484 0004 08       		.uleb128 0x8
+ 485 0005 13       		.uleb128 0x13
+ 486 0006 0B       		.uleb128 0xb
+ 487 0007 03       		.uleb128 0x3
+ 488 0008 08       		.uleb128 0x8
+ 489 0009 1B       		.uleb128 0x1b
+ 490 000a 08       		.uleb128 0x8
+ 491 000b 11       		.uleb128 0x11
+ 492 000c 01       		.uleb128 0x1
+ 493 000d 12       		.uleb128 0x12
+ 494 000e 01       		.uleb128 0x1
+ 495 000f 10       		.uleb128 0x10
+ 496 0010 06       		.uleb128 0x6
+ 497 0011 00       		.byte	0
+ 498 0012 00       		.byte	0
+ 499 0013 02       		.uleb128 0x2
+ 500 0014 24       		.uleb128 0x24
+ 501 0015 00       		.byte	0
+ 502 0016 0B       		.uleb128 0xb
+ 503 0017 0B       		.uleb128 0xb
+ 504 0018 3E       		.uleb128 0x3e
+ 505 0019 0B       		.uleb128 0xb
+ 506 001a 03       		.uleb128 0x3
+ 507 001b 08       		.uleb128 0x8
+ 508 001c 00       		.byte	0
+ 509 001d 00       		.byte	0
+ 510 001e 03       		.uleb128 0x3
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccBZlNqa.s 			page 13
+
+
+ 511 001f 0F       		.uleb128 0xf
+ 512 0020 00       		.byte	0
+ 513 0021 0B       		.uleb128 0xb
+ 514 0022 0B       		.uleb128 0xb
+ 515 0023 49       		.uleb128 0x49
+ 516 0024 13       		.uleb128 0x13
+ 517 0025 00       		.byte	0
+ 518 0026 00       		.byte	0
+ 519 0027 04       		.uleb128 0x4
+ 520 0028 16       		.uleb128 0x16
+ 521 0029 00       		.byte	0
+ 522 002a 03       		.uleb128 0x3
+ 523 002b 08       		.uleb128 0x8
+ 524 002c 3A       		.uleb128 0x3a
+ 525 002d 0B       		.uleb128 0xb
+ 526 002e 3B       		.uleb128 0x3b
+ 527 002f 0B       		.uleb128 0xb
+ 528 0030 39       		.uleb128 0x39
+ 529 0031 0B       		.uleb128 0xb
+ 530 0032 49       		.uleb128 0x49
+ 531 0033 13       		.uleb128 0x13
+ 532 0034 00       		.byte	0
+ 533 0035 00       		.byte	0
+ 534 0036 05       		.uleb128 0x5
+ 535 0037 13       		.uleb128 0x13
+ 536 0038 01       		.byte	0x1
+ 537 0039 03       		.uleb128 0x3
+ 538 003a 08       		.uleb128 0x8
+ 539 003b 0B       		.uleb128 0xb
+ 540 003c 0B       		.uleb128 0xb
+ 541 003d 3A       		.uleb128 0x3a
+ 542 003e 0B       		.uleb128 0xb
+ 543 003f 3B       		.uleb128 0x3b
+ 544 0040 0B       		.uleb128 0xb
+ 545 0041 39       		.uleb128 0x39
+ 546 0042 0B       		.uleb128 0xb
+ 547 0043 01       		.uleb128 0x1
+ 548 0044 13       		.uleb128 0x13
+ 549 0045 00       		.byte	0
+ 550 0046 00       		.byte	0
+ 551 0047 06       		.uleb128 0x6
+ 552 0048 0D       		.uleb128 0xd
+ 553 0049 00       		.byte	0
+ 554 004a 03       		.uleb128 0x3
+ 555 004b 08       		.uleb128 0x8
+ 556 004c 3A       		.uleb128 0x3a
+ 557 004d 0B       		.uleb128 0xb
+ 558 004e 3B       		.uleb128 0x3b
+ 559 004f 0B       		.uleb128 0xb
+ 560 0050 39       		.uleb128 0x39
+ 561 0051 0B       		.uleb128 0xb
+ 562 0052 49       		.uleb128 0x49
+ 563 0053 13       		.uleb128 0x13
+ 564 0054 38       		.uleb128 0x38
+ 565 0055 0A       		.uleb128 0xa
+ 566 0056 00       		.byte	0
+ 567 0057 00       		.byte	0
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccBZlNqa.s 			page 14
+
+
+ 568 0058 07       		.uleb128 0x7
+ 569 0059 01       		.uleb128 0x1
+ 570 005a 01       		.byte	0x1
+ 571 005b 49       		.uleb128 0x49
+ 572 005c 13       		.uleb128 0x13
+ 573 005d 01       		.uleb128 0x1
+ 574 005e 13       		.uleb128 0x13
+ 575 005f 00       		.byte	0
+ 576 0060 00       		.byte	0
+ 577 0061 08       		.uleb128 0x8
+ 578 0062 21       		.uleb128 0x21
+ 579 0063 00       		.byte	0
+ 580 0064 00       		.byte	0
+ 581 0065 00       		.byte	0
+ 582 0066 09       		.uleb128 0x9
+ 583 0067 34       		.uleb128 0x34
+ 584 0068 00       		.byte	0
+ 585 0069 03       		.uleb128 0x3
+ 586 006a 08       		.uleb128 0x8
+ 587 006b 3A       		.uleb128 0x3a
+ 588 006c 0B       		.uleb128 0xb
+ 589 006d 3B       		.uleb128 0x3b
+ 590 006e 0B       		.uleb128 0xb
+ 591 006f 39       		.uleb128 0x39
+ 592 0070 0B       		.uleb128 0xb
+ 593 0071 49       		.uleb128 0x49
+ 594 0072 13       		.uleb128 0x13
+ 595 0073 3F       		.uleb128 0x3f
+ 596 0074 0C       		.uleb128 0xc
+ 597 0075 3C       		.uleb128 0x3c
+ 598 0076 0C       		.uleb128 0xc
+ 599 0077 00       		.byte	0
+ 600 0078 00       		.byte	0
+ 601 0079 0A       		.uleb128 0xa
+ 602 007a 04       		.uleb128 0x4
+ 603 007b 01       		.byte	0x1
+ 604 007c 3E       		.uleb128 0x3e
+ 605 007d 0B       		.uleb128 0xb
+ 606 007e 0B       		.uleb128 0xb
+ 607 007f 0B       		.uleb128 0xb
+ 608 0080 49       		.uleb128 0x49
+ 609 0081 13       		.uleb128 0x13
+ 610 0082 3A       		.uleb128 0x3a
+ 611 0083 0B       		.uleb128 0xb
+ 612 0084 3B       		.uleb128 0x3b
+ 613 0085 0B       		.uleb128 0xb
+ 614 0086 39       		.uleb128 0x39
+ 615 0087 0B       		.uleb128 0xb
+ 616 0088 01       		.uleb128 0x1
+ 617 0089 13       		.uleb128 0x13
+ 618 008a 00       		.byte	0
+ 619 008b 00       		.byte	0
+ 620 008c 0B       		.uleb128 0xb
+ 621 008d 28       		.uleb128 0x28
+ 622 008e 00       		.byte	0
+ 623 008f 03       		.uleb128 0x3
+ 624 0090 08       		.uleb128 0x8
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccBZlNqa.s 			page 15
+
+
+ 625 0091 1C       		.uleb128 0x1c
+ 626 0092 0B       		.uleb128 0xb
+ 627 0093 00       		.byte	0
+ 628 0094 00       		.byte	0
+ 629 0095 0C       		.uleb128 0xc
+ 630 0096 28       		.uleb128 0x28
+ 631 0097 00       		.byte	0
+ 632 0098 03       		.uleb128 0x3
+ 633 0099 08       		.uleb128 0x8
+ 634 009a 1C       		.uleb128 0x1c
+ 635 009b 05       		.uleb128 0x5
+ 636 009c 00       		.byte	0
+ 637 009d 00       		.byte	0
+ 638 009e 0D       		.uleb128 0xd
+ 639 009f 0D       		.uleb128 0xd
+ 640 00a0 00       		.byte	0
+ 641 00a1 03       		.uleb128 0x3
+ 642 00a2 0E       		.uleb128 0xe
+ 643 00a3 3A       		.uleb128 0x3a
+ 644 00a4 0B       		.uleb128 0xb
+ 645 00a5 3B       		.uleb128 0x3b
+ 646 00a6 0B       		.uleb128 0xb
+ 647 00a7 39       		.uleb128 0x39
+ 648 00a8 0B       		.uleb128 0xb
+ 649 00a9 49       		.uleb128 0x49
+ 650 00aa 13       		.uleb128 0x13
+ 651 00ab 38       		.uleb128 0x38
+ 652 00ac 0A       		.uleb128 0xa
+ 653 00ad 00       		.byte	0
+ 654 00ae 00       		.byte	0
+ 655 00af 0E       		.uleb128 0xe
+ 656 00b0 2E       		.uleb128 0x2e
+ 657 00b1 01       		.byte	0x1
+ 658 00b2 3F       		.uleb128 0x3f
+ 659 00b3 0C       		.uleb128 0xc
+ 660 00b4 03       		.uleb128 0x3
+ 661 00b5 08       		.uleb128 0x8
+ 662 00b6 3A       		.uleb128 0x3a
+ 663 00b7 0B       		.uleb128 0xb
+ 664 00b8 3B       		.uleb128 0x3b
+ 665 00b9 0B       		.uleb128 0xb
+ 666 00ba 39       		.uleb128 0x39
+ 667 00bb 0B       		.uleb128 0xb
+ 668 00bc 27       		.uleb128 0x27
+ 669 00bd 0C       		.uleb128 0xc
+ 670 00be 49       		.uleb128 0x49
+ 671 00bf 13       		.uleb128 0x13
+ 672 00c0 11       		.uleb128 0x11
+ 673 00c1 01       		.uleb128 0x1
+ 674 00c2 12       		.uleb128 0x12
+ 675 00c3 01       		.uleb128 0x1
+ 676 00c4 40       		.uleb128 0x40
+ 677 00c5 0A       		.uleb128 0xa
+ 678 00c6 9742     		.uleb128 0x2117
+ 679 00c8 0C       		.uleb128 0xc
+ 680 00c9 01       		.uleb128 0x1
+ 681 00ca 13       		.uleb128 0x13
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccBZlNqa.s 			page 16
+
+
+ 682 00cb 00       		.byte	0
+ 683 00cc 00       		.byte	0
+ 684 00cd 0F       		.uleb128 0xf
+ 685 00ce 05       		.uleb128 0x5
+ 686 00cf 00       		.byte	0
+ 687 00d0 03       		.uleb128 0x3
+ 688 00d1 08       		.uleb128 0x8
+ 689 00d2 3A       		.uleb128 0x3a
+ 690 00d3 0B       		.uleb128 0xb
+ 691 00d4 3B       		.uleb128 0x3b
+ 692 00d5 0B       		.uleb128 0xb
+ 693 00d6 39       		.uleb128 0x39
+ 694 00d7 0B       		.uleb128 0xb
+ 695 00d8 49       		.uleb128 0x49
+ 696 00d9 13       		.uleb128 0x13
+ 697 00da 02       		.uleb128 0x2
+ 698 00db 0A       		.uleb128 0xa
+ 699 00dc 00       		.byte	0
+ 700 00dd 00       		.byte	0
+ 701 00de 10       		.uleb128 0x10
+ 702 00df 34       		.uleb128 0x34
+ 703 00e0 00       		.byte	0
+ 704 00e1 03       		.uleb128 0x3
+ 705 00e2 08       		.uleb128 0x8
+ 706 00e3 3A       		.uleb128 0x3a
+ 707 00e4 0B       		.uleb128 0xb
+ 708 00e5 3B       		.uleb128 0x3b
+ 709 00e6 0B       		.uleb128 0xb
+ 710 00e7 39       		.uleb128 0x39
+ 711 00e8 0B       		.uleb128 0xb
+ 712 00e9 49       		.uleb128 0x49
+ 713 00ea 13       		.uleb128 0x13
+ 714 00eb 1C       		.uleb128 0x1c
+ 715 00ec 0B       		.uleb128 0xb
+ 716 00ed 00       		.byte	0
+ 717 00ee 00       		.byte	0
+ 718 00ef 11       		.uleb128 0x11
+ 719 00f0 2E       		.uleb128 0x2e
+ 720 00f1 01       		.byte	0x1
+ 721 00f2 3F       		.uleb128 0x3f
+ 722 00f3 0C       		.uleb128 0xc
+ 723 00f4 03       		.uleb128 0x3
+ 724 00f5 08       		.uleb128 0x8
+ 725 00f6 3A       		.uleb128 0x3a
+ 726 00f7 0B       		.uleb128 0xb
+ 727 00f8 3B       		.uleb128 0x3b
+ 728 00f9 0B       		.uleb128 0xb
+ 729 00fa 39       		.uleb128 0x39
+ 730 00fb 0B       		.uleb128 0xb
+ 731 00fc 27       		.uleb128 0x27
+ 732 00fd 0C       		.uleb128 0xc
+ 733 00fe 11       		.uleb128 0x11
+ 734 00ff 01       		.uleb128 0x1
+ 735 0100 12       		.uleb128 0x12
+ 736 0101 01       		.uleb128 0x1
+ 737 0102 40       		.uleb128 0x40
+ 738 0103 0A       		.uleb128 0xa
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccBZlNqa.s 			page 17
+
+
+ 739 0104 9742     		.uleb128 0x2117
+ 740 0106 0C       		.uleb128 0xc
+ 741 0107 01       		.uleb128 0x1
+ 742 0108 13       		.uleb128 0x13
+ 743 0109 00       		.byte	0
+ 744 010a 00       		.byte	0
+ 745 010b 12       		.uleb128 0x12
+ 746 010c 34       		.uleb128 0x34
+ 747 010d 00       		.byte	0
+ 748 010e 03       		.uleb128 0x3
+ 749 010f 0E       		.uleb128 0xe
+ 750 0110 3A       		.uleb128 0x3a
+ 751 0111 0B       		.uleb128 0xb
+ 752 0112 3B       		.uleb128 0x3b
+ 753 0113 0B       		.uleb128 0xb
+ 754 0114 39       		.uleb128 0x39
+ 755 0115 0B       		.uleb128 0xb
+ 756 0116 49       		.uleb128 0x49
+ 757 0117 13       		.uleb128 0x13
+ 758 0118 02       		.uleb128 0x2
+ 759 0119 06       		.uleb128 0x6
+ 760 011a B742     		.uleb128 0x2137
+ 761 011c 06       		.uleb128 0x6
+ 762 011d 00       		.byte	0
+ 763 011e 00       		.byte	0
+ 764 011f 00       		.byte	0
+ 765              		.section	.debug_loc,"dr"
+ 766              	Ldebug_loc0:
+ 767              	LVUS0:
+ 768 0000 03       		.uleb128 LVU3
+ 769 0001 00       		.uleb128 0
+ 770              	LLST0:
+ 771 0002 00000000 		.long	LVL0-Ltext0
+ 772 0006 01000000 		.long	LFE13-Ltext0
+ 773 000a 0300     		.word	0x3
+ 774 000c 91       		.byte	0x91
+ 775 000d 00       		.sleb128 0
+ 776 000e 06       		.byte	0x6
+ 777 000f 00000000 		.long	0
+ 778 0013 00000000 		.long	0
+ 779              		.section	.debug_aranges,"dr"
+ 780 0000 1C000000 		.long	0x1c
+ 781 0004 0200     		.word	0x2
+ 782 0006 00000000 		.secrel32	Ldebug_info0
+ 783 000a 04       		.byte	0x4
+ 784 000b 00       		.byte	0
+ 785 000c 0000     		.word	0
+ 786 000e 0000     		.word	0
+ 787 0010 00000000 		.long	Ltext0
+ 788 0014 07000000 		.long	Letext0-Ltext0
+ 789 0018 00000000 		.long	0
+ 790 001c 00000000 		.long	0
+ 791              		.section	.debug_line,"dr"
+ 792              	Ldebug_line0:
+ 793 0000 CF000000 		.section	.debug_str,"dr"
+ 793      02009B00 
+ 793      00000101 
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccBZlNqa.s 			page 18
+
+
+ 793      FB0E0D00 
+ 793      01010101 
+ 794              	LASF0:
+ 795 0000 74727948 		.ascii "tryHarder\0"
+ 795      61726465 
+ 795      7200
+ 796              		.ident	"GCC: (i686-posix-dwarf-rev0, Built by MinGW-W64 project) 8.1.0"
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccBZlNqa.s 			page 19
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 MultiFormatReader.c
+C:\Users\jisu8\AppData\Local\Temp\ccBZlNqa.s:6      .text:00000000 _MultiFormatReader
+C:\Users\jisu8\AppData\Local\Temp\ccBZlNqa.s:20     .text:00000001 _MultiFormatReader_Read
+
+NO UNDEFINED SYMBOLS

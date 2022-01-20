@@ -1,4 +1,4 @@
-#if 0
+
 typedef enum  
 {
 	// The values are an implementation detail. The c++ use-case (ZXing::Flags) could have been designed such that it
@@ -25,5 +25,5 @@ typedef enum
 	OneDCodes = Codabar | Code39 | Code93 | Code128 | EAN8 | EAN13 | ITF | DataBar | DataBarExpanded | UPCA | UPCE,
 	TwoDCodes = Aztec | DataMatrix | MaxiCode | PDF417 | QRCode,
 	Any       = OneDCodes | TwoDCodes,
-}BarcodeFormat_t;
-#endif
+}BarcodeFormats_t;
+

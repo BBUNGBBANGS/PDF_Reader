@@ -4,10 +4,10 @@
             "name": "PDF_BARCODE",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/thirdparty/**"                
+                "${workspaceFolder}/thirdparty/**"        
             ],            
             "forcedInclude": [
-                "D:/1.Project_workspace/PDF_BARCODE/thirdparty/stb_image.h"
+                "&{workspaceFolder}/src/**"
             ],
             "defines": [
                 "_DEBUG",

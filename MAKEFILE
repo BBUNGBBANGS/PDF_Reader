@@ -25,7 +25,8 @@ C_SOURCES =  \
 PDF.c \
 thirdparty/stb_image.c \
 src/ReadBarcode.c \
-src/GenericLuminanceSource.c 
+src/GenericLuminanceSource.c \
+src/MultiFormatReader.c
 
 
 #######################################

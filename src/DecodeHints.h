@@ -1,7 +1,7 @@
 
 #include <stdint.h>
 #include <stdio.h>
-
+#include "BarcodeFormat.h"
 typedef enum 
 {
 	LocalAverage,    ///< T = average of neighboring pixels for 2D and GlobalHistogram for 1D (HybridBinarizer)
@@ -10,9 +10,12 @@ typedef enum
 
 typedef struct DecodeHints
 {
-	uint8_t tryHarder : 1;
-	uint8_t tryRotate : 1;
-	uint8_t isPure : 1;
-	uint8_t returnCodabarStartEnd : 1;
-	Binarizer_t LocalAverage;
+	uint8_t tryHarder;
+	uint8_t tryRotate;
+	uint8_t isPure;
+	uint8_t returnCodabarStartEnd;
+	Binarizer_t Binarizer;
+	BarcodeFormats_t formats;
+	uint64_t * characterSet;
+	uint64_t * allowedLengths;
 }DecodeHints_t;

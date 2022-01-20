@@ -15,7 +15,7 @@
 */
 
 #include "ReadBarcode.h"
-
+#include "MultiFormatReader.h"
 ImageView_t ImageView;
 DecodeHints_t DecodeHints;
 GenericLuminanceSource_t GenericLuminanceSource_;
@@ -61,6 +61,7 @@ unsigned int * ReadBarcode(unsigned char *iv, int width,int height, unsigned int
 
 static void ReadBarcode_Internal(GenericLuminanceSource_t *source,const DecodeHints_t *hints)
 {
+	unsigned char * ret_ptr;
 	source->pixels = ImageView.data;
 	source->left = 0;
 	source->top = 0;
@@ -70,6 +71,10 @@ static void ReadBarcode_Internal(GenericLuminanceSource_t *source,const DecodeHi
 	printf("static Result ReadBarcode : source= %x",source);
 	printf(" hints= %x \n",hints);
 
+	MultiFormatReader(hints);
+
+	ret_ptr = MultiFormatReader_Read(source);
+	return;
 }
 
 static void DecodeHints_Init(void)
@@ -77,7 +82,9 @@ static void DecodeHints_Init(void)
 	DecodeHints.tryHarder = 1;
 	DecodeHints.tryRotate = 1;
 	DecodeHints.isPure = 0;
-	DecodeHints.returnCodabarStartEnd = 0;
+	DecodeHints.returnCodabarStartEnd = 0;	
+	DecodeHints.Binarizer = LocalAverage;
+	DecodeHints.formats = NONE;
 }
 
 static int PixStride(unsigned int format)  

@@ -16,6 +16,8 @@
         "multiformatreader.h": "c",
         "decodehints.h": "c",
         "barcodeformat.h": "c",
-        "genericluminancesource.h": "c"
+        "genericluminancesource.h": "c",
+        "array": "c",
+        "string_view": "c"
     }
 }
