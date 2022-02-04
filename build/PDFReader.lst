@@ -1,0 +1,1718 @@
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 1
+
+
+   1              		.file	"PDFReader.c"
+   2              		.text
+   3              	Ltext0:
+   4              		.section .rdata,"dr"
+   5              		.align 4
+   6              	LC0:
+   7 0000 20446F44 		.ascii " DoDecode: img=%d, multiple=%d, res=%d, str=%d \12\0"
+   7      65636F64 
+   7      653A2069 
+   7      6D673D25 
+   7      642C206D 
+   8 0031 000000   		.text
+   9              		.globl	_DoDecode
+  11              	_DoDecode:
+  12              	LVL0:
+  13              	LFB13:
+  14              		.file 1 "src/pdf417/PDFReader.c"
+   1:src/pdf417/PDFReader.c **** 
+   2:src/pdf417/PDFReader.c **** #include "PDFReader.h"
+   3:src/pdf417/PDFReader.c **** #include "DecodeStatus.h"
+   4:src/pdf417/PDFReader.c **** #include "DecodeHints.h"
+   5:src/pdf417/PDFReader.c **** #include "PDFDetector.h"
+   6:src/pdf417/PDFReader.c **** 
+   7:src/pdf417/PDFReader.c **** DecodeStatus_t DoDecode(GenericLuminanceSource_t * image, unsigned char multiple, unsigned char * r
+   8:src/pdf417/PDFReader.c **** {
+  15              		.loc 1 8 1 view -0
+  16              		.cfi_startproc
+  17              		.loc 1 8 1 is_stmt 0 view LVU1
+  18 0000 56       		pushl	%esi
+  19              	LCFI0:
+  20              		.cfi_def_cfa_offset 8
+  21              		.cfi_offset 6, -8
+  22 0001 53       		pushl	%ebx
+  23              	LCFI1:
+  24              		.cfi_def_cfa_offset 12
+  25              		.cfi_offset 3, -12
+  26 0002 83EC24   		subl	$36, %esp
+  27              	LCFI2:
+  28              		.cfi_def_cfa_offset 48
+  29 0005 8B5C2430 		movl	48(%esp), %ebx
+   9:src/pdf417/PDFReader.c **** 
+  10:src/pdf417/PDFReader.c **** 	printf(" DoDecode: img=%d, multiple=%d, res=%d, str=%d \n", image, multiple, results, characterSet
+  30              		.loc 1 10 2 is_stmt 1 view LVU2
+  31 0009 0FB67424 		movzbl	52(%esp), %esi
+  31      34
+  32 000e 8B44243C 		movl	60(%esp), %eax
+  33 0012 89442410 		movl	%eax, 16(%esp)
+  34 0016 8B442438 		movl	56(%esp), %eax
+  35 001a 8944240C 		movl	%eax, 12(%esp)
+  36 001e 89742408 		movl	%esi, 8(%esp)
+  37 0022 895C2404 		movl	%ebx, 4(%esp)
+  38 0026 C7042400 		movl	$LC0, (%esp)
+  38      000000
+  39 002d E8000000 		call	_printf
+  39      00
+  40              	LVL1:
+  11:src/pdf417/PDFReader.c **** 	unsigned char * detectorResult;
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 2
+
+
+  41              		.loc 1 11 2 view LVU3
+  12:src/pdf417/PDFReader.c **** 	DecodeStatus_t status;
+  42              		.loc 1 12 2 view LVU4
+  13:src/pdf417/PDFReader.c **** 	status = Detect(image, multiple, detectorResult);
+  43              		.loc 1 13 2 view LVU5
+  44              		.loc 1 13 11 is_stmt 0 view LVU6
+  45 0032 C7442408 		movl	$0, 8(%esp)
+  45      00000000 
+  46 003a 89742404 		movl	%esi, 4(%esp)
+  47 003e 891C24   		movl	%ebx, (%esp)
+  48 0041 E8000000 		call	_Detect
+  48      00
+  49              	LVL2:
+  14:src/pdf417/PDFReader.c **** 	if (StatusIsError(status)) 
+  50              		.loc 1 14 2 is_stmt 1 view LVU7
+  51              		.loc 1 14 5 is_stmt 0 view LVU8
+  52 0046 85C0     		testl	%eax, %eax
+  15:src/pdf417/PDFReader.c **** 	{
+  16:src/pdf417/PDFReader.c **** 		return status;
+  17:src/pdf417/PDFReader.c **** 	}
+  18:src/pdf417/PDFReader.c **** 	#if 0
+  19:src/pdf417/PDFReader.c **** 	for (const auto& points : detectorResult.points) 
+  20:src/pdf417/PDFReader.c **** 	{
+  21:src/pdf417/PDFReader.c **** 		DecoderResult decoderResult =
+  22:src/pdf417/PDFReader.c **** 			ScanningDecoder::Decode(*detectorResult.bits, points[4], points[5], points[6], points[7],
+  23:src/pdf417/PDFReader.c **** 									GetMinCodewordWidth(points), GetMaxCodewordWidth(points), characterSet);
+  24:src/pdf417/PDFReader.c **** 		if (decoderResult.isValid()) 
+  25:src/pdf417/PDFReader.c **** 		{
+  26:src/pdf417/PDFReader.c **** 			auto point = [&](int i) { return points[i].value(); };
+  27:src/pdf417/PDFReader.c **** 
+  28:src/pdf417/PDFReader.c **** 			Result result(std::move(decoderResult), {point(0), point(2), point(3), point(1)}, BarcodeFormat:
+  29:src/pdf417/PDFReader.c **** 			results.push_back(result);
+  30:src/pdf417/PDFReader.c **** 
+  31:src/pdf417/PDFReader.c **** 			if (!multiple) 
+  32:src/pdf417/PDFReader.c **** 			{
+  33:src/pdf417/PDFReader.c **** 				return DecodeStatus::NoError;
+  34:src/pdf417/PDFReader.c **** 			}
+  35:src/pdf417/PDFReader.c **** 		}
+  36:src/pdf417/PDFReader.c **** 		else
+  37:src/pdf417/PDFReader.c **** 		if (!multiple) 
+  38:src/pdf417/PDFReader.c **** 		{
+  39:src/pdf417/PDFReader.c **** 			return decoderResult.errorCode();
+  40:src/pdf417/PDFReader.c **** 		}
+  41:src/pdf417/PDFReader.c **** 	}
+  42:src/pdf417/PDFReader.c **** 
+  43:src/pdf417/PDFReader.c **** 	return results.empty() ? DecodeStatus::NotFound : DecodeStatus::NoError;
+  44:src/pdf417/PDFReader.c **** 	#endif
+  45:src/pdf417/PDFReader.c **** }
+  53              		.loc 1 45 1 view LVU9
+  54 0048 83C424   		addl	$36, %esp
+  55              	LCFI3:
+  56              		.cfi_def_cfa_offset 12
+  57 004b 5B       		popl	%ebx
+  58              	LCFI4:
+  59              		.cfi_restore 3
+  60              		.cfi_def_cfa_offset 8
+  61 004c 5E       		popl	%esi
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 3
+
+
+  62              	LCFI5:
+  63              		.cfi_restore 6
+  64              		.cfi_def_cfa_offset 4
+  65 004d C3       		ret
+  66              		.cfi_endproc
+  67              	LFE13:
+  68              		.globl	_decode
+  70              	_decode:
+  71              	LVL3:
+  72              	LFB14:
+  46:src/pdf417/PDFReader.c **** 
+  47:src/pdf417/PDFReader.c **** unsigned char * decode(GenericLuminanceSource_t * image,DecodeHints_t * hints)
+  48:src/pdf417/PDFReader.c **** {
+  73              		.loc 1 48 1 is_stmt 1 view -0
+  74              		.cfi_startproc
+  75              		.loc 1 48 1 is_stmt 0 view LVU11
+  76 004e 83EC1C   		subl	$28, %esp
+  77              	LCFI6:
+  78              		.cfi_def_cfa_offset 32
+  79 0051 8B442424 		movl	36(%esp), %eax
+  49:src/pdf417/PDFReader.c **** 	unsigned int isPure = hints->isPure;
+  80              		.loc 1 49 2 is_stmt 1 view LVU12
+  81              	LVL4:
+  50:src/pdf417/PDFReader.c **** 	unsigned int characterSet = hints->characterSet;
+  82              		.loc 1 50 2 view LVU13
+  83              		.loc 1 50 35 is_stmt 0 view LVU14
+  84 0055 8B500C   		movl	12(%eax), %edx
+  85              	LVL5:
+  51:src/pdf417/PDFReader.c **** 	unsigned char result = 0;
+  86              		.loc 1 51 2 is_stmt 1 view LVU15
+  52:src/pdf417/PDFReader.c **** 	unsigned char results = 0;
+  87              		.loc 1 52 2 view LVU16
+  53:src/pdf417/PDFReader.c **** 	DecodeStatus_t status;
+  88              		.loc 1 53 2 view LVU17
+  54:src/pdf417/PDFReader.c **** 	
+  55:src/pdf417/PDFReader.c **** 	if (isPure) 
+  89              		.loc 1 55 2 view LVU18
+  90              		.loc 1 55 5 is_stmt 0 view LVU19
+  91 0058 80780200 		cmpb	$0, 2(%eax)
+  92 005c 7409     		je	L7
+  93              	LVL6:
+  94              	L5:
+  56:src/pdf417/PDFReader.c **** 	{
+  57:src/pdf417/PDFReader.c **** 		//result = DecodePure(image, characterSet);
+  58:src/pdf417/PDFReader.c **** 		//if (res.status() != DecodeStatus::ChecksumError)
+  59:src/pdf417/PDFReader.c **** 		return result;
+  60:src/pdf417/PDFReader.c **** 		// This falls through and tries the non-pure code path if we have a checksum error. This approach
+  61:src/pdf417/PDFReader.c **** 		// currently the best option to deal with 'aliased' input like e.g. 03-aliased.png
+  62:src/pdf417/PDFReader.c **** 	}
+  63:src/pdf417/PDFReader.c **** 
+  64:src/pdf417/PDFReader.c **** 	status = DoDecode(image, 0, results, characterSet);
+  65:src/pdf417/PDFReader.c **** 
+  66:src/pdf417/PDFReader.c **** 	if (StatusIsOK(status)) 
+  67:src/pdf417/PDFReader.c **** 	{
+  68:src/pdf417/PDFReader.c **** 		return result;
+  69:src/pdf417/PDFReader.c **** 	}
+  70:src/pdf417/PDFReader.c **** 	return result;
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 4
+
+
+  71:src/pdf417/PDFReader.c **** }
+  95              		.loc 1 71 1 view LVU20
+  96 005e B8000000 		movl	$0, %eax
+  96      00
+  97 0063 83C41C   		addl	$28, %esp
+  98              	LCFI7:
+  99              		.cfi_remember_state
+ 100              		.cfi_def_cfa_offset 4
+ 101 0066 C3       		ret
+ 102              	LVL7:
+ 103              	L7:
+ 104              	LCFI8:
+ 105              		.cfi_restore_state
+  64:src/pdf417/PDFReader.c **** 
+ 106              		.loc 1 64 2 is_stmt 1 view LVU21
+  64:src/pdf417/PDFReader.c **** 
+ 107              		.loc 1 64 11 is_stmt 0 view LVU22
+ 108 0067 8954240C 		movl	%edx, 12(%esp)
+ 109              	LVL8:
+  64:src/pdf417/PDFReader.c **** 
+ 110              		.loc 1 64 11 view LVU23
+ 111 006b C7442408 		movl	$0, 8(%esp)
+ 111      00000000 
+ 112 0073 C7442404 		movl	$0, 4(%esp)
+ 112      00000000 
+ 113 007b 8B442420 		movl	32(%esp), %eax
+ 114 007f 890424   		movl	%eax, (%esp)
+ 115 0082 E879FFFF 		call	_DoDecode
+ 115      FF
+ 116              	LVL9:
+  66:src/pdf417/PDFReader.c **** 	{
+ 117              		.loc 1 66 2 is_stmt 1 view LVU24
+ 118 0087 EBD5     		jmp	L5
+ 119              		.cfi_endproc
+ 120              	LFE14:
+ 121              	Letext0:
+ 122              		.file 2 "D:/3.tools/mingw/mingw32/i686-w64-mingw32/include/stdint.h"
+ 123              		.file 3 "D:/3.tools/mingw/mingw32/i686-w64-mingw32/include/stdio.h"
+ 124              		.file 4 "src/BarcodeFormat.h"
+ 125              		.file 5 "src/DecodeHints.h"
+ 126              		.file 6 "src/GenericLuminanceSource.h"
+ 127              		.file 7 "src/DecodeStatus.h"
+ 128              		.file 8 "src/pdf417/PDFDetector.h"
+ 129 0089 909090   		.section	.debug_info,"dr"
+ 130              	Ldebug_info0:
+ 131 0000 34070000 		.long	0x734
+ 132 0004 0200     		.word	0x2
+ 133 0006 00000000 		.secrel32	Ldebug_abbrev0
+ 134 000a 04       		.byte	0x4
+ 135 000b 01       		.uleb128 0x1
+ 136 000c 474E5520 		.ascii "GNU C17 8.1.0 -mtune=generic -march=i686 -g -gdwarf-2 -Og\0"
+ 136      43313720 
+ 136      382E312E 
+ 136      30202D6D 
+ 136      74756E65 
+ 137 0046 0C       		.byte	0xc
+ 138 0047 7372632F 		.ascii "src/pdf417/PDFReader.c\0"
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 5
+
+
+ 138      70646634 
+ 138      31372F50 
+ 138      44465265 
+ 138      61646572 
+ 139 005e 443A5C31 		.ascii "D:\\1.Project_workspace\\PDF_BARCODE\0"
+ 139      2E50726F 
+ 139      6A656374 
+ 139      5F776F72 
+ 139      6B737061 
+ 140 0081 00000000 		.long	Ltext0
+ 141 0085 89000000 		.long	Letext0
+ 142 0089 00000000 		.secrel32	Ldebug_line0
+ 143 008d 02       		.uleb128 0x2
+ 144 008e 01       		.byte	0x1
+ 145 008f 06       		.byte	0x6
+ 146 0090 63686172 		.ascii "char\0"
+ 146      00
+ 147 0095 02       		.uleb128 0x2
+ 148 0096 04       		.byte	0x4
+ 149 0097 07       		.byte	0x7
+ 150 0098 756E7369 		.ascii "unsigned int\0"
+ 150      676E6564 
+ 150      20696E74 
+ 150      00
+ 151 00a5 02       		.uleb128 0x2
+ 152 00a6 04       		.byte	0x4
+ 153 00a7 05       		.byte	0x5
+ 154 00a8 696E7400 		.ascii "int\0"
+ 155 00ac 02       		.uleb128 0x2
+ 156 00ad 02       		.byte	0x2
+ 157 00ae 07       		.byte	0x7
+ 158 00af 73686F72 		.ascii "short unsigned int\0"
+ 158      7420756E 
+ 158      7369676E 
+ 158      65642069 
+ 158      6E7400
+ 159 00c2 02       		.uleb128 0x2
+ 160 00c3 04       		.byte	0x4
+ 161 00c4 05       		.byte	0x5
+ 162 00c5 6C6F6E67 		.ascii "long int\0"
+ 162      20696E74 
+ 162      00
+ 163 00ce 02       		.uleb128 0x2
+ 164 00cf 08       		.byte	0x8
+ 165 00d0 05       		.byte	0x5
+ 166 00d1 6C6F6E67 		.ascii "long long int\0"
+ 166      206C6F6E 
+ 166      6720696E 
+ 166      7400
+ 167 00df 03       		.uleb128 0x3
+ 168 00e0 04       		.byte	0x4
+ 169 00e1 8D000000 		.long	0x8d
+ 170 00e5 02       		.uleb128 0x2
+ 171 00e6 04       		.byte	0x4
+ 172 00e7 07       		.byte	0x7
+ 173 00e8 6C6F6E67 		.ascii "long unsigned int\0"
+ 173      20756E73 
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 6
+
+
+ 173      69676E65 
+ 173      6420696E 
+ 173      7400
+ 174 00fa 02       		.uleb128 0x2
+ 175 00fb 01       		.byte	0x1
+ 176 00fc 08       		.byte	0x8
+ 177 00fd 756E7369 		.ascii "unsigned char\0"
+ 177      676E6564 
+ 177      20636861 
+ 177      7200
+ 178 010b 02       		.uleb128 0x2
+ 179 010c 0C       		.byte	0xc
+ 180 010d 04       		.byte	0x4
+ 181 010e 6C6F6E67 		.ascii "long double\0"
+ 181      20646F75 
+ 181      626C6500 
+ 182 011a 02       		.uleb128 0x2
+ 183 011b 10       		.byte	0x10
+ 184 011c 04       		.byte	0x4
+ 185 011d 5F466C6F 		.ascii "_Float128\0"
+ 185      61743132 
+ 185      3800
+ 186 0127 02       		.uleb128 0x2
+ 187 0128 01       		.byte	0x1
+ 188 0129 06       		.byte	0x6
+ 189 012a 7369676E 		.ascii "signed char\0"
+ 189      65642063 
+ 189      68617200 
+ 190 0136 04       		.uleb128 0x4
+ 191 0137 75696E74 		.ascii "uint8_t\0"
+ 191      385F7400 
+ 192 013f 02       		.byte	0x2
+ 193 0140 24       		.byte	0x24
+ 194 0141 19       		.byte	0x19
+ 195 0142 FA000000 		.long	0xfa
+ 196 0146 02       		.uleb128 0x2
+ 197 0147 02       		.byte	0x2
+ 198 0148 05       		.byte	0x5
+ 199 0149 73686F72 		.ascii "short int\0"
+ 199      7420696E 
+ 199      7400
+ 200 0153 04       		.uleb128 0x4
+ 201 0154 75696E74 		.ascii "uint64_t\0"
+ 201      36345F74 
+ 201      00
+ 202 015d 02       		.byte	0x2
+ 203 015e 2A       		.byte	0x2a
+ 204 015f 30       		.byte	0x30
+ 205 0160 64010000 		.long	0x164
+ 206 0164 02       		.uleb128 0x2
+ 207 0165 08       		.byte	0x8
+ 208 0166 07       		.byte	0x7
+ 209 0167 6C6F6E67 		.ascii "long long unsigned int\0"
+ 209      206C6F6E 
+ 209      6720756E 
+ 209      7369676E 
+ 209      65642069 
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 7
+
+
+ 210 017e 05       		.uleb128 0x5
+ 211 017f 5F696F62 		.ascii "_iobuf\0"
+ 211      756600
+ 212 0186 20       		.byte	0x20
+ 213 0187 03       		.byte	0x3
+ 214 0188 1A       		.byte	0x1a
+ 215 0189 0A       		.byte	0xa
+ 216 018a 1E020000 		.long	0x21e
+ 217 018e 06       		.uleb128 0x6
+ 218 018f 5F707472 		.ascii "_ptr\0"
+ 218      00
+ 219 0194 03       		.byte	0x3
+ 220 0195 1B       		.byte	0x1b
+ 221 0196 0B       		.byte	0xb
+ 222 0197 DF000000 		.long	0xdf
+ 223 019b 02       		.byte	0x2
+ 224 019c 23       		.byte	0x23
+ 225 019d 00       		.uleb128 0
+ 226 019e 06       		.uleb128 0x6
+ 227 019f 5F636E74 		.ascii "_cnt\0"
+ 227      00
+ 228 01a4 03       		.byte	0x3
+ 229 01a5 1C       		.byte	0x1c
+ 230 01a6 09       		.byte	0x9
+ 231 01a7 A5000000 		.long	0xa5
+ 232 01ab 02       		.byte	0x2
+ 233 01ac 23       		.byte	0x23
+ 234 01ad 04       		.uleb128 0x4
+ 235 01ae 06       		.uleb128 0x6
+ 236 01af 5F626173 		.ascii "_base\0"
+ 236      6500
+ 237 01b5 03       		.byte	0x3
+ 238 01b6 1D       		.byte	0x1d
+ 239 01b7 0B       		.byte	0xb
+ 240 01b8 DF000000 		.long	0xdf
+ 241 01bc 02       		.byte	0x2
+ 242 01bd 23       		.byte	0x23
+ 243 01be 08       		.uleb128 0x8
+ 244 01bf 06       		.uleb128 0x6
+ 245 01c0 5F666C61 		.ascii "_flag\0"
+ 245      6700
+ 246 01c6 03       		.byte	0x3
+ 247 01c7 1E       		.byte	0x1e
+ 248 01c8 09       		.byte	0x9
+ 249 01c9 A5000000 		.long	0xa5
+ 250 01cd 02       		.byte	0x2
+ 251 01ce 23       		.byte	0x23
+ 252 01cf 0C       		.uleb128 0xc
+ 253 01d0 06       		.uleb128 0x6
+ 254 01d1 5F66696C 		.ascii "_file\0"
+ 254      6500
+ 255 01d7 03       		.byte	0x3
+ 256 01d8 1F       		.byte	0x1f
+ 257 01d9 09       		.byte	0x9
+ 258 01da A5000000 		.long	0xa5
+ 259 01de 02       		.byte	0x2
+ 260 01df 23       		.byte	0x23
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 8
+
+
+ 261 01e0 10       		.uleb128 0x10
+ 262 01e1 06       		.uleb128 0x6
+ 263 01e2 5F636861 		.ascii "_charbuf\0"
+ 263      72627566 
+ 263      00
+ 264 01eb 03       		.byte	0x3
+ 265 01ec 20       		.byte	0x20
+ 266 01ed 09       		.byte	0x9
+ 267 01ee A5000000 		.long	0xa5
+ 268 01f2 02       		.byte	0x2
+ 269 01f3 23       		.byte	0x23
+ 270 01f4 14       		.uleb128 0x14
+ 271 01f5 06       		.uleb128 0x6
+ 272 01f6 5F627566 		.ascii "_bufsiz\0"
+ 272      73697A00 
+ 273 01fe 03       		.byte	0x3
+ 274 01ff 21       		.byte	0x21
+ 275 0200 09       		.byte	0x9
+ 276 0201 A5000000 		.long	0xa5
+ 277 0205 02       		.byte	0x2
+ 278 0206 23       		.byte	0x23
+ 279 0207 18       		.uleb128 0x18
+ 280 0208 06       		.uleb128 0x6
+ 281 0209 5F746D70 		.ascii "_tmpfname\0"
+ 281      666E616D 
+ 281      6500
+ 282 0213 03       		.byte	0x3
+ 283 0214 22       		.byte	0x22
+ 284 0215 0B       		.byte	0xb
+ 285 0216 DF000000 		.long	0xdf
+ 286 021a 02       		.byte	0x2
+ 287 021b 23       		.byte	0x23
+ 288 021c 1C       		.uleb128 0x1c
+ 289 021d 00       		.byte	0
+ 290 021e 04       		.uleb128 0x4
+ 291 021f 46494C45 		.ascii "FILE\0"
+ 291      00
+ 292 0224 03       		.byte	0x3
+ 293 0225 24       		.byte	0x24
+ 294 0226 19       		.byte	0x19
+ 295 0227 7E010000 		.long	0x17e
+ 296 022b 07       		.uleb128 0x7
+ 297 022c 1E020000 		.long	0x21e
+ 298 0230 36020000 		.long	0x236
+ 299 0234 08       		.uleb128 0x8
+ 300 0235 00       		.byte	0
+ 301 0236 09       		.uleb128 0x9
+ 302 0237 5F696D70 		.ascii "_imp___iob\0"
+ 302      5F5F5F69 
+ 302      6F6200
+ 303 0242 03       		.byte	0x3
+ 304 0243 5C       		.byte	0x5c
+ 305 0244 10       		.byte	0x10
+ 306 0245 4B020000 		.long	0x24b
+ 307 0249 01       		.byte	0x1
+ 308 024a 01       		.byte	0x1
+ 309 024b 03       		.uleb128 0x3
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 9
+
+
+ 310 024c 04       		.byte	0x4
+ 311 024d 2B020000 		.long	0x22b
+ 312 0251 0A       		.uleb128 0xa
+ 313 0252 07       		.byte	0x7
+ 314 0253 04       		.byte	0x4
+ 315 0254 95000000 		.long	0x95
+ 316 0258 04       		.byte	0x4
+ 317 0259 04       		.byte	0x4
+ 318 025a 01       		.byte	0x1
+ 319 025b 27030000 		.long	0x327
+ 320 025f 0B       		.uleb128 0xb
+ 321 0260 4E4F4E45 		.ascii "NONE\0"
+ 321      00
+ 322 0265 00       		.byte	0
+ 323 0266 0B       		.uleb128 0xb
+ 324 0267 417A7465 		.ascii "Aztec\0"
+ 324      6300
+ 325 026d 01       		.byte	0x1
+ 326 026e 0B       		.uleb128 0xb
+ 327 026f 436F6461 		.ascii "Codabar\0"
+ 327      62617200 
+ 328 0277 02       		.byte	0x2
+ 329 0278 0B       		.uleb128 0xb
+ 330 0279 436F6465 		.ascii "Code39\0"
+ 330      333900
+ 331 0280 04       		.byte	0x4
+ 332 0281 0B       		.uleb128 0xb
+ 333 0282 436F6465 		.ascii "Code93\0"
+ 333      393300
+ 334 0289 08       		.byte	0x8
+ 335 028a 0B       		.uleb128 0xb
+ 336 028b 436F6465 		.ascii "Code128\0"
+ 336      31323800 
+ 337 0293 10       		.byte	0x10
+ 338 0294 0B       		.uleb128 0xb
+ 339 0295 44617461 		.ascii "DataBar\0"
+ 339      42617200 
+ 340 029d 20       		.byte	0x20
+ 341 029e 0B       		.uleb128 0xb
+ 342 029f 44617461 		.ascii "DataBarExpanded\0"
+ 342      42617245 
+ 342      7870616E 
+ 342      64656400 
+ 343 02af 40       		.byte	0x40
+ 344 02b0 0B       		.uleb128 0xb
+ 345 02b1 44617461 		.ascii "DataMatrix\0"
+ 345      4D617472 
+ 345      697800
+ 346 02bc 80       		.byte	0x80
+ 347 02bd 0C       		.uleb128 0xc
+ 348 02be 45414E38 		.ascii "EAN8\0"
+ 348      00
+ 349 02c3 0001     		.word	0x100
+ 350 02c5 0C       		.uleb128 0xc
+ 351 02c6 45414E31 		.ascii "EAN13\0"
+ 351      3300
+ 352 02cc 0002     		.word	0x200
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 10
+
+
+ 353 02ce 0C       		.uleb128 0xc
+ 354 02cf 49544600 		.ascii "ITF\0"
+ 355 02d3 0004     		.word	0x400
+ 356 02d5 0C       		.uleb128 0xc
+ 357 02d6 4D617869 		.ascii "MaxiCode\0"
+ 357      436F6465 
+ 357      00
+ 358 02df 0008     		.word	0x800
+ 359 02e1 0C       		.uleb128 0xc
+ 360 02e2 50444634 		.ascii "PDF417\0"
+ 360      313700
+ 361 02e9 0010     		.word	0x1000
+ 362 02eb 0C       		.uleb128 0xc
+ 363 02ec 5152436F 		.ascii "QRCode\0"
+ 363      646500
+ 364 02f3 0020     		.word	0x2000
+ 365 02f5 0C       		.uleb128 0xc
+ 366 02f6 55504341 		.ascii "UPCA\0"
+ 366      00
+ 367 02fb 0040     		.word	0x4000
+ 368 02fd 0C       		.uleb128 0xc
+ 369 02fe 55504345 		.ascii "UPCE\0"
+ 369      00
+ 370 0303 0080     		.word	0x8000
+ 371 0305 0C       		.uleb128 0xc
+ 372 0306 4F6E6544 		.ascii "OneDCodes\0"
+ 372      436F6465 
+ 372      7300
+ 373 0310 7EC7     		.word	0xc77e
+ 374 0312 0C       		.uleb128 0xc
+ 375 0313 54776F44 		.ascii "TwoDCodes\0"
+ 375      436F6465 
+ 375      7300
+ 376 031d 8138     		.word	0x3881
+ 377 031f 0C       		.uleb128 0xc
+ 378 0320 416E7900 		.ascii "Any\0"
+ 379 0324 FFFF     		.word	0xffff
+ 380 0326 00       		.byte	0
+ 381 0327 04       		.uleb128 0x4
+ 382 0328 42617263 		.ascii "BarcodeFormats_t\0"
+ 382      6F646546 
+ 382      6F726D61 
+ 382      74735F74 
+ 382      00
+ 383 0339 04       		.byte	0x4
+ 384 033a 1D       		.byte	0x1d
+ 385 033b 02       		.byte	0x2
+ 386 033c 51020000 		.long	0x251
+ 387 0340 0A       		.uleb128 0xa
+ 388 0341 07       		.byte	0x7
+ 389 0342 04       		.byte	0x4
+ 390 0343 95000000 		.long	0x95
+ 391 0347 05       		.byte	0x5
+ 392 0348 08       		.byte	0x8
+ 393 0349 01       		.byte	0x1
+ 394 034a 70030000 		.long	0x370
+ 395 034e 0B       		.uleb128 0xb
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 11
+
+
+ 396 034f 4C6F6361 		.ascii "LocalAverage\0"
+ 396      6C417665 
+ 396      72616765 
+ 396      00
+ 397 035c 00       		.byte	0
+ 398 035d 0B       		.uleb128 0xb
+ 399 035e 476C6F62 		.ascii "GlobalHistogram\0"
+ 399      616C4869 
+ 399      73746F67 
+ 399      72616D00 
+ 400 036e 01       		.byte	0x1
+ 401 036f 00       		.byte	0
+ 402 0370 04       		.uleb128 0x4
+ 403 0371 42696E61 		.ascii "Binarizer_t\0"
+ 403      72697A65 
+ 403      725F7400 
+ 404 037d 05       		.byte	0x5
+ 405 037e 0B       		.byte	0xb
+ 406 037f 02       		.byte	0x2
+ 407 0380 40030000 		.long	0x340
+ 408 0384 05       		.uleb128 0x5
+ 409 0385 4465636F 		.ascii "DecodeHints\0"
+ 409      64654869 
+ 409      6E747300 
+ 410 0391 14       		.byte	0x14
+ 411 0392 05       		.byte	0x5
+ 412 0393 0D       		.byte	0xd
+ 413 0394 10       		.byte	0x10
+ 414 0395 48040000 		.long	0x448
+ 415 0399 06       		.uleb128 0x6
+ 416 039a 74727948 		.ascii "tryHarder\0"
+ 416      61726465 
+ 416      7200
+ 417 03a4 05       		.byte	0x5
+ 418 03a5 0F       		.byte	0xf
+ 419 03a6 0A       		.byte	0xa
+ 420 03a7 36010000 		.long	0x136
+ 421 03ab 02       		.byte	0x2
+ 422 03ac 23       		.byte	0x23
+ 423 03ad 00       		.uleb128 0
+ 424 03ae 06       		.uleb128 0x6
+ 425 03af 74727952 		.ascii "tryRotate\0"
+ 425      6F746174 
+ 425      6500
+ 426 03b9 05       		.byte	0x5
+ 427 03ba 10       		.byte	0x10
+ 428 03bb 0A       		.byte	0xa
+ 429 03bc 36010000 		.long	0x136
+ 430 03c0 02       		.byte	0x2
+ 431 03c1 23       		.byte	0x23
+ 432 03c2 01       		.uleb128 0x1
+ 433 03c3 06       		.uleb128 0x6
+ 434 03c4 69735075 		.ascii "isPure\0"
+ 434      726500
+ 435 03cb 05       		.byte	0x5
+ 436 03cc 11       		.byte	0x11
+ 437 03cd 0A       		.byte	0xa
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 12
+
+
+ 438 03ce 36010000 		.long	0x136
+ 439 03d2 02       		.byte	0x2
+ 440 03d3 23       		.byte	0x23
+ 441 03d4 02       		.uleb128 0x2
+ 442 03d5 06       		.uleb128 0x6
+ 443 03d6 72657475 		.ascii "returnCodabarStartEnd\0"
+ 443      726E436F 
+ 443      64616261 
+ 443      72537461 
+ 443      7274456E 
+ 444 03ec 05       		.byte	0x5
+ 445 03ed 12       		.byte	0x12
+ 446 03ee 0A       		.byte	0xa
+ 447 03ef 36010000 		.long	0x136
+ 448 03f3 02       		.byte	0x2
+ 449 03f4 23       		.byte	0x23
+ 450 03f5 03       		.uleb128 0x3
+ 451 03f6 06       		.uleb128 0x6
+ 452 03f7 42696E61 		.ascii "Binarizer\0"
+ 452      72697A65 
+ 452      7200
+ 453 0401 05       		.byte	0x5
+ 454 0402 13       		.byte	0x13
+ 455 0403 0E       		.byte	0xe
+ 456 0404 70030000 		.long	0x370
+ 457 0408 02       		.byte	0x2
+ 458 0409 23       		.byte	0x23
+ 459 040a 04       		.uleb128 0x4
+ 460 040b 06       		.uleb128 0x6
+ 461 040c 666F726D 		.ascii "formats\0"
+ 461      61747300 
+ 462 0414 05       		.byte	0x5
+ 463 0415 14       		.byte	0x14
+ 464 0416 13       		.byte	0x13
+ 465 0417 27030000 		.long	0x327
+ 466 041b 02       		.byte	0x2
+ 467 041c 23       		.byte	0x23
+ 468 041d 08       		.uleb128 0x8
+ 469 041e 0D       		.uleb128 0xd
+ 470 041f 00000000 		.secrel32	LASF0
+ 471 0423 05       		.byte	0x5
+ 472 0424 15       		.byte	0x15
+ 473 0425 0D       		.byte	0xd
+ 474 0426 48040000 		.long	0x448
+ 475 042a 02       		.byte	0x2
+ 476 042b 23       		.byte	0x23
+ 477 042c 0C       		.uleb128 0xc
+ 478 042d 06       		.uleb128 0x6
+ 479 042e 616C6C6F 		.ascii "allowedLengths\0"
+ 479      7765644C 
+ 479      656E6774 
+ 479      687300
+ 480 043d 05       		.byte	0x5
+ 481 043e 16       		.byte	0x16
+ 482 043f 0D       		.byte	0xd
+ 483 0440 48040000 		.long	0x448
+ 484 0444 02       		.byte	0x2
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 13
+
+
+ 485 0445 23       		.byte	0x23
+ 486 0446 10       		.uleb128 0x10
+ 487 0447 00       		.byte	0
+ 488 0448 03       		.uleb128 0x3
+ 489 0449 04       		.byte	0x4
+ 490 044a 53010000 		.long	0x153
+ 491 044e 04       		.uleb128 0x4
+ 492 044f 4465636F 		.ascii "DecodeHints_t\0"
+ 492      64654869 
+ 492      6E74735F 
+ 492      7400
+ 493 045d 05       		.byte	0x5
+ 494 045e 17       		.byte	0x17
+ 495 045f 02       		.byte	0x2
+ 496 0460 84030000 		.long	0x384
+ 497 0464 0E       		.uleb128 0xe
+ 498 0465 18       		.byte	0x18
+ 499 0466 06       		.byte	0x6
+ 500 0467 06       		.byte	0x6
+ 501 0468 09       		.byte	0x9
+ 502 0469 D6040000 		.long	0x4d6
+ 503 046d 06       		.uleb128 0x6
+ 504 046e 70697865 		.ascii "pixels\0"
+ 504      6C7300
+ 505 0475 06       		.byte	0x6
+ 506 0476 08       		.byte	0x8
+ 507 0477 15       		.byte	0x15
+ 508 0478 D6040000 		.long	0x4d6
+ 509 047c 02       		.byte	0x2
+ 510 047d 23       		.byte	0x23
+ 511 047e 00       		.uleb128 0
+ 512 047f 06       		.uleb128 0x6
+ 513 0480 6C656674 		.ascii "left\0"
+ 513      00
+ 514 0485 06       		.byte	0x6
+ 515 0486 09       		.byte	0x9
+ 516 0487 09       		.byte	0x9
+ 517 0488 A5000000 		.long	0xa5
+ 518 048c 02       		.byte	0x2
+ 519 048d 23       		.byte	0x23
+ 520 048e 04       		.uleb128 0x4
+ 521 048f 06       		.uleb128 0x6
+ 522 0490 746F7000 		.ascii "top\0"
+ 523 0494 06       		.byte	0x6
+ 524 0495 0A       		.byte	0xa
+ 525 0496 09       		.byte	0x9
+ 526 0497 A5000000 		.long	0xa5
+ 527 049b 02       		.byte	0x2
+ 528 049c 23       		.byte	0x23
+ 529 049d 08       		.uleb128 0x8
+ 530 049e 06       		.uleb128 0x6
+ 531 049f 77696474 		.ascii "width\0"
+ 531      6800
+ 532 04a5 06       		.byte	0x6
+ 533 04a6 0B       		.byte	0xb
+ 534 04a7 09       		.byte	0x9
+ 535 04a8 A5000000 		.long	0xa5
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 14
+
+
+ 536 04ac 02       		.byte	0x2
+ 537 04ad 23       		.byte	0x23
+ 538 04ae 0C       		.uleb128 0xc
+ 539 04af 06       		.uleb128 0x6
+ 540 04b0 68656967 		.ascii "height\0"
+ 540      687400
+ 541 04b7 06       		.byte	0x6
+ 542 04b8 0C       		.byte	0xc
+ 543 04b9 09       		.byte	0x9
+ 544 04ba A5000000 		.long	0xa5
+ 545 04be 02       		.byte	0x2
+ 546 04bf 23       		.byte	0x23
+ 547 04c0 10       		.uleb128 0x10
+ 548 04c1 06       		.uleb128 0x6
+ 549 04c2 726F7742 		.ascii "rowBytes\0"
+ 549      79746573 
+ 549      00
+ 550 04cb 06       		.byte	0x6
+ 551 04cc 0D       		.byte	0xd
+ 552 04cd 09       		.byte	0x9
+ 553 04ce A5000000 		.long	0xa5
+ 554 04d2 02       		.byte	0x2
+ 555 04d3 23       		.byte	0x23
+ 556 04d4 14       		.uleb128 0x14
+ 557 04d5 00       		.byte	0
+ 558 04d6 03       		.uleb128 0x3
+ 559 04d7 04       		.byte	0x4
+ 560 04d8 FA000000 		.long	0xfa
+ 561 04dc 04       		.uleb128 0x4
+ 562 04dd 47656E65 		.ascii "GenericLuminanceSource_t\0"
+ 562      7269634C 
+ 562      756D696E 
+ 562      616E6365 
+ 562      536F7572 
+ 563 04f6 06       		.byte	0x6
+ 564 04f7 0E       		.byte	0xe
+ 565 04f8 02       		.byte	0x2
+ 566 04f9 64040000 		.long	0x464
+ 567 04fd 0A       		.uleb128 0xa
+ 568 04fe 07       		.byte	0x7
+ 569 04ff 04       		.byte	0x4
+ 570 0500 95000000 		.long	0x95
+ 571 0504 07       		.byte	0x7
+ 572 0505 04       		.byte	0x4
+ 573 0506 01       		.byte	0x1
+ 574 0507 3F050000 		.long	0x53f
+ 575 050b 0B       		.uleb128 0xb
+ 576 050c 4E6F4572 		.ascii "NoError\0"
+ 576      726F7200 
+ 577 0514 00       		.byte	0
+ 578 0515 0B       		.uleb128 0xb
+ 579 0516 4E6F7446 		.ascii "NotFound\0"
+ 579      6F756E64 
+ 579      00
+ 580 051f 01       		.byte	0x1
+ 581 0520 0B       		.uleb128 0xb
+ 582 0521 466F726D 		.ascii "FormatError\0"
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 15
+
+
+ 582      61744572 
+ 582      726F7200 
+ 583 052d 02       		.byte	0x2
+ 584 052e 0B       		.uleb128 0xb
+ 585 052f 43686563 		.ascii "ChecksumError\0"
+ 585      6B73756D 
+ 585      4572726F 
+ 585      7200
+ 586 053d 03       		.byte	0x3
+ 587 053e 00       		.byte	0
+ 588 053f 04       		.uleb128 0x4
+ 589 0540 4465636F 		.ascii "DecodeStatus_t\0"
+ 589      64655374 
+ 589      61747573 
+ 589      5F7400
+ 590 054f 07       		.byte	0x7
+ 591 0550 09       		.byte	0x9
+ 592 0551 02       		.byte	0x2
+ 593 0552 FD040000 		.long	0x4fd
+ 594 0556 0F       		.uleb128 0xf
+ 595 0557 01       		.byte	0x1
+ 596 0558 6465636F 		.ascii "decode\0"
+ 596      646500
+ 597 055f 01       		.byte	0x1
+ 598 0560 2F       		.byte	0x2f
+ 599 0561 11       		.byte	0x11
+ 600 0562 01       		.byte	0x1
+ 601 0563 D6040000 		.long	0x4d6
+ 602 0567 4E000000 		.long	LFB14
+ 603 056b 89000000 		.long	LFE14
+ 604 056f 00000000 		.secrel32	LLST2
+ 605 0573 01       		.byte	0x1
+ 606 0574 14060000 		.long	0x614
+ 607 0578 10       		.uleb128 0x10
+ 608 0579 696D6167 		.ascii "image\0"
+ 608      6500
+ 609 057f 01       		.byte	0x1
+ 610 0580 2F       		.byte	0x2f
+ 611 0581 33       		.byte	0x33
+ 612 0582 14060000 		.long	0x614
+ 613 0586 02       		.byte	0x2
+ 614 0587 91       		.byte	0x91
+ 615 0588 00       		.sleb128 0
+ 616 0589 10       		.uleb128 0x10
+ 617 058a 68696E74 		.ascii "hints\0"
+ 617      7300
+ 618 0590 01       		.byte	0x1
+ 619 0591 2F       		.byte	0x2f
+ 620 0592 49       		.byte	0x49
+ 621 0593 1A060000 		.long	0x61a
+ 622 0597 02       		.byte	0x2
+ 623 0598 91       		.byte	0x91
+ 624 0599 04       		.sleb128 4
+ 625 059a 11       		.uleb128 0x11
+ 626 059b 69735075 		.ascii "isPure\0"
+ 626      726500
+ 627 05a2 01       		.byte	0x1
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 16
+
+
+ 628 05a3 31       		.byte	0x31
+ 629 05a4 0F       		.byte	0xf
+ 630 05a5 95000000 		.long	0x95
+ 631 05a9 3C000000 		.secrel32	LLST3
+ 632 05ad 38000000 		.secrel32	LVUS3
+ 633 05b1 12       		.uleb128 0x12
+ 634 05b2 00000000 		.secrel32	LASF0
+ 635 05b6 01       		.byte	0x1
+ 636 05b7 32       		.byte	0x32
+ 637 05b8 0F       		.byte	0xf
+ 638 05b9 95000000 		.long	0x95
+ 639 05bd 6C000000 		.secrel32	LLST4
+ 640 05c1 68000000 		.secrel32	LVUS4
+ 641 05c5 13       		.uleb128 0x13
+ 642 05c6 72657375 		.ascii "result\0"
+ 642      6C7400
+ 643 05cd 01       		.byte	0x1
+ 644 05ce 33       		.byte	0x33
+ 645 05cf 10       		.byte	0x10
+ 646 05d0 FA000000 		.long	0xfa
+ 647 05d4 00       		.byte	0
+ 648 05d5 13       		.uleb128 0x13
+ 649 05d6 72657375 		.ascii "results\0"
+ 649      6C747300 
+ 650 05de 01       		.byte	0x1
+ 651 05df 34       		.byte	0x34
+ 652 05e0 10       		.byte	0x10
+ 653 05e1 FA000000 		.long	0xfa
+ 654 05e5 00       		.byte	0
+ 655 05e6 14       		.uleb128 0x14
+ 656 05e7 73746174 		.ascii "status\0"
+ 656      757300
+ 657 05ee 01       		.byte	0x1
+ 658 05ef 35       		.byte	0x35
+ 659 05f0 11       		.byte	0x11
+ 660 05f1 3F050000 		.long	0x53f
+ 661 05f5 15       		.uleb128 0x15
+ 662 05f6 87000000 		.long	LVL9
+ 663 05fa 20060000 		.long	0x620
+ 664 05fe 16       		.uleb128 0x16
+ 665 05ff 02       		.byte	0x2
+ 666 0600 74       		.byte	0x74
+ 667 0601 00       		.sleb128 0
+ 668 0602 03       		.byte	0x3
+ 669 0603 91       		.byte	0x91
+ 670 0604 00       		.sleb128 0
+ 671 0605 06       		.byte	0x6
+ 672 0606 16       		.uleb128 0x16
+ 673 0607 02       		.byte	0x2
+ 674 0608 74       		.byte	0x74
+ 675 0609 04       		.sleb128 4
+ 676 060a 01       		.byte	0x1
+ 677 060b 30       		.byte	0x30
+ 678 060c 16       		.uleb128 0x16
+ 679 060d 02       		.byte	0x2
+ 680 060e 74       		.byte	0x74
+ 681 060f 08       		.sleb128 8
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 17
+
+
+ 682 0610 01       		.byte	0x1
+ 683 0611 30       		.byte	0x30
+ 684 0612 00       		.byte	0
+ 685 0613 00       		.byte	0
+ 686 0614 03       		.uleb128 0x3
+ 687 0615 04       		.byte	0x4
+ 688 0616 DC040000 		.long	0x4dc
+ 689 061a 03       		.uleb128 0x3
+ 690 061b 04       		.byte	0x4
+ 691 061c 4E040000 		.long	0x44e
+ 692 0620 0F       		.uleb128 0xf
+ 693 0621 01       		.byte	0x1
+ 694 0622 446F4465 		.ascii "DoDecode\0"
+ 694      636F6465 
+ 694      00
+ 695 062b 01       		.byte	0x1
+ 696 062c 07       		.byte	0x7
+ 697 062d 10       		.byte	0x10
+ 698 062e 01       		.byte	0x1
+ 699 062f 3F050000 		.long	0x53f
+ 700 0633 00000000 		.long	LFB13
+ 701 0637 4E000000 		.long	LFE13
+ 702 063b 8A000000 		.secrel32	LLST0
+ 703 063f 01       		.byte	0x1
+ 704 0640 0E070000 		.long	0x70e
+ 705 0644 10       		.uleb128 0x10
+ 706 0645 696D6167 		.ascii "image\0"
+ 706      6500
+ 707 064b 01       		.byte	0x1
+ 708 064c 07       		.byte	0x7
+ 709 064d 34       		.byte	0x34
+ 710 064e 14060000 		.long	0x614
+ 711 0652 02       		.byte	0x2
+ 712 0653 91       		.byte	0x91
+ 713 0654 00       		.sleb128 0
+ 714 0655 10       		.uleb128 0x10
+ 715 0656 6D756C74 		.ascii "multiple\0"
+ 715      69706C65 
+ 715      00
+ 716 065f 01       		.byte	0x1
+ 717 0660 07       		.byte	0x7
+ 718 0661 49       		.byte	0x49
+ 719 0662 FA000000 		.long	0xfa
+ 720 0666 02       		.byte	0x2
+ 721 0667 91       		.byte	0x91
+ 722 0668 04       		.sleb128 4
+ 723 0669 10       		.uleb128 0x10
+ 724 066a 72657375 		.ascii "results\0"
+ 724      6C747300 
+ 725 0672 01       		.byte	0x1
+ 726 0673 07       		.byte	0x7
+ 727 0674 63       		.byte	0x63
+ 728 0675 D6040000 		.long	0x4d6
+ 729 0679 02       		.byte	0x2
+ 730 067a 91       		.byte	0x91
+ 731 067b 08       		.sleb128 8
+ 732 067c 17       		.uleb128 0x17
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 18
+
+
+ 733 067d 00000000 		.secrel32	LASF0
+ 734 0681 01       		.byte	0x1
+ 735 0682 07       		.byte	0x7
+ 736 0683 7B       		.byte	0x7b
+ 737 0684 D6040000 		.long	0x4d6
+ 738 0688 02       		.byte	0x2
+ 739 0689 91       		.byte	0x91
+ 740 068a 0C       		.sleb128 12
+ 741 068b 14       		.uleb128 0x14
+ 742 068c 64657465 		.ascii "detectorResult\0"
+ 742      63746F72 
+ 742      52657375 
+ 742      6C7400
+ 743 069b 01       		.byte	0x1
+ 744 069c 0B       		.byte	0xb
+ 745 069d 12       		.byte	0x12
+ 746 069e D6040000 		.long	0x4d6
+ 747 06a2 11       		.uleb128 0x11
+ 748 06a3 73746174 		.ascii "status\0"
+ 748      757300
+ 749 06aa 01       		.byte	0x1
+ 750 06ab 0C       		.byte	0xc
+ 751 06ac 11       		.byte	0x11
+ 752 06ad 3F050000 		.long	0x53f
+ 753 06b1 E8000000 		.secrel32	LLST1
+ 754 06b5 E6000000 		.secrel32	LVUS1
+ 755 06b9 18       		.uleb128 0x18
+ 756 06ba 32000000 		.long	LVL1
+ 757 06be 0E070000 		.long	0x70e
+ 758 06c2 EF060000 		.long	0x6ef
+ 759 06c6 16       		.uleb128 0x16
+ 760 06c7 02       		.byte	0x2
+ 761 06c8 74       		.byte	0x74
+ 762 06c9 00       		.sleb128 0
+ 763 06ca 05       		.byte	0x5
+ 764 06cb 03       		.byte	0x3
+ 765 06cc 00000000 		.long	LC0
+ 766 06d0 16       		.uleb128 0x16
+ 767 06d1 02       		.byte	0x2
+ 768 06d2 74       		.byte	0x74
+ 769 06d3 04       		.sleb128 4
+ 770 06d4 02       		.byte	0x2
+ 771 06d5 73       		.byte	0x73
+ 772 06d6 00       		.sleb128 0
+ 773 06d7 16       		.uleb128 0x16
+ 774 06d8 02       		.byte	0x2
+ 775 06d9 74       		.byte	0x74
+ 776 06da 08       		.sleb128 8
+ 777 06db 02       		.byte	0x2
+ 778 06dc 76       		.byte	0x76
+ 779 06dd 00       		.sleb128 0
+ 780 06de 16       		.uleb128 0x16
+ 781 06df 02       		.byte	0x2
+ 782 06e0 74       		.byte	0x74
+ 783 06e1 0C       		.sleb128 12
+ 784 06e2 03       		.byte	0x3
+ 785 06e3 91       		.byte	0x91
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 19
+
+
+ 786 06e4 08       		.sleb128 8
+ 787 06e5 06       		.byte	0x6
+ 788 06e6 16       		.uleb128 0x16
+ 789 06e7 02       		.byte	0x2
+ 790 06e8 74       		.byte	0x74
+ 791 06e9 10       		.sleb128 16
+ 792 06ea 03       		.byte	0x3
+ 793 06eb 91       		.byte	0x91
+ 794 06ec 0C       		.sleb128 12
+ 795 06ed 06       		.byte	0x6
+ 796 06ee 00       		.byte	0
+ 797 06ef 15       		.uleb128 0x15
+ 798 06f0 46000000 		.long	LVL2
+ 799 06f4 23070000 		.long	0x723
+ 800 06f8 16       		.uleb128 0x16
+ 801 06f9 02       		.byte	0x2
+ 802 06fa 74       		.byte	0x74
+ 803 06fb 00       		.sleb128 0
+ 804 06fc 02       		.byte	0x2
+ 805 06fd 73       		.byte	0x73
+ 806 06fe 00       		.sleb128 0
+ 807 06ff 16       		.uleb128 0x16
+ 808 0700 02       		.byte	0x2
+ 809 0701 74       		.byte	0x74
+ 810 0702 04       		.sleb128 4
+ 811 0703 02       		.byte	0x2
+ 812 0704 76       		.byte	0x76
+ 813 0705 00       		.sleb128 0
+ 814 0706 16       		.uleb128 0x16
+ 815 0707 02       		.byte	0x2
+ 816 0708 74       		.byte	0x74
+ 817 0709 08       		.sleb128 8
+ 818 070a 01       		.byte	0x1
+ 819 070b 30       		.byte	0x30
+ 820 070c 00       		.byte	0
+ 821 070d 00       		.byte	0
+ 822 070e 19       		.uleb128 0x19
+ 823 070f 01       		.byte	0x1
+ 824 0710 01       		.byte	0x1
+ 825 0711 7072696E 		.ascii "printf\0"
+ 825      746600
+ 826 0718 7072696E 		.ascii "printf\0"
+ 826      746600
+ 827 071f 03       		.byte	0x3
+ 828 0720 FD01     		.word	0x1fd
+ 829 0722 0F       		.byte	0xf
+ 830 0723 1A       		.uleb128 0x1a
+ 831 0724 01       		.byte	0x1
+ 832 0725 01       		.byte	0x1
+ 833 0726 44657465 		.ascii "Detect\0"
+ 833      637400
+ 834 072d 44657465 		.ascii "Detect\0"
+ 834      637400
+ 835 0734 08       		.byte	0x8
+ 836 0735 07       		.byte	0x7
+ 837 0736 17       		.byte	0x17
+ 838 0737 00       		.byte	0
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 20
+
+
+ 839              		.section	.debug_abbrev,"dr"
+ 840              	Ldebug_abbrev0:
+ 841 0000 01       		.uleb128 0x1
+ 842 0001 11       		.uleb128 0x11
+ 843 0002 01       		.byte	0x1
+ 844 0003 25       		.uleb128 0x25
+ 845 0004 08       		.uleb128 0x8
+ 846 0005 13       		.uleb128 0x13
+ 847 0006 0B       		.uleb128 0xb
+ 848 0007 03       		.uleb128 0x3
+ 849 0008 08       		.uleb128 0x8
+ 850 0009 1B       		.uleb128 0x1b
+ 851 000a 08       		.uleb128 0x8
+ 852 000b 11       		.uleb128 0x11
+ 853 000c 01       		.uleb128 0x1
+ 854 000d 12       		.uleb128 0x12
+ 855 000e 01       		.uleb128 0x1
+ 856 000f 10       		.uleb128 0x10
+ 857 0010 06       		.uleb128 0x6
+ 858 0011 00       		.byte	0
+ 859 0012 00       		.byte	0
+ 860 0013 02       		.uleb128 0x2
+ 861 0014 24       		.uleb128 0x24
+ 862 0015 00       		.byte	0
+ 863 0016 0B       		.uleb128 0xb
+ 864 0017 0B       		.uleb128 0xb
+ 865 0018 3E       		.uleb128 0x3e
+ 866 0019 0B       		.uleb128 0xb
+ 867 001a 03       		.uleb128 0x3
+ 868 001b 08       		.uleb128 0x8
+ 869 001c 00       		.byte	0
+ 870 001d 00       		.byte	0
+ 871 001e 03       		.uleb128 0x3
+ 872 001f 0F       		.uleb128 0xf
+ 873 0020 00       		.byte	0
+ 874 0021 0B       		.uleb128 0xb
+ 875 0022 0B       		.uleb128 0xb
+ 876 0023 49       		.uleb128 0x49
+ 877 0024 13       		.uleb128 0x13
+ 878 0025 00       		.byte	0
+ 879 0026 00       		.byte	0
+ 880 0027 04       		.uleb128 0x4
+ 881 0028 16       		.uleb128 0x16
+ 882 0029 00       		.byte	0
+ 883 002a 03       		.uleb128 0x3
+ 884 002b 08       		.uleb128 0x8
+ 885 002c 3A       		.uleb128 0x3a
+ 886 002d 0B       		.uleb128 0xb
+ 887 002e 3B       		.uleb128 0x3b
+ 888 002f 0B       		.uleb128 0xb
+ 889 0030 39       		.uleb128 0x39
+ 890 0031 0B       		.uleb128 0xb
+ 891 0032 49       		.uleb128 0x49
+ 892 0033 13       		.uleb128 0x13
+ 893 0034 00       		.byte	0
+ 894 0035 00       		.byte	0
+ 895 0036 05       		.uleb128 0x5
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 21
+
+
+ 896 0037 13       		.uleb128 0x13
+ 897 0038 01       		.byte	0x1
+ 898 0039 03       		.uleb128 0x3
+ 899 003a 08       		.uleb128 0x8
+ 900 003b 0B       		.uleb128 0xb
+ 901 003c 0B       		.uleb128 0xb
+ 902 003d 3A       		.uleb128 0x3a
+ 903 003e 0B       		.uleb128 0xb
+ 904 003f 3B       		.uleb128 0x3b
+ 905 0040 0B       		.uleb128 0xb
+ 906 0041 39       		.uleb128 0x39
+ 907 0042 0B       		.uleb128 0xb
+ 908 0043 01       		.uleb128 0x1
+ 909 0044 13       		.uleb128 0x13
+ 910 0045 00       		.byte	0
+ 911 0046 00       		.byte	0
+ 912 0047 06       		.uleb128 0x6
+ 913 0048 0D       		.uleb128 0xd
+ 914 0049 00       		.byte	0
+ 915 004a 03       		.uleb128 0x3
+ 916 004b 08       		.uleb128 0x8
+ 917 004c 3A       		.uleb128 0x3a
+ 918 004d 0B       		.uleb128 0xb
+ 919 004e 3B       		.uleb128 0x3b
+ 920 004f 0B       		.uleb128 0xb
+ 921 0050 39       		.uleb128 0x39
+ 922 0051 0B       		.uleb128 0xb
+ 923 0052 49       		.uleb128 0x49
+ 924 0053 13       		.uleb128 0x13
+ 925 0054 38       		.uleb128 0x38
+ 926 0055 0A       		.uleb128 0xa
+ 927 0056 00       		.byte	0
+ 928 0057 00       		.byte	0
+ 929 0058 07       		.uleb128 0x7
+ 930 0059 01       		.uleb128 0x1
+ 931 005a 01       		.byte	0x1
+ 932 005b 49       		.uleb128 0x49
+ 933 005c 13       		.uleb128 0x13
+ 934 005d 01       		.uleb128 0x1
+ 935 005e 13       		.uleb128 0x13
+ 936 005f 00       		.byte	0
+ 937 0060 00       		.byte	0
+ 938 0061 08       		.uleb128 0x8
+ 939 0062 21       		.uleb128 0x21
+ 940 0063 00       		.byte	0
+ 941 0064 00       		.byte	0
+ 942 0065 00       		.byte	0
+ 943 0066 09       		.uleb128 0x9
+ 944 0067 34       		.uleb128 0x34
+ 945 0068 00       		.byte	0
+ 946 0069 03       		.uleb128 0x3
+ 947 006a 08       		.uleb128 0x8
+ 948 006b 3A       		.uleb128 0x3a
+ 949 006c 0B       		.uleb128 0xb
+ 950 006d 3B       		.uleb128 0x3b
+ 951 006e 0B       		.uleb128 0xb
+ 952 006f 39       		.uleb128 0x39
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 22
+
+
+ 953 0070 0B       		.uleb128 0xb
+ 954 0071 49       		.uleb128 0x49
+ 955 0072 13       		.uleb128 0x13
+ 956 0073 3F       		.uleb128 0x3f
+ 957 0074 0C       		.uleb128 0xc
+ 958 0075 3C       		.uleb128 0x3c
+ 959 0076 0C       		.uleb128 0xc
+ 960 0077 00       		.byte	0
+ 961 0078 00       		.byte	0
+ 962 0079 0A       		.uleb128 0xa
+ 963 007a 04       		.uleb128 0x4
+ 964 007b 01       		.byte	0x1
+ 965 007c 3E       		.uleb128 0x3e
+ 966 007d 0B       		.uleb128 0xb
+ 967 007e 0B       		.uleb128 0xb
+ 968 007f 0B       		.uleb128 0xb
+ 969 0080 49       		.uleb128 0x49
+ 970 0081 13       		.uleb128 0x13
+ 971 0082 3A       		.uleb128 0x3a
+ 972 0083 0B       		.uleb128 0xb
+ 973 0084 3B       		.uleb128 0x3b
+ 974 0085 0B       		.uleb128 0xb
+ 975 0086 39       		.uleb128 0x39
+ 976 0087 0B       		.uleb128 0xb
+ 977 0088 01       		.uleb128 0x1
+ 978 0089 13       		.uleb128 0x13
+ 979 008a 00       		.byte	0
+ 980 008b 00       		.byte	0
+ 981 008c 0B       		.uleb128 0xb
+ 982 008d 28       		.uleb128 0x28
+ 983 008e 00       		.byte	0
+ 984 008f 03       		.uleb128 0x3
+ 985 0090 08       		.uleb128 0x8
+ 986 0091 1C       		.uleb128 0x1c
+ 987 0092 0B       		.uleb128 0xb
+ 988 0093 00       		.byte	0
+ 989 0094 00       		.byte	0
+ 990 0095 0C       		.uleb128 0xc
+ 991 0096 28       		.uleb128 0x28
+ 992 0097 00       		.byte	0
+ 993 0098 03       		.uleb128 0x3
+ 994 0099 08       		.uleb128 0x8
+ 995 009a 1C       		.uleb128 0x1c
+ 996 009b 05       		.uleb128 0x5
+ 997 009c 00       		.byte	0
+ 998 009d 00       		.byte	0
+ 999 009e 0D       		.uleb128 0xd
+ 1000 009f 0D       		.uleb128 0xd
+ 1001 00a0 00       		.byte	0
+ 1002 00a1 03       		.uleb128 0x3
+ 1003 00a2 0E       		.uleb128 0xe
+ 1004 00a3 3A       		.uleb128 0x3a
+ 1005 00a4 0B       		.uleb128 0xb
+ 1006 00a5 3B       		.uleb128 0x3b
+ 1007 00a6 0B       		.uleb128 0xb
+ 1008 00a7 39       		.uleb128 0x39
+ 1009 00a8 0B       		.uleb128 0xb
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 23
+
+
+ 1010 00a9 49       		.uleb128 0x49
+ 1011 00aa 13       		.uleb128 0x13
+ 1012 00ab 38       		.uleb128 0x38
+ 1013 00ac 0A       		.uleb128 0xa
+ 1014 00ad 00       		.byte	0
+ 1015 00ae 00       		.byte	0
+ 1016 00af 0E       		.uleb128 0xe
+ 1017 00b0 13       		.uleb128 0x13
+ 1018 00b1 01       		.byte	0x1
+ 1019 00b2 0B       		.uleb128 0xb
+ 1020 00b3 0B       		.uleb128 0xb
+ 1021 00b4 3A       		.uleb128 0x3a
+ 1022 00b5 0B       		.uleb128 0xb
+ 1023 00b6 3B       		.uleb128 0x3b
+ 1024 00b7 0B       		.uleb128 0xb
+ 1025 00b8 39       		.uleb128 0x39
+ 1026 00b9 0B       		.uleb128 0xb
+ 1027 00ba 01       		.uleb128 0x1
+ 1028 00bb 13       		.uleb128 0x13
+ 1029 00bc 00       		.byte	0
+ 1030 00bd 00       		.byte	0
+ 1031 00be 0F       		.uleb128 0xf
+ 1032 00bf 2E       		.uleb128 0x2e
+ 1033 00c0 01       		.byte	0x1
+ 1034 00c1 3F       		.uleb128 0x3f
+ 1035 00c2 0C       		.uleb128 0xc
+ 1036 00c3 03       		.uleb128 0x3
+ 1037 00c4 08       		.uleb128 0x8
+ 1038 00c5 3A       		.uleb128 0x3a
+ 1039 00c6 0B       		.uleb128 0xb
+ 1040 00c7 3B       		.uleb128 0x3b
+ 1041 00c8 0B       		.uleb128 0xb
+ 1042 00c9 39       		.uleb128 0x39
+ 1043 00ca 0B       		.uleb128 0xb
+ 1044 00cb 27       		.uleb128 0x27
+ 1045 00cc 0C       		.uleb128 0xc
+ 1046 00cd 49       		.uleb128 0x49
+ 1047 00ce 13       		.uleb128 0x13
+ 1048 00cf 11       		.uleb128 0x11
+ 1049 00d0 01       		.uleb128 0x1
+ 1050 00d1 12       		.uleb128 0x12
+ 1051 00d2 01       		.uleb128 0x1
+ 1052 00d3 40       		.uleb128 0x40
+ 1053 00d4 06       		.uleb128 0x6
+ 1054 00d5 9742     		.uleb128 0x2117
+ 1055 00d7 0C       		.uleb128 0xc
+ 1056 00d8 01       		.uleb128 0x1
+ 1057 00d9 13       		.uleb128 0x13
+ 1058 00da 00       		.byte	0
+ 1059 00db 00       		.byte	0
+ 1060 00dc 10       		.uleb128 0x10
+ 1061 00dd 05       		.uleb128 0x5
+ 1062 00de 00       		.byte	0
+ 1063 00df 03       		.uleb128 0x3
+ 1064 00e0 08       		.uleb128 0x8
+ 1065 00e1 3A       		.uleb128 0x3a
+ 1066 00e2 0B       		.uleb128 0xb
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 24
+
+
+ 1067 00e3 3B       		.uleb128 0x3b
+ 1068 00e4 0B       		.uleb128 0xb
+ 1069 00e5 39       		.uleb128 0x39
+ 1070 00e6 0B       		.uleb128 0xb
+ 1071 00e7 49       		.uleb128 0x49
+ 1072 00e8 13       		.uleb128 0x13
+ 1073 00e9 02       		.uleb128 0x2
+ 1074 00ea 0A       		.uleb128 0xa
+ 1075 00eb 00       		.byte	0
+ 1076 00ec 00       		.byte	0
+ 1077 00ed 11       		.uleb128 0x11
+ 1078 00ee 34       		.uleb128 0x34
+ 1079 00ef 00       		.byte	0
+ 1080 00f0 03       		.uleb128 0x3
+ 1081 00f1 08       		.uleb128 0x8
+ 1082 00f2 3A       		.uleb128 0x3a
+ 1083 00f3 0B       		.uleb128 0xb
+ 1084 00f4 3B       		.uleb128 0x3b
+ 1085 00f5 0B       		.uleb128 0xb
+ 1086 00f6 39       		.uleb128 0x39
+ 1087 00f7 0B       		.uleb128 0xb
+ 1088 00f8 49       		.uleb128 0x49
+ 1089 00f9 13       		.uleb128 0x13
+ 1090 00fa 02       		.uleb128 0x2
+ 1091 00fb 06       		.uleb128 0x6
+ 1092 00fc B742     		.uleb128 0x2137
+ 1093 00fe 06       		.uleb128 0x6
+ 1094 00ff 00       		.byte	0
+ 1095 0100 00       		.byte	0
+ 1096 0101 12       		.uleb128 0x12
+ 1097 0102 34       		.uleb128 0x34
+ 1098 0103 00       		.byte	0
+ 1099 0104 03       		.uleb128 0x3
+ 1100 0105 0E       		.uleb128 0xe
+ 1101 0106 3A       		.uleb128 0x3a
+ 1102 0107 0B       		.uleb128 0xb
+ 1103 0108 3B       		.uleb128 0x3b
+ 1104 0109 0B       		.uleb128 0xb
+ 1105 010a 39       		.uleb128 0x39
+ 1106 010b 0B       		.uleb128 0xb
+ 1107 010c 49       		.uleb128 0x49
+ 1108 010d 13       		.uleb128 0x13
+ 1109 010e 02       		.uleb128 0x2
+ 1110 010f 06       		.uleb128 0x6
+ 1111 0110 B742     		.uleb128 0x2137
+ 1112 0112 06       		.uleb128 0x6
+ 1113 0113 00       		.byte	0
+ 1114 0114 00       		.byte	0
+ 1115 0115 13       		.uleb128 0x13
+ 1116 0116 34       		.uleb128 0x34
+ 1117 0117 00       		.byte	0
+ 1118 0118 03       		.uleb128 0x3
+ 1119 0119 08       		.uleb128 0x8
+ 1120 011a 3A       		.uleb128 0x3a
+ 1121 011b 0B       		.uleb128 0xb
+ 1122 011c 3B       		.uleb128 0x3b
+ 1123 011d 0B       		.uleb128 0xb
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 25
+
+
+ 1124 011e 39       		.uleb128 0x39
+ 1125 011f 0B       		.uleb128 0xb
+ 1126 0120 49       		.uleb128 0x49
+ 1127 0121 13       		.uleb128 0x13
+ 1128 0122 1C       		.uleb128 0x1c
+ 1129 0123 0B       		.uleb128 0xb
+ 1130 0124 00       		.byte	0
+ 1131 0125 00       		.byte	0
+ 1132 0126 14       		.uleb128 0x14
+ 1133 0127 34       		.uleb128 0x34
+ 1134 0128 00       		.byte	0
+ 1135 0129 03       		.uleb128 0x3
+ 1136 012a 08       		.uleb128 0x8
+ 1137 012b 3A       		.uleb128 0x3a
+ 1138 012c 0B       		.uleb128 0xb
+ 1139 012d 3B       		.uleb128 0x3b
+ 1140 012e 0B       		.uleb128 0xb
+ 1141 012f 39       		.uleb128 0x39
+ 1142 0130 0B       		.uleb128 0xb
+ 1143 0131 49       		.uleb128 0x49
+ 1144 0132 13       		.uleb128 0x13
+ 1145 0133 00       		.byte	0
+ 1146 0134 00       		.byte	0
+ 1147 0135 15       		.uleb128 0x15
+ 1148 0136 898201   		.uleb128 0x4109
+ 1149 0139 01       		.byte	0x1
+ 1150 013a 11       		.uleb128 0x11
+ 1151 013b 01       		.uleb128 0x1
+ 1152 013c 31       		.uleb128 0x31
+ 1153 013d 13       		.uleb128 0x13
+ 1154 013e 00       		.byte	0
+ 1155 013f 00       		.byte	0
+ 1156 0140 16       		.uleb128 0x16
+ 1157 0141 8A8201   		.uleb128 0x410a
+ 1158 0144 00       		.byte	0
+ 1159 0145 02       		.uleb128 0x2
+ 1160 0146 0A       		.uleb128 0xa
+ 1161 0147 9142     		.uleb128 0x2111
+ 1162 0149 0A       		.uleb128 0xa
+ 1163 014a 00       		.byte	0
+ 1164 014b 00       		.byte	0
+ 1165 014c 17       		.uleb128 0x17
+ 1166 014d 05       		.uleb128 0x5
+ 1167 014e 00       		.byte	0
+ 1168 014f 03       		.uleb128 0x3
+ 1169 0150 0E       		.uleb128 0xe
+ 1170 0151 3A       		.uleb128 0x3a
+ 1171 0152 0B       		.uleb128 0xb
+ 1172 0153 3B       		.uleb128 0x3b
+ 1173 0154 0B       		.uleb128 0xb
+ 1174 0155 39       		.uleb128 0x39
+ 1175 0156 0B       		.uleb128 0xb
+ 1176 0157 49       		.uleb128 0x49
+ 1177 0158 13       		.uleb128 0x13
+ 1178 0159 02       		.uleb128 0x2
+ 1179 015a 0A       		.uleb128 0xa
+ 1180 015b 00       		.byte	0
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 26
+
+
+ 1181 015c 00       		.byte	0
+ 1182 015d 18       		.uleb128 0x18
+ 1183 015e 898201   		.uleb128 0x4109
+ 1184 0161 01       		.byte	0x1
+ 1185 0162 11       		.uleb128 0x11
+ 1186 0163 01       		.uleb128 0x1
+ 1187 0164 31       		.uleb128 0x31
+ 1188 0165 13       		.uleb128 0x13
+ 1189 0166 01       		.uleb128 0x1
+ 1190 0167 13       		.uleb128 0x13
+ 1191 0168 00       		.byte	0
+ 1192 0169 00       		.byte	0
+ 1193 016a 19       		.uleb128 0x19
+ 1194 016b 2E       		.uleb128 0x2e
+ 1195 016c 00       		.byte	0
+ 1196 016d 3F       		.uleb128 0x3f
+ 1197 016e 0C       		.uleb128 0xc
+ 1198 016f 3C       		.uleb128 0x3c
+ 1199 0170 0C       		.uleb128 0xc
+ 1200 0171 8740     		.uleb128 0x2007
+ 1201 0173 08       		.uleb128 0x8
+ 1202 0174 03       		.uleb128 0x3
+ 1203 0175 08       		.uleb128 0x8
+ 1204 0176 3A       		.uleb128 0x3a
+ 1205 0177 0B       		.uleb128 0xb
+ 1206 0178 3B       		.uleb128 0x3b
+ 1207 0179 05       		.uleb128 0x5
+ 1208 017a 39       		.uleb128 0x39
+ 1209 017b 0B       		.uleb128 0xb
+ 1210 017c 00       		.byte	0
+ 1211 017d 00       		.byte	0
+ 1212 017e 1A       		.uleb128 0x1a
+ 1213 017f 2E       		.uleb128 0x2e
+ 1214 0180 00       		.byte	0
+ 1215 0181 3F       		.uleb128 0x3f
+ 1216 0182 0C       		.uleb128 0xc
+ 1217 0183 3C       		.uleb128 0x3c
+ 1218 0184 0C       		.uleb128 0xc
+ 1219 0185 8740     		.uleb128 0x2007
+ 1220 0187 08       		.uleb128 0x8
+ 1221 0188 03       		.uleb128 0x3
+ 1222 0189 08       		.uleb128 0x8
+ 1223 018a 3A       		.uleb128 0x3a
+ 1224 018b 0B       		.uleb128 0xb
+ 1225 018c 3B       		.uleb128 0x3b
+ 1226 018d 0B       		.uleb128 0xb
+ 1227 018e 39       		.uleb128 0x39
+ 1228 018f 0B       		.uleb128 0xb
+ 1229 0190 00       		.byte	0
+ 1230 0191 00       		.byte	0
+ 1231 0192 00       		.byte	0
+ 1232              		.section	.debug_loc,"dr"
+ 1233              	Ldebug_loc0:
+ 1234              	LLST2:
+ 1235 0000 4E000000 		.long	LFB14-Ltext0
+ 1236 0004 51000000 		.long	LCFI6-Ltext0
+ 1237 0008 0200     		.word	0x2
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 27
+
+
+ 1238 000a 74       		.byte	0x74
+ 1239 000b 04       		.sleb128 4
+ 1240 000c 51000000 		.long	LCFI6-Ltext0
+ 1241 0010 66000000 		.long	LCFI7-Ltext0
+ 1242 0014 0200     		.word	0x2
+ 1243 0016 74       		.byte	0x74
+ 1244 0017 20       		.sleb128 32
+ 1245 0018 66000000 		.long	LCFI7-Ltext0
+ 1246 001c 67000000 		.long	LCFI8-Ltext0
+ 1247 0020 0200     		.word	0x2
+ 1248 0022 74       		.byte	0x74
+ 1249 0023 04       		.sleb128 4
+ 1250 0024 67000000 		.long	LCFI8-Ltext0
+ 1251 0028 89000000 		.long	LFE14-Ltext0
+ 1252 002c 0200     		.word	0x2
+ 1253 002e 74       		.byte	0x74
+ 1254 002f 20       		.sleb128 32
+ 1255 0030 00000000 		.long	0
+ 1256 0034 00000000 		.long	0
+ 1257              	LVUS3:
+ 1258 0038 01       		.uleb128 LVU13
+ 1259 0039 00       		.uleb128 LVU20
+ 1260 003a 00       		.uleb128 LVU21
+ 1261 003b 00       		.uleb128 LVU23
+ 1262              	LLST3:
+ 1263 003c 55000000 		.long	LVL4-Ltext0
+ 1264 0040 5E000000 		.long	LVL6-Ltext0
+ 1265 0044 0800     		.word	0x8
+ 1266 0046 70       		.byte	0x70
+ 1267 0047 02       		.sleb128 2
+ 1268 0048 94       		.byte	0x94
+ 1269 0049 01       		.byte	0x1
+ 1270 004a 08       		.byte	0x8
+ 1271 004b FF       		.byte	0xff
+ 1272 004c 1A       		.byte	0x1a
+ 1273 004d 9F       		.byte	0x9f
+ 1274 004e 67000000 		.long	LVL7-Ltext0
+ 1275 0052 6B000000 		.long	LVL8-Ltext0
+ 1276 0056 0800     		.word	0x8
+ 1277 0058 70       		.byte	0x70
+ 1278 0059 02       		.sleb128 2
+ 1279 005a 94       		.byte	0x94
+ 1280 005b 01       		.byte	0x1
+ 1281 005c 08       		.byte	0x8
+ 1282 005d FF       		.byte	0xff
+ 1283 005e 1A       		.byte	0x1a
+ 1284 005f 9F       		.byte	0x9f
+ 1285 0060 00000000 		.long	0
+ 1286 0064 00000000 		.long	0
+ 1287              	LVUS4:
+ 1288 0068 00       		.uleb128 LVU15
+ 1289 0069 00       		.uleb128 LVU20
+ 1290 006a 00       		.uleb128 LVU21
+ 1291 006b 00       		.uleb128 LVU24
+ 1292              	LLST4:
+ 1293 006c 58000000 		.long	LVL5-Ltext0
+ 1294 0070 5E000000 		.long	LVL6-Ltext0
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 28
+
+
+ 1295 0074 0100     		.word	0x1
+ 1296 0076 52       		.byte	0x52
+ 1297 0077 67000000 		.long	LVL7-Ltext0
+ 1298 007b 86000000 		.long	LVL9-1-Ltext0
+ 1299 007f 0100     		.word	0x1
+ 1300 0081 52       		.byte	0x52
+ 1301 0082 00000000 		.long	0
+ 1302 0086 00000000 		.long	0
+ 1303              	LLST0:
+ 1304 008a 00000000 		.long	LFB13-Ltext0
+ 1305 008e 01000000 		.long	LCFI0-Ltext0
+ 1306 0092 0200     		.word	0x2
+ 1307 0094 74       		.byte	0x74
+ 1308 0095 04       		.sleb128 4
+ 1309 0096 01000000 		.long	LCFI0-Ltext0
+ 1310 009a 02000000 		.long	LCFI1-Ltext0
+ 1311 009e 0200     		.word	0x2
+ 1312 00a0 74       		.byte	0x74
+ 1313 00a1 08       		.sleb128 8
+ 1314 00a2 02000000 		.long	LCFI1-Ltext0
+ 1315 00a6 05000000 		.long	LCFI2-Ltext0
+ 1316 00aa 0200     		.word	0x2
+ 1317 00ac 74       		.byte	0x74
+ 1318 00ad 0C       		.sleb128 12
+ 1319 00ae 05000000 		.long	LCFI2-Ltext0
+ 1320 00b2 4B000000 		.long	LCFI3-Ltext0
+ 1321 00b6 0200     		.word	0x2
+ 1322 00b8 74       		.byte	0x74
+ 1323 00b9 30       		.sleb128 48
+ 1324 00ba 4B000000 		.long	LCFI3-Ltext0
+ 1325 00be 4C000000 		.long	LCFI4-Ltext0
+ 1326 00c2 0200     		.word	0x2
+ 1327 00c4 74       		.byte	0x74
+ 1328 00c5 0C       		.sleb128 12
+ 1329 00c6 4C000000 		.long	LCFI4-Ltext0
+ 1330 00ca 4D000000 		.long	LCFI5-Ltext0
+ 1331 00ce 0200     		.word	0x2
+ 1332 00d0 74       		.byte	0x74
+ 1333 00d1 08       		.sleb128 8
+ 1334 00d2 4D000000 		.long	LCFI5-Ltext0
+ 1335 00d6 4E000000 		.long	LFE13-Ltext0
+ 1336 00da 0200     		.word	0x2
+ 1337 00dc 74       		.byte	0x74
+ 1338 00dd 04       		.sleb128 4
+ 1339 00de 00000000 		.long	0
+ 1340 00e2 00000000 		.long	0
+ 1341              	LVUS1:
+ 1342 00e6 00       		.uleb128 LVU7
+ 1343 00e7 00       		.uleb128 0
+ 1344              	LLST1:
+ 1345 00e8 46000000 		.long	LVL2-Ltext0
+ 1346 00ec 4E000000 		.long	LFE13-Ltext0
+ 1347 00f0 0100     		.word	0x1
+ 1348 00f2 50       		.byte	0x50
+ 1349 00f3 00000000 		.long	0
+ 1350 00f7 00000000 		.long	0
+ 1351              		.section	.debug_aranges,"dr"
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 29
+
+
+ 1352 0000 1C000000 		.long	0x1c
+ 1353 0004 0200     		.word	0x2
+ 1354 0006 00000000 		.secrel32	Ldebug_info0
+ 1355 000a 04       		.byte	0x4
+ 1356 000b 00       		.byte	0
+ 1357 000c 0000     		.word	0
+ 1358 000e 0000     		.word	0
+ 1359 0010 00000000 		.long	Ltext0
+ 1360 0014 89000000 		.long	Letext0-Ltext0
+ 1361 0018 00000000 		.long	0
+ 1362 001c 00000000 		.long	0
+ 1363              		.section	.debug_line,"dr"
+ 1364              	Ldebug_line0:
+ 1365 0000 43010000 		.section	.debug_str,"dr"
+ 1365      0200DD00 
+ 1365      00000101 
+ 1365      FB0E0D00 
+ 1365      01010101 
+ 1366              	LASF0:
+ 1367 0000 63686172 		.ascii "characterSet\0"
+ 1367      61637465 
+ 1367      72536574 
+ 1367      00
+ 1368              		.ident	"GCC: (i686-posix-dwarf-rev0, Built by MinGW-W64 project) 8.1.0"
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s 			page 30
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 PDFReader.c
+C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s:11     .text:00000000 _DoDecode
+C:\Users\jisu8\AppData\Local\Temp\ccTV0ZJ1.s:70     .text:0000004e _decode
+
+UNDEFINED SYMBOLS
+_printf
+_Detect

@@ -1,4 +1,6 @@
-
+#ifndef _BINARYBITMAP_H
+#define _BINARYBITMAP_H
+#if 0
 class BitArray;
 class BitMatrix;
 
@@ -12,9 +14,7 @@ using PatternRow = std::vector<uint16_t>;
 */
 class BinaryBitmap
 {
-public:
-	virtual ~BinaryBitmap() = default;
-w
+
 	/**
 	* @return The width of the bitmap.
 	*/
@@ -77,4 +77,5 @@ w
 		throw std::runtime_error("This binarizer does not support rotation.");
 	}
 };
-
+#endif
+#endif

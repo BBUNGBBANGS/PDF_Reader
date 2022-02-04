@@ -1,3 +1,6 @@
+#ifndef _READBARCODE_H
+#define _READBARCODE_H
+
 #include <stdint.h>
 #include <stdio.h>
 #include "GenericLuminanceSource.h"
@@ -15,7 +18,7 @@ typedef enum
 
 typedef struct 
 {
-	const uint8_t* data; 
+	uint8_t* data; 
 	int width; 
 	int height;
 	ImageFormat_t format; 
@@ -25,6 +28,7 @@ typedef struct
 
 
 extern unsigned int * ReadBarcode(unsigned char *iv, int width,int height, unsigned int ImageFormat);
+#endif
 
 
 

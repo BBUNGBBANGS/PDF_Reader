@@ -26,7 +26,12 @@ PDF.c \
 thirdparty/stb_image.c \
 src/ReadBarcode.c \
 src/GenericLuminanceSource.c \
-src/MultiFormatReader.c
+src/MultiFormatReader.c \
+src/HybridBinarizer.c \
+src/BitMatrix.c \
+src/pdf417/PDFReader.c \
+src/pdf417/PDFDetector.c \ 
+
 
 
 #######################################

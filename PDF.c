@@ -67,7 +67,7 @@ int main()
     //while(1)
     //{
     printf("%s",filepath);
-        //system("pause");
+        system("pause");
     //}
     return 0;
 }

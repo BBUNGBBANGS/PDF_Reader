@@ -71,9 +71,7 @@ static void ReadBarcode_Internal(GenericLuminanceSource_t *source,const DecodeHi
 	printf("static Result ReadBarcode : source= %x",source);
 	printf(" hints= %x \n",hints);
 
-	MultiFormatReader(hints);
-
-	ret_ptr = MultiFormatReader_Read(source);
+	ret_ptr = MultiFormatReader(source,hints);
 	return;
 }
 

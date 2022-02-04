@@ -14,8 +14,9 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-#include <stdint.h>
-#include <stdio.h>
+#include "GenericLuminanceSource.h"
+
+uint8_t pixels[115200];
 
 static inline copy_n(uint8_t * _First, unsigned int _Count_raw, uint8_t* _Dest) ;
 
@@ -68,11 +69,11 @@ unsigned char * GenericLuminanceSource(int left, int top, int width, int height,
 	}
 	else 
 	{
-		unsigned char pixels[width * height];
 		const uint8_t *rgbSource = (bytes) + top * rowBytes;
 		uint8_t *destRow = pixels;//pixels->data; // pixel의 data 값을 가져와야함 포인터로.
 		for (int y = 0; y < height; ++y, rgbSource += rowBytes, destRow += width) 
 		{
+
 			const uint8_t *src = rgbSource + (left * pixelBytes);
 			for (int x = 0; x < width; ++x, src += pixelBytes)
 			{
@@ -82,6 +83,26 @@ unsigned char * GenericLuminanceSource(int left, int top, int width, int height,
 		ret = pixels;
 	}
 	return ret;
+}
+
+const uint8_t * getMatrix(GenericLuminanceSource_t * source, uint8_t * buffer, int * outRowBytes, uint8_t forceCopy)
+{
+
+	uint8_t newBuf[source->width * source->height];
+	const uint8_t* row = source->pixels + source->top*source->rowBytes + source->left;
+	if (!forceCopy) 
+	{
+		*outRowBytes = source->rowBytes;
+		return row;
+	}
+
+	*outRowBytes = source->width;
+	uint8_t* dest = buffer;
+	for (int y = 0; y < source->height; ++y, row += source->rowBytes, dest += source->width) 
+	{
+		copy_n(row, source->width, dest);
+	}
+	return dest;
 }
 
 static inline copy_n(uint8_t * _First, unsigned int _Count_raw, uint8_t* _Dest) 

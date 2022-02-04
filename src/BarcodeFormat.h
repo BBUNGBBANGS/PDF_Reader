@@ -1,4 +1,5 @@
-
+#ifndef _BARCODEFORMAT_H
+#define _BARCODEFORMAT_H
 typedef enum  
 {
 	// The values are an implementation detail. The c++ use-case (ZXing::Flags) could have been designed such that it
@@ -27,3 +28,4 @@ typedef enum
 	Any       = OneDCodes | TwoDCodes,
 }BarcodeFormats_t;
 
+#endif

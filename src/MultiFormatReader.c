@@ -16,23 +16,16 @@
 */
 
 #include "MultiFormatReader.h"
+#include "pdf417/PDFReader.h"
 
-void MultiFormatReader(DecodeHints_t * hints)
-{
-	uint8_t tryHarder;
-	tryHarder = hints->tryHarder;
-	
-	//_readers.emplace_back(new Pdf417::Reader(hints)); //뭘 읽는거지?
-}
-
-unsigned char * MultiFormatReader_Read(unsigned char * image) 
+unsigned char * MultiFormatReader(GenericLuminanceSource_t * image,DecodeHints_t * hints) 
 {
 	uint8_t readers = 1;
 	// If we have only one reader in our list, just return whatever that decoded.
 	// This preserves information (e.g. ChecksumError) instead of just returning 'NotFound'.
 	if (readers == 1)//readers 사이즈가 1일때 진입
 	{
-		//return decode(image);
+		return decode(image,hints);
 	}
 
 	#if 0

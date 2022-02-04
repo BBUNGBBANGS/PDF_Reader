@@ -1,3 +1,5 @@
+#ifndef _DECODEHINTS_H
+#define _DECODEHINTS_H
 
 #include <stdint.h>
 #include <stdio.h>
@@ -19,3 +21,5 @@ typedef struct DecodeHints
 	uint64_t * characterSet;
 	uint64_t * allowedLengths;
 }DecodeHints_t;
+
+#endif
