@@ -8,17 +8,19 @@ DecodeStatus_t DoDecode(GenericLuminanceSource_t * image, unsigned char multiple
 {
 
 	printf(" DoDecode: img=%d, multiple=%d, res=%d, str=%d \n", image, multiple, results, characterSet);
-	unsigned char * detectorResult;
+	Detector_Result_t * detectorResult;
 	DecodeStatus_t status;
 	status = Detect(image, multiple, detectorResult);
 	if (StatusIsError(status)) 
 	{
 		return status;
 	}
+
+	ResultPoint_t * points;
 	#if 0
 	for (const auto& points : detectorResult.points) 
 	{
-		DecoderResult decoderResult =
+		DecoderResult_t decoderResult =
 			ScanningDecoder::Decode(*detectorResult.bits, points[4], points[5], points[6], points[7],
 									GetMinCodewordWidth(points), GetMaxCodewordWidth(points), characterSet);
 		if (decoderResult.isValid()) 

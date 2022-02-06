@@ -13,5 +13,5 @@ typedef struct
 	// Use copy() below.
 }BitMatrix_t;
 
-extern unsigned int getPatternRow(BitMatrix_t * m, int r, uint16_t * p_row);
+extern void getPatternRow(BitMatrix_t * m, int r, uint16_t * p_row);
 #endif

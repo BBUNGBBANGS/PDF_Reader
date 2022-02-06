@@ -1,5 +1,6 @@
 #ifndef _DECODERESULT_H
 #define _DECODERESULT_H
+#include "decodestatus.h"
 #if 0
 typedef struct 
 {

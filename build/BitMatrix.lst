@@ -1,688 +1,906 @@
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4QnABb.s 			page 1
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccy2pXnh.s 			page 1
 
 
    1              		.file	"BitMatrix.c"
    2              		.text
    3              	Ltext0:
-   4              		.globl	_getPatternRow
-   6              	_getPatternRow:
-   7              	LVL0:
-   8              	LFB1:
-   9              		.file 1 "src/BitMatrix.c"
+   4              		.comm	_Row_array, 2000, 5
+   6              	_isSet:
+   7              	LFB1:
+   8              		.file 1 "src/BitMatrix.c"
    1:src/BitMatrix.c **** 
    2:src/BitMatrix.c **** #include "BitMatrix.h"
    3:src/BitMatrix.c **** 
-   4:src/BitMatrix.c **** unsigned int getPatternRow(BitMatrix_t * m, int r, uint16_t * p_row)
-   5:src/BitMatrix.c **** {
-  10              		.loc 1 5 1 view -0
-  11              		.cfi_startproc
-  12              		.loc 1 5 1 is_stmt 0 view LVU1
-  13 0000 53       		pushl	%ebx
-  14              	LCFI0:
-  15              		.cfi_def_cfa_offset 8
-  16              		.cfi_offset 3, -8
-  17 0001 8B4C2408 		movl	8(%esp), %ecx
-  18 0005 8B5C2410 		movl	16(%esp), %ebx
-   6:src/BitMatrix.c **** 
-   7:src/BitMatrix.c **** 	uint8_t * b_row = m->bits + r * m->_width;
-  19              		.loc 1 7 2 is_stmt 1 view LVU2
-  20              	LVL1:
-   8:src/BitMatrix.c **** 
-   9:src/BitMatrix.c **** 	//uint16_t * row = (uint16_t*)malloc(sizeof(uint16_t) * array_length);
+   4:src/BitMatrix.c **** uint16_t Row_array[1000];
+   5:src/BitMatrix.c **** 
+   6:src/BitMatrix.c **** static uint8_t isSet(uint8_t v) 
+   7:src/BitMatrix.c **** { 
+   9              		.loc 1 7 1
+  10              		.cfi_startproc
+  11 0000 55       		pushl	%ebp
+  12              	LCFI0:
+  13              		.cfi_def_cfa_offset 8
+  14              		.cfi_offset 5, -8
+  15 0001 89E5     		movl	%esp, %ebp
+  16              	LCFI1:
+  17              		.cfi_def_cfa_register 5
+  18 0003 83EC04   		subl	$4, %esp
+  19 0006 8B4508   		movl	8(%ebp), %eax
+  20 0009 8845FC   		movb	%al, -4(%ebp)
+   8:src/BitMatrix.c **** 	return v != 0; // see SET_V above
+  21              		.loc 1 8 11
+  22 000c 807DFC00 		cmpb	$0, -4(%ebp)
+  23 0010 0F95C0   		setne	%al
+   9:src/BitMatrix.c **** } 
+  24              		.loc 1 9 1
+  25 0013 C9       		leave
+  26              	LCFI2:
+  27              		.cfi_restore 5
+  28              		.cfi_def_cfa 4, 4
+  29 0014 C3       		ret
+  30              		.cfi_endproc
+  31              	LFE1:
+  32              		.globl	_getPatternRow
+  34              	_getPatternRow:
+  35              	LFB2:
   10:src/BitMatrix.c **** 
-  11:src/BitMatrix.c **** 	for(int i = 0;i<m->_width + 2;i++)
-  21              		.loc 1 11 2 view LVU3
-  22              	LBB2:
-  23              		.loc 1 11 6 view LVU4
-  24              		.loc 1 11 10 is_stmt 0 view LVU5
-  25 0009 BA000000 		movl	$0, %edx
-  25      00
-  26              	LVL2:
-  27              	L2:
-  28              		.loc 1 11 17 discriminator 1 view LVU6
-  29 000e 8B01     		movl	(%ecx), %eax
-  30 0010 83C001   		addl	$1, %eax
-  31              		.loc 1 11 2 discriminator 1 view LVU7
-  32 0013 39D0     		cmpl	%edx, %eax
-  33 0015 7C0B     		jl	L5
-  12:src/BitMatrix.c **** 	{
-  13:src/BitMatrix.c **** 		p_row[i] = 0;
-  34              		.loc 1 13 3 is_stmt 1 discriminator 3 view LVU8
-  35              		.loc 1 13 12 is_stmt 0 discriminator 3 view LVU9
-  36 0017 66C70453 		movw	$0, (%ebx,%edx,2)
-  36      0000
-  11:src/BitMatrix.c **** 	{
-  37              		.loc 1 11 33 discriminator 3 view LVU10
-  38 001d 83C201   		addl	$1, %edx
-  39              	LVL3:
-  11:src/BitMatrix.c **** 	{
-  40              		.loc 1 11 33 discriminator 3 view LVU11
-  41 0020 EBEC     		jmp	L2
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4QnABb.s 			page 2
+  11:src/BitMatrix.c **** void getPatternRow(BitMatrix_t * m, int r, uint16_t * p_row)
+  12:src/BitMatrix.c **** {
+  36              		.loc 1 12 1
+  37              		.cfi_startproc
+  38 0015 55       		pushl	%ebp
+  39              	LCFI3:
+  40              		.cfi_def_cfa_offset 8
+  41              		.cfi_offset 5, -8
+  42 0016 89E5     		movl	%esp, %ebp
+  43              	LCFI4:
+  44              		.cfi_def_cfa_register 5
+  45 0018 83EC14   		subl	$20, %esp
+  13:src/BitMatrix.c **** 
+  14:src/BitMatrix.c **** 	uint8_t * b_row = m->bits + r * m->_width;
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccy2pXnh.s 			page 2
 
 
-  42              	LVL4:
-  43              	L5:
-  11:src/BitMatrix.c **** 	{
-  44              		.loc 1 11 33 discriminator 3 view LVU12
-  45              	LBE2:
-  14:src/BitMatrix.c **** 	}
-  15:src/BitMatrix.c **** 	#if 0
-  16:src/BitMatrix.c **** 	std::fill(p_row.begin(), p_row.end(), 0);
+  46              		.loc 1 14 21
+  47 001b 8B4508   		movl	8(%ebp), %eax
+  48 001e 8B500C   		movl	12(%eax), %edx
+  49              		.loc 1 14 35
+  50 0021 8B4508   		movl	8(%ebp), %eax
+  51 0024 8B00     		movl	(%eax), %eax
+  52              		.loc 1 14 32
+  53 0026 0FAF450C 		imull	12(%ebp), %eax
+  54              		.loc 1 14 12
+  55 002a 01D0     		addl	%edx, %eax
+  56 002c 8945F0   		movl	%eax, -16(%ebp)
+  15:src/BitMatrix.c **** 	uint8_t * bitPos = NULL;
+  57              		.loc 1 15 12
+  58 002f C745FC00 		movl	$0, -4(%ebp)
+  58      000000
+  16:src/BitMatrix.c **** 	uint16_t * intPos = NULL;
+  59              		.loc 1 16 13
+  60 0036 C745F800 		movl	$0, -8(%ebp)
+  60      000000
+  61              	LBB2:
   17:src/BitMatrix.c **** 
-  18:src/BitMatrix.c **** 	auto* bitPos = b_row.begin();
-  19:src/BitMatrix.c **** 	auto* intPos = p_row.data();
-  20:src/BitMatrix.c **** 
-  21:src/BitMatrix.c **** 	intPos += BitMatrix::isSet(*bitPos); // first value is number of white pixels, here 0
+  18:src/BitMatrix.c **** 	for(int i = 0;i<m->_width + 2;i++)
+  62              		.loc 1 18 10
+  63 003d C745F400 		movl	$0, -12(%ebp)
+  63      000000
+  64              		.loc 1 18 2
+  65 0044 EB11     		jmp	L4
+  66              	L5:
+  19:src/BitMatrix.c **** 	{
+  20:src/BitMatrix.c **** 		Row_array[i] = 0;
+  67              		.loc 1 20 16 discriminator 3
+  68 0046 8B45F4   		movl	-12(%ebp), %eax
+  69 0049 66C78400 		movw	$0, _Row_array(%eax,%eax)
+  69      00000000 
+  69      0000
+  18:src/BitMatrix.c **** 	{
+  70              		.loc 1 18 33 discriminator 3
+  71 0053 8345F401 		addl	$1, -12(%ebp)
+  72              	L4:
+  18:src/BitMatrix.c **** 	{
+  73              		.loc 1 18 19 discriminator 1
+  74 0057 8B4508   		movl	8(%ebp), %eax
+  75 005a 8B00     		movl	(%eax), %eax
+  18:src/BitMatrix.c **** 	{
+  76              		.loc 1 18 17 discriminator 1
+  77 005c 83C001   		addl	$1, %eax
+  18:src/BitMatrix.c **** 	{
+  78              		.loc 1 18 2 discriminator 1
+  79 005f 3945F4   		cmpl	%eax, -12(%ebp)
+  80 0062 7EE2     		jle	L5
+  81              	LBE2:
+  21:src/BitMatrix.c **** 	}
   22:src/BitMatrix.c **** 
-  23:src/BitMatrix.c **** 	while (++bitPos < b_row.end()) {
-  24:src/BitMatrix.c **** 		++(*intPos);
-  25:src/BitMatrix.c **** 		intPos += bitPos[0] != bitPos[-1];
-  26:src/BitMatrix.c **** 	}
-  27:src/BitMatrix.c **** 	++(*intPos);
-  28:src/BitMatrix.c **** 
-  29:src/BitMatrix.c **** 	if (BitMatrix::isSet(bitPos[-1]))
-  30:src/BitMatrix.c **** 		intPos++;
-  31:src/BitMatrix.c **** 
-  32:src/BitMatrix.c **** 	p_row.resize(intPos - p_row.data() + 1);
-  33:src/BitMatrix.c **** 
-  34:src/BitMatrix.c **** 	#endif
-  35:src/BitMatrix.c **** 	return 0;
-  46              		.loc 1 35 2 is_stmt 1 view LVU13
-  36:src/BitMatrix.c **** }
-  47              		.loc 1 36 1 is_stmt 0 view LVU14
-  48 0022 B8000000 		movl	$0, %eax
-  48      00
-  49 0027 5B       		popl	%ebx
-  50              	LCFI1:
-  51              		.cfi_restore 3
-  52              		.cfi_def_cfa_offset 4
-  53              	LVL5:
-  54              		.loc 1 36 1 view LVU15
-  55 0028 C3       		ret
-  56              		.cfi_endproc
-  57              	LFE1:
-  58              	Letext0:
-  59              		.file 2 "D:/3.tools/mingw/mingw32/i686-w64-mingw32/include/stdint.h"
-  60              		.file 3 "src/BitMatrix.h"
-  61 0029 909090   		.section	.debug_info,"dr"
-  62              	Ldebug_info0:
-  63 0000 73020000 		.long	0x273
-  64 0004 0200     		.word	0x2
-  65 0006 00000000 		.secrel32	Ldebug_abbrev0
-  66 000a 04       		.byte	0x4
-  67 000b 01       		.uleb128 0x1
-  68 000c 474E5520 		.ascii "GNU C17 8.1.0 -mtune=generic -march=i686 -g -gdwarf-2 -Og\0"
-  68      43313720 
-  68      382E312E 
-  68      30202D6D 
-  68      74756E65 
-  69 0046 0C       		.byte	0xc
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4QnABb.s 			page 3
+  23:src/BitMatrix.c **** 	bitPos = b_row;
+  82              		.loc 1 23 9
+  83 0064 8B45F0   		movl	-16(%ebp), %eax
+  84 0067 8945FC   		movl	%eax, -4(%ebp)
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccy2pXnh.s 			page 3
 
 
-  70 0047 7372632F 		.ascii "src/BitMatrix.c\0"
-  70      4269744D 
-  70      61747269 
-  70      782E6300 
-  71 0057 443A5C31 		.ascii "D:\\1.Project_workspace\\PDF_BARCODE\0"
-  71      2E50726F 
-  71      6A656374 
-  71      5F776F72 
-  71      6B737061 
-  72 007a 00000000 		.long	Ltext0
-  73 007e 29000000 		.long	Letext0
-  74 0082 00000000 		.secrel32	Ldebug_line0
-  75 0086 02       		.uleb128 0x2
-  76 0087 01       		.byte	0x1
-  77 0088 06       		.byte	0x6
-  78 0089 63686172 		.ascii "char\0"
-  78      00
-  79 008e 02       		.uleb128 0x2
-  80 008f 04       		.byte	0x4
-  81 0090 07       		.byte	0x7
-  82 0091 756E7369 		.ascii "unsigned int\0"
-  82      676E6564 
-  82      20696E74 
-  82      00
-  83 009e 02       		.uleb128 0x2
-  84 009f 04       		.byte	0x4
-  85 00a0 05       		.byte	0x5
-  86 00a1 696E7400 		.ascii "int\0"
-  87 00a5 02       		.uleb128 0x2
-  88 00a6 02       		.byte	0x2
-  89 00a7 07       		.byte	0x7
-  90 00a8 73686F72 		.ascii "short unsigned int\0"
-  90      7420756E 
-  90      7369676E 
-  90      65642069 
-  90      6E7400
-  91 00bb 02       		.uleb128 0x2
-  92 00bc 04       		.byte	0x4
-  93 00bd 05       		.byte	0x5
-  94 00be 6C6F6E67 		.ascii "long int\0"
-  94      20696E74 
-  94      00
-  95 00c7 02       		.uleb128 0x2
-  96 00c8 08       		.byte	0x8
-  97 00c9 05       		.byte	0x5
-  98 00ca 6C6F6E67 		.ascii "long long int\0"
-  98      206C6F6E 
-  98      6720696E 
-  98      7400
-  99 00d8 02       		.uleb128 0x2
- 100 00d9 04       		.byte	0x4
- 101 00da 07       		.byte	0x7
- 102 00db 6C6F6E67 		.ascii "long unsigned int\0"
- 102      20756E73 
- 102      69676E65 
- 102      6420696E 
- 102      7400
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4QnABb.s 			page 4
+  24:src/BitMatrix.c **** 	intPos = Row_array;
+  85              		.loc 1 24 9
+  86 006a C745F800 		movl	$_Row_array, -8(%ebp)
+  86      000000
+  25:src/BitMatrix.c **** 
+  26:src/BitMatrix.c **** 	intPos += isSet(*bitPos); // first value is number of white pixels, here 0
+  87              		.loc 1 26 18
+  88 0071 8B45FC   		movl	-4(%ebp), %eax
+  89 0074 0FB600   		movzbl	(%eax), %eax
+  90              		.loc 1 26 12
+  91 0077 0FB6C0   		movzbl	%al, %eax
+  92 007a 890424   		movl	%eax, (%esp)
+  93 007d E87EFFFF 		call	_isSet
+  93      FF
+  94 0082 0FB6C0   		movzbl	%al, %eax
+  95              		.loc 1 26 9
+  96 0085 01C0     		addl	%eax, %eax
+  97 0087 0145F8   		addl	%eax, -8(%ebp)
+  27:src/BitMatrix.c **** 
+  28:src/BitMatrix.c **** 	while (++bitPos < (m->bits + (r + 1) * m->_width)) 
+  98              		.loc 1 28 8
+  99 008a EB31     		jmp	L6
+ 100              	L9:
+  29:src/BitMatrix.c **** 	{
+  30:src/BitMatrix.c **** 		++(*intPos);
+ 101              		.loc 1 30 6
+ 102 008c 8B45F8   		movl	-8(%ebp), %eax
+ 103 008f 0FB700   		movzwl	(%eax), %eax
+ 104              		.loc 1 30 3
+ 105 0092 8D5001   		leal	1(%eax), %edx
+ 106 0095 8B45F8   		movl	-8(%ebp), %eax
+ 107 0098 668910   		movw	%dx, (%eax)
+  31:src/BitMatrix.c **** 		intPos += bitPos[0] != bitPos[-1];
+ 108              		.loc 1 31 19
+ 109 009b 8B45FC   		movl	-4(%ebp), %eax
+ 110 009e 0FB610   		movzbl	(%eax), %edx
+ 111              		.loc 1 31 32
+ 112 00a1 8B45FC   		movl	-4(%ebp), %eax
+ 113 00a4 83E801   		subl	$1, %eax
+ 114 00a7 0FB600   		movzbl	(%eax), %eax
+ 115              		.loc 1 31 10
+ 116 00aa 38C2     		cmpb	%al, %dl
+ 117 00ac 7407     		je	L7
+ 118              		.loc 1 31 10 is_stmt 0 discriminator 1
+ 119 00ae B8020000 		movl	$2, %eax
+ 119      00
+ 120 00b3 EB05     		jmp	L8
+ 121              	L7:
+ 122              		.loc 1 31 10 discriminator 2
+ 123 00b5 B8000000 		movl	$0, %eax
+ 123      00
+ 124              	L8:
+ 125              		.loc 1 31 10 discriminator 4
+ 126 00ba 0145F8   		addl	%eax, -8(%ebp)
+ 127              	L6:
+  28:src/BitMatrix.c **** 	{
+ 128              		.loc 1 28 8 is_stmt 1
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccy2pXnh.s 			page 4
 
 
- 103 00ed 02       		.uleb128 0x2
- 104 00ee 01       		.byte	0x1
- 105 00ef 08       		.byte	0x8
- 106 00f0 756E7369 		.ascii "unsigned char\0"
- 106      676E6564 
- 106      20636861 
- 106      7200
- 107 00fe 02       		.uleb128 0x2
- 108 00ff 0C       		.byte	0xc
- 109 0100 04       		.byte	0x4
- 110 0101 6C6F6E67 		.ascii "long double\0"
- 110      20646F75 
- 110      626C6500 
- 111 010d 02       		.uleb128 0x2
- 112 010e 10       		.byte	0x10
- 113 010f 04       		.byte	0x4
- 114 0110 5F466C6F 		.ascii "_Float128\0"
- 114      61743132 
- 114      3800
- 115 011a 02       		.uleb128 0x2
- 116 011b 01       		.byte	0x1
- 117 011c 06       		.byte	0x6
- 118 011d 7369676E 		.ascii "signed char\0"
- 118      65642063 
- 118      68617200 
- 119 0129 03       		.uleb128 0x3
- 120 012a 75696E74 		.ascii "uint8_t\0"
- 120      385F7400 
- 121 0132 02       		.byte	0x2
- 122 0133 24       		.byte	0x24
- 123 0134 19       		.byte	0x19
- 124 0135 ED000000 		.long	0xed
- 125 0139 02       		.uleb128 0x2
- 126 013a 02       		.byte	0x2
- 127 013b 05       		.byte	0x5
- 128 013c 73686F72 		.ascii "short int\0"
- 128      7420696E 
- 128      7400
- 129 0146 03       		.uleb128 0x3
- 130 0147 75696E74 		.ascii "uint16_t\0"
- 130      31365F74 
- 130      00
- 131 0150 02       		.byte	0x2
- 132 0151 26       		.byte	0x26
- 133 0152 19       		.byte	0x19
- 134 0153 A5000000 		.long	0xa5
- 135 0157 02       		.uleb128 0x2
- 136 0158 08       		.byte	0x8
- 137 0159 07       		.byte	0x7
- 138 015a 6C6F6E67 		.ascii "long long unsigned int\0"
- 138      206C6F6E 
- 138      6720756E 
- 138      7369676E 
- 138      65642069 
- 139 0171 04       		.uleb128 0x4
- 140 0172 10       		.byte	0x10
- 141 0173 03       		.byte	0x3
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4QnABb.s 			page 5
+ 129 00bd 8345FC01 		addl	$1, -4(%ebp)
+  28:src/BitMatrix.c **** 	{
+ 130              		.loc 1 28 22
+ 131 00c1 8B4508   		movl	8(%ebp), %eax
+ 132 00c4 8B500C   		movl	12(%eax), %edx
+  28:src/BitMatrix.c **** 	{
+ 133              		.loc 1 28 34
+ 134 00c7 8B450C   		movl	12(%ebp), %eax
+ 135 00ca 8D4801   		leal	1(%eax), %ecx
+  28:src/BitMatrix.c **** 	{
+ 136              		.loc 1 28 42
+ 137 00cd 8B4508   		movl	8(%ebp), %eax
+ 138 00d0 8B00     		movl	(%eax), %eax
+  28:src/BitMatrix.c **** 	{
+ 139              		.loc 1 28 39
+ 140 00d2 0FAFC1   		imull	%ecx, %eax
+  28:src/BitMatrix.c **** 	{
+ 141              		.loc 1 28 29
+ 142 00d5 01D0     		addl	%edx, %eax
+  28:src/BitMatrix.c **** 	{
+ 143              		.loc 1 28 8
+ 144 00d7 3945FC   		cmpl	%eax, -4(%ebp)
+ 145 00da 72B0     		jb	L9
+  32:src/BitMatrix.c **** 	}
+  33:src/BitMatrix.c **** 	++(*intPos);
+ 146              		.loc 1 33 5
+ 147 00dc 8B45F8   		movl	-8(%ebp), %eax
+ 148 00df 0FB700   		movzwl	(%eax), %eax
+ 149              		.loc 1 33 2
+ 150 00e2 8D5001   		leal	1(%eax), %edx
+ 151 00e5 8B45F8   		movl	-8(%ebp), %eax
+ 152 00e8 668910   		movw	%dx, (%eax)
+  34:src/BitMatrix.c **** 
+  35:src/BitMatrix.c **** 	if (isSet(bitPos[-1]))
+ 153              		.loc 1 35 18
+ 154 00eb 8B45FC   		movl	-4(%ebp), %eax
+ 155 00ee 83E801   		subl	$1, %eax
+ 156 00f1 0FB600   		movzbl	(%eax), %eax
+ 157              		.loc 1 35 6
+ 158 00f4 0FB6C0   		movzbl	%al, %eax
+ 159 00f7 890424   		movl	%eax, (%esp)
+ 160 00fa E801FFFF 		call	_isSet
+ 160      FF
+ 161              		.loc 1 35 5
+ 162 00ff 84C0     		testb	%al, %al
+ 163 0101 7404     		je	L10
+  36:src/BitMatrix.c **** 	{
+  37:src/BitMatrix.c **** 		intPos++;
+ 164              		.loc 1 37 9
+ 165 0103 8345F802 		addl	$2, -8(%ebp)
+ 166              	L10:
+  38:src/BitMatrix.c **** 	}
+  39:src/BitMatrix.c **** 
+  40:src/BitMatrix.c **** 	p_row = Row_array;
+ 167              		.loc 1 40 8
+ 168 0107 C7451000 		movl	$_Row_array, 16(%ebp)
+ 168      000000
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccy2pXnh.s 			page 5
 
 
- 142 0174 06       		.byte	0x6
- 143 0175 09       		.byte	0x9
- 144 0176 C4010000 		.long	0x1c4
- 145 017a 05       		.uleb128 0x5
- 146 017b 5F776964 		.ascii "_width\0"
- 146      746800
- 147 0182 03       		.byte	0x3
- 148 0183 08       		.byte	0x8
- 149 0184 06       		.byte	0x6
- 150 0185 9E000000 		.long	0x9e
- 151 0189 02       		.byte	0x2
- 152 018a 23       		.byte	0x23
- 153 018b 00       		.uleb128 0
- 154 018c 05       		.uleb128 0x5
- 155 018d 5F686569 		.ascii "_height\0"
- 155      67687400 
- 156 0195 03       		.byte	0x3
- 157 0196 09       		.byte	0x9
- 158 0197 06       		.byte	0x6
- 159 0198 9E000000 		.long	0x9e
- 160 019c 02       		.byte	0x2
- 161 019d 23       		.byte	0x23
- 162 019e 04       		.uleb128 0x4
- 163 019f 05       		.uleb128 0x5
- 164 01a0 5F726F77 		.ascii "_rowSize\0"
- 164      53697A65 
- 164      00
- 165 01a9 03       		.byte	0x3
- 166 01aa 0A       		.byte	0xa
- 167 01ab 06       		.byte	0x6
- 168 01ac 9E000000 		.long	0x9e
- 169 01b0 02       		.byte	0x2
- 170 01b1 23       		.byte	0x23
- 171 01b2 08       		.uleb128 0x8
- 172 01b3 05       		.uleb128 0x5
- 173 01b4 62697473 		.ascii "bits\0"
- 173      00
- 174 01b9 03       		.byte	0x3
- 175 01ba 0B       		.byte	0xb
- 176 01bb 0C       		.byte	0xc
- 177 01bc C4010000 		.long	0x1c4
- 178 01c0 02       		.byte	0x2
- 179 01c1 23       		.byte	0x23
- 180 01c2 0C       		.uleb128 0xc
- 181 01c3 00       		.byte	0
- 182 01c4 06       		.uleb128 0x6
- 183 01c5 04       		.byte	0x4
- 184 01c6 29010000 		.long	0x129
- 185 01ca 03       		.uleb128 0x3
- 186 01cb 4269744D 		.ascii "BitMatrix_t\0"
- 186      61747269 
- 186      785F7400 
- 187 01d7 03       		.byte	0x3
- 188 01d8 0E       		.byte	0xe
- 189 01d9 02       		.byte	0x2
- 190 01da 71010000 		.long	0x171
- 191 01de 07       		.uleb128 0x7
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4QnABb.s 			page 6
+  41:src/BitMatrix.c **** 	//p_row.resize(intPos - p_row.data() + 1);
+  42:src/BitMatrix.c **** 
+  43:src/BitMatrix.c **** 	//return 0;
+  44:src/BitMatrix.c **** }
+ 169              		.loc 1 44 1
+ 170 010e 90       		nop
+ 171 010f C9       		leave
+ 172              	LCFI5:
+ 173              		.cfi_restore 5
+ 174              		.cfi_def_cfa 4, 4
+ 175 0110 C3       		ret
+ 176              		.cfi_endproc
+ 177              	LFE2:
+ 178              	Letext0:
+ 179              		.file 2 "D:/3.tools/mingw/mingw32/i686-w64-mingw32/include/stdint.h"
+ 180              		.file 3 "src/BitMatrix.h"
+ 181 0111 909090   		.section	.debug_info,"dr"
+ 182              	Ldebug_info0:
+ 183 0000 D8020000 		.long	0x2d8
+ 184 0004 0200     		.word	0x2
+ 185 0006 00000000 		.secrel32	Ldebug_abbrev0
+ 186 000a 04       		.byte	0x4
+ 187 000b 01       		.uleb128 0x1
+ 188 000c 474E5520 		.ascii "GNU C17 8.1.0 -mtune=generic -march=i686 -g -gdwarf-2 -O0\0"
+ 188      43313720 
+ 188      382E312E 
+ 188      30202D6D 
+ 188      74756E65 
+ 189 0046 0C       		.byte	0xc
+ 190 0047 7372632F 		.ascii "src/BitMatrix.c\0"
+ 190      4269744D 
+ 190      61747269 
+ 190      782E6300 
+ 191 0057 443A5C31 		.ascii "D:\\1.Project_workspace\\PDF_BARCODE\0"
+ 191      2E50726F 
+ 191      6A656374 
+ 191      5F776F72 
+ 191      6B737061 
+ 192 007a 00000000 		.long	Ltext0
+ 193 007e 11010000 		.long	Letext0
+ 194 0082 00000000 		.secrel32	Ldebug_line0
+ 195 0086 02       		.uleb128 0x2
+ 196 0087 01       		.byte	0x1
+ 197 0088 06       		.byte	0x6
+ 198 0089 63686172 		.ascii "char\0"
+ 198      00
+ 199 008e 02       		.uleb128 0x2
+ 200 008f 04       		.byte	0x4
+ 201 0090 07       		.byte	0x7
+ 202 0091 756E7369 		.ascii "unsigned int\0"
+ 202      676E6564 
+ 202      20696E74 
+ 202      00
+ 203 009e 02       		.uleb128 0x2
+ 204 009f 04       		.byte	0x4
+ 205 00a0 05       		.byte	0x5
+ 206 00a1 696E7400 		.ascii "int\0"
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccy2pXnh.s 			page 6
 
 
- 192 01df 01       		.byte	0x1
- 193 01e0 67657450 		.ascii "getPatternRow\0"
- 193      61747465 
- 193      726E526F 
- 193      7700
- 194 01ee 01       		.byte	0x1
- 195 01ef 04       		.byte	0x4
- 196 01f0 0E       		.byte	0xe
- 197 01f1 01       		.byte	0x1
- 198 01f2 8E000000 		.long	0x8e
- 199 01f6 00000000 		.long	LFB1
- 200 01fa 29000000 		.long	LFE1
- 201 01fe 00000000 		.secrel32	LLST0
- 202 0202 01       		.byte	0x1
- 203 0203 6A020000 		.long	0x26a
- 204 0207 08       		.uleb128 0x8
- 205 0208 6D00     		.ascii "m\0"
- 206 020a 01       		.byte	0x1
- 207 020b 04       		.byte	0x4
- 208 020c 2A       		.byte	0x2a
- 209 020d 6A020000 		.long	0x26a
- 210 0211 02       		.byte	0x2
- 211 0212 91       		.byte	0x91
- 212 0213 00       		.sleb128 0
- 213 0214 08       		.uleb128 0x8
- 214 0215 7200     		.ascii "r\0"
- 215 0217 01       		.byte	0x1
- 216 0218 04       		.byte	0x4
- 217 0219 31       		.byte	0x31
- 218 021a 9E000000 		.long	0x9e
- 219 021e 02       		.byte	0x2
- 220 021f 91       		.byte	0x91
- 221 0220 04       		.sleb128 4
- 222 0221 09       		.uleb128 0x9
- 223 0222 705F726F 		.ascii "p_row\0"
- 223      7700
- 224 0228 01       		.byte	0x1
- 225 0229 04       		.byte	0x4
- 226 022a 3F       		.byte	0x3f
- 227 022b 70020000 		.long	0x270
- 228 022f 32000000 		.secrel32	LLST1
- 229 0233 2C000000 		.secrel32	LVUS1
- 230 0237 0A       		.uleb128 0xa
- 231 0238 625F726F 		.ascii "b_row\0"
- 231      7700
- 232 023e 01       		.byte	0x1
- 233 023f 07       		.byte	0x7
- 234 0240 0C       		.byte	0xc
- 235 0241 C4010000 		.long	0x1c4
- 236 0245 5F000000 		.secrel32	LLST2
- 237 0249 5D000000 		.secrel32	LVUS2
- 238 024d 0B       		.uleb128 0xb
- 239 024e 09000000 		.long	LBB2
- 240 0252 22000000 		.long	LBE2
- 241 0256 0A       		.uleb128 0xa
- 242 0257 6900     		.ascii "i\0"
- 243 0259 01       		.byte	0x1
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4QnABb.s 			page 7
+ 207 00a5 02       		.uleb128 0x2
+ 208 00a6 02       		.byte	0x2
+ 209 00a7 07       		.byte	0x7
+ 210 00a8 73686F72 		.ascii "short unsigned int\0"
+ 210      7420756E 
+ 210      7369676E 
+ 210      65642069 
+ 210      6E7400
+ 211 00bb 02       		.uleb128 0x2
+ 212 00bc 04       		.byte	0x4
+ 213 00bd 05       		.byte	0x5
+ 214 00be 6C6F6E67 		.ascii "long int\0"
+ 214      20696E74 
+ 214      00
+ 215 00c7 02       		.uleb128 0x2
+ 216 00c8 08       		.byte	0x8
+ 217 00c9 05       		.byte	0x5
+ 218 00ca 6C6F6E67 		.ascii "long long int\0"
+ 218      206C6F6E 
+ 218      6720696E 
+ 218      7400
+ 219 00d8 02       		.uleb128 0x2
+ 220 00d9 04       		.byte	0x4
+ 221 00da 07       		.byte	0x7
+ 222 00db 6C6F6E67 		.ascii "long unsigned int\0"
+ 222      20756E73 
+ 222      69676E65 
+ 222      6420696E 
+ 222      7400
+ 223 00ed 02       		.uleb128 0x2
+ 224 00ee 01       		.byte	0x1
+ 225 00ef 08       		.byte	0x8
+ 226 00f0 756E7369 		.ascii "unsigned char\0"
+ 226      676E6564 
+ 226      20636861 
+ 226      7200
+ 227 00fe 02       		.uleb128 0x2
+ 228 00ff 0C       		.byte	0xc
+ 229 0100 04       		.byte	0x4
+ 230 0101 6C6F6E67 		.ascii "long double\0"
+ 230      20646F75 
+ 230      626C6500 
+ 231 010d 02       		.uleb128 0x2
+ 232 010e 10       		.byte	0x10
+ 233 010f 04       		.byte	0x4
+ 234 0110 5F466C6F 		.ascii "_Float128\0"
+ 234      61743132 
+ 234      3800
+ 235 011a 02       		.uleb128 0x2
+ 236 011b 01       		.byte	0x1
+ 237 011c 06       		.byte	0x6
+ 238 011d 7369676E 		.ascii "signed char\0"
+ 238      65642063 
+ 238      68617200 
+ 239 0129 03       		.uleb128 0x3
+ 240 012a 75696E74 		.ascii "uint8_t\0"
+ 240      385F7400 
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccy2pXnh.s 			page 7
 
 
- 244 025a 0B       		.byte	0xb
- 245 025b 0A       		.byte	0xa
- 246 025c 9E000000 		.long	0x9e
- 247 0260 85000000 		.secrel32	LLST3
- 248 0264 81000000 		.secrel32	LVUS3
- 249 0268 00       		.byte	0
- 250 0269 00       		.byte	0
- 251 026a 06       		.uleb128 0x6
- 252 026b 04       		.byte	0x4
- 253 026c CA010000 		.long	0x1ca
- 254 0270 06       		.uleb128 0x6
- 255 0271 04       		.byte	0x4
- 256 0272 46010000 		.long	0x146
- 257 0276 00       		.byte	0
- 258              		.section	.debug_abbrev,"dr"
- 259              	Ldebug_abbrev0:
- 260 0000 01       		.uleb128 0x1
- 261 0001 11       		.uleb128 0x11
- 262 0002 01       		.byte	0x1
- 263 0003 25       		.uleb128 0x25
- 264 0004 08       		.uleb128 0x8
- 265 0005 13       		.uleb128 0x13
- 266 0006 0B       		.uleb128 0xb
- 267 0007 03       		.uleb128 0x3
- 268 0008 08       		.uleb128 0x8
- 269 0009 1B       		.uleb128 0x1b
- 270 000a 08       		.uleb128 0x8
- 271 000b 11       		.uleb128 0x11
- 272 000c 01       		.uleb128 0x1
- 273 000d 12       		.uleb128 0x12
- 274 000e 01       		.uleb128 0x1
- 275 000f 10       		.uleb128 0x10
- 276 0010 06       		.uleb128 0x6
- 277 0011 00       		.byte	0
- 278 0012 00       		.byte	0
- 279 0013 02       		.uleb128 0x2
- 280 0014 24       		.uleb128 0x24
- 281 0015 00       		.byte	0
- 282 0016 0B       		.uleb128 0xb
- 283 0017 0B       		.uleb128 0xb
- 284 0018 3E       		.uleb128 0x3e
- 285 0019 0B       		.uleb128 0xb
- 286 001a 03       		.uleb128 0x3
- 287 001b 08       		.uleb128 0x8
- 288 001c 00       		.byte	0
- 289 001d 00       		.byte	0
- 290 001e 03       		.uleb128 0x3
- 291 001f 16       		.uleb128 0x16
- 292 0020 00       		.byte	0
- 293 0021 03       		.uleb128 0x3
- 294 0022 08       		.uleb128 0x8
- 295 0023 3A       		.uleb128 0x3a
- 296 0024 0B       		.uleb128 0xb
- 297 0025 3B       		.uleb128 0x3b
- 298 0026 0B       		.uleb128 0xb
- 299 0027 39       		.uleb128 0x39
- 300 0028 0B       		.uleb128 0xb
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4QnABb.s 			page 8
+ 241 0132 02       		.byte	0x2
+ 242 0133 24       		.byte	0x24
+ 243 0134 19       		.byte	0x19
+ 244 0135 ED000000 		.long	0xed
+ 245 0139 02       		.uleb128 0x2
+ 246 013a 02       		.byte	0x2
+ 247 013b 05       		.byte	0x5
+ 248 013c 73686F72 		.ascii "short int\0"
+ 248      7420696E 
+ 248      7400
+ 249 0146 03       		.uleb128 0x3
+ 250 0147 75696E74 		.ascii "uint16_t\0"
+ 250      31365F74 
+ 250      00
+ 251 0150 02       		.byte	0x2
+ 252 0151 26       		.byte	0x26
+ 253 0152 19       		.byte	0x19
+ 254 0153 A5000000 		.long	0xa5
+ 255 0157 02       		.uleb128 0x2
+ 256 0158 08       		.byte	0x8
+ 257 0159 07       		.byte	0x7
+ 258 015a 6C6F6E67 		.ascii "long long unsigned int\0"
+ 258      206C6F6E 
+ 258      6720756E 
+ 258      7369676E 
+ 258      65642069 
+ 259 0171 04       		.uleb128 0x4
+ 260 0172 10       		.byte	0x10
+ 261 0173 03       		.byte	0x3
+ 262 0174 06       		.byte	0x6
+ 263 0175 09       		.byte	0x9
+ 264 0176 C4010000 		.long	0x1c4
+ 265 017a 05       		.uleb128 0x5
+ 266 017b 5F776964 		.ascii "_width\0"
+ 266      746800
+ 267 0182 03       		.byte	0x3
+ 268 0183 08       		.byte	0x8
+ 269 0184 06       		.byte	0x6
+ 270 0185 9E000000 		.long	0x9e
+ 271 0189 02       		.byte	0x2
+ 272 018a 23       		.byte	0x23
+ 273 018b 00       		.uleb128 0
+ 274 018c 05       		.uleb128 0x5
+ 275 018d 5F686569 		.ascii "_height\0"
+ 275      67687400 
+ 276 0195 03       		.byte	0x3
+ 277 0196 09       		.byte	0x9
+ 278 0197 06       		.byte	0x6
+ 279 0198 9E000000 		.long	0x9e
+ 280 019c 02       		.byte	0x2
+ 281 019d 23       		.byte	0x23
+ 282 019e 04       		.uleb128 0x4
+ 283 019f 05       		.uleb128 0x5
+ 284 01a0 5F726F77 		.ascii "_rowSize\0"
+ 284      53697A65 
+ 284      00
+ 285 01a9 03       		.byte	0x3
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccy2pXnh.s 			page 8
 
 
- 301 0029 49       		.uleb128 0x49
- 302 002a 13       		.uleb128 0x13
- 303 002b 00       		.byte	0
- 304 002c 00       		.byte	0
- 305 002d 04       		.uleb128 0x4
- 306 002e 13       		.uleb128 0x13
- 307 002f 01       		.byte	0x1
- 308 0030 0B       		.uleb128 0xb
- 309 0031 0B       		.uleb128 0xb
- 310 0032 3A       		.uleb128 0x3a
- 311 0033 0B       		.uleb128 0xb
- 312 0034 3B       		.uleb128 0x3b
- 313 0035 0B       		.uleb128 0xb
- 314 0036 39       		.uleb128 0x39
- 315 0037 0B       		.uleb128 0xb
- 316 0038 01       		.uleb128 0x1
- 317 0039 13       		.uleb128 0x13
- 318 003a 00       		.byte	0
- 319 003b 00       		.byte	0
- 320 003c 05       		.uleb128 0x5
- 321 003d 0D       		.uleb128 0xd
- 322 003e 00       		.byte	0
- 323 003f 03       		.uleb128 0x3
- 324 0040 08       		.uleb128 0x8
- 325 0041 3A       		.uleb128 0x3a
- 326 0042 0B       		.uleb128 0xb
- 327 0043 3B       		.uleb128 0x3b
- 328 0044 0B       		.uleb128 0xb
- 329 0045 39       		.uleb128 0x39
- 330 0046 0B       		.uleb128 0xb
- 331 0047 49       		.uleb128 0x49
- 332 0048 13       		.uleb128 0x13
- 333 0049 38       		.uleb128 0x38
- 334 004a 0A       		.uleb128 0xa
- 335 004b 00       		.byte	0
- 336 004c 00       		.byte	0
- 337 004d 06       		.uleb128 0x6
- 338 004e 0F       		.uleb128 0xf
- 339 004f 00       		.byte	0
- 340 0050 0B       		.uleb128 0xb
- 341 0051 0B       		.uleb128 0xb
- 342 0052 49       		.uleb128 0x49
- 343 0053 13       		.uleb128 0x13
- 344 0054 00       		.byte	0
- 345 0055 00       		.byte	0
- 346 0056 07       		.uleb128 0x7
- 347 0057 2E       		.uleb128 0x2e
- 348 0058 01       		.byte	0x1
- 349 0059 3F       		.uleb128 0x3f
- 350 005a 0C       		.uleb128 0xc
- 351 005b 03       		.uleb128 0x3
- 352 005c 08       		.uleb128 0x8
- 353 005d 3A       		.uleb128 0x3a
- 354 005e 0B       		.uleb128 0xb
- 355 005f 3B       		.uleb128 0x3b
- 356 0060 0B       		.uleb128 0xb
- 357 0061 39       		.uleb128 0x39
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4QnABb.s 			page 9
+ 286 01aa 0A       		.byte	0xa
+ 287 01ab 06       		.byte	0x6
+ 288 01ac 9E000000 		.long	0x9e
+ 289 01b0 02       		.byte	0x2
+ 290 01b1 23       		.byte	0x23
+ 291 01b2 08       		.uleb128 0x8
+ 292 01b3 05       		.uleb128 0x5
+ 293 01b4 62697473 		.ascii "bits\0"
+ 293      00
+ 294 01b9 03       		.byte	0x3
+ 295 01ba 0B       		.byte	0xb
+ 296 01bb 0C       		.byte	0xc
+ 297 01bc C4010000 		.long	0x1c4
+ 298 01c0 02       		.byte	0x2
+ 299 01c1 23       		.byte	0x23
+ 300 01c2 0C       		.uleb128 0xc
+ 301 01c3 00       		.byte	0
+ 302 01c4 06       		.uleb128 0x6
+ 303 01c5 04       		.byte	0x4
+ 304 01c6 29010000 		.long	0x129
+ 305 01ca 03       		.uleb128 0x3
+ 306 01cb 4269744D 		.ascii "BitMatrix_t\0"
+ 306      61747269 
+ 306      785F7400 
+ 307 01d7 03       		.byte	0x3
+ 308 01d8 0E       		.byte	0xe
+ 309 01d9 02       		.byte	0x2
+ 310 01da 71010000 		.long	0x171
+ 311 01de 07       		.uleb128 0x7
+ 312 01df 46010000 		.long	0x146
+ 313 01e3 EF010000 		.long	0x1ef
+ 314 01e7 08       		.uleb128 0x8
+ 315 01e8 8E000000 		.long	0x8e
+ 316 01ec E703     		.word	0x3e7
+ 317 01ee 00       		.byte	0
+ 318 01ef 09       		.uleb128 0x9
+ 319 01f0 526F775F 		.ascii "Row_array\0"
+ 319      61727261 
+ 319      7900
+ 320 01fa 01       		.byte	0x1
+ 321 01fb 04       		.byte	0x4
+ 322 01fc 0A       		.byte	0xa
+ 323 01fd DE010000 		.long	0x1de
+ 324 0201 01       		.byte	0x1
+ 325 0202 05       		.byte	0x5
+ 326 0203 03       		.byte	0x3
+ 327 0204 00000000 		.long	_Row_array
+ 328 0208 0A       		.uleb128 0xa
+ 329 0209 01       		.byte	0x1
+ 330 020a 67657450 		.ascii "getPatternRow\0"
+ 330      61747465 
+ 330      726E526F 
+ 330      7700
+ 331 0218 01       		.byte	0x1
+ 332 0219 0B       		.byte	0xb
+ 333 021a 06       		.byte	0x6
+ 334 021b 01       		.byte	0x1
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccy2pXnh.s 			page 9
 
 
- 358 0062 0B       		.uleb128 0xb
- 359 0063 27       		.uleb128 0x27
- 360 0064 0C       		.uleb128 0xc
- 361 0065 49       		.uleb128 0x49
- 362 0066 13       		.uleb128 0x13
- 363 0067 11       		.uleb128 0x11
- 364 0068 01       		.uleb128 0x1
- 365 0069 12       		.uleb128 0x12
- 366 006a 01       		.uleb128 0x1
- 367 006b 40       		.uleb128 0x40
- 368 006c 06       		.uleb128 0x6
- 369 006d 9742     		.uleb128 0x2117
- 370 006f 0C       		.uleb128 0xc
- 371 0070 01       		.uleb128 0x1
- 372 0071 13       		.uleb128 0x13
- 373 0072 00       		.byte	0
- 374 0073 00       		.byte	0
- 375 0074 08       		.uleb128 0x8
- 376 0075 05       		.uleb128 0x5
- 377 0076 00       		.byte	0
- 378 0077 03       		.uleb128 0x3
- 379 0078 08       		.uleb128 0x8
- 380 0079 3A       		.uleb128 0x3a
- 381 007a 0B       		.uleb128 0xb
- 382 007b 3B       		.uleb128 0x3b
- 383 007c 0B       		.uleb128 0xb
- 384 007d 39       		.uleb128 0x39
- 385 007e 0B       		.uleb128 0xb
- 386 007f 49       		.uleb128 0x49
- 387 0080 13       		.uleb128 0x13
- 388 0081 02       		.uleb128 0x2
- 389 0082 0A       		.uleb128 0xa
- 390 0083 00       		.byte	0
- 391 0084 00       		.byte	0
- 392 0085 09       		.uleb128 0x9
- 393 0086 05       		.uleb128 0x5
- 394 0087 00       		.byte	0
- 395 0088 03       		.uleb128 0x3
- 396 0089 08       		.uleb128 0x8
- 397 008a 3A       		.uleb128 0x3a
- 398 008b 0B       		.uleb128 0xb
- 399 008c 3B       		.uleb128 0x3b
- 400 008d 0B       		.uleb128 0xb
- 401 008e 39       		.uleb128 0x39
- 402 008f 0B       		.uleb128 0xb
- 403 0090 49       		.uleb128 0x49
- 404 0091 13       		.uleb128 0x13
- 405 0092 02       		.uleb128 0x2
- 406 0093 06       		.uleb128 0x6
- 407 0094 B742     		.uleb128 0x2137
- 408 0096 06       		.uleb128 0x6
- 409 0097 00       		.byte	0
- 410 0098 00       		.byte	0
- 411 0099 0A       		.uleb128 0xa
- 412 009a 34       		.uleb128 0x34
- 413 009b 00       		.byte	0
- 414 009c 03       		.uleb128 0x3
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4QnABb.s 			page 10
+ 335 021c 15000000 		.long	LFB2
+ 336 0220 11010000 		.long	LFE2
+ 337 0224 00000000 		.secrel32	LLST1
+ 338 0228 01       		.byte	0x1
+ 339 0229 A5020000 		.long	0x2a5
+ 340 022d 0B       		.uleb128 0xb
+ 341 022e 6D00     		.ascii "m\0"
+ 342 0230 01       		.byte	0x1
+ 343 0231 0B       		.byte	0xb
+ 344 0232 22       		.byte	0x22
+ 345 0233 A5020000 		.long	0x2a5
+ 346 0237 02       		.byte	0x2
+ 347 0238 91       		.byte	0x91
+ 348 0239 00       		.sleb128 0
+ 349 023a 0B       		.uleb128 0xb
+ 350 023b 7200     		.ascii "r\0"
+ 351 023d 01       		.byte	0x1
+ 352 023e 0B       		.byte	0xb
+ 353 023f 29       		.byte	0x29
+ 354 0240 9E000000 		.long	0x9e
+ 355 0244 02       		.byte	0x2
+ 356 0245 91       		.byte	0x91
+ 357 0246 04       		.sleb128 4
+ 358 0247 0B       		.uleb128 0xb
+ 359 0248 705F726F 		.ascii "p_row\0"
+ 359      7700
+ 360 024e 01       		.byte	0x1
+ 361 024f 0B       		.byte	0xb
+ 362 0250 37       		.byte	0x37
+ 363 0251 AB020000 		.long	0x2ab
+ 364 0255 02       		.byte	0x2
+ 365 0256 91       		.byte	0x91
+ 366 0257 08       		.sleb128 8
+ 367 0258 0C       		.uleb128 0xc
+ 368 0259 625F726F 		.ascii "b_row\0"
+ 368      7700
+ 369 025f 01       		.byte	0x1
+ 370 0260 0E       		.byte	0xe
+ 371 0261 0C       		.byte	0xc
+ 372 0262 C4010000 		.long	0x1c4
+ 373 0266 02       		.byte	0x2
+ 374 0267 91       		.byte	0x91
+ 375 0268 68       		.sleb128 -24
+ 376 0269 0C       		.uleb128 0xc
+ 377 026a 62697450 		.ascii "bitPos\0"
+ 377      6F7300
+ 378 0271 01       		.byte	0x1
+ 379 0272 0F       		.byte	0xf
+ 380 0273 0C       		.byte	0xc
+ 381 0274 C4010000 		.long	0x1c4
+ 382 0278 02       		.byte	0x2
+ 383 0279 91       		.byte	0x91
+ 384 027a 74       		.sleb128 -12
+ 385 027b 0C       		.uleb128 0xc
+ 386 027c 696E7450 		.ascii "intPos\0"
+ 386      6F7300
+ 387 0283 01       		.byte	0x1
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccy2pXnh.s 			page 10
 
 
- 415 009d 08       		.uleb128 0x8
- 416 009e 3A       		.uleb128 0x3a
- 417 009f 0B       		.uleb128 0xb
- 418 00a0 3B       		.uleb128 0x3b
- 419 00a1 0B       		.uleb128 0xb
- 420 00a2 39       		.uleb128 0x39
- 421 00a3 0B       		.uleb128 0xb
- 422 00a4 49       		.uleb128 0x49
- 423 00a5 13       		.uleb128 0x13
- 424 00a6 02       		.uleb128 0x2
- 425 00a7 06       		.uleb128 0x6
- 426 00a8 B742     		.uleb128 0x2137
- 427 00aa 06       		.uleb128 0x6
- 428 00ab 00       		.byte	0
- 429 00ac 00       		.byte	0
- 430 00ad 0B       		.uleb128 0xb
- 431 00ae 0B       		.uleb128 0xb
- 432 00af 01       		.byte	0x1
- 433 00b0 11       		.uleb128 0x11
- 434 00b1 01       		.uleb128 0x1
- 435 00b2 12       		.uleb128 0x12
- 436 00b3 01       		.uleb128 0x1
- 437 00b4 00       		.byte	0
- 438 00b5 00       		.byte	0
- 439 00b6 00       		.byte	0
- 440              		.section	.debug_loc,"dr"
- 441              	Ldebug_loc0:
- 442              	LLST0:
- 443 0000 00000000 		.long	LFB1-Ltext0
- 444 0004 01000000 		.long	LCFI0-Ltext0
- 445 0008 0200     		.word	0x2
- 446 000a 74       		.byte	0x74
- 447 000b 04       		.sleb128 4
- 448 000c 01000000 		.long	LCFI0-Ltext0
- 449 0010 28000000 		.long	LCFI1-Ltext0
- 450 0014 0200     		.word	0x2
- 451 0016 74       		.byte	0x74
- 452 0017 08       		.sleb128 8
- 453 0018 28000000 		.long	LCFI1-Ltext0
- 454 001c 29000000 		.long	LFE1-Ltext0
- 455 0020 0200     		.word	0x2
- 456 0022 74       		.byte	0x74
- 457 0023 04       		.sleb128 4
- 458 0024 00000000 		.long	0
- 459 0028 00000000 		.long	0
- 460              	LVUS1:
- 461 002c 00       		.uleb128 0
- 462 002d 00       		.uleb128 LVU12
- 463 002e 00       		.uleb128 LVU12
- 464 002f 00       		.uleb128 LVU15
- 465 0030 00       		.uleb128 LVU15
- 466 0031 00       		.uleb128 0
- 467              	LLST1:
- 468 0032 00000000 		.long	LVL0-Ltext0
- 469 0036 22000000 		.long	LVL4-Ltext0
- 470 003a 0200     		.word	0x2
- 471 003c 91       		.byte	0x91
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4QnABb.s 			page 11
+ 388 0284 10       		.byte	0x10
+ 389 0285 0D       		.byte	0xd
+ 390 0286 AB020000 		.long	0x2ab
+ 391 028a 02       		.byte	0x2
+ 392 028b 91       		.byte	0x91
+ 393 028c 70       		.sleb128 -16
+ 394 028d 0D       		.uleb128 0xd
+ 395 028e 3D000000 		.long	LBB2
+ 396 0292 64000000 		.long	LBE2
+ 397 0296 0C       		.uleb128 0xc
+ 398 0297 6900     		.ascii "i\0"
+ 399 0299 01       		.byte	0x1
+ 400 029a 12       		.byte	0x12
+ 401 029b 0A       		.byte	0xa
+ 402 029c 9E000000 		.long	0x9e
+ 403 02a0 02       		.byte	0x2
+ 404 02a1 91       		.byte	0x91
+ 405 02a2 6C       		.sleb128 -20
+ 406 02a3 00       		.byte	0
+ 407 02a4 00       		.byte	0
+ 408 02a5 06       		.uleb128 0x6
+ 409 02a6 04       		.byte	0x4
+ 410 02a7 CA010000 		.long	0x1ca
+ 411 02ab 06       		.uleb128 0x6
+ 412 02ac 04       		.byte	0x4
+ 413 02ad 46010000 		.long	0x146
+ 414 02b1 0E       		.uleb128 0xe
+ 415 02b2 69735365 		.ascii "isSet\0"
+ 415      7400
+ 416 02b8 01       		.byte	0x1
+ 417 02b9 06       		.byte	0x6
+ 418 02ba 10       		.byte	0x10
+ 419 02bb 01       		.byte	0x1
+ 420 02bc 29010000 		.long	0x129
+ 421 02c0 00000000 		.long	LFB1
+ 422 02c4 15000000 		.long	LFE1
+ 423 02c8 38000000 		.secrel32	LLST0
+ 424 02cc 01       		.byte	0x1
+ 425 02cd 0B       		.uleb128 0xb
+ 426 02ce 7600     		.ascii "v\0"
+ 427 02d0 01       		.byte	0x1
+ 428 02d1 06       		.byte	0x6
+ 429 02d2 1E       		.byte	0x1e
+ 430 02d3 29010000 		.long	0x129
+ 431 02d7 02       		.byte	0x2
+ 432 02d8 91       		.byte	0x91
+ 433 02d9 74       		.sleb128 -12
+ 434 02da 00       		.byte	0
+ 435 02db 00       		.byte	0
+ 436              		.section	.debug_abbrev,"dr"
+ 437              	Ldebug_abbrev0:
+ 438 0000 01       		.uleb128 0x1
+ 439 0001 11       		.uleb128 0x11
+ 440 0002 01       		.byte	0x1
+ 441 0003 25       		.uleb128 0x25
+ 442 0004 08       		.uleb128 0x8
+ 443 0005 13       		.uleb128 0x13
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccy2pXnh.s 			page 11
 
 
- 472 003d 08       		.sleb128 8
- 473 003e 22000000 		.long	LVL4-Ltext0
- 474 0042 28000000 		.long	LVL5-Ltext0
- 475 0046 0100     		.word	0x1
- 476 0048 53       		.byte	0x53
- 477 0049 28000000 		.long	LVL5-Ltext0
- 478 004d 29000000 		.long	LFE1-Ltext0
- 479 0051 0200     		.word	0x2
- 480 0053 91       		.byte	0x91
- 481 0054 08       		.sleb128 8
- 482 0055 00000000 		.long	0
- 483 0059 00000000 		.long	0
- 484              	LVUS2:
- 485 005d 01       		.uleb128 LVU3
- 486 005e 00       		.uleb128 LVU6
- 487              	LLST2:
- 488 005f 09000000 		.long	LVL1-Ltext0
- 489 0063 0E000000 		.long	LVL2-Ltext0
- 490 0067 1000     		.word	0x10
- 491 0069 91       		.byte	0x91
- 492 006a 00       		.sleb128 0
- 493 006b 06       		.byte	0x6
- 494 006c 06       		.byte	0x6
- 495 006d 91       		.byte	0x91
- 496 006e 04       		.sleb128 4
- 497 006f 06       		.byte	0x6
- 498 0070 1E       		.byte	0x1e
- 499 0071 91       		.byte	0x91
- 500 0072 00       		.sleb128 0
- 501 0073 06       		.byte	0x6
- 502 0074 23       		.byte	0x23
- 503 0075 0C       		.uleb128 0xc
- 504 0076 06       		.byte	0x6
- 505 0077 22       		.byte	0x22
- 506 0078 9F       		.byte	0x9f
- 507 0079 00000000 		.long	0
- 508 007d 00000000 		.long	0
- 509              	LVUS3:
- 510 0081 03       		.uleb128 LVU5
- 511 0082 00       		.uleb128 LVU6
- 512 0083 00       		.uleb128 LVU6
- 513 0084 00       		.uleb128 0
- 514              	LLST3:
- 515 0085 09000000 		.long	LVL1-Ltext0
- 516 0089 0E000000 		.long	LVL2-Ltext0
- 517 008d 0200     		.word	0x2
- 518 008f 30       		.byte	0x30
- 519 0090 9F       		.byte	0x9f
- 520 0091 0E000000 		.long	LVL2-Ltext0
- 521 0095 29000000 		.long	LFE1-Ltext0
- 522 0099 0100     		.word	0x1
- 523 009b 52       		.byte	0x52
- 524 009c 00000000 		.long	0
- 525 00a0 00000000 		.long	0
- 526              		.section	.debug_aranges,"dr"
- 527 0000 1C000000 		.long	0x1c
- 528 0004 0200     		.word	0x2
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4QnABb.s 			page 12
+ 444 0006 0B       		.uleb128 0xb
+ 445 0007 03       		.uleb128 0x3
+ 446 0008 08       		.uleb128 0x8
+ 447 0009 1B       		.uleb128 0x1b
+ 448 000a 08       		.uleb128 0x8
+ 449 000b 11       		.uleb128 0x11
+ 450 000c 01       		.uleb128 0x1
+ 451 000d 12       		.uleb128 0x12
+ 452 000e 01       		.uleb128 0x1
+ 453 000f 10       		.uleb128 0x10
+ 454 0010 06       		.uleb128 0x6
+ 455 0011 00       		.byte	0
+ 456 0012 00       		.byte	0
+ 457 0013 02       		.uleb128 0x2
+ 458 0014 24       		.uleb128 0x24
+ 459 0015 00       		.byte	0
+ 460 0016 0B       		.uleb128 0xb
+ 461 0017 0B       		.uleb128 0xb
+ 462 0018 3E       		.uleb128 0x3e
+ 463 0019 0B       		.uleb128 0xb
+ 464 001a 03       		.uleb128 0x3
+ 465 001b 08       		.uleb128 0x8
+ 466 001c 00       		.byte	0
+ 467 001d 00       		.byte	0
+ 468 001e 03       		.uleb128 0x3
+ 469 001f 16       		.uleb128 0x16
+ 470 0020 00       		.byte	0
+ 471 0021 03       		.uleb128 0x3
+ 472 0022 08       		.uleb128 0x8
+ 473 0023 3A       		.uleb128 0x3a
+ 474 0024 0B       		.uleb128 0xb
+ 475 0025 3B       		.uleb128 0x3b
+ 476 0026 0B       		.uleb128 0xb
+ 477 0027 39       		.uleb128 0x39
+ 478 0028 0B       		.uleb128 0xb
+ 479 0029 49       		.uleb128 0x49
+ 480 002a 13       		.uleb128 0x13
+ 481 002b 00       		.byte	0
+ 482 002c 00       		.byte	0
+ 483 002d 04       		.uleb128 0x4
+ 484 002e 13       		.uleb128 0x13
+ 485 002f 01       		.byte	0x1
+ 486 0030 0B       		.uleb128 0xb
+ 487 0031 0B       		.uleb128 0xb
+ 488 0032 3A       		.uleb128 0x3a
+ 489 0033 0B       		.uleb128 0xb
+ 490 0034 3B       		.uleb128 0x3b
+ 491 0035 0B       		.uleb128 0xb
+ 492 0036 39       		.uleb128 0x39
+ 493 0037 0B       		.uleb128 0xb
+ 494 0038 01       		.uleb128 0x1
+ 495 0039 13       		.uleb128 0x13
+ 496 003a 00       		.byte	0
+ 497 003b 00       		.byte	0
+ 498 003c 05       		.uleb128 0x5
+ 499 003d 0D       		.uleb128 0xd
+ 500 003e 00       		.byte	0
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccy2pXnh.s 			page 12
 
 
- 529 0006 00000000 		.secrel32	Ldebug_info0
- 530 000a 04       		.byte	0x4
- 531 000b 00       		.byte	0
- 532 000c 0000     		.word	0
- 533 000e 0000     		.word	0
- 534 0010 00000000 		.long	Ltext0
- 535 0014 29000000 		.long	Letext0-Ltext0
- 536 0018 00000000 		.long	0
- 537 001c 00000000 		.long	0
- 538              		.section	.debug_line,"dr"
- 539              	Ldebug_line0:
- 540 0000 D0000000 		.section	.debug_str,"dr"
- 540      02007300 
- 540      00000101 
- 540      FB0E0D00 
- 540      01010101 
- 541              		.ident	"GCC: (i686-posix-dwarf-rev0, Built by MinGW-W64 project) 8.1.0"
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4QnABb.s 			page 13
+ 501 003f 03       		.uleb128 0x3
+ 502 0040 08       		.uleb128 0x8
+ 503 0041 3A       		.uleb128 0x3a
+ 504 0042 0B       		.uleb128 0xb
+ 505 0043 3B       		.uleb128 0x3b
+ 506 0044 0B       		.uleb128 0xb
+ 507 0045 39       		.uleb128 0x39
+ 508 0046 0B       		.uleb128 0xb
+ 509 0047 49       		.uleb128 0x49
+ 510 0048 13       		.uleb128 0x13
+ 511 0049 38       		.uleb128 0x38
+ 512 004a 0A       		.uleb128 0xa
+ 513 004b 00       		.byte	0
+ 514 004c 00       		.byte	0
+ 515 004d 06       		.uleb128 0x6
+ 516 004e 0F       		.uleb128 0xf
+ 517 004f 00       		.byte	0
+ 518 0050 0B       		.uleb128 0xb
+ 519 0051 0B       		.uleb128 0xb
+ 520 0052 49       		.uleb128 0x49
+ 521 0053 13       		.uleb128 0x13
+ 522 0054 00       		.byte	0
+ 523 0055 00       		.byte	0
+ 524 0056 07       		.uleb128 0x7
+ 525 0057 01       		.uleb128 0x1
+ 526 0058 01       		.byte	0x1
+ 527 0059 49       		.uleb128 0x49
+ 528 005a 13       		.uleb128 0x13
+ 529 005b 01       		.uleb128 0x1
+ 530 005c 13       		.uleb128 0x13
+ 531 005d 00       		.byte	0
+ 532 005e 00       		.byte	0
+ 533 005f 08       		.uleb128 0x8
+ 534 0060 21       		.uleb128 0x21
+ 535 0061 00       		.byte	0
+ 536 0062 49       		.uleb128 0x49
+ 537 0063 13       		.uleb128 0x13
+ 538 0064 2F       		.uleb128 0x2f
+ 539 0065 05       		.uleb128 0x5
+ 540 0066 00       		.byte	0
+ 541 0067 00       		.byte	0
+ 542 0068 09       		.uleb128 0x9
+ 543 0069 34       		.uleb128 0x34
+ 544 006a 00       		.byte	0
+ 545 006b 03       		.uleb128 0x3
+ 546 006c 08       		.uleb128 0x8
+ 547 006d 3A       		.uleb128 0x3a
+ 548 006e 0B       		.uleb128 0xb
+ 549 006f 3B       		.uleb128 0x3b
+ 550 0070 0B       		.uleb128 0xb
+ 551 0071 39       		.uleb128 0x39
+ 552 0072 0B       		.uleb128 0xb
+ 553 0073 49       		.uleb128 0x49
+ 554 0074 13       		.uleb128 0x13
+ 555 0075 3F       		.uleb128 0x3f
+ 556 0076 0C       		.uleb128 0xc
+ 557 0077 02       		.uleb128 0x2
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccy2pXnh.s 			page 13
+
+
+ 558 0078 0A       		.uleb128 0xa
+ 559 0079 00       		.byte	0
+ 560 007a 00       		.byte	0
+ 561 007b 0A       		.uleb128 0xa
+ 562 007c 2E       		.uleb128 0x2e
+ 563 007d 01       		.byte	0x1
+ 564 007e 3F       		.uleb128 0x3f
+ 565 007f 0C       		.uleb128 0xc
+ 566 0080 03       		.uleb128 0x3
+ 567 0081 08       		.uleb128 0x8
+ 568 0082 3A       		.uleb128 0x3a
+ 569 0083 0B       		.uleb128 0xb
+ 570 0084 3B       		.uleb128 0x3b
+ 571 0085 0B       		.uleb128 0xb
+ 572 0086 39       		.uleb128 0x39
+ 573 0087 0B       		.uleb128 0xb
+ 574 0088 27       		.uleb128 0x27
+ 575 0089 0C       		.uleb128 0xc
+ 576 008a 11       		.uleb128 0x11
+ 577 008b 01       		.uleb128 0x1
+ 578 008c 12       		.uleb128 0x12
+ 579 008d 01       		.uleb128 0x1
+ 580 008e 40       		.uleb128 0x40
+ 581 008f 06       		.uleb128 0x6
+ 582 0090 9642     		.uleb128 0x2116
+ 583 0092 0C       		.uleb128 0xc
+ 584 0093 01       		.uleb128 0x1
+ 585 0094 13       		.uleb128 0x13
+ 586 0095 00       		.byte	0
+ 587 0096 00       		.byte	0
+ 588 0097 0B       		.uleb128 0xb
+ 589 0098 05       		.uleb128 0x5
+ 590 0099 00       		.byte	0
+ 591 009a 03       		.uleb128 0x3
+ 592 009b 08       		.uleb128 0x8
+ 593 009c 3A       		.uleb128 0x3a
+ 594 009d 0B       		.uleb128 0xb
+ 595 009e 3B       		.uleb128 0x3b
+ 596 009f 0B       		.uleb128 0xb
+ 597 00a0 39       		.uleb128 0x39
+ 598 00a1 0B       		.uleb128 0xb
+ 599 00a2 49       		.uleb128 0x49
+ 600 00a3 13       		.uleb128 0x13
+ 601 00a4 02       		.uleb128 0x2
+ 602 00a5 0A       		.uleb128 0xa
+ 603 00a6 00       		.byte	0
+ 604 00a7 00       		.byte	0
+ 605 00a8 0C       		.uleb128 0xc
+ 606 00a9 34       		.uleb128 0x34
+ 607 00aa 00       		.byte	0
+ 608 00ab 03       		.uleb128 0x3
+ 609 00ac 08       		.uleb128 0x8
+ 610 00ad 3A       		.uleb128 0x3a
+ 611 00ae 0B       		.uleb128 0xb
+ 612 00af 3B       		.uleb128 0x3b
+ 613 00b0 0B       		.uleb128 0xb
+ 614 00b1 39       		.uleb128 0x39
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccy2pXnh.s 			page 14
+
+
+ 615 00b2 0B       		.uleb128 0xb
+ 616 00b3 49       		.uleb128 0x49
+ 617 00b4 13       		.uleb128 0x13
+ 618 00b5 02       		.uleb128 0x2
+ 619 00b6 0A       		.uleb128 0xa
+ 620 00b7 00       		.byte	0
+ 621 00b8 00       		.byte	0
+ 622 00b9 0D       		.uleb128 0xd
+ 623 00ba 0B       		.uleb128 0xb
+ 624 00bb 01       		.byte	0x1
+ 625 00bc 11       		.uleb128 0x11
+ 626 00bd 01       		.uleb128 0x1
+ 627 00be 12       		.uleb128 0x12
+ 628 00bf 01       		.uleb128 0x1
+ 629 00c0 00       		.byte	0
+ 630 00c1 00       		.byte	0
+ 631 00c2 0E       		.uleb128 0xe
+ 632 00c3 2E       		.uleb128 0x2e
+ 633 00c4 01       		.byte	0x1
+ 634 00c5 03       		.uleb128 0x3
+ 635 00c6 08       		.uleb128 0x8
+ 636 00c7 3A       		.uleb128 0x3a
+ 637 00c8 0B       		.uleb128 0xb
+ 638 00c9 3B       		.uleb128 0x3b
+ 639 00ca 0B       		.uleb128 0xb
+ 640 00cb 39       		.uleb128 0x39
+ 641 00cc 0B       		.uleb128 0xb
+ 642 00cd 27       		.uleb128 0x27
+ 643 00ce 0C       		.uleb128 0xc
+ 644 00cf 49       		.uleb128 0x49
+ 645 00d0 13       		.uleb128 0x13
+ 646 00d1 11       		.uleb128 0x11
+ 647 00d2 01       		.uleb128 0x1
+ 648 00d3 12       		.uleb128 0x12
+ 649 00d4 01       		.uleb128 0x1
+ 650 00d5 40       		.uleb128 0x40
+ 651 00d6 06       		.uleb128 0x6
+ 652 00d7 9742     		.uleb128 0x2117
+ 653 00d9 0C       		.uleb128 0xc
+ 654 00da 00       		.byte	0
+ 655 00db 00       		.byte	0
+ 656 00dc 00       		.byte	0
+ 657              		.section	.debug_loc,"dr"
+ 658              	Ldebug_loc0:
+ 659              	LLST1:
+ 660 0000 15000000 		.long	LFB2-Ltext0
+ 661 0004 16000000 		.long	LCFI3-Ltext0
+ 662 0008 0200     		.word	0x2
+ 663 000a 74       		.byte	0x74
+ 664 000b 04       		.sleb128 4
+ 665 000c 16000000 		.long	LCFI3-Ltext0
+ 666 0010 18000000 		.long	LCFI4-Ltext0
+ 667 0014 0200     		.word	0x2
+ 668 0016 74       		.byte	0x74
+ 669 0017 08       		.sleb128 8
+ 670 0018 18000000 		.long	LCFI4-Ltext0
+ 671 001c 10010000 		.long	LCFI5-Ltext0
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccy2pXnh.s 			page 15
+
+
+ 672 0020 0200     		.word	0x2
+ 673 0022 75       		.byte	0x75
+ 674 0023 08       		.sleb128 8
+ 675 0024 10010000 		.long	LCFI5-Ltext0
+ 676 0028 11010000 		.long	LFE2-Ltext0
+ 677 002c 0200     		.word	0x2
+ 678 002e 74       		.byte	0x74
+ 679 002f 04       		.sleb128 4
+ 680 0030 00000000 		.long	0
+ 681 0034 00000000 		.long	0
+ 682              	LLST0:
+ 683 0038 00000000 		.long	LFB1-Ltext0
+ 684 003c 01000000 		.long	LCFI0-Ltext0
+ 685 0040 0200     		.word	0x2
+ 686 0042 74       		.byte	0x74
+ 687 0043 04       		.sleb128 4
+ 688 0044 01000000 		.long	LCFI0-Ltext0
+ 689 0048 03000000 		.long	LCFI1-Ltext0
+ 690 004c 0200     		.word	0x2
+ 691 004e 74       		.byte	0x74
+ 692 004f 08       		.sleb128 8
+ 693 0050 03000000 		.long	LCFI1-Ltext0
+ 694 0054 14000000 		.long	LCFI2-Ltext0
+ 695 0058 0200     		.word	0x2
+ 696 005a 75       		.byte	0x75
+ 697 005b 08       		.sleb128 8
+ 698 005c 14000000 		.long	LCFI2-Ltext0
+ 699 0060 15000000 		.long	LFE1-Ltext0
+ 700 0064 0200     		.word	0x2
+ 701 0066 74       		.byte	0x74
+ 702 0067 04       		.sleb128 4
+ 703 0068 00000000 		.long	0
+ 704 006c 00000000 		.long	0
+ 705              		.section	.debug_aranges,"dr"
+ 706 0000 1C000000 		.long	0x1c
+ 707 0004 0200     		.word	0x2
+ 708 0006 00000000 		.secrel32	Ldebug_info0
+ 709 000a 04       		.byte	0x4
+ 710 000b 00       		.byte	0
+ 711 000c 0000     		.word	0
+ 712 000e 0000     		.word	0
+ 713 0010 00000000 		.long	Ltext0
+ 714 0014 11010000 		.long	Letext0-Ltext0
+ 715 0018 00000000 		.long	0
+ 716 001c 00000000 		.long	0
+ 717              		.section	.debug_line,"dr"
+ 718              	Ldebug_line0:
+ 719 0000 25010000 		.section	.debug_str,"dr"
+ 719      02007300 
+ 719      00000101 
+ 719      FB0E0D00 
+ 719      01010101 
+ 720              		.ident	"GCC: (i686-posix-dwarf-rev0, Built by MinGW-W64 project) 8.1.0"
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccy2pXnh.s 			page 16
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 BitMatrix.c
-C:\Users\jisu8\AppData\Local\Temp\cc4QnABb.s:6      .text:00000000 _getPatternRow
+                            *COM*:000007d0 _Row_array
+C:\Users\jisu8\AppData\Local\Temp\ccy2pXnh.s:6      .text:00000000 _isSet
+C:\Users\jisu8\AppData\Local\Temp\ccy2pXnh.s:34     .text:00000015 _getPatternRow
 
 NO UNDEFINED SYMBOLS
