@@ -64,6 +64,8 @@
         "thread": "c",
         "matrix.h": "c",
         "numeric": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "pdfcodeworddecoder.h": "c",
+        "map": "c"
     }
 }

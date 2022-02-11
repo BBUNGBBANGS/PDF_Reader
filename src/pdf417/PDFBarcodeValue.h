@@ -1,5 +1,5 @@
-#ifndef _RESULTPOINT_H
-#define _RESULTPOINT_H
+#ifndef _PDFBARCODEVALUE_H
+#define _PDFBARCODEVALUE_H
 /*
 * Copyright 2016 Nu-book Inc.
 * Copyright 2016 ZXing authors
@@ -16,20 +16,29 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-#include <stdint.h>
-typedef struct 
+
+
+#if 0
+/**
+* @author Guenther Grau
+*/
+class BarcodeValue
 {
-	float x;
-	float y;
-}PointT_t;
+	std::map<int, int> _values;
 
-typedef struct 
-{
-	uint8_t m_hasValue;
-	PointT_t m_value;
-}ResultPoint_t;
+public:
+	/**
+	* Add an occurrence of a value
+	*/
+	void setValue(int value);
 
+	/**
+	* Determines the maximum occurrence of a set value and returns all values which were set with this occurrence.
+	* @return an array of int, containing the values with the highest occurrence, or null, if no value was set
+	*/
+	std::vector<int> value() const;
 
-extern float Distance(int aX, int aY, int bX, int bY);
-
+	int confidence(int value) const;
+};
+#endif
 #endif

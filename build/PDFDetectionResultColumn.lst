@@ -1,0 +1,945 @@
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccXdWtbA.s 			page 1
+
+
+   1              		.file	"PDFDetectionResultColumn.c"
+   2              		.text
+   3              	Ltext0:
+   4              		.section .rdata,"dr"
+   5              		.align 4
+   6              	_MAX_NEARBY_DISTANCE:
+   7 0000 05000000 		.long	5
+   8              		.align 4
+   9              	_MIN_ROWS_IN_BARCODE:
+  10 0004 03000000 		.long	3
+  11              		.align 4
+  12              	_MAX_ROWS_IN_BARCODE:
+  13 0008 5A000000 		.long	90
+  14              		.comm	_codewords, 4000, 5
+  15              	LC0:
+  16 000c 496E7661 		.ascii "Invalid bounding box\0"
+  16      6C696420 
+  16      626F756E 
+  16      64696E67 
+  16      20626F78 
+  17 0021 000000   		.text
+  18              		.globl	_DetectionResultColumn
+  20              	_DetectionResultColumn:
+  21              	LFB1:
+  22              		.file 1 "src/pdf417/PDFDetectionResultColumn.c"
+   1:src/pdf417/PDFDetectionResultColumn.c **** /*
+   2:src/pdf417/PDFDetectionResultColumn.c **** * Copyright 2016 Nu-book Inc.
+   3:src/pdf417/PDFDetectionResultColumn.c **** * Copyright 2016 ZXing authors
+   4:src/pdf417/PDFDetectionResultColumn.c **** *
+   5:src/pdf417/PDFDetectionResultColumn.c **** * Licensed under the Apache License, Version 2.0 (the "License");
+   6:src/pdf417/PDFDetectionResultColumn.c **** * you may not use this file except in compliance with the License.
+   7:src/pdf417/PDFDetectionResultColumn.c **** * You may obtain a copy of the License at
+   8:src/pdf417/PDFDetectionResultColumn.c **** *
+   9:src/pdf417/PDFDetectionResultColumn.c **** *      http://www.apache.org/licenses/LICENSE-2.0
+  10:src/pdf417/PDFDetectionResultColumn.c **** *
+  11:src/pdf417/PDFDetectionResultColumn.c **** * Unless required by applicable law or agreed to in writing, software
+  12:src/pdf417/PDFDetectionResultColumn.c **** * distributed under the License is distributed on an "AS IS" BASIS,
+  13:src/pdf417/PDFDetectionResultColumn.c **** * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  14:src/pdf417/PDFDetectionResultColumn.c **** * See the License for the specific language governing permissions and
+  15:src/pdf417/PDFDetectionResultColumn.c **** * limitations under the License.
+  16:src/pdf417/PDFDetectionResultColumn.c **** */
+  17:src/pdf417/PDFDetectionResultColumn.c **** 
+  18:src/pdf417/PDFDetectionResultColumn.c **** #include "PDFDetectionResultColumn.h"
+  19:src/pdf417/PDFDetectionResultColumn.c **** #include "PDFBarcodeMetadata.h"
+  20:src/pdf417/PDFDetectionResultColumn.c **** #include "PDFBarcodeValue.h"
+  21:src/pdf417/PDFDetectionResultColumn.c **** 
+  22:src/pdf417/PDFDetectionResultColumn.c **** 
+  23:src/pdf417/PDFDetectionResultColumn.c **** static const int MAX_NEARBY_DISTANCE = 5;
+  24:src/pdf417/PDFDetectionResultColumn.c **** static const int MIN_ROWS_IN_BARCODE = 3;
+  25:src/pdf417/PDFDetectionResultColumn.c **** static const int MAX_ROWS_IN_BARCODE = 90;
+  26:src/pdf417/PDFDetectionResultColumn.c **** 
+  27:src/pdf417/PDFDetectionResultColumn.c **** int codewords[1000];
+  28:src/pdf417/PDFDetectionResultColumn.c **** 
+  29:src/pdf417/PDFDetectionResultColumn.c **** void DetectionResultColumn(const BoundingBox_t * boundingBox, RowIndicator_t rowIndicator)
+  30:src/pdf417/PDFDetectionResultColumn.c **** {
+  23              		.loc 1 30 1
+  24              		.cfi_startproc
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccXdWtbA.s 			page 2
+
+
+  25 0000 55       		pushl	%ebp
+  26              	LCFI0:
+  27              		.cfi_def_cfa_offset 8
+  28              		.cfi_offset 5, -8
+  29 0001 89E5     		movl	%esp, %ebp
+  30              	LCFI1:
+  31              		.cfi_def_cfa_register 5
+  32 0003 83EC18   		subl	$24, %esp
+  31:src/pdf417/PDFDetectionResultColumn.c **** 	if (boundingBox->_maxY < boundingBox->_minY) 
+  33              		.loc 1 31 17
+  34 0006 8B4508   		movl	8(%ebp), %eax
+  35 0009 8B5044   		movl	68(%eax), %edx
+  36              		.loc 1 31 38
+  37 000c 8B4508   		movl	8(%ebp), %eax
+  38 000f 8B4040   		movl	64(%eax), %eax
+  39              		.loc 1 31 5
+  40 0012 39C2     		cmpl	%eax, %edx
+  41 0014 7D0C     		jge	L3
+  42              	LBB2:
+  32:src/pdf417/PDFDetectionResultColumn.c **** 	{
+  33:src/pdf417/PDFDetectionResultColumn.c **** 		printf("Invalid bounding box");
+  43              		.loc 1 33 3
+  44 0016 C704240C 		movl	$LC0, (%esp)
+  44      000000
+  45 001d E8000000 		call	_printf
+  45      00
+  46              	L3:
+  47              	LBE2:
+  34:src/pdf417/PDFDetectionResultColumn.c **** 	}
+  35:src/pdf417/PDFDetectionResultColumn.c **** 
+  36:src/pdf417/PDFDetectionResultColumn.c **** 	//_codewords.resize(boundingBox->_maxY - boundingBox->_minY + 1);
+  37:src/pdf417/PDFDetectionResultColumn.c **** }
+  48              		.loc 1 37 1
+  49 0022 90       		nop
+  50 0023 C9       		leave
+  51              	LCFI2:
+  52              		.cfi_restore 5
+  53              		.cfi_def_cfa 4, 4
+  54 0024 C3       		ret
+  55              		.cfi_endproc
+  56              	LFE1:
+  57              	Letext0:
+  58              		.file 2 "src/ResultPoint.h"
+  59              		.file 3 "D:/3.tools/mingw/mingw32/i686-w64-mingw32/include/stdint.h"
+  60              		.file 4 "src/pdf417/PDFBoundingBox.h"
+  61              		.file 5 "src/pdf417/PDFDetectionResultColumn.h"
+  62              		.file 6 "<built-in>"
+  63 0025 909090   		.section	.debug_info,"dr"
+  64              	Ldebug_info0:
+  65 0000 47040000 		.long	0x447
+  66 0004 0200     		.word	0x2
+  67 0006 00000000 		.secrel32	Ldebug_abbrev0
+  68 000a 04       		.byte	0x4
+  69 000b 01       		.uleb128 0x1
+  70 000c 474E5520 		.ascii "GNU C17 8.1.0 -mtune=generic -march=i686 -g -gdwarf-2 -O0\0"
+  70      43313720 
+  70      382E312E 
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccXdWtbA.s 			page 3
+
+
+  70      30202D6D 
+  70      74756E65 
+  71 0046 0C       		.byte	0xc
+  72 0047 7372632F 		.ascii "src/pdf417/PDFDetectionResultColumn.c\0"
+  72      70646634 
+  72      31372F50 
+  72      44464465 
+  72      74656374 
+  73 006d 443A5C31 		.ascii "D:\\1.Project_workspace\\PDF_BARCODE\0"
+  73      2E50726F 
+  73      6A656374 
+  73      5F776F72 
+  73      6B737061 
+  74 0090 00000000 		.long	Ltext0
+  75 0094 25000000 		.long	Letext0
+  76 0098 00000000 		.secrel32	Ldebug_line0
+  77 009c 02       		.uleb128 0x2
+  78 009d 01       		.byte	0x1
+  79 009e 06       		.byte	0x6
+  80 009f 63686172 		.ascii "char\0"
+  80      00
+  81 00a4 03       		.uleb128 0x3
+  82 00a5 9C000000 		.long	0x9c
+  83 00a9 02       		.uleb128 0x2
+  84 00aa 04       		.byte	0x4
+  85 00ab 07       		.byte	0x7
+  86 00ac 756E7369 		.ascii "unsigned int\0"
+  86      676E6564 
+  86      20696E74 
+  86      00
+  87 00b9 02       		.uleb128 0x2
+  88 00ba 04       		.byte	0x4
+  89 00bb 05       		.byte	0x5
+  90 00bc 696E7400 		.ascii "int\0"
+  91 00c0 03       		.uleb128 0x3
+  92 00c1 B9000000 		.long	0xb9
+  93 00c5 02       		.uleb128 0x2
+  94 00c6 02       		.byte	0x2
+  95 00c7 07       		.byte	0x7
+  96 00c8 73686F72 		.ascii "short unsigned int\0"
+  96      7420756E 
+  96      7369676E 
+  96      65642069 
+  96      6E7400
+  97 00db 02       		.uleb128 0x2
+  98 00dc 04       		.byte	0x4
+  99 00dd 05       		.byte	0x5
+ 100 00de 6C6F6E67 		.ascii "long int\0"
+ 100      20696E74 
+ 100      00
+ 101 00e7 02       		.uleb128 0x2
+ 102 00e8 08       		.byte	0x8
+ 103 00e9 05       		.byte	0x5
+ 104 00ea 6C6F6E67 		.ascii "long long int\0"
+ 104      206C6F6E 
+ 104      6720696E 
+ 104      7400
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccXdWtbA.s 			page 4
+
+
+ 105 00f8 02       		.uleb128 0x2
+ 106 00f9 04       		.byte	0x4
+ 107 00fa 07       		.byte	0x7
+ 108 00fb 6C6F6E67 		.ascii "long unsigned int\0"
+ 108      20756E73 
+ 108      69676E65 
+ 108      6420696E 
+ 108      7400
+ 109 010d 02       		.uleb128 0x2
+ 110 010e 01       		.byte	0x1
+ 111 010f 08       		.byte	0x8
+ 112 0110 756E7369 		.ascii "unsigned char\0"
+ 112      676E6564 
+ 112      20636861 
+ 112      7200
+ 113 011e 02       		.uleb128 0x2
+ 114 011f 0C       		.byte	0xc
+ 115 0120 04       		.byte	0x4
+ 116 0121 6C6F6E67 		.ascii "long double\0"
+ 116      20646F75 
+ 116      626C6500 
+ 117 012d 02       		.uleb128 0x2
+ 118 012e 10       		.byte	0x10
+ 119 012f 04       		.byte	0x4
+ 120 0130 5F466C6F 		.ascii "_Float128\0"
+ 120      61743132 
+ 120      3800
+ 121 013a 02       		.uleb128 0x2
+ 122 013b 01       		.byte	0x1
+ 123 013c 06       		.byte	0x6
+ 124 013d 7369676E 		.ascii "signed char\0"
+ 124      65642063 
+ 124      68617200 
+ 125 0149 04       		.uleb128 0x4
+ 126 014a 75696E74 		.ascii "uint8_t\0"
+ 126      385F7400 
+ 127 0152 03       		.byte	0x3
+ 128 0153 24       		.byte	0x24
+ 129 0154 19       		.byte	0x19
+ 130 0155 0D010000 		.long	0x10d
+ 131 0159 02       		.uleb128 0x2
+ 132 015a 02       		.byte	0x2
+ 133 015b 05       		.byte	0x5
+ 134 015c 73686F72 		.ascii "short int\0"
+ 134      7420696E 
+ 134      7400
+ 135 0166 02       		.uleb128 0x2
+ 136 0167 08       		.byte	0x8
+ 137 0168 07       		.byte	0x7
+ 138 0169 6C6F6E67 		.ascii "long long unsigned int\0"
+ 138      206C6F6E 
+ 138      6720756E 
+ 138      7369676E 
+ 138      65642069 
+ 139 0180 05       		.uleb128 0x5
+ 140 0181 08       		.byte	0x8
+ 141 0182 02       		.byte	0x2
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccXdWtbA.s 			page 5
+
+
+ 142 0183 14       		.byte	0x14
+ 143 0184 09       		.byte	0x9
+ 144 0185 A4010000 		.long	0x1a4
+ 145 0189 06       		.uleb128 0x6
+ 146 018a 7800     		.ascii "x\0"
+ 147 018c 02       		.byte	0x2
+ 148 018d 16       		.byte	0x16
+ 149 018e 08       		.byte	0x8
+ 150 018f A4010000 		.long	0x1a4
+ 151 0193 02       		.byte	0x2
+ 152 0194 23       		.byte	0x23
+ 153 0195 00       		.uleb128 0
+ 154 0196 06       		.uleb128 0x6
+ 155 0197 7900     		.ascii "y\0"
+ 156 0199 02       		.byte	0x2
+ 157 019a 17       		.byte	0x17
+ 158 019b 08       		.byte	0x8
+ 159 019c A4010000 		.long	0x1a4
+ 160 01a0 02       		.byte	0x2
+ 161 01a1 23       		.byte	0x23
+ 162 01a2 04       		.uleb128 0x4
+ 163 01a3 00       		.byte	0
+ 164 01a4 02       		.uleb128 0x2
+ 165 01a5 04       		.byte	0x4
+ 166 01a6 04       		.byte	0x4
+ 167 01a7 666C6F61 		.ascii "float\0"
+ 167      7400
+ 168 01ad 04       		.uleb128 0x4
+ 169 01ae 506F696E 		.ascii "PointT_t\0"
+ 169      74545F74 
+ 169      00
+ 170 01b7 02       		.byte	0x2
+ 171 01b8 18       		.byte	0x18
+ 172 01b9 02       		.byte	0x2
+ 173 01ba 80010000 		.long	0x180
+ 174 01be 05       		.uleb128 0x5
+ 175 01bf 0C       		.byte	0xc
+ 176 01c0 02       		.byte	0x2
+ 177 01c1 1A       		.byte	0x1a
+ 178 01c2 09       		.byte	0x9
+ 179 01c3 F1010000 		.long	0x1f1
+ 180 01c7 06       		.uleb128 0x6
+ 181 01c8 6D5F6861 		.ascii "m_hasValue\0"
+ 181      7356616C 
+ 181      756500
+ 182 01d3 02       		.byte	0x2
+ 183 01d4 1C       		.byte	0x1c
+ 184 01d5 0A       		.byte	0xa
+ 185 01d6 49010000 		.long	0x149
+ 186 01da 02       		.byte	0x2
+ 187 01db 23       		.byte	0x23
+ 188 01dc 00       		.uleb128 0
+ 189 01dd 06       		.uleb128 0x6
+ 190 01de 6D5F7661 		.ascii "m_value\0"
+ 190      6C756500 
+ 191 01e6 02       		.byte	0x2
+ 192 01e7 1D       		.byte	0x1d
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccXdWtbA.s 			page 6
+
+
+ 193 01e8 0B       		.byte	0xb
+ 194 01e9 AD010000 		.long	0x1ad
+ 195 01ed 02       		.byte	0x2
+ 196 01ee 23       		.byte	0x23
+ 197 01ef 04       		.uleb128 0x4
+ 198 01f0 00       		.byte	0
+ 199 01f1 04       		.uleb128 0x4
+ 200 01f2 52657375 		.ascii "ResultPoint_t\0"
+ 200      6C74506F 
+ 200      696E745F 
+ 200      7400
+ 201 0200 02       		.byte	0x2
+ 202 0201 1E       		.byte	0x1e
+ 203 0202 02       		.byte	0x2
+ 204 0203 BE010000 		.long	0x1be
+ 205 0207 05       		.uleb128 0x5
+ 206 0208 48       		.byte	0x48
+ 207 0209 04       		.byte	0x4
+ 208 020a 06       		.byte	0x6
+ 209 020b 09       		.byte	0x9
+ 210 020c D8020000 		.long	0x2d8
+ 211 0210 06       		.uleb128 0x6
+ 212 0211 5F696D67 		.ascii "_imgWidth\0"
+ 212      57696474 
+ 212      6800
+ 213 021b 04       		.byte	0x4
+ 214 021c 08       		.byte	0x8
+ 215 021d 06       		.byte	0x6
+ 216 021e B9000000 		.long	0xb9
+ 217 0222 02       		.byte	0x2
+ 218 0223 23       		.byte	0x23
+ 219 0224 00       		.uleb128 0
+ 220 0225 06       		.uleb128 0x6
+ 221 0226 5F696D67 		.ascii "_imgHeight\0"
+ 221      48656967 
+ 221      687400
+ 222 0231 04       		.byte	0x4
+ 223 0232 09       		.byte	0x9
+ 224 0233 06       		.byte	0x6
+ 225 0234 B9000000 		.long	0xb9
+ 226 0238 02       		.byte	0x2
+ 227 0239 23       		.byte	0x23
+ 228 023a 04       		.uleb128 0x4
+ 229 023b 06       		.uleb128 0x6
+ 230 023c 5F746F70 		.ascii "_topLeft\0"
+ 230      4C656674 
+ 230      00
+ 231 0245 04       		.byte	0x4
+ 232 0246 0A       		.byte	0xa
+ 233 0247 10       		.byte	0x10
+ 234 0248 F1010000 		.long	0x1f1
+ 235 024c 02       		.byte	0x2
+ 236 024d 23       		.byte	0x23
+ 237 024e 08       		.uleb128 0x8
+ 238 024f 06       		.uleb128 0x6
+ 239 0250 5F626F74 		.ascii "_bottomLeft\0"
+ 239      746F6D4C 
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccXdWtbA.s 			page 7
+
+
+ 239      65667400 
+ 240 025c 04       		.byte	0x4
+ 241 025d 0B       		.byte	0xb
+ 242 025e 10       		.byte	0x10
+ 243 025f F1010000 		.long	0x1f1
+ 244 0263 02       		.byte	0x2
+ 245 0264 23       		.byte	0x23
+ 246 0265 14       		.uleb128 0x14
+ 247 0266 06       		.uleb128 0x6
+ 248 0267 5F746F70 		.ascii "_topRight\0"
+ 248      52696768 
+ 248      7400
+ 249 0271 04       		.byte	0x4
+ 250 0272 0C       		.byte	0xc
+ 251 0273 10       		.byte	0x10
+ 252 0274 F1010000 		.long	0x1f1
+ 253 0278 02       		.byte	0x2
+ 254 0279 23       		.byte	0x23
+ 255 027a 20       		.uleb128 0x20
+ 256 027b 06       		.uleb128 0x6
+ 257 027c 5F626F74 		.ascii "_bottomRight\0"
+ 257      746F6D52 
+ 257      69676874 
+ 257      00
+ 258 0289 04       		.byte	0x4
+ 259 028a 0D       		.byte	0xd
+ 260 028b 10       		.byte	0x10
+ 261 028c F1010000 		.long	0x1f1
+ 262 0290 02       		.byte	0x2
+ 263 0291 23       		.byte	0x23
+ 264 0292 2C       		.uleb128 0x2c
+ 265 0293 06       		.uleb128 0x6
+ 266 0294 5F6D696E 		.ascii "_minX\0"
+ 266      5800
+ 267 029a 04       		.byte	0x4
+ 268 029b 0E       		.byte	0xe
+ 269 029c 06       		.byte	0x6
+ 270 029d B9000000 		.long	0xb9
+ 271 02a1 02       		.byte	0x2
+ 272 02a2 23       		.byte	0x23
+ 273 02a3 38       		.uleb128 0x38
+ 274 02a4 06       		.uleb128 0x6
+ 275 02a5 5F6D6178 		.ascii "_maxX\0"
+ 275      5800
+ 276 02ab 04       		.byte	0x4
+ 277 02ac 0F       		.byte	0xf
+ 278 02ad 06       		.byte	0x6
+ 279 02ae B9000000 		.long	0xb9
+ 280 02b2 02       		.byte	0x2
+ 281 02b3 23       		.byte	0x23
+ 282 02b4 3C       		.uleb128 0x3c
+ 283 02b5 06       		.uleb128 0x6
+ 284 02b6 5F6D696E 		.ascii "_minY\0"
+ 284      5900
+ 285 02bc 04       		.byte	0x4
+ 286 02bd 10       		.byte	0x10
+ 287 02be 06       		.byte	0x6
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccXdWtbA.s 			page 8
+
+
+ 288 02bf B9000000 		.long	0xb9
+ 289 02c3 02       		.byte	0x2
+ 290 02c4 23       		.byte	0x23
+ 291 02c5 40       		.uleb128 0x40
+ 292 02c6 06       		.uleb128 0x6
+ 293 02c7 5F6D6178 		.ascii "_maxY\0"
+ 293      5900
+ 294 02cd 04       		.byte	0x4
+ 295 02ce 11       		.byte	0x11
+ 296 02cf 06       		.byte	0x6
+ 297 02d0 B9000000 		.long	0xb9
+ 298 02d4 02       		.byte	0x2
+ 299 02d5 23       		.byte	0x23
+ 300 02d6 44       		.uleb128 0x44
+ 301 02d7 00       		.byte	0
+ 302 02d8 04       		.uleb128 0x4
+ 303 02d9 426F756E 		.ascii "BoundingBox_t\0"
+ 303      64696E67 
+ 303      426F785F 
+ 303      7400
+ 304 02e7 04       		.byte	0x4
+ 305 02e8 12       		.byte	0x12
+ 306 02e9 02       		.byte	0x2
+ 307 02ea 07020000 		.long	0x207
+ 308 02ee 03       		.uleb128 0x3
+ 309 02ef D8020000 		.long	0x2d8
+ 310 02f3 07       		.uleb128 0x7
+ 311 02f4 07       		.byte	0x7
+ 312 02f5 04       		.byte	0x4
+ 313 02f6 A9000000 		.long	0xa9
+ 314 02fa 05       		.byte	0x5
+ 315 02fb 08       		.byte	0x8
+ 316 02fc 01       		.byte	0x1
+ 317 02fd 18030000 		.long	0x318
+ 318 0301 08       		.uleb128 0x8
+ 319 0302 4E6F6E65 		.ascii "None\0"
+ 319      00
+ 320 0307 00       		.byte	0
+ 321 0308 08       		.uleb128 0x8
+ 322 0309 4C656674 		.ascii "Left\0"
+ 322      00
+ 323 030e 01       		.byte	0x1
+ 324 030f 08       		.uleb128 0x8
+ 325 0310 52696768 		.ascii "Right\0"
+ 325      7400
+ 326 0316 02       		.byte	0x2
+ 327 0317 00       		.byte	0
+ 328 0318 04       		.uleb128 0x4
+ 329 0319 526F7749 		.ascii "RowIndicator_t\0"
+ 329      6E646963 
+ 329      61746F72 
+ 329      5F7400
+ 330 0328 05       		.byte	0x5
+ 331 0329 0C       		.byte	0xc
+ 332 032a 02       		.byte	0x2
+ 333 032b F3020000 		.long	0x2f3
+ 334 032f 09       		.uleb128 0x9
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccXdWtbA.s 			page 9
+
+
+ 335 0330 4D41585F 		.ascii "MAX_NEARBY_DISTANCE\0"
+ 335      4E454152 
+ 335      42595F44 
+ 335      49535441 
+ 335      4E434500 
+ 336 0344 01       		.byte	0x1
+ 337 0345 17       		.byte	0x17
+ 338 0346 12       		.byte	0x12
+ 339 0347 C0000000 		.long	0xc0
+ 340 034b 05       		.byte	0x5
+ 341 034c 03       		.byte	0x3
+ 342 034d 00000000 		.long	_MAX_NEARBY_DISTANCE
+ 343 0351 09       		.uleb128 0x9
+ 344 0352 4D494E5F 		.ascii "MIN_ROWS_IN_BARCODE\0"
+ 344      524F5753 
+ 344      5F494E5F 
+ 344      42415243 
+ 344      4F444500 
+ 345 0366 01       		.byte	0x1
+ 346 0367 18       		.byte	0x18
+ 347 0368 12       		.byte	0x12
+ 348 0369 C0000000 		.long	0xc0
+ 349 036d 05       		.byte	0x5
+ 350 036e 03       		.byte	0x3
+ 351 036f 04000000 		.long	_MIN_ROWS_IN_BARCODE
+ 352 0373 09       		.uleb128 0x9
+ 353 0374 4D41585F 		.ascii "MAX_ROWS_IN_BARCODE\0"
+ 353      524F5753 
+ 353      5F494E5F 
+ 353      42415243 
+ 353      4F444500 
+ 354 0388 01       		.byte	0x1
+ 355 0389 19       		.byte	0x19
+ 356 038a 12       		.byte	0x12
+ 357 038b C0000000 		.long	0xc0
+ 358 038f 05       		.byte	0x5
+ 359 0390 03       		.byte	0x3
+ 360 0391 08000000 		.long	_MAX_ROWS_IN_BARCODE
+ 361 0395 0A       		.uleb128 0xa
+ 362 0396 B9000000 		.long	0xb9
+ 363 039a A6030000 		.long	0x3a6
+ 364 039e 0B       		.uleb128 0xb
+ 365 039f A9000000 		.long	0xa9
+ 366 03a3 E703     		.word	0x3e7
+ 367 03a5 00       		.byte	0
+ 368 03a6 0C       		.uleb128 0xc
+ 369 03a7 636F6465 		.ascii "codewords\0"
+ 369      776F7264 
+ 369      7300
+ 370 03b1 01       		.byte	0x1
+ 371 03b2 1B       		.byte	0x1b
+ 372 03b3 05       		.byte	0x5
+ 373 03b4 95030000 		.long	0x395
+ 374 03b8 01       		.byte	0x1
+ 375 03b9 05       		.byte	0x5
+ 376 03ba 03       		.byte	0x3
+ 377 03bb 00000000 		.long	_codewords
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccXdWtbA.s 			page 10
+
+
+ 378 03bf 0D       		.uleb128 0xd
+ 379 03c0 01       		.byte	0x1
+ 380 03c1 44657465 		.ascii "DetectionResultColumn\0"
+ 380      6374696F 
+ 380      6E526573 
+ 380      756C7443 
+ 380      6F6C756D 
+ 381 03d7 01       		.byte	0x1
+ 382 03d8 1D       		.byte	0x1d
+ 383 03d9 06       		.byte	0x6
+ 384 03da 01       		.byte	0x1
+ 385 03db 00000000 		.long	LFB1
+ 386 03df 25000000 		.long	LFE1
+ 387 03e3 00000000 		.secrel32	LLST0
+ 388 03e7 01       		.byte	0x1
+ 389 03e8 3E040000 		.long	0x43e
+ 390 03ec 0E       		.uleb128 0xe
+ 391 03ed 626F756E 		.ascii "boundingBox\0"
+ 391      64696E67 
+ 391      426F7800 
+ 392 03f9 01       		.byte	0x1
+ 393 03fa 1D       		.byte	0x1d
+ 394 03fb 32       		.byte	0x32
+ 395 03fc 3E040000 		.long	0x43e
+ 396 0400 02       		.byte	0x2
+ 397 0401 91       		.byte	0x91
+ 398 0402 00       		.sleb128 0
+ 399 0403 0E       		.uleb128 0xe
+ 400 0404 726F7749 		.ascii "rowIndicator\0"
+ 400      6E646963 
+ 400      61746F72 
+ 400      00
+ 401 0411 01       		.byte	0x1
+ 402 0412 1D       		.byte	0x1d
+ 403 0413 4E       		.byte	0x4e
+ 404 0414 18030000 		.long	0x318
+ 405 0418 02       		.byte	0x2
+ 406 0419 91       		.byte	0x91
+ 407 041a 04       		.sleb128 4
+ 408 041b 0F       		.uleb128 0xf
+ 409 041c 16000000 		.long	LBB2
+ 410 0420 22000000 		.long	LBE2
+ 411 0424 10       		.uleb128 0x10
+ 412 0425 01       		.byte	0x1
+ 413 0426 7072696E 		.ascii "printf\0"
+ 413      746600
+ 414 042d 06       		.byte	0x6
+ 415 042e 00       		.byte	0
+ 416 042f 01       		.byte	0x1
+ 417 0430 B9000000 		.long	0xb9
+ 418 0434 01       		.byte	0x1
+ 419 0435 11       		.uleb128 0x11
+ 420 0436 44040000 		.long	0x444
+ 421 043a 12       		.uleb128 0x12
+ 422 043b 00       		.byte	0
+ 423 043c 00       		.byte	0
+ 424 043d 00       		.byte	0
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccXdWtbA.s 			page 11
+
+
+ 425 043e 13       		.uleb128 0x13
+ 426 043f 04       		.byte	0x4
+ 427 0440 EE020000 		.long	0x2ee
+ 428 0444 13       		.uleb128 0x13
+ 429 0445 04       		.byte	0x4
+ 430 0446 A4000000 		.long	0xa4
+ 431 044a 00       		.byte	0
+ 432              		.section	.debug_abbrev,"dr"
+ 433              	Ldebug_abbrev0:
+ 434 0000 01       		.uleb128 0x1
+ 435 0001 11       		.uleb128 0x11
+ 436 0002 01       		.byte	0x1
+ 437 0003 25       		.uleb128 0x25
+ 438 0004 08       		.uleb128 0x8
+ 439 0005 13       		.uleb128 0x13
+ 440 0006 0B       		.uleb128 0xb
+ 441 0007 03       		.uleb128 0x3
+ 442 0008 08       		.uleb128 0x8
+ 443 0009 1B       		.uleb128 0x1b
+ 444 000a 08       		.uleb128 0x8
+ 445 000b 11       		.uleb128 0x11
+ 446 000c 01       		.uleb128 0x1
+ 447 000d 12       		.uleb128 0x12
+ 448 000e 01       		.uleb128 0x1
+ 449 000f 10       		.uleb128 0x10
+ 450 0010 06       		.uleb128 0x6
+ 451 0011 00       		.byte	0
+ 452 0012 00       		.byte	0
+ 453 0013 02       		.uleb128 0x2
+ 454 0014 24       		.uleb128 0x24
+ 455 0015 00       		.byte	0
+ 456 0016 0B       		.uleb128 0xb
+ 457 0017 0B       		.uleb128 0xb
+ 458 0018 3E       		.uleb128 0x3e
+ 459 0019 0B       		.uleb128 0xb
+ 460 001a 03       		.uleb128 0x3
+ 461 001b 08       		.uleb128 0x8
+ 462 001c 00       		.byte	0
+ 463 001d 00       		.byte	0
+ 464 001e 03       		.uleb128 0x3
+ 465 001f 26       		.uleb128 0x26
+ 466 0020 00       		.byte	0
+ 467 0021 49       		.uleb128 0x49
+ 468 0022 13       		.uleb128 0x13
+ 469 0023 00       		.byte	0
+ 470 0024 00       		.byte	0
+ 471 0025 04       		.uleb128 0x4
+ 472 0026 16       		.uleb128 0x16
+ 473 0027 00       		.byte	0
+ 474 0028 03       		.uleb128 0x3
+ 475 0029 08       		.uleb128 0x8
+ 476 002a 3A       		.uleb128 0x3a
+ 477 002b 0B       		.uleb128 0xb
+ 478 002c 3B       		.uleb128 0x3b
+ 479 002d 0B       		.uleb128 0xb
+ 480 002e 39       		.uleb128 0x39
+ 481 002f 0B       		.uleb128 0xb
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccXdWtbA.s 			page 12
+
+
+ 482 0030 49       		.uleb128 0x49
+ 483 0031 13       		.uleb128 0x13
+ 484 0032 00       		.byte	0
+ 485 0033 00       		.byte	0
+ 486 0034 05       		.uleb128 0x5
+ 487 0035 13       		.uleb128 0x13
+ 488 0036 01       		.byte	0x1
+ 489 0037 0B       		.uleb128 0xb
+ 490 0038 0B       		.uleb128 0xb
+ 491 0039 3A       		.uleb128 0x3a
+ 492 003a 0B       		.uleb128 0xb
+ 493 003b 3B       		.uleb128 0x3b
+ 494 003c 0B       		.uleb128 0xb
+ 495 003d 39       		.uleb128 0x39
+ 496 003e 0B       		.uleb128 0xb
+ 497 003f 01       		.uleb128 0x1
+ 498 0040 13       		.uleb128 0x13
+ 499 0041 00       		.byte	0
+ 500 0042 00       		.byte	0
+ 501 0043 06       		.uleb128 0x6
+ 502 0044 0D       		.uleb128 0xd
+ 503 0045 00       		.byte	0
+ 504 0046 03       		.uleb128 0x3
+ 505 0047 08       		.uleb128 0x8
+ 506 0048 3A       		.uleb128 0x3a
+ 507 0049 0B       		.uleb128 0xb
+ 508 004a 3B       		.uleb128 0x3b
+ 509 004b 0B       		.uleb128 0xb
+ 510 004c 39       		.uleb128 0x39
+ 511 004d 0B       		.uleb128 0xb
+ 512 004e 49       		.uleb128 0x49
+ 513 004f 13       		.uleb128 0x13
+ 514 0050 38       		.uleb128 0x38
+ 515 0051 0A       		.uleb128 0xa
+ 516 0052 00       		.byte	0
+ 517 0053 00       		.byte	0
+ 518 0054 07       		.uleb128 0x7
+ 519 0055 04       		.uleb128 0x4
+ 520 0056 01       		.byte	0x1
+ 521 0057 3E       		.uleb128 0x3e
+ 522 0058 0B       		.uleb128 0xb
+ 523 0059 0B       		.uleb128 0xb
+ 524 005a 0B       		.uleb128 0xb
+ 525 005b 49       		.uleb128 0x49
+ 526 005c 13       		.uleb128 0x13
+ 527 005d 3A       		.uleb128 0x3a
+ 528 005e 0B       		.uleb128 0xb
+ 529 005f 3B       		.uleb128 0x3b
+ 530 0060 0B       		.uleb128 0xb
+ 531 0061 39       		.uleb128 0x39
+ 532 0062 0B       		.uleb128 0xb
+ 533 0063 01       		.uleb128 0x1
+ 534 0064 13       		.uleb128 0x13
+ 535 0065 00       		.byte	0
+ 536 0066 00       		.byte	0
+ 537 0067 08       		.uleb128 0x8
+ 538 0068 28       		.uleb128 0x28
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccXdWtbA.s 			page 13
+
+
+ 539 0069 00       		.byte	0
+ 540 006a 03       		.uleb128 0x3
+ 541 006b 08       		.uleb128 0x8
+ 542 006c 1C       		.uleb128 0x1c
+ 543 006d 0B       		.uleb128 0xb
+ 544 006e 00       		.byte	0
+ 545 006f 00       		.byte	0
+ 546 0070 09       		.uleb128 0x9
+ 547 0071 34       		.uleb128 0x34
+ 548 0072 00       		.byte	0
+ 549 0073 03       		.uleb128 0x3
+ 550 0074 08       		.uleb128 0x8
+ 551 0075 3A       		.uleb128 0x3a
+ 552 0076 0B       		.uleb128 0xb
+ 553 0077 3B       		.uleb128 0x3b
+ 554 0078 0B       		.uleb128 0xb
+ 555 0079 39       		.uleb128 0x39
+ 556 007a 0B       		.uleb128 0xb
+ 557 007b 49       		.uleb128 0x49
+ 558 007c 13       		.uleb128 0x13
+ 559 007d 02       		.uleb128 0x2
+ 560 007e 0A       		.uleb128 0xa
+ 561 007f 00       		.byte	0
+ 562 0080 00       		.byte	0
+ 563 0081 0A       		.uleb128 0xa
+ 564 0082 01       		.uleb128 0x1
+ 565 0083 01       		.byte	0x1
+ 566 0084 49       		.uleb128 0x49
+ 567 0085 13       		.uleb128 0x13
+ 568 0086 01       		.uleb128 0x1
+ 569 0087 13       		.uleb128 0x13
+ 570 0088 00       		.byte	0
+ 571 0089 00       		.byte	0
+ 572 008a 0B       		.uleb128 0xb
+ 573 008b 21       		.uleb128 0x21
+ 574 008c 00       		.byte	0
+ 575 008d 49       		.uleb128 0x49
+ 576 008e 13       		.uleb128 0x13
+ 577 008f 2F       		.uleb128 0x2f
+ 578 0090 05       		.uleb128 0x5
+ 579 0091 00       		.byte	0
+ 580 0092 00       		.byte	0
+ 581 0093 0C       		.uleb128 0xc
+ 582 0094 34       		.uleb128 0x34
+ 583 0095 00       		.byte	0
+ 584 0096 03       		.uleb128 0x3
+ 585 0097 08       		.uleb128 0x8
+ 586 0098 3A       		.uleb128 0x3a
+ 587 0099 0B       		.uleb128 0xb
+ 588 009a 3B       		.uleb128 0x3b
+ 589 009b 0B       		.uleb128 0xb
+ 590 009c 39       		.uleb128 0x39
+ 591 009d 0B       		.uleb128 0xb
+ 592 009e 49       		.uleb128 0x49
+ 593 009f 13       		.uleb128 0x13
+ 594 00a0 3F       		.uleb128 0x3f
+ 595 00a1 0C       		.uleb128 0xc
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccXdWtbA.s 			page 14
+
+
+ 596 00a2 02       		.uleb128 0x2
+ 597 00a3 0A       		.uleb128 0xa
+ 598 00a4 00       		.byte	0
+ 599 00a5 00       		.byte	0
+ 600 00a6 0D       		.uleb128 0xd
+ 601 00a7 2E       		.uleb128 0x2e
+ 602 00a8 01       		.byte	0x1
+ 603 00a9 3F       		.uleb128 0x3f
+ 604 00aa 0C       		.uleb128 0xc
+ 605 00ab 03       		.uleb128 0x3
+ 606 00ac 08       		.uleb128 0x8
+ 607 00ad 3A       		.uleb128 0x3a
+ 608 00ae 0B       		.uleb128 0xb
+ 609 00af 3B       		.uleb128 0x3b
+ 610 00b0 0B       		.uleb128 0xb
+ 611 00b1 39       		.uleb128 0x39
+ 612 00b2 0B       		.uleb128 0xb
+ 613 00b3 27       		.uleb128 0x27
+ 614 00b4 0C       		.uleb128 0xc
+ 615 00b5 11       		.uleb128 0x11
+ 616 00b6 01       		.uleb128 0x1
+ 617 00b7 12       		.uleb128 0x12
+ 618 00b8 01       		.uleb128 0x1
+ 619 00b9 40       		.uleb128 0x40
+ 620 00ba 06       		.uleb128 0x6
+ 621 00bb 9642     		.uleb128 0x2116
+ 622 00bd 0C       		.uleb128 0xc
+ 623 00be 01       		.uleb128 0x1
+ 624 00bf 13       		.uleb128 0x13
+ 625 00c0 00       		.byte	0
+ 626 00c1 00       		.byte	0
+ 627 00c2 0E       		.uleb128 0xe
+ 628 00c3 05       		.uleb128 0x5
+ 629 00c4 00       		.byte	0
+ 630 00c5 03       		.uleb128 0x3
+ 631 00c6 08       		.uleb128 0x8
+ 632 00c7 3A       		.uleb128 0x3a
+ 633 00c8 0B       		.uleb128 0xb
+ 634 00c9 3B       		.uleb128 0x3b
+ 635 00ca 0B       		.uleb128 0xb
+ 636 00cb 39       		.uleb128 0x39
+ 637 00cc 0B       		.uleb128 0xb
+ 638 00cd 49       		.uleb128 0x49
+ 639 00ce 13       		.uleb128 0x13
+ 640 00cf 02       		.uleb128 0x2
+ 641 00d0 0A       		.uleb128 0xa
+ 642 00d1 00       		.byte	0
+ 643 00d2 00       		.byte	0
+ 644 00d3 0F       		.uleb128 0xf
+ 645 00d4 0B       		.uleb128 0xb
+ 646 00d5 01       		.byte	0x1
+ 647 00d6 11       		.uleb128 0x11
+ 648 00d7 01       		.uleb128 0x1
+ 649 00d8 12       		.uleb128 0x12
+ 650 00d9 01       		.uleb128 0x1
+ 651 00da 00       		.byte	0
+ 652 00db 00       		.byte	0
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccXdWtbA.s 			page 15
+
+
+ 653 00dc 10       		.uleb128 0x10
+ 654 00dd 2E       		.uleb128 0x2e
+ 655 00de 01       		.byte	0x1
+ 656 00df 3F       		.uleb128 0x3f
+ 657 00e0 0C       		.uleb128 0xc
+ 658 00e1 03       		.uleb128 0x3
+ 659 00e2 08       		.uleb128 0x8
+ 660 00e3 3A       		.uleb128 0x3a
+ 661 00e4 0B       		.uleb128 0xb
+ 662 00e5 3B       		.uleb128 0x3b
+ 663 00e6 0B       		.uleb128 0xb
+ 664 00e7 27       		.uleb128 0x27
+ 665 00e8 0C       		.uleb128 0xc
+ 666 00e9 49       		.uleb128 0x49
+ 667 00ea 13       		.uleb128 0x13
+ 668 00eb 3C       		.uleb128 0x3c
+ 669 00ec 0C       		.uleb128 0xc
+ 670 00ed 00       		.byte	0
+ 671 00ee 00       		.byte	0
+ 672 00ef 11       		.uleb128 0x11
+ 673 00f0 05       		.uleb128 0x5
+ 674 00f1 00       		.byte	0
+ 675 00f2 49       		.uleb128 0x49
+ 676 00f3 13       		.uleb128 0x13
+ 677 00f4 00       		.byte	0
+ 678 00f5 00       		.byte	0
+ 679 00f6 12       		.uleb128 0x12
+ 680 00f7 18       		.uleb128 0x18
+ 681 00f8 00       		.byte	0
+ 682 00f9 00       		.byte	0
+ 683 00fa 00       		.byte	0
+ 684 00fb 13       		.uleb128 0x13
+ 685 00fc 0F       		.uleb128 0xf
+ 686 00fd 00       		.byte	0
+ 687 00fe 0B       		.uleb128 0xb
+ 688 00ff 0B       		.uleb128 0xb
+ 689 0100 49       		.uleb128 0x49
+ 690 0101 13       		.uleb128 0x13
+ 691 0102 00       		.byte	0
+ 692 0103 00       		.byte	0
+ 693 0104 00       		.byte	0
+ 694              		.section	.debug_loc,"dr"
+ 695              	Ldebug_loc0:
+ 696              	LLST0:
+ 697 0000 00000000 		.long	LFB1-Ltext0
+ 698 0004 01000000 		.long	LCFI0-Ltext0
+ 699 0008 0200     		.word	0x2
+ 700 000a 74       		.byte	0x74
+ 701 000b 04       		.sleb128 4
+ 702 000c 01000000 		.long	LCFI0-Ltext0
+ 703 0010 03000000 		.long	LCFI1-Ltext0
+ 704 0014 0200     		.word	0x2
+ 705 0016 74       		.byte	0x74
+ 706 0017 08       		.sleb128 8
+ 707 0018 03000000 		.long	LCFI1-Ltext0
+ 708 001c 24000000 		.long	LCFI2-Ltext0
+ 709 0020 0200     		.word	0x2
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccXdWtbA.s 			page 16
+
+
+ 710 0022 75       		.byte	0x75
+ 711 0023 08       		.sleb128 8
+ 712 0024 24000000 		.long	LCFI2-Ltext0
+ 713 0028 25000000 		.long	LFE1-Ltext0
+ 714 002c 0200     		.word	0x2
+ 715 002e 74       		.byte	0x74
+ 716 002f 04       		.sleb128 4
+ 717 0030 00000000 		.long	0
+ 718 0034 00000000 		.long	0
+ 719              		.section	.debug_aranges,"dr"
+ 720 0000 1C000000 		.long	0x1c
+ 721 0004 0200     		.word	0x2
+ 722 0006 00000000 		.secrel32	Ldebug_info0
+ 723 000a 04       		.byte	0x4
+ 724 000b 00       		.byte	0
+ 725 000c 0000     		.word	0
+ 726 000e 0000     		.word	0
+ 727 0010 00000000 		.long	Ltext0
+ 728 0014 25000000 		.long	Letext0-Ltext0
+ 729 0018 00000000 		.long	0
+ 730 001c 00000000 		.long	0
+ 731              		.section	.debug_line,"dr"
+ 732              	Ldebug_line0:
+ 733 0000 F5000000 		.section	.debug_str,"dr"
+ 733      0200CF00 
+ 733      00000101 
+ 733      FB0E0D00 
+ 733      01010101 
+ 734              		.ident	"GCC: (i686-posix-dwarf-rev0, Built by MinGW-W64 project) 8.1.0"
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccXdWtbA.s 			page 17
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 PDFDetectionResultColumn.c
+C:\Users\jisu8\AppData\Local\Temp\ccXdWtbA.s:6      .rdata:00000000 _MAX_NEARBY_DISTANCE
+C:\Users\jisu8\AppData\Local\Temp\ccXdWtbA.s:9      .rdata:00000004 _MIN_ROWS_IN_BARCODE
+C:\Users\jisu8\AppData\Local\Temp\ccXdWtbA.s:12     .rdata:00000008 _MAX_ROWS_IN_BARCODE
+                            *COM*:00000fa0 _codewords
+C:\Users\jisu8\AppData\Local\Temp\ccXdWtbA.s:20     .text:00000000 _DetectionResultColumn
+
+UNDEFINED SYMBOLS
+_printf

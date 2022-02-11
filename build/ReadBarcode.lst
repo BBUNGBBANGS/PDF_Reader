@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 1
 
 
    1              		.file	"ReadBarcode.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
   26:src/ReadBarcode.c **** static int GreenIndex(unsigned int format); 
   27:src/ReadBarcode.c **** static int BlueIndex(unsigned int format);  
   28:src/ReadBarcode.c **** static void ReadBarcode_Internal(GenericLuminanceSource_t *source,const DecodeHints_t *hints);
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 2
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 2
 
 
   29:src/ReadBarcode.c **** 
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
   54      00
   55              		.loc 1 42 12
   56 0046 8945E0   		movl	%eax, -32(%ebp)
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 3
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 3
 
 
   43:src/ReadBarcode.c **** 	rowStride = width * pixStride;
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
   98 00b6 8B4508   		movl	8(%ebp), %eax
   99 00b9 897C2424 		movl	%edi, 36(%esp)
  100 00bd 89742420 		movl	%esi, 32(%esp)
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 4
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 4
 
 
  101 00c1 895C241C 		movl	%ebx, 28(%esp)
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  135 0133 B8000000 		movl	$_ImageView, %eax
  135      00
   60:src/ReadBarcode.c **** }
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 5
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 5
 
 
  136              		.loc 1 60 1
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  177 0151 8B4508   		movl	8(%ebp), %eax
  178 0154 C7400400 		movl	$0, 4(%eax)
  178      000000
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 6
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 6
 
 
   67:src/ReadBarcode.c **** 	source->top = 0;
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  215 01c4 90       		nop
   76:src/ReadBarcode.c **** }
  216              		.loc 1 76 1
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 7
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 7
 
 
  217 01c5 C9       		leave
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  252              	LCFI6:
  253              		.cfi_def_cfa_offset 8
  254              		.cfi_offset 5, -8
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 8
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 8
 
 
  255 01fa 89E5     		movl	%esp, %ebp
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  303 0213 89E5     		movl	%esp, %ebp
  304              	LCFI13:
  305              		.cfi_def_cfa_register 5
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 9
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 9
 
 
   98:src/ReadBarcode.c **** 	return ((uint32_t)(format) >> 1*8) & 0xFF; 
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  355 000b 01       		.uleb128 0x1
  356 000c 474E5520 		.ascii "GNU C17 8.1.0 -mtune=generic -march=i686 -g -gdwarf-2 -O0\0"
  356      43313720 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 10
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 10
 
 
  356      382E312E 
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  387 00da 03       		.uleb128 0x3
  388 00db 04       		.byte	0x4
  389 00dc 88000000 		.long	0x88
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 11
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 11
 
 
  390 00e0 02       		.uleb128 0x2
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  426 015f 04       		.uleb128 0x4
  427 0160 75696E74 		.ascii "uint64_t\0"
  427      36345F74 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 12
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 12
 
 
  427      00
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  472 01d2 03       		.byte	0x3
  473 01d3 1E       		.byte	0x1e
  474 01d4 09       		.byte	0x9
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 13
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 13
 
 
  475 01d5 A0000000 		.long	0xa0
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  522 0237 07       		.uleb128 0x7
  523 0238 2A020000 		.long	0x22a
  524 023c 42020000 		.long	0x242
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 14
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 14
 
 
  525 0240 08       		.uleb128 0x8
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  574 029f 0B       		.byte	0xb
  575 02a0 09       		.byte	0x9
  576 02a1 A0000000 		.long	0xa0
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 15
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 15
 
 
  577 02a5 02       		.byte	0x2
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  624 0316 02010003 		.long	0x3000102
  625 031a 0E       		.uleb128 0xe
  626 031b 42475200 		.ascii "BGR\0"
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 16
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 16
 
 
  627 031f 00010203 		.long	0x3020100
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  672 038d 0C000000 		.secrel32	LASF0
  673 0391 05       		.byte	0x5
  674 0392 17       		.byte	0x17
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 17
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 17
 
 
  675 0393 06       		.byte	0x6
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  726      00
  727 03f7 00       		.byte	0
  728 03f8 0D       		.uleb128 0xd
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 18
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 18
 
 
  729 03f9 417A7465 		.ascii "Aztec\0"
@@ -1078,7 +1078,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  767 047d 0F       		.uleb128 0xf
  768 047e 5152436F 		.ascii "QRCode\0"
  768      646500
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 19
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 19
 
 
  769 0485 0020     		.word	0x2000
@@ -1138,7 +1138,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  807 0502 04       		.uleb128 0x4
  808 0503 42696E61 		.ascii "Binarizer_t\0"
  808      72697A65 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 20
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 20
 
 
  808      725F7400 
@@ -1198,7 +1198,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  853 057d 02       		.byte	0x2
  854 057e 23       		.byte	0x23
  855 057f 03       		.uleb128 0x3
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 21
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 21
 
 
  856 0580 06       		.uleb128 0x6
@@ -1258,7 +1258,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  898 05f0 07       		.byte	0x7
  899 05f1 17       		.byte	0x17
  900 05f2 02       		.byte	0x2
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 22
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 22
 
 
  901 05f3 16050000 		.long	0x516
@@ -1318,7 +1318,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  947 0674 13000000 		.secrel32	LASF1
  948 0678 01       		.byte	0x1
  949 0679 64       		.byte	0x64
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 23
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 23
 
 
  950 067a 23       		.byte	0x23
@@ -1378,7 +1378,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  1000 06eb 14       		.uleb128 0x14
  1001 06ec 50697853 		.ascii "PixStride\0"
  1001      74726964 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 24
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 24
 
 
  1001      6500
@@ -1438,7 +1438,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  1046      636500
  1047 0774 01       		.byte	0x1
  1048 0775 3E       		.byte	0x3e
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 25
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 25
 
 
  1049 0776 3C       		.byte	0x3c
@@ -1498,7 +1498,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  1099 07e2 91       		.byte	0x91
  1100 07e3 00       		.sleb128 0
  1101 07e4 18       		.uleb128 0x18
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 26
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 26
 
 
  1102 07e5 77696474 		.ascii "width\0"
@@ -1558,7 +1558,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  1152 0847 02       		.byte	0x2
  1153 0848 91       		.byte	0x91
  1154 0849 58       		.sleb128 -40
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 27
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 27
 
 
  1155 084a 19       		.uleb128 0x19
@@ -1618,7 +1618,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  1205 000d 12       		.uleb128 0x12
  1206 000e 01       		.uleb128 0x1
  1207 000f 10       		.uleb128 0x10
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 28
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 28
 
 
  1208 0010 06       		.uleb128 0x6
@@ -1678,7 +1678,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  1262 0046 00       		.byte	0
  1263 0047 06       		.uleb128 0x6
  1264 0048 0D       		.uleb128 0xd
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 29
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 29
 
 
  1265 0049 00       		.byte	0
@@ -1738,7 +1738,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  1319 007f 0B       		.uleb128 0xb
  1320 0080 3B       		.uleb128 0x3b
  1321 0081 0B       		.uleb128 0xb
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 30
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 30
 
 
  1322 0082 39       		.uleb128 0x39
@@ -1798,7 +1798,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  1376 00b8 03       		.uleb128 0x3
  1377 00b9 08       		.uleb128 0x8
  1378 00ba 1C       		.uleb128 0x1c
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 31
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 31
 
 
  1379 00bb 06       		.uleb128 0x6
@@ -1858,7 +1858,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  1433 00f1 00       		.byte	0
  1434 00f2 13       		.uleb128 0x13
  1435 00f3 34       		.uleb128 0x34
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 32
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 32
 
 
  1436 00f4 00       		.byte	0
@@ -1918,7 +1918,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  1490 012b 0B       		.uleb128 0xb
  1491 012c 49       		.uleb128 0x49
  1492 012d 13       		.uleb128 0x13
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 33
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 33
 
 
  1493 012e 02       		.uleb128 0x2
@@ -1978,7 +1978,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  1547 0166 00       		.byte	0
  1548 0167 03       		.uleb128 0x3
  1549 0168 08       		.uleb128 0x8
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 34
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 34
 
 
  1550 0169 3A       		.uleb128 0x3a
@@ -2038,7 +2038,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  1604 01a0 01       		.uleb128 0x1
  1605 01a1 13       		.uleb128 0x13
  1606 01a2 00       		.byte	0
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 35
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 35
 
 
  1607 01a3 00       		.byte	0
@@ -2098,7 +2098,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  1661 004f 08       		.sleb128 8
  1662 0050 15020000 		.long	LCFI13-Ltext0
  1663 0054 1F020000 		.long	LCFI14-Ltext0
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 36
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 36
 
 
  1664 0058 0200     		.word	0x2
@@ -2158,7 +2158,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  1718 00d8 00000000 		.long	0
  1719 00dc 00000000 		.long	0
  1720              	LLST1:
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 37
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 37
 
 
  1721 00e0 40010000 		.long	LFB14-Ltext0
@@ -2218,7 +2218,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  1775 0014 2B020000 		.long	Letext0-Ltext0
  1776 0018 00000000 		.long	0
  1777 001c 00000000 		.long	0
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 38
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 38
 
 
  1778              		.section	.debug_line,"dr"
@@ -2247,7 +2247,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 1
  1790      74726964 
  1790      6500
  1791              		.ident	"GCC: (i686-posix-dwarf-rev0, Built by MinGW-W64 project) 8.1.0"
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s 			page 39
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s 			page 39
 
 
 DEFINED SYMBOLS
@@ -2255,13 +2255,13 @@ DEFINED SYMBOLS
                             *COM*:00000018 _ImageView
                             *COM*:00000014 _DecodeHints
                             *COM*:00000018 _GenericLuminanceSource_
-C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s:18     .text:00000000 _ReadBarcode
-C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s:159    .text:00000140 _ReadBarcode_Internal
-C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s:225    .text:000001c7 _DecodeHints_Init
-C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s:247    .text:000001f9 _PixStride
-C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s:270    .text:00000204 _RedIndex
-C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s:295    .text:00000212 _GreenIndex
-C:\Users\jisu8\AppData\Local\Temp\ccpuI04r.s:320    .text:00000220 _BlueIndex
+C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s:18     .text:00000000 _ReadBarcode
+C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s:159    .text:00000140 _ReadBarcode_Internal
+C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s:225    .text:000001c7 _DecodeHints_Init
+C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s:247    .text:000001f9 _PixStride
+C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s:270    .text:00000204 _RedIndex
+C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s:295    .text:00000212 _GreenIndex
+C:\Users\jisu8\AppData\Local\Temp\ccU5Trg1.s:320    .text:00000220 _BlueIndex
 
 UNDEFINED SYMBOLS
 _printf

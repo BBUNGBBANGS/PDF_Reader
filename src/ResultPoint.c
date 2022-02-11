@@ -21,8 +21,9 @@
 
 float Distance(int aX, int aY, int bX, int bY)
 {
+	float dx = 0;
+	float dy = 0;
 	dx = (float)(aX - bX);
 	dy = (float)(aY - bY);
 	return sqrt(dx * dx + dy * dy);
 }
-

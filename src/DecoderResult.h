@@ -1,23 +1,20 @@
 #ifndef _DECODERESULT_H
 #define _DECODERESULT_H
 #include "decodestatus.h"
-#if 0
+#include "StructuredAppend.h"
+#include <stdint.h>
 typedef struct 
 {
-	DecodeStatus_t status = NoError;
-	ByteArray _rawBytes;
-	int _numBits = 0;
-	std::wstring _text;
-	std::wstring _ecLevel;
-	int _errorsCorrected = -1;
-	int _erasures = -1;
-	StructuredAppendInfo _structuredAppend;
-	bool _readerInit = false;
-	std::shared_ptr<CustomData> _extra;
-
-	DecoderResult(const DecoderResult &) = delete;
-	DecoderResult& operator=(const DecoderResult &) = delete;
-
+	DecodeStatus_t status;
+	uint8_t * _rawBytes;
+	int _numBits;
+	unsigned char * _text; //wstring
+	unsigned char * _ecLevel; //wstring
+	int _errorsCorrected;
+	int _erasures;
+	StructuredAppendInfo_t _structuredAppend;
+	uint8_t _readerInit; // bool
+	uint8_t * _extra; //custom data
 }DecoderResult_t;
-#endif
+
 #endif

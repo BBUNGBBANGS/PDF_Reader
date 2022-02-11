@@ -29,8 +29,16 @@ src/GenericLuminanceSource.c \
 src/MultiFormatReader.c \
 src/HybridBinarizer.c \
 src/BitMatrix.c \
+src/ResultPoint.c \
+src/Library.c \
+src/pdf417/PDFBarcodeValue.c \
+src/pdf417/PDFBoundingBox.c \
+src/pdf417/PDFCodewordDecoder.c \
+src/pdf417/PDFDetectionResult.c \
+src/pdf417/PDFDetectionResultColumn.c \
+src/pdf417/PDFDetector.c \
 src/pdf417/PDFReader.c \
-src/pdf417/PDFDetector.c \ 
+src/pdf417/PDFScanningDecoder.c
 
 
 
