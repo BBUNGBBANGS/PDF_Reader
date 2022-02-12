@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 1
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 1
 
 
    1              		.file	"PDFBoundingBox.c"
@@ -39,1943 +39,3130 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 1
   14 0001 89E5     		movl	%esp, %ebp
   15              	LCFI1:
   16              		.cfi_def_cfa_register 5
-  24:src/pdf417/PDFBoundingBox.c **** 	result->_imgWidth = 0;
-  17              		.loc 1 24 20
+  24:src/pdf417/PDFBoundingBox.c **** 	result->m_value._imgWidth = 0;
+  17              		.loc 1 24 28
   18 0003 8B4508   		movl	8(%ebp), %eax
-  19 0006 C7000000 		movl	$0, (%eax)
-  19      0000
-  25:src/pdf417/PDFBoundingBox.c **** 	result->_imgHeight = 0;
-  20              		.loc 1 25 21
-  21 000c 8B4508   		movl	8(%ebp), %eax
-  22 000f C7400400 		movl	$0, 4(%eax)
+  19 0006 C7400400 		movl	$0, 4(%eax)
+  19      000000
+  25:src/pdf417/PDFBoundingBox.c **** 	result->m_value._imgHeight = 0;
+  20              		.loc 1 25 29
+  21 000d 8B4508   		movl	8(%ebp), %eax
+  22 0010 C7400800 		movl	$0, 8(%eax)
   22      000000
-  26:src/pdf417/PDFBoundingBox.c **** 	result->_minX = 0;
-  23              		.loc 1 26 16
-  24 0016 8B4508   		movl	8(%ebp), %eax
-  25 0019 C7403800 		movl	$0, 56(%eax)
+  26:src/pdf417/PDFBoundingBox.c **** 	result->m_value._minX = 0;
+  23              		.loc 1 26 24
+  24 0017 8B4508   		movl	8(%ebp), %eax
+  25 001a C7403C00 		movl	$0, 60(%eax)
   25      000000
-  27:src/pdf417/PDFBoundingBox.c **** 	result->_maxX = 0;
-  26              		.loc 1 27 16
-  27 0020 8B4508   		movl	8(%ebp), %eax
-  28 0023 C7403C00 		movl	$0, 60(%eax)
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 2
+  27:src/pdf417/PDFBoundingBox.c **** 	result->m_value._maxX = 0;
+  26              		.loc 1 27 24
+  27 0021 8B4508   		movl	8(%ebp), %eax
+  28 0024 C7404000 		movl	$0, 64(%eax)
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 2
 
 
   28      000000
-  28:src/pdf417/PDFBoundingBox.c **** 	result->_minY = 0;
-  29              		.loc 1 28 16
-  30 002a 8B4508   		movl	8(%ebp), %eax
-  31 002d C7404000 		movl	$0, 64(%eax)
+  28:src/pdf417/PDFBoundingBox.c **** 	result->m_value._minY = 0;
+  29              		.loc 1 28 24
+  30 002b 8B4508   		movl	8(%ebp), %eax
+  31 002e C7404400 		movl	$0, 68(%eax)
   31      000000
-  29:src/pdf417/PDFBoundingBox.c **** 	result->_maxY = 0;
-  32              		.loc 1 29 16
-  33 0034 8B4508   		movl	8(%ebp), %eax
-  34 0037 C7404400 		movl	$0, 68(%eax)
+  29:src/pdf417/PDFBoundingBox.c **** 	result->m_value._maxY = 0;
+  32              		.loc 1 29 24
+  33 0035 8B4508   		movl	8(%ebp), %eax
+  34 0038 C7404800 		movl	$0, 72(%eax)
   34      000000
   30:src/pdf417/PDFBoundingBox.c **** }
   35              		.loc 1 30 1
-  36 003e 90       		nop
-  37 003f 5D       		popl	%ebp
+  36 003f 90       		nop
+  37 0040 5D       		popl	%ebp
   38              	LCFI2:
   39              		.cfi_restore 5
   40              		.cfi_def_cfa 4, 4
-  41 0040 C3       		ret
+  41 0041 C3       		ret
   42              		.cfi_endproc
   43              	LFE4:
-  44              		.globl	_Create
-  46              	_Create:
+  44              		.globl	_topLeft
+  46              	_topLeft:
   47              	LFB5:
   31:src/pdf417/PDFBoundingBox.c **** 
-  32:src/pdf417/PDFBoundingBox.c **** uint8_t Create(int imgWidth, int imgHeight, const ResultPoint_t topLeft, const ResultPoint_t bottom
+  32:src/pdf417/PDFBoundingBox.c **** ResultPoint_t topLeft(BoundingBox_t * box)
   33:src/pdf417/PDFBoundingBox.c **** {
   48              		.loc 1 33 1
   49              		.cfi_startproc
-  50 0041 55       		pushl	%ebp
+  50 0042 55       		pushl	%ebp
   51              	LCFI3:
   52              		.cfi_def_cfa_offset 8
   53              		.cfi_offset 5, -8
-  54 0042 89E5     		movl	%esp, %ebp
+  54 0043 89E5     		movl	%esp, %ebp
   55              	LCFI4:
   56              		.cfi_def_cfa_register 5
-  57 0044 83EC18   		subl	$24, %esp
-  34:src/pdf417/PDFBoundingBox.c **** 	BoundingBox_Init(result);
-  58              		.loc 1 34 2
-  59 0047 8B4540   		movl	64(%ebp), %eax
-  60 004a 890424   		movl	%eax, (%esp)
-  61 004d E8AEFFFF 		call	_BoundingBox_Init
-  61      FF
-  35:src/pdf417/PDFBoundingBox.c **** 
-  36:src/pdf417/PDFBoundingBox.c **** 	if ((topLeft.m_hasValue == 0 && topRight.m_hasValue == 0) ||
-  62              		.loc 1 36 14
-  63 0052 0FB64510 		movzbl	16(%ebp), %eax
-  64              		.loc 1 36 5
-  65 0056 84C0     		testb	%al, %al
-  66 0058 7508     		jne	L3
-  67              		.loc 1 36 42 discriminator 1
-  68 005a 0FB64528 		movzbl	40(%ebp), %eax
-  69              		.loc 1 36 31 discriminator 1
-  70 005e 84C0     		testb	%al, %al
-  71 0060 7430     		je	L4
-  72              	L3:
-  37:src/pdf417/PDFBoundingBox.c **** 		(bottomLeft.m_hasValue == 0 && bottomRight.m_hasValue == 0) ||
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 3
+  34:src/pdf417/PDFBoundingBox.c **** 	return box->m_value._topLeft;
+  57              		.loc 1 34 21
+  58 0045 8B4508   		movl	8(%ebp), %eax
+  59 0048 8B550C   		movl	12(%ebp), %edx
+  60 004b 8B4A0C   		movl	12(%edx), %ecx
+  61 004e 8908     		movl	%ecx, (%eax)
+  62 0050 8B4A10   		movl	16(%edx), %ecx
+  63 0053 894804   		movl	%ecx, 4(%eax)
+  64 0056 8B5214   		movl	20(%edx), %edx
+  65 0059 895008   		movl	%edx, 8(%eax)
+  35:src/pdf417/PDFBoundingBox.c **** } 
+  66              		.loc 1 35 1
+  67 005c 8B4508   		movl	8(%ebp), %eax
+  68 005f 5D       		popl	%ebp
+  69              	LCFI5:
+  70              		.cfi_restore 5
+  71              		.cfi_def_cfa 4, 4
+  72 0060 C3       		ret
+  73              		.cfi_endproc
+  74              	LFE5:
+  75              		.globl	_topRight
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 3
 
 
-  73              		.loc 1 37 14 discriminator 3
-  74 0062 0FB6451C 		movzbl	28(%ebp), %eax
-  36:src/pdf417/PDFBoundingBox.c **** 		(bottomLeft.m_hasValue == 0 && bottomRight.m_hasValue == 0) ||
-  75              		.loc 1 36 60 discriminator 3
-  76 0066 84C0     		testb	%al, %al
-  77 0068 7508     		jne	L5
-  78              		.loc 1 37 45
-  79 006a 0FB64534 		movzbl	52(%ebp), %eax
-  80              		.loc 1 37 31
-  81 006e 84C0     		testb	%al, %al
-  82 0070 7420     		je	L4
-  83              	L5:
-  38:src/pdf417/PDFBoundingBox.c **** 		(topLeft.m_hasValue != 0 && bottomLeft.m_hasValue == 0) ||
-  84              		.loc 1 38 11 discriminator 1
-  85 0072 0FB64510 		movzbl	16(%ebp), %eax
-  37:src/pdf417/PDFBoundingBox.c **** 		(bottomLeft.m_hasValue == 0 && bottomRight.m_hasValue == 0) ||
-  86              		.loc 1 37 63 discriminator 1
-  87 0076 84C0     		testb	%al, %al
-  88 0078 7408     		je	L6
-  89              		.loc 1 38 41
-  90 007a 0FB6451C 		movzbl	28(%ebp), %eax
-  91              		.loc 1 38 28
-  92 007e 84C0     		testb	%al, %al
-  93 0080 7410     		je	L4
-  94              	L6:
-  39:src/pdf417/PDFBoundingBox.c **** 		(topRight.m_hasValue != 0 && bottomRight.m_hasValue == 0)) 
-  95              		.loc 1 39 12 discriminator 1
-  96 0082 0FB64528 		movzbl	40(%ebp), %eax
-  38:src/pdf417/PDFBoundingBox.c **** 		(topLeft.m_hasValue != 0 && bottomLeft.m_hasValue == 0) ||
-  97              		.loc 1 38 59 discriminator 1
-  98 0086 84C0     		testb	%al, %al
-  99 0088 740F     		je	L7
- 100              		.loc 1 39 43
- 101 008a 0FB64534 		movzbl	52(%ebp), %eax
- 102              		.loc 1 39 29
- 103 008e 84C0     		testb	%al, %al
- 104 0090 7507     		jne	L7
- 105              	L4:
-  40:src/pdf417/PDFBoundingBox.c **** 	{
-  41:src/pdf417/PDFBoundingBox.c **** 		return 0;
- 106              		.loc 1 41 10
- 107 0092 B8000000 		movl	$0, %eax
- 107      00
- 108 0097 EB75     		jmp	L8
- 109              	L7:
-  42:src/pdf417/PDFBoundingBox.c **** 	}
-  43:src/pdf417/PDFBoundingBox.c **** 
-  44:src/pdf417/PDFBoundingBox.c **** 	result->_imgWidth = imgWidth;
- 110              		.loc 1 44 20
- 111 0099 8B4540   		movl	64(%ebp), %eax
- 112 009c 8B5508   		movl	8(%ebp), %edx
- 113 009f 8910     		movl	%edx, (%eax)
-  45:src/pdf417/PDFBoundingBox.c **** 	result->_imgHeight = imgHeight;
- 114              		.loc 1 45 21
- 115 00a1 8B4540   		movl	64(%ebp), %eax
- 116 00a4 8B550C   		movl	12(%ebp), %edx
- 117 00a7 895004   		movl	%edx, 4(%eax)
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 4
+  77              	_topRight:
+  78              	LFB6:
+  36:src/pdf417/PDFBoundingBox.c **** 
+  37:src/pdf417/PDFBoundingBox.c **** ResultPoint_t topRight(BoundingBox_t * box)
+  38:src/pdf417/PDFBoundingBox.c **** {
+  79              		.loc 1 38 1
+  80              		.cfi_startproc
+  81 0061 55       		pushl	%ebp
+  82              	LCFI6:
+  83              		.cfi_def_cfa_offset 8
+  84              		.cfi_offset 5, -8
+  85 0062 89E5     		movl	%esp, %ebp
+  86              	LCFI7:
+  87              		.cfi_def_cfa_register 5
+  39:src/pdf417/PDFBoundingBox.c **** 	return box->m_value._topRight;
+  88              		.loc 1 39 21
+  89 0064 8B4508   		movl	8(%ebp), %eax
+  90 0067 8B550C   		movl	12(%ebp), %edx
+  91 006a 8B4A24   		movl	36(%edx), %ecx
+  92 006d 8908     		movl	%ecx, (%eax)
+  93 006f 8B4A28   		movl	40(%edx), %ecx
+  94 0072 894804   		movl	%ecx, 4(%eax)
+  95 0075 8B522C   		movl	44(%edx), %edx
+  96 0078 895008   		movl	%edx, 8(%eax)
+  40:src/pdf417/PDFBoundingBox.c **** } 
+  97              		.loc 1 40 1
+  98 007b 8B4508   		movl	8(%ebp), %eax
+  99 007e 5D       		popl	%ebp
+ 100              	LCFI8:
+ 101              		.cfi_restore 5
+ 102              		.cfi_def_cfa 4, 4
+ 103 007f C3       		ret
+ 104              		.cfi_endproc
+ 105              	LFE6:
+ 106              		.globl	_bottomLeft
+ 108              	_bottomLeft:
+ 109              	LFB7:
+  41:src/pdf417/PDFBoundingBox.c **** 
+  42:src/pdf417/PDFBoundingBox.c **** ResultPoint_t bottomLeft(BoundingBox_t * box)
+  43:src/pdf417/PDFBoundingBox.c **** {
+ 110              		.loc 1 43 1
+ 111              		.cfi_startproc
+ 112 0080 55       		pushl	%ebp
+ 113              	LCFI9:
+ 114              		.cfi_def_cfa_offset 8
+ 115              		.cfi_offset 5, -8
+ 116 0081 89E5     		movl	%esp, %ebp
+ 117              	LCFI10:
+ 118              		.cfi_def_cfa_register 5
+  44:src/pdf417/PDFBoundingBox.c **** 	return box->m_value._bottomLeft;
+ 119              		.loc 1 44 21
+ 120 0083 8B4508   		movl	8(%ebp), %eax
+ 121 0086 8B550C   		movl	12(%ebp), %edx
+ 122 0089 8B4A18   		movl	24(%edx), %ecx
+ 123 008c 8908     		movl	%ecx, (%eax)
+ 124 008e 8B4A1C   		movl	28(%edx), %ecx
+ 125 0091 894804   		movl	%ecx, 4(%eax)
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 4
 
 
-  46:src/pdf417/PDFBoundingBox.c **** 	result->_topLeft = topLeft;
- 118              		.loc 1 46 19
- 119 00aa 8B4540   		movl	64(%ebp), %eax
- 120 00ad 8B5510   		movl	16(%ebp), %edx
- 121 00b0 895008   		movl	%edx, 8(%eax)
- 122 00b3 8B5514   		movl	20(%ebp), %edx
- 123 00b6 89500C   		movl	%edx, 12(%eax)
- 124 00b9 8B5518   		movl	24(%ebp), %edx
- 125 00bc 895010   		movl	%edx, 16(%eax)
-  47:src/pdf417/PDFBoundingBox.c **** 	result->_bottomLeft = bottomLeft;
- 126              		.loc 1 47 22
- 127 00bf 8B4540   		movl	64(%ebp), %eax
- 128 00c2 8B551C   		movl	28(%ebp), %edx
- 129 00c5 895014   		movl	%edx, 20(%eax)
- 130 00c8 8B5520   		movl	32(%ebp), %edx
- 131 00cb 895018   		movl	%edx, 24(%eax)
- 132 00ce 8B5524   		movl	36(%ebp), %edx
- 133 00d1 89501C   		movl	%edx, 28(%eax)
-  48:src/pdf417/PDFBoundingBox.c **** 	result->_topRight = topRight;
- 134              		.loc 1 48 20
- 135 00d4 8B4540   		movl	64(%ebp), %eax
- 136 00d7 8B5528   		movl	40(%ebp), %edx
- 137 00da 895020   		movl	%edx, 32(%eax)
- 138 00dd 8B552C   		movl	44(%ebp), %edx
- 139 00e0 895024   		movl	%edx, 36(%eax)
- 140 00e3 8B5530   		movl	48(%ebp), %edx
- 141 00e6 895028   		movl	%edx, 40(%eax)
-  49:src/pdf417/PDFBoundingBox.c **** 	result->_bottomRight = bottomRight;
- 142              		.loc 1 49 23
- 143 00e9 8B4540   		movl	64(%ebp), %eax
- 144 00ec 8B5534   		movl	52(%ebp), %edx
- 145 00ef 89502C   		movl	%edx, 44(%eax)
- 146 00f2 8B5538   		movl	56(%ebp), %edx
- 147 00f5 895030   		movl	%edx, 48(%eax)
- 148 00f8 8B553C   		movl	60(%ebp), %edx
- 149 00fb 895034   		movl	%edx, 52(%eax)
-  50:src/pdf417/PDFBoundingBox.c **** 	calculateMinMaxValues(result);
- 150              		.loc 1 50 2
- 151 00fe 8B4540   		movl	64(%ebp), %eax
- 152 0101 890424   		movl	%eax, (%esp)
- 153 0104 E8070000 		call	_calculateMinMaxValues
- 153      00
+ 126 0094 8B5220   		movl	32(%edx), %edx
+ 127 0097 895008   		movl	%edx, 8(%eax)
+  45:src/pdf417/PDFBoundingBox.c **** } 
+ 128              		.loc 1 45 1
+ 129 009a 8B4508   		movl	8(%ebp), %eax
+ 130 009d 5D       		popl	%ebp
+ 131              	LCFI11:
+ 132              		.cfi_restore 5
+ 133              		.cfi_def_cfa 4, 4
+ 134 009e C3       		ret
+ 135              		.cfi_endproc
+ 136              	LFE7:
+ 137              		.globl	_bottomRight
+ 139              	_bottomRight:
+ 140              	LFB8:
+  46:src/pdf417/PDFBoundingBox.c **** 
+  47:src/pdf417/PDFBoundingBox.c **** ResultPoint_t bottomRight(BoundingBox_t * box)
+  48:src/pdf417/PDFBoundingBox.c **** {
+ 141              		.loc 1 48 1
+ 142              		.cfi_startproc
+ 143 009f 55       		pushl	%ebp
+ 144              	LCFI12:
+ 145              		.cfi_def_cfa_offset 8
+ 146              		.cfi_offset 5, -8
+ 147 00a0 89E5     		movl	%esp, %ebp
+ 148              	LCFI13:
+ 149              		.cfi_def_cfa_register 5
+  49:src/pdf417/PDFBoundingBox.c **** 	return box->m_value._bottomRight;
+ 150              		.loc 1 49 21
+ 151 00a2 8B4508   		movl	8(%ebp), %eax
+ 152 00a5 8B550C   		movl	12(%ebp), %edx
+ 153 00a8 8B4A30   		movl	48(%edx), %ecx
+ 154 00ab 8908     		movl	%ecx, (%eax)
+ 155 00ad 8B4A34   		movl	52(%edx), %ecx
+ 156 00b0 894804   		movl	%ecx, 4(%eax)
+ 157 00b3 8B5238   		movl	56(%edx), %edx
+ 158 00b6 895008   		movl	%edx, 8(%eax)
+  50:src/pdf417/PDFBoundingBox.c **** } 
+ 159              		.loc 1 50 1
+ 160 00b9 8B4508   		movl	8(%ebp), %eax
+ 161 00bc 5D       		popl	%ebp
+ 162              	LCFI14:
+ 163              		.cfi_restore 5
+ 164              		.cfi_def_cfa 4, 4
+ 165 00bd C3       		ret
+ 166              		.cfi_endproc
+ 167              	LFE8:
+ 168              		.globl	_Create
+ 170              	_Create:
+ 171              	LFB9:
   51:src/pdf417/PDFBoundingBox.c **** 
-  52:src/pdf417/PDFBoundingBox.c **** 	return 1;//true
- 154              		.loc 1 52 9
- 155 0109 B8010000 		movl	$1, %eax
- 155      00
- 156              	L8:
-  53:src/pdf417/PDFBoundingBox.c **** 
-  54:src/pdf417/PDFBoundingBox.c **** }
- 157              		.loc 1 54 1
- 158 010e C9       		leave
- 159              	LCFI5:
- 160              		.cfi_restore 5
- 161              		.cfi_def_cfa 4, 4
- 162 010f C3       		ret
- 163              		.cfi_endproc
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 5
+  52:src/pdf417/PDFBoundingBox.c **** uint8_t Create(int imgWidth, int imgHeight, const ResultPoint_t topLeft, const ResultPoint_t bottom
+  53:src/pdf417/PDFBoundingBox.c **** {
+ 172              		.loc 1 53 1
+ 173              		.cfi_startproc
+ 174 00be 55       		pushl	%ebp
+ 175              	LCFI15:
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 5
 
 
- 164              	LFE5:
- 165              		.globl	_calculateMinMaxValues
- 167              	_calculateMinMaxValues:
- 168              	LFB6:
+ 176              		.cfi_def_cfa_offset 8
+ 177              		.cfi_offset 5, -8
+ 178 00bf 89E5     		movl	%esp, %ebp
+ 179              	LCFI16:
+ 180              		.cfi_def_cfa_register 5
+ 181 00c1 83EC18   		subl	$24, %esp
+  54:src/pdf417/PDFBoundingBox.c **** 	BoundingBox_Init(result);
+ 182              		.loc 1 54 2
+ 183 00c4 8B4540   		movl	64(%ebp), %eax
+ 184 00c7 890424   		movl	%eax, (%esp)
+ 185 00ca E831FFFF 		call	_BoundingBox_Init
+ 185      FF
   55:src/pdf417/PDFBoundingBox.c **** 
-  56:src/pdf417/PDFBoundingBox.c **** void calculateMinMaxValues(BoundingBox_t * result)
-  57:src/pdf417/PDFBoundingBox.c **** {
- 169              		.loc 1 57 1
- 170              		.cfi_startproc
- 171 0110 55       		pushl	%ebp
- 172              	LCFI6:
- 173              		.cfi_def_cfa_offset 8
- 174              		.cfi_offset 5, -8
- 175 0111 89E5     		movl	%esp, %ebp
- 176              	LCFI7:
- 177              		.cfi_def_cfa_register 5
- 178 0113 83EC0C   		subl	$12, %esp
-  58:src/pdf417/PDFBoundingBox.c **** 	if (result->_topLeft.m_hasValue == 0) 
- 179              		.loc 1 58 22
- 180 0116 8B4508   		movl	8(%ebp), %eax
- 181 0119 0FB64008 		movzbl	8(%eax), %eax
- 182              		.loc 1 58 5
- 183 011d 84C0     		testb	%al, %al
- 184 011f 7528     		jne	L10
-  59:src/pdf417/PDFBoundingBox.c **** 	{
-  60:src/pdf417/PDFBoundingBox.c **** 		result->_topLeft.m_value.x = 0.f;
- 185              		.loc 1 60 30
- 186 0121 8B4508   		movl	8(%ebp), %eax
- 187 0124 D9EE     		fldz
- 188 0126 D9580C   		fstps	12(%eax)
-  61:src/pdf417/PDFBoundingBox.c **** 		result->_topLeft.m_value.x = result->_topRight.m_value.y;
- 189              		.loc 1 61 57
- 190 0129 8B4508   		movl	8(%ebp), %eax
- 191 012c D94028   		flds	40(%eax)
- 192              		.loc 1 61 30
- 193 012f 8B4508   		movl	8(%ebp), %eax
- 194 0132 D9580C   		fstps	12(%eax)
-  62:src/pdf417/PDFBoundingBox.c **** 		result->_bottomLeft.m_value.x = 0.f;
- 195              		.loc 1 62 33
- 196 0135 8B4508   		movl	8(%ebp), %eax
- 197 0138 D9EE     		fldz
- 198 013a D95818   		fstps	24(%eax)
-  63:src/pdf417/PDFBoundingBox.c **** 		result->_bottomLeft.m_value.x = result->_bottomRight.m_value.y;
- 199              		.loc 1 63 63
- 200 013d 8B4508   		movl	8(%ebp), %eax
- 201 0140 D94034   		flds	52(%eax)
- 202              		.loc 1 63 33
- 203 0143 8B4508   		movl	8(%ebp), %eax
- 204 0146 D95818   		fstps	24(%eax)
- 205              	L10:
-  64:src/pdf417/PDFBoundingBox.c **** 	}
-  65:src/pdf417/PDFBoundingBox.c **** 	if (result->_topRight.m_hasValue == 0) 
- 206              		.loc 1 65 23
- 207 0149 8B4508   		movl	8(%ebp), %eax
- 208 014c 0FB64020 		movzbl	32(%eax), %eax
- 209              		.loc 1 65 5
- 210 0150 84C0     		testb	%al, %al
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 6
+  56:src/pdf417/PDFBoundingBox.c **** 	if ((topLeft.m_hasValue == 0 && topRight.m_hasValue == 0) ||
+ 186              		.loc 1 56 14
+ 187 00cf 0FB64510 		movzbl	16(%ebp), %eax
+ 188              		.loc 1 56 5
+ 189 00d3 84C0     		testb	%al, %al
+ 190 00d5 7508     		jne	L11
+ 191              		.loc 1 56 42 discriminator 1
+ 192 00d7 0FB64528 		movzbl	40(%ebp), %eax
+ 193              		.loc 1 56 31 discriminator 1
+ 194 00db 84C0     		testb	%al, %al
+ 195 00dd 7430     		je	L12
+ 196              	L11:
+  57:src/pdf417/PDFBoundingBox.c **** 		(bottomLeft.m_hasValue == 0 && bottomRight.m_hasValue == 0) ||
+ 197              		.loc 1 57 14 discriminator 3
+ 198 00df 0FB6451C 		movzbl	28(%ebp), %eax
+  56:src/pdf417/PDFBoundingBox.c **** 		(bottomLeft.m_hasValue == 0 && bottomRight.m_hasValue == 0) ||
+ 199              		.loc 1 56 60 discriminator 3
+ 200 00e3 84C0     		testb	%al, %al
+ 201 00e5 7508     		jne	L13
+ 202              		.loc 1 57 45
+ 203 00e7 0FB64534 		movzbl	52(%ebp), %eax
+ 204              		.loc 1 57 31
+ 205 00eb 84C0     		testb	%al, %al
+ 206 00ed 7420     		je	L12
+ 207              	L13:
+  58:src/pdf417/PDFBoundingBox.c **** 		(topLeft.m_hasValue != 0 && bottomLeft.m_hasValue == 0) ||
+ 208              		.loc 1 58 11 discriminator 1
+ 209 00ef 0FB64510 		movzbl	16(%ebp), %eax
+  57:src/pdf417/PDFBoundingBox.c **** 		(bottomLeft.m_hasValue == 0 && bottomRight.m_hasValue == 0) ||
+ 210              		.loc 1 57 63 discriminator 1
+ 211 00f3 84C0     		testb	%al, %al
+ 212 00f5 7408     		je	L14
+ 213              		.loc 1 58 41
+ 214 00f7 0FB6451C 		movzbl	28(%ebp), %eax
+ 215              		.loc 1 58 28
+ 216 00fb 84C0     		testb	%al, %al
+ 217 00fd 7410     		je	L12
+ 218              	L14:
+  59:src/pdf417/PDFBoundingBox.c **** 		(topRight.m_hasValue != 0 && bottomRight.m_hasValue == 0)) 
+ 219              		.loc 1 59 12 discriminator 1
+ 220 00ff 0FB64528 		movzbl	40(%ebp), %eax
+  58:src/pdf417/PDFBoundingBox.c **** 		(topLeft.m_hasValue != 0 && bottomLeft.m_hasValue == 0) ||
+ 221              		.loc 1 58 59 discriminator 1
+ 222 0103 84C0     		testb	%al, %al
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 6
 
 
- 211 0152 7541     		jne	L11
-  66:src/pdf417/PDFBoundingBox.c **** 	{
-  67:src/pdf417/PDFBoundingBox.c **** 		result->_topRight.m_value.x = (float)(result->_imgWidth - 1);
- 212              		.loc 1 67 47
- 213 0154 8B4508   		movl	8(%ebp), %eax
- 214 0157 8B00     		movl	(%eax), %eax
- 215              		.loc 1 67 59
- 216 0159 83E801   		subl	$1, %eax
- 217              		.loc 1 67 33
- 218 015c 8945F4   		movl	%eax, -12(%ebp)
- 219 015f DB45F4   		fildl	-12(%ebp)
- 220              		.loc 1 67 31
- 221 0162 8B4508   		movl	8(%ebp), %eax
- 222 0165 D95824   		fstps	36(%eax)
-  68:src/pdf417/PDFBoundingBox.c **** 		result->_topRight.m_value.y = result->_topLeft.m_value.y;
- 223              		.loc 1 68 57
- 224 0168 8B4508   		movl	8(%ebp), %eax
- 225 016b D94010   		flds	16(%eax)
- 226              		.loc 1 68 31
- 227 016e 8B4508   		movl	8(%ebp), %eax
- 228 0171 D95828   		fstps	40(%eax)
-  69:src/pdf417/PDFBoundingBox.c **** 		result->_bottomRight.m_value.x = (float)(result->_imgHeight - 1); 
- 229              		.loc 1 69 50
- 230 0174 8B4508   		movl	8(%ebp), %eax
- 231 0177 8B4004   		movl	4(%eax), %eax
- 232              		.loc 1 69 63
- 233 017a 83E801   		subl	$1, %eax
- 234              		.loc 1 69 36
- 235 017d 8945F4   		movl	%eax, -12(%ebp)
- 236 0180 DB45F4   		fildl	-12(%ebp)
- 237              		.loc 1 69 34
- 238 0183 8B4508   		movl	8(%ebp), %eax
- 239 0186 D95830   		fstps	48(%eax)
-  70:src/pdf417/PDFBoundingBox.c **** 		result->_bottomRight.m_value.y = result->_bottomLeft.m_value.y;
- 240              		.loc 1 70 63
- 241 0189 8B4508   		movl	8(%ebp), %eax
- 242 018c D9401C   		flds	28(%eax)
- 243              		.loc 1 70 34
- 244 018f 8B4508   		movl	8(%ebp), %eax
- 245 0192 D95834   		fstps	52(%eax)
- 246              	L11:
-  71:src/pdf417/PDFBoundingBox.c **** 	}
+ 223 0105 740F     		je	L15
+ 224              		.loc 1 59 43
+ 225 0107 0FB64534 		movzbl	52(%ebp), %eax
+ 226              		.loc 1 59 29
+ 227 010b 84C0     		testb	%al, %al
+ 228 010d 7507     		jne	L15
+ 229              	L12:
+  60:src/pdf417/PDFBoundingBox.c **** 	{
+  61:src/pdf417/PDFBoundingBox.c **** 		return 0;
+ 230              		.loc 1 61 10
+ 231 010f B8000000 		movl	$0, %eax
+ 231      00
+ 232 0114 EB7C     		jmp	L16
+ 233              	L15:
+  62:src/pdf417/PDFBoundingBox.c **** 	}
+  63:src/pdf417/PDFBoundingBox.c **** 
+  64:src/pdf417/PDFBoundingBox.c **** 	result->m_value._imgWidth = imgWidth;
+ 234              		.loc 1 64 28
+ 235 0116 8B4540   		movl	64(%ebp), %eax
+ 236 0119 8B5508   		movl	8(%ebp), %edx
+ 237 011c 895004   		movl	%edx, 4(%eax)
+  65:src/pdf417/PDFBoundingBox.c **** 	result->m_value._imgHeight = imgHeight;
+ 238              		.loc 1 65 29
+ 239 011f 8B4540   		movl	64(%ebp), %eax
+ 240 0122 8B550C   		movl	12(%ebp), %edx
+ 241 0125 895008   		movl	%edx, 8(%eax)
+  66:src/pdf417/PDFBoundingBox.c **** 	result->m_value._topLeft = topLeft;
+ 242              		.loc 1 66 27
+ 243 0128 8B4540   		movl	64(%ebp), %eax
+ 244 012b 8B5510   		movl	16(%ebp), %edx
+ 245 012e 89500C   		movl	%edx, 12(%eax)
+ 246 0131 8B5514   		movl	20(%ebp), %edx
+ 247 0134 895010   		movl	%edx, 16(%eax)
+ 248 0137 8B5518   		movl	24(%ebp), %edx
+ 249 013a 895014   		movl	%edx, 20(%eax)
+  67:src/pdf417/PDFBoundingBox.c **** 	result->m_value._bottomLeft = bottomLeft;
+ 250              		.loc 1 67 30
+ 251 013d 8B4540   		movl	64(%ebp), %eax
+ 252 0140 8B551C   		movl	28(%ebp), %edx
+ 253 0143 895018   		movl	%edx, 24(%eax)
+ 254 0146 8B5520   		movl	32(%ebp), %edx
+ 255 0149 89501C   		movl	%edx, 28(%eax)
+ 256 014c 8B5524   		movl	36(%ebp), %edx
+ 257 014f 895020   		movl	%edx, 32(%eax)
+  68:src/pdf417/PDFBoundingBox.c **** 	result->m_value._topRight = topRight;
+ 258              		.loc 1 68 28
+ 259 0152 8B4540   		movl	64(%ebp), %eax
+ 260 0155 8B5528   		movl	40(%ebp), %edx
+ 261 0158 895024   		movl	%edx, 36(%eax)
+ 262 015b 8B552C   		movl	44(%ebp), %edx
+ 263 015e 895028   		movl	%edx, 40(%eax)
+ 264 0161 8B5530   		movl	48(%ebp), %edx
+ 265 0164 89502C   		movl	%edx, 44(%eax)
+  69:src/pdf417/PDFBoundingBox.c **** 	result->m_value._bottomRight = bottomRight;
+ 266              		.loc 1 69 31
+ 267 0167 8B4540   		movl	64(%ebp), %eax
+ 268 016a 8B5534   		movl	52(%ebp), %edx
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 7
+
+
+ 269 016d 895030   		movl	%edx, 48(%eax)
+ 270 0170 8B5538   		movl	56(%ebp), %edx
+ 271 0173 895034   		movl	%edx, 52(%eax)
+ 272 0176 8B553C   		movl	60(%ebp), %edx
+ 273 0179 895038   		movl	%edx, 56(%eax)
+  70:src/pdf417/PDFBoundingBox.c **** 	result->m_hasValue = 1;
+ 274              		.loc 1 70 21
+ 275 017c 8B4540   		movl	64(%ebp), %eax
+ 276 017f C60001   		movb	$1, (%eax)
+  71:src/pdf417/PDFBoundingBox.c **** 	calculateMinMaxValues(result);
+ 277              		.loc 1 71 2
+ 278 0182 8B4540   		movl	64(%ebp), %eax
+ 279 0185 890424   		movl	%eax, (%esp)
+ 280 0188 E8C00000 		call	_calculateMinMaxValues
+ 280      00
   72:src/pdf417/PDFBoundingBox.c **** 
-  73:src/pdf417/PDFBoundingBox.c **** 	result->_minX = (int)(__min(result->_topLeft.m_value.x, result->_bottomLeft.m_value.x));
- 247              		.loc 1 73 24
- 248 0195 8B4508   		movl	8(%ebp), %eax
- 249 0198 D9400C   		flds	12(%eax)
- 250 019b 8B4508   		movl	8(%ebp), %eax
- 251 019e D94018   		flds	24(%eax)
- 252              		.loc 1 73 18
- 253 01a1 DFF1     		fcomip	%st(1), %st
- 254 01a3 DDD8     		fstp	%st(0)
- 255 01a5 7622     		jbe	L28
- 256              		.loc 1 73 24 discriminator 1
- 257 01a7 8B4508   		movl	8(%ebp), %eax
- 258 01aa D9400C   		flds	12(%eax)
- 259              		.loc 1 73 18 discriminator 1
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 7
+  73:src/pdf417/PDFBoundingBox.c **** 	return 1;//true
+ 281              		.loc 1 73 9
+ 282 018d B8010000 		movl	$1, %eax
+ 282      00
+ 283              	L16:
+  74:src/pdf417/PDFBoundingBox.c **** 
+  75:src/pdf417/PDFBoundingBox.c **** }
+ 284              		.loc 1 75 1
+ 285 0192 C9       		leave
+ 286              	LCFI17:
+ 287              		.cfi_restore 5
+ 288              		.cfi_def_cfa 4, 4
+ 289 0193 C3       		ret
+ 290              		.cfi_endproc
+ 291              	LFE9:
+ 292              		.globl	_copy
+ 294              	_copy:
+ 295              	LFB10:
+  76:src/pdf417/PDFBoundingBox.c **** 
+  77:src/pdf417/PDFBoundingBox.c **** void copy(BoundingBox_t * box,BoundingBox_t * result)
+  78:src/pdf417/PDFBoundingBox.c **** {
+ 296              		.loc 1 78 1
+ 297              		.cfi_startproc
+ 298 0194 55       		pushl	%ebp
+ 299              	LCFI18:
+ 300              		.cfi_def_cfa_offset 8
+ 301              		.cfi_offset 5, -8
+ 302 0195 89E5     		movl	%esp, %ebp
+ 303              	LCFI19:
+ 304              		.cfi_def_cfa_register 5
+  79:src/pdf417/PDFBoundingBox.c **** 	result->m_hasValue = box->m_hasValue;
+ 305              		.loc 1 79 26
+ 306 0197 8B4508   		movl	8(%ebp), %eax
+ 307 019a 0FB610   		movzbl	(%eax), %edx
+ 308              		.loc 1 79 21
+ 309 019d 8B450C   		movl	12(%ebp), %eax
+ 310 01a0 8810     		movb	%dl, (%eax)
+  80:src/pdf417/PDFBoundingBox.c **** 	result->m_value._imgWidth = box->m_value._imgWidth;
+ 311              		.loc 1 80 42
+ 312 01a2 8B4508   		movl	8(%ebp), %eax
+ 313 01a5 8B5004   		movl	4(%eax), %edx
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 8
 
 
- 260 01ad D97DFE   		fnstcw	-2(%ebp)
- 261 01b0 0FB745FE 		movzwl	-2(%ebp), %eax
- 262 01b4 80CC0C   		orb	$12, %ah
- 263 01b7 668945FC 		movw	%ax, -4(%ebp)
- 264 01bb D96DFC   		fldcw	-4(%ebp)
- 265 01be DB5DF8   		fistpl	-8(%ebp)
- 266 01c1 D96DFE   		fldcw	-2(%ebp)
- 267 01c4 8B55F8   		movl	-8(%ebp), %edx
- 268 01c7 EB20     		jmp	L14
- 269              	L28:
- 270              		.loc 1 73 24 discriminator 2
- 271 01c9 8B4508   		movl	8(%ebp), %eax
- 272 01cc D94018   		flds	24(%eax)
- 273              		.loc 1 73 18 discriminator 2
- 274 01cf D97DFE   		fnstcw	-2(%ebp)
- 275 01d2 0FB745FE 		movzwl	-2(%ebp), %eax
- 276 01d6 80CC0C   		orb	$12, %ah
- 277 01d9 668945FC 		movw	%ax, -4(%ebp)
- 278 01dd D96DFC   		fldcw	-4(%ebp)
- 279 01e0 DB5DF8   		fistpl	-8(%ebp)
- 280 01e3 D96DFE   		fldcw	-2(%ebp)
- 281 01e6 8B55F8   		movl	-8(%ebp), %edx
- 282              	L14:
- 283              		.loc 1 73 16 discriminator 4
- 284 01e9 8B4508   		movl	8(%ebp), %eax
- 285 01ec 895038   		movl	%edx, 56(%eax)
-  74:src/pdf417/PDFBoundingBox.c **** 	result->_maxX = (int)(__max(result->_topRight.m_value.x, result->_bottomRight.m_value.x));
- 286              		.loc 1 74 24 discriminator 4
- 287 01ef 8B4508   		movl	8(%ebp), %eax
- 288 01f2 D94024   		flds	36(%eax)
- 289 01f5 8B4508   		movl	8(%ebp), %eax
- 290 01f8 D94030   		flds	48(%eax)
- 291 01fb D9C9     		fxch	%st(1)
- 292              		.loc 1 74 18 discriminator 4
- 293 01fd DFF1     		fcomip	%st(1), %st
- 294 01ff DDD8     		fstp	%st(0)
- 295 0201 7614     		jbe	L29
- 296              		.loc 1 74 24 discriminator 1
- 297 0203 8B4508   		movl	8(%ebp), %eax
- 298 0206 D94024   		flds	36(%eax)
- 299              		.loc 1 74 18 discriminator 1
- 300 0209 D96DFC   		fldcw	-4(%ebp)
- 301 020c DB5DF8   		fistpl	-8(%ebp)
- 302 020f D96DFE   		fldcw	-2(%ebp)
- 303 0212 8B55F8   		movl	-8(%ebp), %edx
- 304 0215 EB12     		jmp	L17
- 305              	L29:
- 306              		.loc 1 74 24 discriminator 2
- 307 0217 8B4508   		movl	8(%ebp), %eax
- 308 021a D94030   		flds	48(%eax)
- 309              		.loc 1 74 18 discriminator 2
- 310 021d D96DFC   		fldcw	-4(%ebp)
- 311 0220 DB5DF8   		fistpl	-8(%ebp)
- 312 0223 D96DFE   		fldcw	-2(%ebp)
- 313 0226 8B55F8   		movl	-8(%ebp), %edx
- 314              	L17:
- 315              		.loc 1 74 16 discriminator 4
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 8
+ 314              		.loc 1 80 28
+ 315 01a8 8B450C   		movl	12(%ebp), %eax
+ 316 01ab 895004   		movl	%edx, 4(%eax)
+  81:src/pdf417/PDFBoundingBox.c **** 	result->m_value._imgHeight = box->m_value._imgHeight;
+ 317              		.loc 1 81 43
+ 318 01ae 8B4508   		movl	8(%ebp), %eax
+ 319 01b1 8B5008   		movl	8(%eax), %edx
+ 320              		.loc 1 81 29
+ 321 01b4 8B450C   		movl	12(%ebp), %eax
+ 322 01b7 895008   		movl	%edx, 8(%eax)
+  82:src/pdf417/PDFBoundingBox.c **** 	result->m_value._topLeft = box->m_value._topLeft;
+ 323              		.loc 1 82 27
+ 324 01ba 8B450C   		movl	12(%ebp), %eax
+ 325 01bd 8B5508   		movl	8(%ebp), %edx
+ 326 01c0 8B4A0C   		movl	12(%edx), %ecx
+ 327 01c3 89480C   		movl	%ecx, 12(%eax)
+ 328 01c6 8B4A10   		movl	16(%edx), %ecx
+ 329 01c9 894810   		movl	%ecx, 16(%eax)
+ 330 01cc 8B5214   		movl	20(%edx), %edx
+ 331 01cf 895014   		movl	%edx, 20(%eax)
+  83:src/pdf417/PDFBoundingBox.c **** 	result->m_value._bottomLeft = box->m_value._bottomLeft;
+ 332              		.loc 1 83 30
+ 333 01d2 8B450C   		movl	12(%ebp), %eax
+ 334 01d5 8B5508   		movl	8(%ebp), %edx
+ 335 01d8 8B4A18   		movl	24(%edx), %ecx
+ 336 01db 894818   		movl	%ecx, 24(%eax)
+ 337 01de 8B4A1C   		movl	28(%edx), %ecx
+ 338 01e1 89481C   		movl	%ecx, 28(%eax)
+ 339 01e4 8B5220   		movl	32(%edx), %edx
+ 340 01e7 895020   		movl	%edx, 32(%eax)
+  84:src/pdf417/PDFBoundingBox.c **** 	result->m_value._topRight = box->m_value._topRight;
+ 341              		.loc 1 84 28
+ 342 01ea 8B450C   		movl	12(%ebp), %eax
+ 343 01ed 8B5508   		movl	8(%ebp), %edx
+ 344 01f0 8B4A24   		movl	36(%edx), %ecx
+ 345 01f3 894824   		movl	%ecx, 36(%eax)
+ 346 01f6 8B4A28   		movl	40(%edx), %ecx
+ 347 01f9 894828   		movl	%ecx, 40(%eax)
+ 348 01fc 8B522C   		movl	44(%edx), %edx
+ 349 01ff 89502C   		movl	%edx, 44(%eax)
+  85:src/pdf417/PDFBoundingBox.c **** 	result->m_value._bottomRight = box->m_value._bottomRight;
+ 350              		.loc 1 85 31
+ 351 0202 8B450C   		movl	12(%ebp), %eax
+ 352 0205 8B5508   		movl	8(%ebp), %edx
+ 353 0208 8B4A30   		movl	48(%edx), %ecx
+ 354 020b 894830   		movl	%ecx, 48(%eax)
+ 355 020e 8B4A34   		movl	52(%edx), %ecx
+ 356 0211 894834   		movl	%ecx, 52(%eax)
+ 357 0214 8B5238   		movl	56(%edx), %edx
+ 358 0217 895038   		movl	%edx, 56(%eax)
+  86:src/pdf417/PDFBoundingBox.c **** 	result->m_value._minX = box->m_value._minX;
+ 359              		.loc 1 86 38
+ 360 021a 8B4508   		movl	8(%ebp), %eax
+ 361 021d 8B503C   		movl	60(%eax), %edx
+ 362              		.loc 1 86 24
+ 363 0220 8B450C   		movl	12(%ebp), %eax
+ 364 0223 89503C   		movl	%edx, 60(%eax)
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 9
 
 
- 316 0229 8B4508   		movl	8(%ebp), %eax
- 317 022c 89503C   		movl	%edx, 60(%eax)
-  75:src/pdf417/PDFBoundingBox.c **** 	result->_minY = (int)(__min(result->_topLeft.m_value.y, result->_topRight.m_value.y));
- 318              		.loc 1 75 24 discriminator 4
- 319 022f 8B4508   		movl	8(%ebp), %eax
- 320 0232 D94010   		flds	16(%eax)
- 321 0235 8B4508   		movl	8(%ebp), %eax
- 322 0238 D94028   		flds	40(%eax)
- 323              		.loc 1 75 18 discriminator 4
- 324 023b DFF1     		fcomip	%st(1), %st
- 325 023d DDD8     		fstp	%st(0)
- 326 023f 7614     		jbe	L30
- 327              		.loc 1 75 24 discriminator 1
- 328 0241 8B4508   		movl	8(%ebp), %eax
- 329 0244 D94010   		flds	16(%eax)
- 330              		.loc 1 75 18 discriminator 1
- 331 0247 D96DFC   		fldcw	-4(%ebp)
- 332 024a DB5DF8   		fistpl	-8(%ebp)
- 333 024d D96DFE   		fldcw	-2(%ebp)
- 334 0250 8B55F8   		movl	-8(%ebp), %edx
- 335 0253 EB12     		jmp	L20
- 336              	L30:
- 337              		.loc 1 75 24 discriminator 2
- 338 0255 8B4508   		movl	8(%ebp), %eax
- 339 0258 D94028   		flds	40(%eax)
- 340              		.loc 1 75 18 discriminator 2
- 341 025b D96DFC   		fldcw	-4(%ebp)
- 342 025e DB5DF8   		fistpl	-8(%ebp)
- 343 0261 D96DFE   		fldcw	-2(%ebp)
- 344 0264 8B55F8   		movl	-8(%ebp), %edx
- 345              	L20:
- 346              		.loc 1 75 16 discriminator 4
- 347 0267 8B4508   		movl	8(%ebp), %eax
- 348 026a 895040   		movl	%edx, 64(%eax)
-  76:src/pdf417/PDFBoundingBox.c **** 	result->_maxY = (int)(__max(result->_bottomLeft.m_value.y, result->_bottomRight.m_value.y));
- 349              		.loc 1 76 24 discriminator 4
- 350 026d 8B4508   		movl	8(%ebp), %eax
- 351 0270 D9401C   		flds	28(%eax)
- 352 0273 8B4508   		movl	8(%ebp), %eax
- 353 0276 D94034   		flds	52(%eax)
- 354 0279 D9C9     		fxch	%st(1)
- 355              		.loc 1 76 18 discriminator 4
- 356 027b DFF1     		fcomip	%st(1), %st
- 357 027d DDD8     		fstp	%st(0)
- 358 027f 7614     		jbe	L31
- 359              		.loc 1 76 24 discriminator 1
- 360 0281 8B4508   		movl	8(%ebp), %eax
- 361 0284 D9401C   		flds	28(%eax)
- 362              		.loc 1 76 18 discriminator 1
- 363 0287 D96DFC   		fldcw	-4(%ebp)
- 364 028a DB5DF8   		fistpl	-8(%ebp)
- 365 028d D96DFE   		fldcw	-2(%ebp)
- 366 0290 8B55F8   		movl	-8(%ebp), %edx
- 367 0293 EB12     		jmp	L23
- 368              	L31:
- 369              		.loc 1 76 24 discriminator 2
- 370 0295 8B4508   		movl	8(%ebp), %eax
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 9
+  87:src/pdf417/PDFBoundingBox.c **** 	result->m_value._maxX = box->m_value._maxX;
+ 365              		.loc 1 87 38
+ 366 0226 8B4508   		movl	8(%ebp), %eax
+ 367 0229 8B5040   		movl	64(%eax), %edx
+ 368              		.loc 1 87 24
+ 369 022c 8B450C   		movl	12(%ebp), %eax
+ 370 022f 895040   		movl	%edx, 64(%eax)
+  88:src/pdf417/PDFBoundingBox.c **** 	result->m_value._minY = box->m_value._minY;
+ 371              		.loc 1 88 38
+ 372 0232 8B4508   		movl	8(%ebp), %eax
+ 373 0235 8B5044   		movl	68(%eax), %edx
+ 374              		.loc 1 88 24
+ 375 0238 8B450C   		movl	12(%ebp), %eax
+ 376 023b 895044   		movl	%edx, 68(%eax)
+  89:src/pdf417/PDFBoundingBox.c **** 	result->m_value._maxY = box->m_value._maxY;
+ 377              		.loc 1 89 38
+ 378 023e 8B4508   		movl	8(%ebp), %eax
+ 379 0241 8B5048   		movl	72(%eax), %edx
+ 380              		.loc 1 89 24
+ 381 0244 8B450C   		movl	12(%ebp), %eax
+ 382 0247 895048   		movl	%edx, 72(%eax)
+  90:src/pdf417/PDFBoundingBox.c **** }
+ 383              		.loc 1 90 1
+ 384 024a 90       		nop
+ 385 024b 5D       		popl	%ebp
+ 386              	LCFI20:
+ 387              		.cfi_restore 5
+ 388              		.cfi_def_cfa 4, 4
+ 389 024c C3       		ret
+ 390              		.cfi_endproc
+ 391              	LFE10:
+ 392              		.globl	_calculateMinMaxValues
+ 394              	_calculateMinMaxValues:
+ 395              	LFB11:
+  91:src/pdf417/PDFBoundingBox.c **** 
+  92:src/pdf417/PDFBoundingBox.c **** void calculateMinMaxValues(BoundingBox_t * result)
+  93:src/pdf417/PDFBoundingBox.c **** {
+ 396              		.loc 1 93 1
+ 397              		.cfi_startproc
+ 398 024d 55       		pushl	%ebp
+ 399              	LCFI21:
+ 400              		.cfi_def_cfa_offset 8
+ 401              		.cfi_offset 5, -8
+ 402 024e 89E5     		movl	%esp, %ebp
+ 403              	LCFI22:
+ 404              		.cfi_def_cfa_register 5
+ 405 0250 83EC0C   		subl	$12, %esp
+  94:src/pdf417/PDFBoundingBox.c **** 	if (result->m_value._topLeft.m_hasValue == 0) 
+ 406              		.loc 1 94 30
+ 407 0253 8B4508   		movl	8(%ebp), %eax
+ 408 0256 0FB6400C 		movzbl	12(%eax), %eax
+ 409              		.loc 1 94 5
+ 410 025a 84C0     		testb	%al, %al
+ 411 025c 7528     		jne	L19
+  95:src/pdf417/PDFBoundingBox.c **** 	{
+  96:src/pdf417/PDFBoundingBox.c **** 		result->m_value._topLeft.m_value.x = 0.f;
+ 412              		.loc 1 96 38
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 10
 
 
- 371 0298 D94034   		flds	52(%eax)
- 372              		.loc 1 76 18 discriminator 2
- 373 029b D96DFC   		fldcw	-4(%ebp)
- 374 029e DB5DF8   		fistpl	-8(%ebp)
- 375 02a1 D96DFE   		fldcw	-2(%ebp)
- 376 02a4 8B55F8   		movl	-8(%ebp), %edx
- 377              	L23:
- 378              		.loc 1 76 16 discriminator 4
- 379 02a7 8B4508   		movl	8(%ebp), %eax
- 380 02aa 895044   		movl	%edx, 68(%eax)
-  77:src/pdf417/PDFBoundingBox.c **** }
- 381              		.loc 1 77 1 discriminator 4
- 382 02ad 90       		nop
- 383 02ae C9       		leave
- 384              	LCFI8:
- 385              		.cfi_restore 5
- 386              		.cfi_def_cfa 4, 4
- 387 02af C3       		ret
- 388              		.cfi_endproc
- 389              	LFE6:
- 390              		.globl	_Merge
- 392              	_Merge:
- 393              	LFB7:
-  78:src/pdf417/PDFBoundingBox.c **** 
-  79:src/pdf417/PDFBoundingBox.c **** uint8_t Merge(const BoundingBox_t leftBox, const BoundingBox_t rightBox, BoundingBox_t result)
-  80:src/pdf417/PDFBoundingBox.c **** {
- 394              		.loc 1 80 1
- 395              		.cfi_startproc
-  81:src/pdf417/PDFBoundingBox.c **** 	#if 0
-  82:src/pdf417/PDFBoundingBox.c **** 	if (leftBox.m_hasValue == 0) 
-  83:src/pdf417/PDFBoundingBox.c **** 	{
-  84:src/pdf417/PDFBoundingBox.c **** 		result = rightBox;
-  85:src/pdf417/PDFBoundingBox.c **** 		return true;
-  86:src/pdf417/PDFBoundingBox.c **** 	}
-  87:src/pdf417/PDFBoundingBox.c **** 
-  88:src/pdf417/PDFBoundingBox.c **** 	if (rightBox.m_hasValue == 0) 
-  89:src/pdf417/PDFBoundingBox.c **** 	{
-  90:src/pdf417/PDFBoundingBox.c **** 		result = leftBox;
-  91:src/pdf417/PDFBoundingBox.c **** 		return true;
-  92:src/pdf417/PDFBoundingBox.c **** 	}
-  93:src/pdf417/PDFBoundingBox.c **** 
-  94:src/pdf417/PDFBoundingBox.c **** 	BoundingBox box;
-  95:src/pdf417/PDFBoundingBox.c **** 	if (Create(leftBox.value()._imgWidth, leftBox.value()._imgHeight, leftBox.value()._topLeft, leftBo
-  96:src/pdf417/PDFBoundingBox.c **** 		result = box;
-  97:src/pdf417/PDFBoundingBox.c **** 		return true;
-  98:src/pdf417/PDFBoundingBox.c **** 	}
-  99:src/pdf417/PDFBoundingBox.c **** 
- 100:src/pdf417/PDFBoundingBox.c **** 	return false;
- 101:src/pdf417/PDFBoundingBox.c **** 	#endif
- 102:src/pdf417/PDFBoundingBox.c **** }
- 396              		.loc 1 102 1
- 397 02b0 90       		nop
- 398 02b1 C3       		ret
- 399              		.cfi_endproc
- 400              	LFE7:
- 401              		.globl	_AddMissingRows
- 403              	_AddMissingRows:
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 10
+ 413 025e 8B4508   		movl	8(%ebp), %eax
+ 414 0261 D9EE     		fldz
+ 415 0263 D95810   		fstps	16(%eax)
+  97:src/pdf417/PDFBoundingBox.c **** 		result->m_value._topLeft.m_value.x = result->m_value._topRight.m_value.y;
+ 416              		.loc 1 97 73
+ 417 0266 8B4508   		movl	8(%ebp), %eax
+ 418 0269 D9402C   		flds	44(%eax)
+ 419              		.loc 1 97 38
+ 420 026c 8B4508   		movl	8(%ebp), %eax
+ 421 026f D95810   		fstps	16(%eax)
+  98:src/pdf417/PDFBoundingBox.c **** 		result->m_value._bottomLeft.m_value.x = 0.f;
+ 422              		.loc 1 98 41
+ 423 0272 8B4508   		movl	8(%ebp), %eax
+ 424 0275 D9EE     		fldz
+ 425 0277 D9581C   		fstps	28(%eax)
+  99:src/pdf417/PDFBoundingBox.c **** 		result->m_value._bottomLeft.m_value.x = result->m_value._bottomRight.m_value.y;
+ 426              		.loc 1 99 79
+ 427 027a 8B4508   		movl	8(%ebp), %eax
+ 428 027d D94038   		flds	56(%eax)
+ 429              		.loc 1 99 41
+ 430 0280 8B4508   		movl	8(%ebp), %eax
+ 431 0283 D9581C   		fstps	28(%eax)
+ 432              	L19:
+ 100:src/pdf417/PDFBoundingBox.c **** 	}
+ 101:src/pdf417/PDFBoundingBox.c **** 	if (result->m_value._topRight.m_hasValue == 0) 
+ 433              		.loc 1 101 31
+ 434 0286 8B4508   		movl	8(%ebp), %eax
+ 435 0289 0FB64024 		movzbl	36(%eax), %eax
+ 436              		.loc 1 101 5
+ 437 028d 84C0     		testb	%al, %al
+ 438 028f 7542     		jne	L20
+ 102:src/pdf417/PDFBoundingBox.c **** 	{
+ 103:src/pdf417/PDFBoundingBox.c **** 		result->m_value._topRight.m_value.x = (float)(result->m_value._imgWidth - 1);
+ 439              		.loc 1 103 64
+ 440 0291 8B4508   		movl	8(%ebp), %eax
+ 441 0294 8B4004   		movl	4(%eax), %eax
+ 442              		.loc 1 103 75
+ 443 0297 83E801   		subl	$1, %eax
+ 444              		.loc 1 103 41
+ 445 029a 8945F4   		movl	%eax, -12(%ebp)
+ 446 029d DB45F4   		fildl	-12(%ebp)
+ 447              		.loc 1 103 39
+ 448 02a0 8B4508   		movl	8(%ebp), %eax
+ 449 02a3 D95828   		fstps	40(%eax)
+ 104:src/pdf417/PDFBoundingBox.c **** 		result->m_value._topRight.m_value.y = result->m_value._topLeft.m_value.y;
+ 450              		.loc 1 104 73
+ 451 02a6 8B4508   		movl	8(%ebp), %eax
+ 452 02a9 D94014   		flds	20(%eax)
+ 453              		.loc 1 104 39
+ 454 02ac 8B4508   		movl	8(%ebp), %eax
+ 455 02af D9582C   		fstps	44(%eax)
+ 105:src/pdf417/PDFBoundingBox.c **** 		result->m_value._bottomRight.m_value.x = (float)(result->m_value._imgHeight - 1); 
+ 456              		.loc 1 105 67
+ 457 02b2 8B4508   		movl	8(%ebp), %eax
+ 458 02b5 8B4008   		movl	8(%eax), %eax
+ 459              		.loc 1 105 79
+ 460 02b8 83E801   		subl	$1, %eax
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 11
 
 
- 404              	LFB8:
- 103:src/pdf417/PDFBoundingBox.c **** 
- 104:src/pdf417/PDFBoundingBox.c **** uint8_t AddMissingRows(const BoundingBox_t box, int missingStartRows, int missingEndRows, uint8_t i
- 105:src/pdf417/PDFBoundingBox.c **** {
- 405              		.loc 1 105 1
- 406              		.cfi_startproc
- 407 02b2 55       		pushl	%ebp
- 408              	LCFI9:
- 409              		.cfi_def_cfa_offset 8
- 410              		.cfi_offset 5, -8
- 411 02b3 89E5     		movl	%esp, %ebp
- 412              	LCFI10:
- 413              		.cfi_def_cfa_register 5
- 414 02b5 83EC04   		subl	$4, %esp
- 415 02b8 8B4558   		movl	88(%ebp), %eax
- 416 02bb 8845FC   		movb	%al, -4(%ebp)
- 106:src/pdf417/PDFBoundingBox.c **** 	#if 0
- 107:src/pdf417/PDFBoundingBox.c **** 	auto newTopLeft = box._topLeft;
- 108:src/pdf417/PDFBoundingBox.c **** 	auto newBottomLeft = box._bottomLeft;
- 109:src/pdf417/PDFBoundingBox.c **** 	auto newTopRight = box._topRight;
- 110:src/pdf417/PDFBoundingBox.c **** 	auto newBottomRight = box._bottomRight;
- 111:src/pdf417/PDFBoundingBox.c **** 
- 112:src/pdf417/PDFBoundingBox.c **** 	if (missingStartRows > 0) 
- 113:src/pdf417/PDFBoundingBox.c **** 	{
- 114:src/pdf417/PDFBoundingBox.c **** 		auto top = isLeft ? box._topLeft : box._topRight;
- 115:src/pdf417/PDFBoundingBox.c **** 		int newMinY = static_cast<int>(top.value().y()) - missingStartRows;
- 116:src/pdf417/PDFBoundingBox.c **** 		if (newMinY < 0) 
- 117:src/pdf417/PDFBoundingBox.c **** 		{
- 118:src/pdf417/PDFBoundingBox.c **** 			newMinY = 0;
- 119:src/pdf417/PDFBoundingBox.c **** 		}
- 120:src/pdf417/PDFBoundingBox.c **** 
- 121:src/pdf417/PDFBoundingBox.c **** 		ResultPoint newTop(top.value().x(), static_cast<float>(newMinY));
- 122:src/pdf417/PDFBoundingBox.c **** 
- 123:src/pdf417/PDFBoundingBox.c **** 		if (isLeft) 
- 124:src/pdf417/PDFBoundingBox.c **** 		{
- 125:src/pdf417/PDFBoundingBox.c **** 			newTopLeft = newTop;
- 126:src/pdf417/PDFBoundingBox.c **** 		}
- 127:src/pdf417/PDFBoundingBox.c **** 		else 
- 128:src/pdf417/PDFBoundingBox.c **** 		{
- 129:src/pdf417/PDFBoundingBox.c **** 			newTopRight = newTop;
- 130:src/pdf417/PDFBoundingBox.c **** 		}
- 131:src/pdf417/PDFBoundingBox.c **** 	}
- 132:src/pdf417/PDFBoundingBox.c **** 
- 133:src/pdf417/PDFBoundingBox.c **** 	if (missingEndRows > 0) 
- 134:src/pdf417/PDFBoundingBox.c **** 	{
- 135:src/pdf417/PDFBoundingBox.c **** 		auto bottom = isLeft ? box._bottomLeft : box._bottomRight;
- 136:src/pdf417/PDFBoundingBox.c **** 		int newMaxY = (int)bottom.value().y() + missingEndRows;
- 137:src/pdf417/PDFBoundingBox.c **** 		if (newMaxY >= box._imgHeight) 
- 138:src/pdf417/PDFBoundingBox.c **** 		{
- 139:src/pdf417/PDFBoundingBox.c **** 			newMaxY = box._imgHeight - 1;
- 140:src/pdf417/PDFBoundingBox.c **** 		}
- 141:src/pdf417/PDFBoundingBox.c **** 
- 142:src/pdf417/PDFBoundingBox.c **** 		ResultPoint_t newBottom(bottom.value().x(), static_cast<float>(newMaxY));
- 143:src/pdf417/PDFBoundingBox.c **** 		
- 144:src/pdf417/PDFBoundingBox.c **** 		if (isLeft) 
- 145:src/pdf417/PDFBoundingBox.c **** 		{
- 146:src/pdf417/PDFBoundingBox.c **** 			newBottomLeft = newBottom;
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 11
+ 461              		.loc 1 105 44
+ 462 02bb 8945F4   		movl	%eax, -12(%ebp)
+ 463 02be DB45F4   		fildl	-12(%ebp)
+ 464              		.loc 1 105 42
+ 465 02c1 8B4508   		movl	8(%ebp), %eax
+ 466 02c4 D95834   		fstps	52(%eax)
+ 106:src/pdf417/PDFBoundingBox.c **** 		result->m_value._bottomRight.m_value.y = result->m_value._bottomLeft.m_value.y;
+ 467              		.loc 1 106 79
+ 468 02c7 8B4508   		movl	8(%ebp), %eax
+ 469 02ca D94020   		flds	32(%eax)
+ 470              		.loc 1 106 42
+ 471 02cd 8B4508   		movl	8(%ebp), %eax
+ 472 02d0 D95838   		fstps	56(%eax)
+ 473              	L20:
+ 107:src/pdf417/PDFBoundingBox.c **** 	}
+ 108:src/pdf417/PDFBoundingBox.c **** 
+ 109:src/pdf417/PDFBoundingBox.c **** 	result->m_value._minX = (int)(__min(result->m_value._topLeft.m_value.x, result->m_value._bottomLef
+ 474              		.loc 1 109 32
+ 475 02d3 8B4508   		movl	8(%ebp), %eax
+ 476 02d6 D94010   		flds	16(%eax)
+ 477 02d9 8B4508   		movl	8(%ebp), %eax
+ 478 02dc D9401C   		flds	28(%eax)
+ 479              		.loc 1 109 26
+ 480 02df DFF1     		fcomip	%st(1), %st
+ 481 02e1 DDD8     		fstp	%st(0)
+ 482 02e3 7622     		jbe	L37
+ 483              		.loc 1 109 32 discriminator 1
+ 484 02e5 8B4508   		movl	8(%ebp), %eax
+ 485 02e8 D94010   		flds	16(%eax)
+ 486              		.loc 1 109 26 discriminator 1
+ 487 02eb D97DFE   		fnstcw	-2(%ebp)
+ 488 02ee 0FB745FE 		movzwl	-2(%ebp), %eax
+ 489 02f2 80CC0C   		orb	$12, %ah
+ 490 02f5 668945FC 		movw	%ax, -4(%ebp)
+ 491 02f9 D96DFC   		fldcw	-4(%ebp)
+ 492 02fc DB5DF8   		fistpl	-8(%ebp)
+ 493 02ff D96DFE   		fldcw	-2(%ebp)
+ 494 0302 8B55F8   		movl	-8(%ebp), %edx
+ 495 0305 EB20     		jmp	L23
+ 496              	L37:
+ 497              		.loc 1 109 32 discriminator 2
+ 498 0307 8B4508   		movl	8(%ebp), %eax
+ 499 030a D9401C   		flds	28(%eax)
+ 500              		.loc 1 109 26 discriminator 2
+ 501 030d D97DFE   		fnstcw	-2(%ebp)
+ 502 0310 0FB745FE 		movzwl	-2(%ebp), %eax
+ 503 0314 80CC0C   		orb	$12, %ah
+ 504 0317 668945FC 		movw	%ax, -4(%ebp)
+ 505 031b D96DFC   		fldcw	-4(%ebp)
+ 506 031e DB5DF8   		fistpl	-8(%ebp)
+ 507 0321 D96DFE   		fldcw	-2(%ebp)
+ 508 0324 8B55F8   		movl	-8(%ebp), %edx
+ 509              	L23:
+ 510              		.loc 1 109 24 discriminator 4
+ 511 0327 8B4508   		movl	8(%ebp), %eax
+ 512 032a 89503C   		movl	%edx, 60(%eax)
+ 110:src/pdf417/PDFBoundingBox.c **** 	result->m_value._maxX = (int)(__max(result->m_value._topRight.m_value.x, result->m_value._bottomRi
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 12
 
 
- 147:src/pdf417/PDFBoundingBox.c **** 		}
- 148:src/pdf417/PDFBoundingBox.c **** 		else 
- 149:src/pdf417/PDFBoundingBox.c **** 		{
- 150:src/pdf417/PDFBoundingBox.c **** 			newBottomRight = newBottom;
- 151:src/pdf417/PDFBoundingBox.c **** 		}
- 152:src/pdf417/PDFBoundingBox.c **** 	}
- 153:src/pdf417/PDFBoundingBox.c **** 
- 154:src/pdf417/PDFBoundingBox.c **** 	return Create(box._imgWidth, box._imgHeight, newTopLeft, newBottomLeft, newTopRight, newBottomRigh
- 155:src/pdf417/PDFBoundingBox.c **** 	#endif
- 156:src/pdf417/PDFBoundingBox.c **** }
- 417              		.loc 1 156 1
- 418 02be 90       		nop
- 419 02bf C9       		leave
- 420              	LCFI11:
- 421              		.cfi_restore 5
- 422              		.cfi_def_cfa 4, 4
- 423 02c0 C3       		ret
- 424              		.cfi_endproc
- 425              	LFE8:
- 426              	Letext0:
- 427              		.file 2 "D:/3.tools/mingw/mingw32/i686-w64-mingw32/include/crtdefs.h"
- 428              		.file 3 "D:/3.tools/mingw/mingw32/i686-w64-mingw32/include/stdint.h"
- 429              		.file 4 "src/ResultPoint.h"
- 430              		.file 5 "src/pdf417/PDFBoundingBox.h"
- 431              		.file 6 "D:/3.tools/mingw/mingw32/i686-w64-mingw32/include/stdlib.h"
- 432              		.file 7 "D:/3.tools/mingw/mingw32/i686-w64-mingw32/include/malloc.h"
- 433 02c1 909090   		.section	.debug_info,"dr"
- 434              	Ldebug_info0:
- 435 0000 DC060000 		.long	0x6dc
- 436 0004 0200     		.word	0x2
- 437 0006 00000000 		.secrel32	Ldebug_abbrev0
- 438 000a 04       		.byte	0x4
- 439 000b 01       		.uleb128 0x1
- 440 000c 474E5520 		.ascii "GNU C17 8.1.0 -mtune=generic -march=i686 -g -gdwarf-2 -O0\0"
- 440      43313720 
- 440      382E312E 
- 440      30202D6D 
- 440      74756E65 
- 441 0046 0C       		.byte	0xc
- 442 0047 7372632F 		.ascii "src/pdf417/PDFBoundingBox.c\0"
- 442      70646634 
- 442      31372F50 
- 442      4446426F 
- 442      756E6469 
- 443 0063 443A5C31 		.ascii "D:\\1.Project_workspace\\PDF_BARCODE\0"
- 443      2E50726F 
- 443      6A656374 
- 443      5F776F72 
- 443      6B737061 
- 444 0086 00000000 		.long	Ltext0
- 445 008a C1020000 		.long	Letext0
- 446 008e 00000000 		.secrel32	Ldebug_line0
- 447 0092 02       		.uleb128 0x2
- 448 0093 01       		.byte	0x1
- 449 0094 06       		.byte	0x6
- 450 0095 63686172 		.ascii "char\0"
- 450      00
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 12
+ 513              		.loc 1 110 32 discriminator 4
+ 514 032d 8B4508   		movl	8(%ebp), %eax
+ 515 0330 D94028   		flds	40(%eax)
+ 516 0333 8B4508   		movl	8(%ebp), %eax
+ 517 0336 D94034   		flds	52(%eax)
+ 518 0339 D9C9     		fxch	%st(1)
+ 519              		.loc 1 110 26 discriminator 4
+ 520 033b DFF1     		fcomip	%st(1), %st
+ 521 033d DDD8     		fstp	%st(0)
+ 522 033f 7614     		jbe	L38
+ 523              		.loc 1 110 32 discriminator 1
+ 524 0341 8B4508   		movl	8(%ebp), %eax
+ 525 0344 D94028   		flds	40(%eax)
+ 526              		.loc 1 110 26 discriminator 1
+ 527 0347 D96DFC   		fldcw	-4(%ebp)
+ 528 034a DB5DF8   		fistpl	-8(%ebp)
+ 529 034d D96DFE   		fldcw	-2(%ebp)
+ 530 0350 8B55F8   		movl	-8(%ebp), %edx
+ 531 0353 EB12     		jmp	L26
+ 532              	L38:
+ 533              		.loc 1 110 32 discriminator 2
+ 534 0355 8B4508   		movl	8(%ebp), %eax
+ 535 0358 D94034   		flds	52(%eax)
+ 536              		.loc 1 110 26 discriminator 2
+ 537 035b D96DFC   		fldcw	-4(%ebp)
+ 538 035e DB5DF8   		fistpl	-8(%ebp)
+ 539 0361 D96DFE   		fldcw	-2(%ebp)
+ 540 0364 8B55F8   		movl	-8(%ebp), %edx
+ 541              	L26:
+ 542              		.loc 1 110 24 discriminator 4
+ 543 0367 8B4508   		movl	8(%ebp), %eax
+ 544 036a 895040   		movl	%edx, 64(%eax)
+ 111:src/pdf417/PDFBoundingBox.c **** 	result->m_value._minY = (int)(__min(result->m_value._topLeft.m_value.y, result->m_value._topRight.
+ 545              		.loc 1 111 32 discriminator 4
+ 546 036d 8B4508   		movl	8(%ebp), %eax
+ 547 0370 D94014   		flds	20(%eax)
+ 548 0373 8B4508   		movl	8(%ebp), %eax
+ 549 0376 D9402C   		flds	44(%eax)
+ 550              		.loc 1 111 26 discriminator 4
+ 551 0379 DFF1     		fcomip	%st(1), %st
+ 552 037b DDD8     		fstp	%st(0)
+ 553 037d 7614     		jbe	L39
+ 554              		.loc 1 111 32 discriminator 1
+ 555 037f 8B4508   		movl	8(%ebp), %eax
+ 556 0382 D94014   		flds	20(%eax)
+ 557              		.loc 1 111 26 discriminator 1
+ 558 0385 D96DFC   		fldcw	-4(%ebp)
+ 559 0388 DB5DF8   		fistpl	-8(%ebp)
+ 560 038b D96DFE   		fldcw	-2(%ebp)
+ 561 038e 8B55F8   		movl	-8(%ebp), %edx
+ 562 0391 EB12     		jmp	L29
+ 563              	L39:
+ 564              		.loc 1 111 32 discriminator 2
+ 565 0393 8B4508   		movl	8(%ebp), %eax
+ 566 0396 D9402C   		flds	44(%eax)
+ 567              		.loc 1 111 26 discriminator 2
+ 568 0399 D96DFC   		fldcw	-4(%ebp)
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 13
 
 
- 451 009a 02       		.uleb128 0x2
- 452 009b 04       		.byte	0x4
- 453 009c 07       		.byte	0x7
- 454 009d 756E7369 		.ascii "unsigned int\0"
- 454      676E6564 
- 454      20696E74 
- 454      00
- 455 00aa 02       		.uleb128 0x2
- 456 00ab 04       		.byte	0x4
- 457 00ac 05       		.byte	0x5
- 458 00ad 696E7400 		.ascii "int\0"
- 459 00b1 03       		.uleb128 0x3
- 460 00b2 77636861 		.ascii "wchar_t\0"
- 460      725F7400 
- 461 00ba 02       		.byte	0x2
- 462 00bb 62       		.byte	0x62
- 463 00bc 18       		.byte	0x18
- 464 00bd C1000000 		.long	0xc1
- 465 00c1 02       		.uleb128 0x2
- 466 00c2 02       		.byte	0x2
- 467 00c3 07       		.byte	0x7
- 468 00c4 73686F72 		.ascii "short unsigned int\0"
- 468      7420756E 
- 468      7369676E 
- 468      65642069 
- 468      6E7400
- 469 00d7 02       		.uleb128 0x2
- 470 00d8 04       		.byte	0x4
- 471 00d9 05       		.byte	0x5
- 472 00da 6C6F6E67 		.ascii "long int\0"
- 472      20696E74 
- 472      00
- 473 00e3 02       		.uleb128 0x2
- 474 00e4 08       		.byte	0x8
- 475 00e5 05       		.byte	0x5
- 476 00e6 6C6F6E67 		.ascii "long long int\0"
- 476      206C6F6E 
- 476      6720696E 
- 476      7400
- 477 00f4 04       		.uleb128 0x4
- 478 00f5 04       		.byte	0x4
- 479 00f6 92000000 		.long	0x92
- 480 00fa 04       		.uleb128 0x4
- 481 00fb 04       		.byte	0x4
- 482 00fc B1000000 		.long	0xb1
- 483 0100 04       		.uleb128 0x4
- 484 0101 04       		.byte	0x4
- 485 0102 AA000000 		.long	0xaa
- 486 0106 02       		.uleb128 0x2
- 487 0107 04       		.byte	0x4
- 488 0108 07       		.byte	0x7
- 489 0109 6C6F6E67 		.ascii "long unsigned int\0"
- 489      20756E73 
- 489      69676E65 
- 489      6420696E 
- 489      7400
- 490 011b 02       		.uleb128 0x2
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 13
+ 569 039c DB5DF8   		fistpl	-8(%ebp)
+ 570 039f D96DFE   		fldcw	-2(%ebp)
+ 571 03a2 8B55F8   		movl	-8(%ebp), %edx
+ 572              	L29:
+ 573              		.loc 1 111 24 discriminator 4
+ 574 03a5 8B4508   		movl	8(%ebp), %eax
+ 575 03a8 895044   		movl	%edx, 68(%eax)
+ 112:src/pdf417/PDFBoundingBox.c **** 	result->m_value._maxY = (int)(__max(result->m_value._bottomLeft.m_value.y, result->m_value._bottom
+ 576              		.loc 1 112 32 discriminator 4
+ 577 03ab 8B4508   		movl	8(%ebp), %eax
+ 578 03ae D94020   		flds	32(%eax)
+ 579 03b1 8B4508   		movl	8(%ebp), %eax
+ 580 03b4 D94038   		flds	56(%eax)
+ 581 03b7 D9C9     		fxch	%st(1)
+ 582              		.loc 1 112 26 discriminator 4
+ 583 03b9 DFF1     		fcomip	%st(1), %st
+ 584 03bb DDD8     		fstp	%st(0)
+ 585 03bd 7614     		jbe	L40
+ 586              		.loc 1 112 32 discriminator 1
+ 587 03bf 8B4508   		movl	8(%ebp), %eax
+ 588 03c2 D94020   		flds	32(%eax)
+ 589              		.loc 1 112 26 discriminator 1
+ 590 03c5 D96DFC   		fldcw	-4(%ebp)
+ 591 03c8 DB5DF8   		fistpl	-8(%ebp)
+ 592 03cb D96DFE   		fldcw	-2(%ebp)
+ 593 03ce 8B55F8   		movl	-8(%ebp), %edx
+ 594 03d1 EB12     		jmp	L32
+ 595              	L40:
+ 596              		.loc 1 112 32 discriminator 2
+ 597 03d3 8B4508   		movl	8(%ebp), %eax
+ 598 03d6 D94038   		flds	56(%eax)
+ 599              		.loc 1 112 26 discriminator 2
+ 600 03d9 D96DFC   		fldcw	-4(%ebp)
+ 601 03dc DB5DF8   		fistpl	-8(%ebp)
+ 602 03df D96DFE   		fldcw	-2(%ebp)
+ 603 03e2 8B55F8   		movl	-8(%ebp), %edx
+ 604              	L32:
+ 605              		.loc 1 112 24 discriminator 4
+ 606 03e5 8B4508   		movl	8(%ebp), %eax
+ 607 03e8 895048   		movl	%edx, 72(%eax)
+ 113:src/pdf417/PDFBoundingBox.c **** }
+ 608              		.loc 1 113 1 discriminator 4
+ 609 03eb 90       		nop
+ 610 03ec C9       		leave
+ 611              	LCFI23:
+ 612              		.cfi_restore 5
+ 613              		.cfi_def_cfa 4, 4
+ 614 03ed C3       		ret
+ 615              		.cfi_endproc
+ 616              	LFE11:
+ 617              		.globl	_Bounding_Merge
+ 619              	_Bounding_Merge:
+ 620              	LFB12:
+ 114:src/pdf417/PDFBoundingBox.c **** 
+ 115:src/pdf417/PDFBoundingBox.c **** uint8_t Bounding_Merge(const BoundingBox_t * leftBox, const BoundingBox_t * rightBox, BoundingBox_t
+ 116:src/pdf417/PDFBoundingBox.c **** {
+ 621              		.loc 1 116 1
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 14
 
 
- 491 011c 01       		.byte	0x1
- 492 011d 08       		.byte	0x8
- 493 011e 756E7369 		.ascii "unsigned char\0"
- 493      676E6564 
- 493      20636861 
- 493      7200
- 494 012c 02       		.uleb128 0x2
- 495 012d 0C       		.byte	0xc
- 496 012e 04       		.byte	0x4
- 497 012f 6C6F6E67 		.ascii "long double\0"
- 497      20646F75 
- 497      626C6500 
- 498 013b 02       		.uleb128 0x2
- 499 013c 10       		.byte	0x10
- 500 013d 04       		.byte	0x4
- 501 013e 5F466C6F 		.ascii "_Float128\0"
- 501      61743132 
- 501      3800
- 502 0148 02       		.uleb128 0x2
- 503 0149 01       		.byte	0x1
- 504 014a 06       		.byte	0x6
- 505 014b 7369676E 		.ascii "signed char\0"
- 505      65642063 
- 505      68617200 
- 506 0157 03       		.uleb128 0x3
- 507 0158 75696E74 		.ascii "uint8_t\0"
- 507      385F7400 
- 508 0160 03       		.byte	0x3
- 509 0161 24       		.byte	0x24
- 510 0162 19       		.byte	0x19
- 511 0163 1B010000 		.long	0x11b
- 512 0167 02       		.uleb128 0x2
- 513 0168 02       		.byte	0x2
- 514 0169 05       		.byte	0x5
- 515 016a 73686F72 		.ascii "short int\0"
- 515      7420696E 
- 515      7400
- 516 0174 02       		.uleb128 0x2
- 517 0175 08       		.byte	0x8
- 518 0176 07       		.byte	0x7
- 519 0177 6C6F6E67 		.ascii "long long unsigned int\0"
- 519      206C6F6E 
- 519      6720756E 
- 519      7369676E 
- 519      65642069 
- 520 018e 05       		.uleb128 0x5
- 521 018f 08       		.byte	0x8
- 522 0190 04       		.byte	0x4
- 523 0191 14       		.byte	0x14
- 524 0192 09       		.byte	0x9
- 525 0193 B2010000 		.long	0x1b2
- 526 0197 06       		.uleb128 0x6
- 527 0198 7800     		.ascii "x\0"
- 528 019a 04       		.byte	0x4
- 529 019b 16       		.byte	0x16
- 530 019c 08       		.byte	0x8
- 531 019d B2010000 		.long	0x1b2
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 14
+ 622              		.cfi_startproc
+ 623 03ee 55       		pushl	%ebp
+ 624              	LCFI24:
+ 625              		.cfi_def_cfa_offset 8
+ 626              		.cfi_offset 5, -8
+ 627 03ef 89E5     		movl	%esp, %ebp
+ 628              	LCFI25:
+ 629              		.cfi_def_cfa_register 5
+ 630 03f1 53       		pushl	%ebx
+ 631 03f2 81EC9400 		subl	$148, %esp
+ 631      0000
+ 632              		.cfi_offset 3, -12
+ 117:src/pdf417/PDFBoundingBox.c **** 
+ 118:src/pdf417/PDFBoundingBox.c **** 	if (leftBox->m_hasValue == 0) 
+ 633              		.loc 1 118 13
+ 634 03f8 8B4508   		movl	8(%ebp), %eax
+ 635 03fb 0FB600   		movzbl	(%eax), %eax
+ 636              		.loc 1 118 5
+ 637 03fe 84C0     		testb	%al, %al
+ 638 0400 7510     		jne	L42
+ 119:src/pdf417/PDFBoundingBox.c **** 	{
+ 120:src/pdf417/PDFBoundingBox.c **** 		result = rightBox;
+ 639              		.loc 1 120 10
+ 640 0402 8B450C   		movl	12(%ebp), %eax
+ 641 0405 894510   		movl	%eax, 16(%ebp)
+ 121:src/pdf417/PDFBoundingBox.c **** 		return 1;
+ 642              		.loc 1 121 10
+ 643 0408 B8010000 		movl	$1, %eax
+ 643      00
+ 644 040d E9BB0000 		jmp	L46
+ 644      00
+ 645              	L42:
+ 122:src/pdf417/PDFBoundingBox.c **** 	}
+ 123:src/pdf417/PDFBoundingBox.c **** 
+ 124:src/pdf417/PDFBoundingBox.c **** 	if (rightBox->m_hasValue == 0) 
+ 646              		.loc 1 124 14
+ 647 0412 8B450C   		movl	12(%ebp), %eax
+ 648 0415 0FB600   		movzbl	(%eax), %eax
+ 649              		.loc 1 124 5
+ 650 0418 84C0     		testb	%al, %al
+ 651 041a 7510     		jne	L44
+ 125:src/pdf417/PDFBoundingBox.c **** 	{
+ 126:src/pdf417/PDFBoundingBox.c **** 		result = leftBox;
+ 652              		.loc 1 126 10
+ 653 041c 8B4508   		movl	8(%ebp), %eax
+ 654 041f 894510   		movl	%eax, 16(%ebp)
+ 127:src/pdf417/PDFBoundingBox.c **** 		return 1;
+ 655              		.loc 1 127 10
+ 656 0422 B8010000 		movl	$1, %eax
+ 656      00
+ 657 0427 E9A10000 		jmp	L46
+ 657      00
+ 658              	L44:
+ 128:src/pdf417/PDFBoundingBox.c **** 	}
+ 129:src/pdf417/PDFBoundingBox.c **** 
+ 130:src/pdf417/PDFBoundingBox.c **** 	BoundingBox_t box;
+ 131:src/pdf417/PDFBoundingBox.c **** 	if (Create(leftBox->m_value._imgWidth, leftBox->m_value._imgHeight, leftBox->m_value._topLeft, lef
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 15
 
 
- 532 01a1 02       		.byte	0x2
- 533 01a2 23       		.byte	0x23
- 534 01a3 00       		.uleb128 0
- 535 01a4 06       		.uleb128 0x6
- 536 01a5 7900     		.ascii "y\0"
- 537 01a7 04       		.byte	0x4
- 538 01a8 17       		.byte	0x17
- 539 01a9 08       		.byte	0x8
- 540 01aa B2010000 		.long	0x1b2
- 541 01ae 02       		.byte	0x2
- 542 01af 23       		.byte	0x23
- 543 01b0 04       		.uleb128 0x4
- 544 01b1 00       		.byte	0
- 545 01b2 02       		.uleb128 0x2
- 546 01b3 04       		.byte	0x4
- 547 01b4 04       		.byte	0x4
- 548 01b5 666C6F61 		.ascii "float\0"
- 548      7400
- 549 01bb 03       		.uleb128 0x3
- 550 01bc 506F696E 		.ascii "PointT_t\0"
- 550      74545F74 
- 550      00
- 551 01c5 04       		.byte	0x4
- 552 01c6 18       		.byte	0x18
- 553 01c7 02       		.byte	0x2
- 554 01c8 8E010000 		.long	0x18e
- 555 01cc 05       		.uleb128 0x5
- 556 01cd 0C       		.byte	0xc
- 557 01ce 04       		.byte	0x4
- 558 01cf 1A       		.byte	0x1a
- 559 01d0 09       		.byte	0x9
- 560 01d1 FF010000 		.long	0x1ff
- 561 01d5 06       		.uleb128 0x6
- 562 01d6 6D5F6861 		.ascii "m_hasValue\0"
- 562      7356616C 
- 562      756500
- 563 01e1 04       		.byte	0x4
- 564 01e2 1C       		.byte	0x1c
- 565 01e3 0A       		.byte	0xa
- 566 01e4 57010000 		.long	0x157
- 567 01e8 02       		.byte	0x2
- 568 01e9 23       		.byte	0x23
- 569 01ea 00       		.uleb128 0
- 570 01eb 06       		.uleb128 0x6
- 571 01ec 6D5F7661 		.ascii "m_value\0"
- 571      6C756500 
- 572 01f4 04       		.byte	0x4
- 573 01f5 1D       		.byte	0x1d
- 574 01f6 0B       		.byte	0xb
- 575 01f7 BB010000 		.long	0x1bb
- 576 01fb 02       		.byte	0x2
- 577 01fc 23       		.byte	0x23
- 578 01fd 04       		.uleb128 0x4
- 579 01fe 00       		.byte	0
- 580 01ff 03       		.uleb128 0x3
- 581 0200 52657375 		.ascii "ResultPoint_t\0"
- 581      6C74506F 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 15
+ 659              		.loc 1 131 6
+ 660 042c 8B4508   		movl	8(%ebp), %eax
+ 661 042f 8B4808   		movl	8(%eax), %ecx
+ 662 0432 8B4508   		movl	8(%ebp), %eax
+ 663 0435 8B5004   		movl	4(%eax), %edx
+ 664 0438 8D45AC   		leal	-84(%ebp), %eax
+ 665 043b 89442438 		movl	%eax, 56(%esp)
+ 666 043f 8B450C   		movl	12(%ebp), %eax
+ 667 0442 8B5830   		movl	48(%eax), %ebx
+ 668 0445 895C242C 		movl	%ebx, 44(%esp)
+ 669 0449 8B5834   		movl	52(%eax), %ebx
+ 670 044c 895C2430 		movl	%ebx, 48(%esp)
+ 671 0450 8B4038   		movl	56(%eax), %eax
+ 672 0453 89442434 		movl	%eax, 52(%esp)
+ 673 0457 8B450C   		movl	12(%ebp), %eax
+ 674 045a 8B5824   		movl	36(%eax), %ebx
+ 675 045d 895C2420 		movl	%ebx, 32(%esp)
+ 676 0461 8B5828   		movl	40(%eax), %ebx
+ 677 0464 895C2424 		movl	%ebx, 36(%esp)
+ 678 0468 8B402C   		movl	44(%eax), %eax
+ 679 046b 89442428 		movl	%eax, 40(%esp)
+ 680 046f 8B4508   		movl	8(%ebp), %eax
+ 681 0472 8B5818   		movl	24(%eax), %ebx
+ 682 0475 895C2414 		movl	%ebx, 20(%esp)
+ 683 0479 8B581C   		movl	28(%eax), %ebx
+ 684 047c 895C2418 		movl	%ebx, 24(%esp)
+ 685 0480 8B4020   		movl	32(%eax), %eax
+ 686 0483 8944241C 		movl	%eax, 28(%esp)
+ 687 0487 8B4508   		movl	8(%ebp), %eax
+ 688 048a 8B580C   		movl	12(%eax), %ebx
+ 689 048d 895C2408 		movl	%ebx, 8(%esp)
+ 690 0491 8B5810   		movl	16(%eax), %ebx
+ 691 0494 895C240C 		movl	%ebx, 12(%esp)
+ 692 0498 8B4014   		movl	20(%eax), %eax
+ 693 049b 89442410 		movl	%eax, 16(%esp)
+ 694 049f 894C2404 		movl	%ecx, 4(%esp)
+ 695 04a3 891424   		movl	%edx, (%esp)
+ 696 04a6 E813FCFF 		call	_Create
+ 696      FF
+ 697              		.loc 1 131 5
+ 698 04ab 84C0     		testb	%al, %al
+ 699 04ad 7419     		je	L45
+ 132:src/pdf417/PDFBoundingBox.c **** 	{
+ 133:src/pdf417/PDFBoundingBox.c **** 		copy(&box,result);
+ 700              		.loc 1 133 3
+ 701 04af 8B4510   		movl	16(%ebp), %eax
+ 702 04b2 89442404 		movl	%eax, 4(%esp)
+ 703 04b6 8D45AC   		leal	-84(%ebp), %eax
+ 704 04b9 890424   		movl	%eax, (%esp)
+ 705 04bc E8D3FCFF 		call	_copy
+ 705      FF
+ 134:src/pdf417/PDFBoundingBox.c **** 		return 1;
+ 706              		.loc 1 134 10
+ 707 04c1 B8010000 		movl	$1, %eax
+ 707      00
+ 708 04c6 EB05     		jmp	L46
+ 709              	L45:
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 16
 
 
- 581      696E745F 
- 581      7400
- 582 020e 04       		.byte	0x4
- 583 020f 1E       		.byte	0x1e
- 584 0210 02       		.byte	0x2
- 585 0211 CC010000 		.long	0x1cc
- 586 0215 07       		.uleb128 0x7
- 587 0216 FF010000 		.long	0x1ff
- 588 021a 05       		.uleb128 0x5
- 589 021b 48       		.byte	0x48
- 590 021c 05       		.byte	0x5
- 591 021d 06       		.byte	0x6
- 592 021e 09       		.byte	0x9
- 593 021f EB020000 		.long	0x2eb
- 594 0223 06       		.uleb128 0x6
- 595 0224 5F696D67 		.ascii "_imgWidth\0"
- 595      57696474 
- 595      6800
- 596 022e 05       		.byte	0x5
- 597 022f 08       		.byte	0x8
- 598 0230 06       		.byte	0x6
- 599 0231 AA000000 		.long	0xaa
- 600 0235 02       		.byte	0x2
- 601 0236 23       		.byte	0x23
- 602 0237 00       		.uleb128 0
- 603 0238 06       		.uleb128 0x6
- 604 0239 5F696D67 		.ascii "_imgHeight\0"
- 604      48656967 
- 604      687400
- 605 0244 05       		.byte	0x5
- 606 0245 09       		.byte	0x9
- 607 0246 06       		.byte	0x6
- 608 0247 AA000000 		.long	0xaa
- 609 024b 02       		.byte	0x2
- 610 024c 23       		.byte	0x23
- 611 024d 04       		.uleb128 0x4
- 612 024e 06       		.uleb128 0x6
- 613 024f 5F746F70 		.ascii "_topLeft\0"
- 613      4C656674 
- 613      00
- 614 0258 05       		.byte	0x5
- 615 0259 0A       		.byte	0xa
- 616 025a 10       		.byte	0x10
- 617 025b FF010000 		.long	0x1ff
- 618 025f 02       		.byte	0x2
- 619 0260 23       		.byte	0x23
- 620 0261 08       		.uleb128 0x8
- 621 0262 06       		.uleb128 0x6
- 622 0263 5F626F74 		.ascii "_bottomLeft\0"
- 622      746F6D4C 
- 622      65667400 
- 623 026f 05       		.byte	0x5
- 624 0270 0B       		.byte	0xb
- 625 0271 10       		.byte	0x10
- 626 0272 FF010000 		.long	0x1ff
- 627 0276 02       		.byte	0x2
- 628 0277 23       		.byte	0x23
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 16
+ 135:src/pdf417/PDFBoundingBox.c **** 	}
+ 136:src/pdf417/PDFBoundingBox.c **** 
+ 137:src/pdf417/PDFBoundingBox.c **** 	return 0;
+ 710              		.loc 1 137 9
+ 711 04c8 B8000000 		movl	$0, %eax
+ 711      00
+ 712              	L46:
+ 138:src/pdf417/PDFBoundingBox.c **** 
+ 139:src/pdf417/PDFBoundingBox.c **** }
+ 713              		.loc 1 139 1 discriminator 1
+ 714 04cd 81C49400 		addl	$148, %esp
+ 714      0000
+ 715 04d3 5B       		popl	%ebx
+ 716              		.cfi_restore 3
+ 717 04d4 5D       		popl	%ebp
+ 718              	LCFI26:
+ 719              		.cfi_restore 5
+ 720              		.cfi_def_cfa 4, 4
+ 721 04d5 C3       		ret
+ 722              		.cfi_endproc
+ 723              	LFE12:
+ 724              		.globl	_AddMissingRows
+ 726              	_AddMissingRows:
+ 727              	LFB13:
+ 140:src/pdf417/PDFBoundingBox.c **** 
+ 141:src/pdf417/PDFBoundingBox.c **** uint8_t AddMissingRows(const BoundingBox_t * box, int missingStartRows, int missingEndRows, uint8_t
+ 142:src/pdf417/PDFBoundingBox.c **** {
+ 728              		.loc 1 142 1
+ 729              		.cfi_startproc
+ 730 04d6 55       		pushl	%ebp
+ 731              	LCFI27:
+ 732              		.cfi_def_cfa_offset 8
+ 733              		.cfi_offset 5, -8
+ 734 04d7 89E5     		movl	%esp, %ebp
+ 735              	LCFI28:
+ 736              		.cfi_def_cfa_register 5
+ 737 04d9 81ECC800 		subl	$200, %esp
+ 737      0000
+ 738 04df 8B4514   		movl	20(%ebp), %eax
+ 739 04e2 884584   		movb	%al, -124(%ebp)
+ 143:src/pdf417/PDFBoundingBox.c **** 
+ 144:src/pdf417/PDFBoundingBox.c **** 	ResultPoint_t newTopLeft = box->m_value._topLeft;
+ 740              		.loc 1 144 16
+ 741 04e5 8B4508   		movl	8(%ebp), %eax
+ 742 04e8 8B500C   		movl	12(%eax), %edx
+ 743 04eb 8955E4   		movl	%edx, -28(%ebp)
+ 744 04ee 8B5010   		movl	16(%eax), %edx
+ 745 04f1 8955E8   		movl	%edx, -24(%ebp)
+ 746 04f4 8B4014   		movl	20(%eax), %eax
+ 747 04f7 8945EC   		movl	%eax, -20(%ebp)
+ 145:src/pdf417/PDFBoundingBox.c **** 	ResultPoint_t newBottomLeft = box->m_value._bottomLeft;
+ 748              		.loc 1 145 16
+ 749 04fa 8B4508   		movl	8(%ebp), %eax
+ 750 04fd 8B5018   		movl	24(%eax), %edx
+ 751 0500 8955D8   		movl	%edx, -40(%ebp)
+ 752 0503 8B501C   		movl	28(%eax), %edx
+ 753 0506 8955DC   		movl	%edx, -36(%ebp)
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 17
 
 
- 629 0278 14       		.uleb128 0x14
- 630 0279 06       		.uleb128 0x6
- 631 027a 5F746F70 		.ascii "_topRight\0"
- 631      52696768 
- 631      7400
- 632 0284 05       		.byte	0x5
- 633 0285 0C       		.byte	0xc
- 634 0286 10       		.byte	0x10
- 635 0287 FF010000 		.long	0x1ff
- 636 028b 02       		.byte	0x2
- 637 028c 23       		.byte	0x23
- 638 028d 20       		.uleb128 0x20
- 639 028e 06       		.uleb128 0x6
- 640 028f 5F626F74 		.ascii "_bottomRight\0"
- 640      746F6D52 
- 640      69676874 
- 640      00
- 641 029c 05       		.byte	0x5
- 642 029d 0D       		.byte	0xd
- 643 029e 10       		.byte	0x10
- 644 029f FF010000 		.long	0x1ff
- 645 02a3 02       		.byte	0x2
- 646 02a4 23       		.byte	0x23
- 647 02a5 2C       		.uleb128 0x2c
- 648 02a6 06       		.uleb128 0x6
- 649 02a7 5F6D696E 		.ascii "_minX\0"
- 649      5800
- 650 02ad 05       		.byte	0x5
- 651 02ae 0E       		.byte	0xe
- 652 02af 06       		.byte	0x6
- 653 02b0 AA000000 		.long	0xaa
- 654 02b4 02       		.byte	0x2
- 655 02b5 23       		.byte	0x23
- 656 02b6 38       		.uleb128 0x38
- 657 02b7 06       		.uleb128 0x6
- 658 02b8 5F6D6178 		.ascii "_maxX\0"
- 658      5800
- 659 02be 05       		.byte	0x5
- 660 02bf 0F       		.byte	0xf
- 661 02c0 06       		.byte	0x6
- 662 02c1 AA000000 		.long	0xaa
- 663 02c5 02       		.byte	0x2
- 664 02c6 23       		.byte	0x23
- 665 02c7 3C       		.uleb128 0x3c
- 666 02c8 06       		.uleb128 0x6
- 667 02c9 5F6D696E 		.ascii "_minY\0"
- 667      5900
- 668 02cf 05       		.byte	0x5
- 669 02d0 10       		.byte	0x10
- 670 02d1 06       		.byte	0x6
- 671 02d2 AA000000 		.long	0xaa
- 672 02d6 02       		.byte	0x2
- 673 02d7 23       		.byte	0x23
- 674 02d8 40       		.uleb128 0x40
- 675 02d9 06       		.uleb128 0x6
- 676 02da 5F6D6178 		.ascii "_maxY\0"
- 676      5900
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 17
+ 754 0509 8B4020   		movl	32(%eax), %eax
+ 755 050c 8945E0   		movl	%eax, -32(%ebp)
+ 146:src/pdf417/PDFBoundingBox.c **** 	ResultPoint_t newTopRight = box->m_value._topRight;
+ 756              		.loc 1 146 16
+ 757 050f 8B4508   		movl	8(%ebp), %eax
+ 758 0512 8B5024   		movl	36(%eax), %edx
+ 759 0515 8955CC   		movl	%edx, -52(%ebp)
+ 760 0518 8B5028   		movl	40(%eax), %edx
+ 761 051b 8955D0   		movl	%edx, -48(%ebp)
+ 762 051e 8B402C   		movl	44(%eax), %eax
+ 763 0521 8945D4   		movl	%eax, -44(%ebp)
+ 147:src/pdf417/PDFBoundingBox.c **** 	ResultPoint_t newBottomRight = box->m_value._bottomRight;
+ 764              		.loc 1 147 16
+ 765 0524 8B4508   		movl	8(%ebp), %eax
+ 766 0527 8B5030   		movl	48(%eax), %edx
+ 767 052a 8955C0   		movl	%edx, -64(%ebp)
+ 768 052d 8B5034   		movl	52(%eax), %edx
+ 769 0530 8955C4   		movl	%edx, -60(%ebp)
+ 770 0533 8B4038   		movl	56(%eax), %eax
+ 771 0536 8945C8   		movl	%eax, -56(%ebp)
+ 148:src/pdf417/PDFBoundingBox.c **** 
+ 149:src/pdf417/PDFBoundingBox.c **** 	if (missingStartRows > 0) 
+ 772              		.loc 1 149 5
+ 773 0539 837D0C00 		cmpl	$0, 12(%ebp)
+ 774 053d 0F8EA400 		jle	L48
+ 774      0000
+ 775              	LBB2:
+ 150:src/pdf417/PDFBoundingBox.c **** 	{
+ 151:src/pdf417/PDFBoundingBox.c **** 		ResultPoint_t top = isLeft ? box->m_value._topLeft : box->m_value._topRight;
+ 776              		.loc 1 151 17
+ 777 0543 807D8400 		cmpb	$0, -124(%ebp)
+ 778 0547 7417     		je	L49
+ 779              		.loc 1 151 17 is_stmt 0 discriminator 1
+ 780 0549 8B4508   		movl	8(%ebp), %eax
+ 781 054c 8B500C   		movl	12(%eax), %edx
+ 782 054f 8955B4   		movl	%edx, -76(%ebp)
+ 783 0552 8B5010   		movl	16(%eax), %edx
+ 784 0555 8955B8   		movl	%edx, -72(%ebp)
+ 785 0558 8B4014   		movl	20(%eax), %eax
+ 786 055b 8945BC   		movl	%eax, -68(%ebp)
+ 787 055e EB15     		jmp	L50
+ 788              	L49:
+ 789              		.loc 1 151 17 discriminator 2
+ 790 0560 8B4508   		movl	8(%ebp), %eax
+ 791 0563 8B5024   		movl	36(%eax), %edx
+ 792 0566 8955B4   		movl	%edx, -76(%ebp)
+ 793 0569 8B5028   		movl	40(%eax), %edx
+ 794 056c 8955B8   		movl	%edx, -72(%ebp)
+ 795 056f 8B402C   		movl	44(%eax), %eax
+ 796 0572 8945BC   		movl	%eax, -68(%ebp)
+ 797              	L50:
+ 152:src/pdf417/PDFBoundingBox.c **** 		int newMinY = (int)(top.m_value.y) - missingStartRows;
+ 798              		.loc 1 152 34 is_stmt 1
+ 799 0575 D945BC   		flds	-68(%ebp)
+ 800              		.loc 1 152 17
+ 801 0578 D97D86   		fnstcw	-122(%ebp)
+ 802 057b 0FB74586 		movzwl	-122(%ebp), %eax
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 18
 
 
- 677 02e0 05       		.byte	0x5
- 678 02e1 11       		.byte	0x11
- 679 02e2 06       		.byte	0x6
- 680 02e3 AA000000 		.long	0xaa
- 681 02e7 02       		.byte	0x2
- 682 02e8 23       		.byte	0x23
- 683 02e9 44       		.uleb128 0x44
- 684 02ea 00       		.byte	0
- 685 02eb 03       		.uleb128 0x3
- 686 02ec 426F756E 		.ascii "BoundingBox_t\0"
- 686      64696E67 
- 686      426F785F 
- 686      7400
- 687 02fa 05       		.byte	0x5
- 688 02fb 12       		.byte	0x12
- 689 02fc 02       		.byte	0x2
- 690 02fd 1A020000 		.long	0x21a
- 691 0301 07       		.uleb128 0x7
- 692 0302 EB020000 		.long	0x2eb
- 693 0306 02       		.uleb128 0x2
- 694 0307 08       		.byte	0x8
- 695 0308 04       		.byte	0x4
- 696 0309 646F7562 		.ascii "double\0"
- 696      6C6500
- 697 0310 08       		.uleb128 0x8
- 698 0311 5F696D70 		.ascii "_imp____mb_cur_max\0"
- 698      5F5F5F5F 
- 698      6D625F63 
- 698      75725F6D 
- 698      617800
- 699 0324 06       		.byte	0x6
- 700 0325 73       		.byte	0x73
- 701 0326 10       		.byte	0x10
- 702 0327 00010000 		.long	0x100
- 703 032b 01       		.byte	0x1
- 704 032c 01       		.byte	0x1
- 705 032d 09       		.uleb128 0x9
- 706 032e F4000000 		.long	0xf4
- 707 0332 3D030000 		.long	0x33d
- 708 0336 0A       		.uleb128 0xa
- 709 0337 9A000000 		.long	0x9a
- 710 033b 00       		.byte	0
- 711 033c 00       		.byte	0
- 712 033d 08       		.uleb128 0x8
- 713 033e 5F737973 		.ascii "_sys_errlist\0"
- 713      5F657272 
- 713      6C697374 
- 713      00
- 714 034b 06       		.byte	0x6
- 715 034c AC       		.byte	0xac
- 716 034d 26       		.byte	0x26
- 717 034e 2D030000 		.long	0x32d
- 718 0352 01       		.byte	0x1
- 719 0353 01       		.byte	0x1
- 720 0354 08       		.uleb128 0x8
- 721 0355 5F737973 		.ascii "_sys_nerr\0"
- 721      5F6E6572 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 18
+ 803 057f 80CC0C   		orb	$12, %ah
+ 804 0582 66894582 		movw	%ax, -126(%ebp)
+ 805 0586 D96D82   		fldcw	-126(%ebp)
+ 806 0589 DB9D7CFF 		fistpl	-132(%ebp)
+ 806      FFFF
+ 807 058f D96D86   		fldcw	-122(%ebp)
+ 808 0592 8B857CFF 		movl	-132(%ebp), %eax
+ 808      FFFF
+ 809              		.loc 1 152 7
+ 810 0598 2B450C   		subl	12(%ebp), %eax
+ 811 059b 8945F4   		movl	%eax, -12(%ebp)
+ 153:src/pdf417/PDFBoundingBox.c **** 		if (newMinY < 0) 
+ 812              		.loc 1 153 6
+ 813 059e 837DF400 		cmpl	$0, -12(%ebp)
+ 814 05a2 7907     		jns	L51
+ 154:src/pdf417/PDFBoundingBox.c **** 		{
+ 155:src/pdf417/PDFBoundingBox.c **** 			newMinY = 0;
+ 815              		.loc 1 155 12
+ 816 05a4 C745F400 		movl	$0, -12(%ebp)
+ 816      000000
+ 817              	L51:
+ 156:src/pdf417/PDFBoundingBox.c **** 		}
+ 157:src/pdf417/PDFBoundingBox.c **** 
+ 158:src/pdf417/PDFBoundingBox.c **** 		ResultPoint_t newTop;
+ 159:src/pdf417/PDFBoundingBox.c **** 		newTop.m_hasValue = 1;
+ 818              		.loc 1 159 21
+ 819 05ab C645A801 		movb	$1, -88(%ebp)
+ 160:src/pdf417/PDFBoundingBox.c **** 		newTop.m_value.x = top.m_value.x;
+ 820              		.loc 1 160 33
+ 821 05af D945B8   		flds	-72(%ebp)
+ 822              		.loc 1 160 20
+ 823 05b2 D95DAC   		fstps	-84(%ebp)
+ 161:src/pdf417/PDFBoundingBox.c **** 		newTop.m_value.y = (float)newMinY;
+ 824              		.loc 1 161 22
+ 825 05b5 DB45F4   		fildl	-12(%ebp)
+ 826              		.loc 1 161 20
+ 827 05b8 D95DB0   		fstps	-80(%ebp)
+ 162:src/pdf417/PDFBoundingBox.c **** 
+ 163:src/pdf417/PDFBoundingBox.c **** 		if (isLeft) 
+ 828              		.loc 1 163 6
+ 829 05bb 807D8400 		cmpb	$0, -124(%ebp)
+ 830 05bf 7414     		je	L52
+ 164:src/pdf417/PDFBoundingBox.c **** 		{
+ 165:src/pdf417/PDFBoundingBox.c **** 			newTopLeft = newTop;
+ 831              		.loc 1 165 15
+ 832 05c1 8B45A8   		movl	-88(%ebp), %eax
+ 833 05c4 8945E4   		movl	%eax, -28(%ebp)
+ 834 05c7 8B45AC   		movl	-84(%ebp), %eax
+ 835 05ca 8945E8   		movl	%eax, -24(%ebp)
+ 836 05cd 8B45B0   		movl	-80(%ebp), %eax
+ 837 05d0 8945EC   		movl	%eax, -20(%ebp)
+ 838 05d3 EB12     		jmp	L48
+ 839              	L52:
+ 166:src/pdf417/PDFBoundingBox.c **** 		}
+ 167:src/pdf417/PDFBoundingBox.c **** 		else 
+ 168:src/pdf417/PDFBoundingBox.c **** 		{
+ 169:src/pdf417/PDFBoundingBox.c **** 			newTopRight = newTop;
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 19
 
 
- 721      7200
- 722 035f 06       		.byte	0x6
- 723 0360 AD       		.byte	0xad
- 724 0361 24       		.byte	0x24
- 725 0362 AA000000 		.long	0xaa
- 726 0366 01       		.byte	0x1
- 727 0367 01       		.byte	0x1
- 728 0368 0B       		.uleb128 0xb
- 729 0369 5F696D70 		.ascii "_imp____argc\0"
- 729      5F5F5F5F 
- 729      61726763 
- 729      00
- 730 0376 06       		.byte	0x6
- 731 0377 1901     		.word	0x119
- 732 0379 10       		.byte	0x10
- 733 037a 00010000 		.long	0x100
- 734 037e 01       		.byte	0x1
- 735 037f 01       		.byte	0x1
- 736 0380 0B       		.uleb128 0xb
- 737 0381 5F696D70 		.ascii "_imp____argv\0"
- 737      5F5F5F5F 
- 737      61726776 
- 737      00
- 738 038e 06       		.byte	0x6
- 739 038f 1D01     		.word	0x11d
- 740 0391 13       		.byte	0x13
- 741 0392 98030000 		.long	0x398
- 742 0396 01       		.byte	0x1
- 743 0397 01       		.byte	0x1
- 744 0398 04       		.uleb128 0x4
- 745 0399 04       		.byte	0x4
- 746 039a 9E030000 		.long	0x39e
- 747 039e 04       		.uleb128 0x4
- 748 039f 04       		.byte	0x4
- 749 03a0 F4000000 		.long	0xf4
- 750 03a4 0B       		.uleb128 0xb
- 751 03a5 5F696D70 		.ascii "_imp____wargv\0"
- 751      5F5F5F5F 
- 751      77617267 
- 751      7600
- 752 03b3 06       		.byte	0x6
- 753 03b4 2101     		.word	0x121
- 754 03b6 16       		.byte	0x16
- 755 03b7 BD030000 		.long	0x3bd
- 756 03bb 01       		.byte	0x1
- 757 03bc 01       		.byte	0x1
- 758 03bd 04       		.uleb128 0x4
- 759 03be 04       		.byte	0x4
- 760 03bf C3030000 		.long	0x3c3
- 761 03c3 04       		.uleb128 0x4
- 762 03c4 04       		.byte	0x4
- 763 03c5 FA000000 		.long	0xfa
- 764 03c9 0B       		.uleb128 0xb
- 765 03ca 5F696D70 		.ascii "_imp___environ\0"
- 765      5F5F5F65 
- 765      6E766972 
- 765      6F6E00
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 19
+ 840              		.loc 1 169 16
+ 841 05d5 8B45A8   		movl	-88(%ebp), %eax
+ 842 05d8 8945CC   		movl	%eax, -52(%ebp)
+ 843 05db 8B45AC   		movl	-84(%ebp), %eax
+ 844 05de 8945D0   		movl	%eax, -48(%ebp)
+ 845 05e1 8B45B0   		movl	-80(%ebp), %eax
+ 846 05e4 8945D4   		movl	%eax, -44(%ebp)
+ 847              	L48:
+ 848              	LBE2:
+ 170:src/pdf417/PDFBoundingBox.c **** 		}
+ 171:src/pdf417/PDFBoundingBox.c **** 	}
+ 172:src/pdf417/PDFBoundingBox.c **** 
+ 173:src/pdf417/PDFBoundingBox.c **** 	if (missingEndRows > 0) 
+ 849              		.loc 1 173 5
+ 850 05e7 837D1000 		cmpl	$0, 16(%ebp)
+ 851 05eb 0F8EB000 		jle	L54
+ 851      0000
+ 852              	LBB3:
+ 174:src/pdf417/PDFBoundingBox.c **** 	{
+ 175:src/pdf417/PDFBoundingBox.c **** 		ResultPoint_t bottom = isLeft ? box->m_value._bottomLeft : box->m_value._bottomRight;
+ 853              		.loc 1 175 17
+ 854 05f1 807D8400 		cmpb	$0, -124(%ebp)
+ 855 05f5 7417     		je	L55
+ 856              		.loc 1 175 17 is_stmt 0 discriminator 1
+ 857 05f7 8B4508   		movl	8(%ebp), %eax
+ 858 05fa 8B5018   		movl	24(%eax), %edx
+ 859 05fd 89559C   		movl	%edx, -100(%ebp)
+ 860 0600 8B501C   		movl	28(%eax), %edx
+ 861 0603 8955A0   		movl	%edx, -96(%ebp)
+ 862 0606 8B4020   		movl	32(%eax), %eax
+ 863 0609 8945A4   		movl	%eax, -92(%ebp)
+ 864 060c EB15     		jmp	L56
+ 865              	L55:
+ 866              		.loc 1 175 17 discriminator 2
+ 867 060e 8B4508   		movl	8(%ebp), %eax
+ 868 0611 8B5030   		movl	48(%eax), %edx
+ 869 0614 89559C   		movl	%edx, -100(%ebp)
+ 870 0617 8B5034   		movl	52(%eax), %edx
+ 871 061a 8955A0   		movl	%edx, -96(%ebp)
+ 872 061d 8B4038   		movl	56(%eax), %eax
+ 873 0620 8945A4   		movl	%eax, -92(%ebp)
+ 874              	L56:
+ 176:src/pdf417/PDFBoundingBox.c **** 		int newMaxY = (int)bottom.m_value.y + missingEndRows;
+ 875              		.loc 1 176 36 is_stmt 1
+ 876 0623 D945A4   		flds	-92(%ebp)
+ 877              		.loc 1 176 17
+ 878 0626 D97D86   		fnstcw	-122(%ebp)
+ 879 0629 0FB74586 		movzwl	-122(%ebp), %eax
+ 880 062d 80CC0C   		orb	$12, %ah
+ 881 0630 66894582 		movw	%ax, -126(%ebp)
+ 882 0634 D96D82   		fldcw	-126(%ebp)
+ 883 0637 DB9D7CFF 		fistpl	-132(%ebp)
+ 883      FFFF
+ 884 063d D96D86   		fldcw	-122(%ebp)
+ 885 0640 8B957CFF 		movl	-132(%ebp), %edx
+ 885      FFFF
+ 886              		.loc 1 176 7
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 20
 
 
- 766 03d9 06       		.byte	0x6
- 767 03da 2701     		.word	0x127
- 768 03dc 13       		.byte	0x13
- 769 03dd 98030000 		.long	0x398
- 770 03e1 01       		.byte	0x1
- 771 03e2 01       		.byte	0x1
- 772 03e3 0B       		.uleb128 0xb
- 773 03e4 5F696D70 		.ascii "_imp___wenviron\0"
- 773      5F5F5F77 
- 773      656E7669 
- 773      726F6E00 
- 774 03f4 06       		.byte	0x6
- 775 03f5 2C01     		.word	0x12c
- 776 03f7 16       		.byte	0x16
- 777 03f8 BD030000 		.long	0x3bd
- 778 03fc 01       		.byte	0x1
- 779 03fd 01       		.byte	0x1
- 780 03fe 0B       		.uleb128 0xb
- 781 03ff 5F696D70 		.ascii "_imp___pgmptr\0"
- 781      5F5F5F70 
- 781      676D7074 
- 781      7200
- 782 040d 06       		.byte	0x6
- 783 040e 3201     		.word	0x132
- 784 0410 12       		.byte	0x12
- 785 0411 9E030000 		.long	0x39e
- 786 0415 01       		.byte	0x1
- 787 0416 01       		.byte	0x1
- 788 0417 0B       		.uleb128 0xb
- 789 0418 5F696D70 		.ascii "_imp___wpgmptr\0"
- 789      5F5F5F77 
- 789      70676D70 
- 789      747200
- 790 0427 06       		.byte	0x6
- 791 0428 3701     		.word	0x137
- 792 042a 15       		.byte	0x15
- 793 042b C3030000 		.long	0x3c3
- 794 042f 01       		.byte	0x1
- 795 0430 01       		.byte	0x1
- 796 0431 0B       		.uleb128 0xb
- 797 0432 5F696D70 		.ascii "_imp___osplatform\0"
- 797      5F5F5F6F 
- 797      73706C61 
- 797      74666F72 
- 797      6D00
- 798 0444 06       		.byte	0x6
- 799 0445 3C01     		.word	0x13c
- 800 0447 19       		.byte	0x19
- 801 0448 4E040000 		.long	0x44e
- 802 044c 01       		.byte	0x1
- 803 044d 01       		.byte	0x1
- 804 044e 04       		.uleb128 0x4
- 805 044f 04       		.byte	0x4
- 806 0450 9A000000 		.long	0x9a
- 807 0454 0B       		.uleb128 0xb
- 808 0455 5F696D70 		.ascii "_imp___osver\0"
- 808      5F5F5F6F 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 20
+ 887 0646 8B4510   		movl	16(%ebp), %eax
+ 888 0649 01D0     		addl	%edx, %eax
+ 889 064b 8945F0   		movl	%eax, -16(%ebp)
+ 177:src/pdf417/PDFBoundingBox.c **** 		if (newMaxY >= box->m_value._imgHeight) 
+ 890              		.loc 1 177 30
+ 891 064e 8B4508   		movl	8(%ebp), %eax
+ 892 0651 8B4008   		movl	8(%eax), %eax
+ 893              		.loc 1 177 6
+ 894 0654 3945F0   		cmpl	%eax, -16(%ebp)
+ 895 0657 7C0C     		jl	L57
+ 178:src/pdf417/PDFBoundingBox.c **** 		{
+ 179:src/pdf417/PDFBoundingBox.c **** 			newMaxY = box->m_value._imgHeight - 1;
+ 896              		.loc 1 179 26
+ 897 0659 8B4508   		movl	8(%ebp), %eax
+ 898 065c 8B4008   		movl	8(%eax), %eax
+ 899              		.loc 1 179 12
+ 900 065f 83E801   		subl	$1, %eax
+ 901 0662 8945F0   		movl	%eax, -16(%ebp)
+ 902              	L57:
+ 180:src/pdf417/PDFBoundingBox.c **** 		}
+ 181:src/pdf417/PDFBoundingBox.c **** 
+ 182:src/pdf417/PDFBoundingBox.c **** 		ResultPoint_t newBottom;
+ 183:src/pdf417/PDFBoundingBox.c **** 		newBottom.m_hasValue = 1;
+ 903              		.loc 1 183 24
+ 904 0665 C6459001 		movb	$1, -112(%ebp)
+ 184:src/pdf417/PDFBoundingBox.c **** 		newBottom.m_value.x = bottom.m_value.x;
+ 905              		.loc 1 184 39
+ 906 0669 D945A0   		flds	-96(%ebp)
+ 907              		.loc 1 184 23
+ 908 066c D95D94   		fstps	-108(%ebp)
+ 185:src/pdf417/PDFBoundingBox.c **** 		newBottom.m_value.y = (float)newMaxY;
+ 909              		.loc 1 185 25
+ 910 066f DB45F0   		fildl	-16(%ebp)
+ 911              		.loc 1 185 23
+ 912 0672 D95D98   		fstps	-104(%ebp)
+ 186:src/pdf417/PDFBoundingBox.c **** 		
+ 187:src/pdf417/PDFBoundingBox.c **** 		if (isLeft) 
+ 913              		.loc 1 187 6
+ 914 0675 807D8400 		cmpb	$0, -124(%ebp)
+ 915 0679 7414     		je	L58
+ 188:src/pdf417/PDFBoundingBox.c **** 		{
+ 189:src/pdf417/PDFBoundingBox.c **** 			newBottomLeft = newBottom;
+ 916              		.loc 1 189 18
+ 917 067b 8B4590   		movl	-112(%ebp), %eax
+ 918 067e 8945D8   		movl	%eax, -40(%ebp)
+ 919 0681 8B4594   		movl	-108(%ebp), %eax
+ 920 0684 8945DC   		movl	%eax, -36(%ebp)
+ 921 0687 8B4598   		movl	-104(%ebp), %eax
+ 922 068a 8945E0   		movl	%eax, -32(%ebp)
+ 923 068d EB12     		jmp	L54
+ 924              	L58:
+ 190:src/pdf417/PDFBoundingBox.c **** 		}
+ 191:src/pdf417/PDFBoundingBox.c **** 		else 
+ 192:src/pdf417/PDFBoundingBox.c **** 		{
+ 193:src/pdf417/PDFBoundingBox.c **** 			newBottomRight = newBottom;
+ 925              		.loc 1 193 19
+ 926 068f 8B4590   		movl	-112(%ebp), %eax
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 21
 
 
- 808      73766572 
- 808      00
- 809 0462 06       		.byte	0x6
- 810 0463 4101     		.word	0x141
- 811 0465 19       		.byte	0x19
- 812 0466 4E040000 		.long	0x44e
- 813 046a 01       		.byte	0x1
- 814 046b 01       		.byte	0x1
- 815 046c 0B       		.uleb128 0xb
- 816 046d 5F696D70 		.ascii "_imp___winver\0"
- 816      5F5F5F77 
- 816      696E7665 
- 816      7200
- 817 047b 06       		.byte	0x6
- 818 047c 4601     		.word	0x146
- 819 047e 19       		.byte	0x19
- 820 047f 4E040000 		.long	0x44e
- 821 0483 01       		.byte	0x1
- 822 0484 01       		.byte	0x1
- 823 0485 0B       		.uleb128 0xb
- 824 0486 5F696D70 		.ascii "_imp___winmajor\0"
- 824      5F5F5F77 
- 824      696E6D61 
- 824      6A6F7200 
- 825 0496 06       		.byte	0x6
- 826 0497 4B01     		.word	0x14b
- 827 0499 19       		.byte	0x19
- 828 049a 4E040000 		.long	0x44e
- 829 049e 01       		.byte	0x1
- 830 049f 01       		.byte	0x1
- 831 04a0 0B       		.uleb128 0xb
- 832 04a1 5F696D70 		.ascii "_imp___winminor\0"
- 832      5F5F5F77 
- 832      696E6D69 
- 832      6E6F7200 
- 833 04b1 06       		.byte	0x6
- 834 04b2 5001     		.word	0x150
- 835 04b4 19       		.byte	0x19
- 836 04b5 4E040000 		.long	0x44e
- 837 04b9 01       		.byte	0x1
- 838 04ba 01       		.byte	0x1
- 839 04bb 08       		.uleb128 0x8
- 840 04bc 5F616D62 		.ascii "_amblksiz\0"
- 840      6C6B7369 
- 840      7A00
- 841 04c6 07       		.byte	0x7
- 842 04c7 35       		.byte	0x35
- 843 04c8 17       		.byte	0x17
- 844 04c9 9A000000 		.long	0x9a
- 845 04cd 01       		.byte	0x1
- 846 04ce 01       		.byte	0x1
- 847 04cf 0C       		.uleb128 0xc
- 848 04d0 01       		.byte	0x1
- 849 04d1 4164644D 		.ascii "AddMissingRows\0"
- 849      69737369 
- 849      6E67526F 
- 849      777300
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 21
+ 927 0692 8945C0   		movl	%eax, -64(%ebp)
+ 928 0695 8B4594   		movl	-108(%ebp), %eax
+ 929 0698 8945C4   		movl	%eax, -60(%ebp)
+ 930 069b 8B4598   		movl	-104(%ebp), %eax
+ 931 069e 8945C8   		movl	%eax, -56(%ebp)
+ 932              	L54:
+ 933              	LBE3:
+ 194:src/pdf417/PDFBoundingBox.c **** 		}
+ 195:src/pdf417/PDFBoundingBox.c **** 	}
+ 196:src/pdf417/PDFBoundingBox.c **** 
+ 197:src/pdf417/PDFBoundingBox.c **** 	return Create(box->m_value._imgWidth, box->m_value._imgHeight, newTopLeft, newBottomLeft, newTopRi
+ 934              		.loc 1 197 9
+ 935 06a1 8B4508   		movl	8(%ebp), %eax
+ 936 06a4 8B5008   		movl	8(%eax), %edx
+ 937 06a7 8B4508   		movl	8(%ebp), %eax
+ 938 06aa 8B4004   		movl	4(%eax), %eax
+ 939 06ad 8B4D18   		movl	24(%ebp), %ecx
+ 940 06b0 894C2438 		movl	%ecx, 56(%esp)
+ 941 06b4 8B4DC0   		movl	-64(%ebp), %ecx
+ 942 06b7 894C242C 		movl	%ecx, 44(%esp)
+ 943 06bb 8B4DC4   		movl	-60(%ebp), %ecx
+ 944 06be 894C2430 		movl	%ecx, 48(%esp)
+ 945 06c2 8B4DC8   		movl	-56(%ebp), %ecx
+ 946 06c5 894C2434 		movl	%ecx, 52(%esp)
+ 947 06c9 8B4DCC   		movl	-52(%ebp), %ecx
+ 948 06cc 894C2420 		movl	%ecx, 32(%esp)
+ 949 06d0 8B4DD0   		movl	-48(%ebp), %ecx
+ 950 06d3 894C2424 		movl	%ecx, 36(%esp)
+ 951 06d7 8B4DD4   		movl	-44(%ebp), %ecx
+ 952 06da 894C2428 		movl	%ecx, 40(%esp)
+ 953 06de 8B4DD8   		movl	-40(%ebp), %ecx
+ 954 06e1 894C2414 		movl	%ecx, 20(%esp)
+ 955 06e5 8B4DDC   		movl	-36(%ebp), %ecx
+ 956 06e8 894C2418 		movl	%ecx, 24(%esp)
+ 957 06ec 8B4DE0   		movl	-32(%ebp), %ecx
+ 958 06ef 894C241C 		movl	%ecx, 28(%esp)
+ 959 06f3 8B4DE4   		movl	-28(%ebp), %ecx
+ 960 06f6 894C2408 		movl	%ecx, 8(%esp)
+ 961 06fa 8B4DE8   		movl	-24(%ebp), %ecx
+ 962 06fd 894C240C 		movl	%ecx, 12(%esp)
+ 963 0701 8B4DEC   		movl	-20(%ebp), %ecx
+ 964 0704 894C2410 		movl	%ecx, 16(%esp)
+ 965 0708 89542404 		movl	%edx, 4(%esp)
+ 966 070c 890424   		movl	%eax, (%esp)
+ 967 070f E8AAF9FF 		call	_Create
+ 967      FF
+ 198:src/pdf417/PDFBoundingBox.c **** 
+ 199:src/pdf417/PDFBoundingBox.c **** }
+ 968              		.loc 1 199 1
+ 969 0714 C9       		leave
+ 970              	LCFI29:
+ 971              		.cfi_restore 5
+ 972              		.cfi_def_cfa 4, 4
+ 973 0715 C3       		ret
+ 974              		.cfi_endproc
+ 975              	LFE13:
+ 976              	Letext0:
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 22
 
 
- 850 04e0 01       		.byte	0x1
- 851 04e1 68       		.byte	0x68
- 852 04e2 09       		.byte	0x9
- 853 04e3 01       		.byte	0x1
- 854 04e4 57010000 		.long	0x157
- 855 04e8 B2020000 		.long	LFB8
- 856 04ec C1020000 		.long	LFE8
- 857 04f0 00000000 		.secrel32	LLST3
- 858 04f4 01       		.byte	0x1
- 859 04f5 63050000 		.long	0x563
- 860 04f9 0D       		.uleb128 0xd
- 861 04fa 626F7800 		.ascii "box\0"
- 862 04fe 01       		.byte	0x1
- 863 04ff 68       		.byte	0x68
- 864 0500 2C       		.byte	0x2c
- 865 0501 01030000 		.long	0x301
- 866 0505 02       		.byte	0x2
- 867 0506 91       		.byte	0x91
- 868 0507 00       		.sleb128 0
- 869 0508 0D       		.uleb128 0xd
- 870 0509 6D697373 		.ascii "missingStartRows\0"
- 870      696E6753 
- 870      74617274 
- 870      526F7773 
- 870      00
- 871 051a 01       		.byte	0x1
- 872 051b 68       		.byte	0x68
- 873 051c 35       		.byte	0x35
- 874 051d AA000000 		.long	0xaa
- 875 0521 03       		.byte	0x3
- 876 0522 91       		.byte	0x91
- 877 0523 C800     		.sleb128 72
- 878 0525 0D       		.uleb128 0xd
- 879 0526 6D697373 		.ascii "missingEndRows\0"
- 879      696E6745 
- 879      6E64526F 
- 879      777300
- 880 0535 01       		.byte	0x1
- 881 0536 68       		.byte	0x68
- 882 0537 4B       		.byte	0x4b
- 883 0538 AA000000 		.long	0xaa
- 884 053c 03       		.byte	0x3
- 885 053d 91       		.byte	0x91
- 886 053e CC00     		.sleb128 76
- 887 0540 0D       		.uleb128 0xd
- 888 0541 69734C65 		.ascii "isLeft\0"
- 888      667400
- 889 0548 01       		.byte	0x1
- 890 0549 68       		.byte	0x68
- 891 054a 63       		.byte	0x63
- 892 054b 57010000 		.long	0x157
- 893 054f 02       		.byte	0x2
- 894 0550 91       		.byte	0x91
- 895 0551 74       		.sleb128 -12
- 896 0552 0E       		.uleb128 0xe
- 897 0553 00000000 		.secrel32	LASF0
- 898 0557 01       		.byte	0x1
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 22
+ 977              		.file 2 "D:/3.tools/mingw/mingw32/i686-w64-mingw32/include/crtdefs.h"
+ 978              		.file 3 "D:/3.tools/mingw/mingw32/i686-w64-mingw32/include/stdint.h"
+ 979              		.file 4 "src/ResultPoint.h"
+ 980              		.file 5 "src/pdf417/PDFBoundingBox.h"
+ 981              		.file 6 "D:/3.tools/mingw/mingw32/i686-w64-mingw32/include/stdlib.h"
+ 982              		.file 7 "D:/3.tools/mingw/mingw32/i686-w64-mingw32/include/malloc.h"
+ 983 0716 9090     		.section	.debug_info,"dr"
+ 984              	Ldebug_info0:
+ 985 0000 09090000 		.long	0x909
+ 986 0004 0200     		.word	0x2
+ 987 0006 00000000 		.secrel32	Ldebug_abbrev0
+ 988 000a 04       		.byte	0x4
+ 989 000b 01       		.uleb128 0x1
+ 990 000c 474E5520 		.ascii "GNU C17 8.1.0 -mtune=generic -march=i686 -g -gdwarf-2 -O0\0"
+ 990      43313720 
+ 990      382E312E 
+ 990      30202D6D 
+ 990      74756E65 
+ 991 0046 0C       		.byte	0xc
+ 992 0047 7372632F 		.ascii "src/pdf417/PDFBoundingBox.c\0"
+ 992      70646634 
+ 992      31372F50 
+ 992      4446426F 
+ 992      756E6469 
+ 993 0063 443A5C31 		.ascii "D:\\1.Project_workspace\\PDF_BARCODE\0"
+ 993      2E50726F 
+ 993      6A656374 
+ 993      5F776F72 
+ 993      6B737061 
+ 994 0086 00000000 		.long	Ltext0
+ 995 008a 16070000 		.long	Letext0
+ 996 008e 00000000 		.secrel32	Ldebug_line0
+ 997 0092 02       		.uleb128 0x2
+ 998 0093 01       		.byte	0x1
+ 999 0094 06       		.byte	0x6
+ 1000 0095 63686172 		.ascii "char\0"
+ 1000      00
+ 1001 009a 02       		.uleb128 0x2
+ 1002 009b 04       		.byte	0x4
+ 1003 009c 07       		.byte	0x7
+ 1004 009d 756E7369 		.ascii "unsigned int\0"
+ 1004      676E6564 
+ 1004      20696E74 
+ 1004      00
+ 1005 00aa 02       		.uleb128 0x2
+ 1006 00ab 04       		.byte	0x4
+ 1007 00ac 05       		.byte	0x5
+ 1008 00ad 696E7400 		.ascii "int\0"
+ 1009 00b1 03       		.uleb128 0x3
+ 1010 00b2 77636861 		.ascii "wchar_t\0"
+ 1010      725F7400 
+ 1011 00ba 02       		.byte	0x2
+ 1012 00bb 62       		.byte	0x62
+ 1013 00bc 18       		.byte	0x18
+ 1014 00bd C1000000 		.long	0xc1
+ 1015 00c1 02       		.uleb128 0x2
+ 1016 00c2 02       		.byte	0x2
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 23
 
 
- 899 0558 68       		.byte	0x68
- 900 0559 79       		.byte	0x79
- 901 055a EB020000 		.long	0x2eb
- 902 055e 03       		.byte	0x3
- 903 055f 91       		.byte	0x91
- 904 0560 D400     		.sleb128 84
- 905 0562 00       		.byte	0
- 906 0563 0F       		.uleb128 0xf
- 907 0564 01       		.byte	0x1
- 908 0565 4D657267 		.ascii "Merge\0"
- 908      6500
- 909 056b 01       		.byte	0x1
- 910 056c 4F       		.byte	0x4f
- 911 056d 09       		.byte	0x9
- 912 056e 01       		.byte	0x1
- 913 056f 57010000 		.long	0x157
- 914 0573 B0020000 		.long	LFB7
- 915 0577 B2020000 		.long	LFE7
- 916 057b 02       		.byte	0x2
- 917 057c 74       		.byte	0x74
- 918 057d 04       		.sleb128 4
- 919 057e 01       		.byte	0x1
- 920 057f BC050000 		.long	0x5bc
- 921 0583 0D       		.uleb128 0xd
- 922 0584 6C656674 		.ascii "leftBox\0"
- 922      426F7800 
- 923 058c 01       		.byte	0x1
- 924 058d 4F       		.byte	0x4f
- 925 058e 23       		.byte	0x23
- 926 058f 01030000 		.long	0x301
- 927 0593 02       		.byte	0x2
- 928 0594 91       		.byte	0x91
- 929 0595 00       		.sleb128 0
- 930 0596 0D       		.uleb128 0xd
- 931 0597 72696768 		.ascii "rightBox\0"
- 931      74426F78 
- 931      00
- 932 05a0 01       		.byte	0x1
- 933 05a1 4F       		.byte	0x4f
- 934 05a2 40       		.byte	0x40
- 935 05a3 01030000 		.long	0x301
- 936 05a7 03       		.byte	0x3
- 937 05a8 91       		.byte	0x91
- 938 05a9 C800     		.sleb128 72
- 939 05ab 0E       		.uleb128 0xe
- 940 05ac 00000000 		.secrel32	LASF0
- 941 05b0 01       		.byte	0x1
- 942 05b1 4F       		.byte	0x4f
- 943 05b2 58       		.byte	0x58
- 944 05b3 EB020000 		.long	0x2eb
- 945 05b7 03       		.byte	0x3
- 946 05b8 91       		.byte	0x91
- 947 05b9 9001     		.sleb128 144
- 948 05bb 00       		.byte	0
- 949 05bc 10       		.uleb128 0x10
- 950 05bd 01       		.byte	0x1
- 951 05be 07000000 		.secrel32	LASF1
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 23
+ 1017 00c3 07       		.byte	0x7
+ 1018 00c4 73686F72 		.ascii "short unsigned int\0"
+ 1018      7420756E 
+ 1018      7369676E 
+ 1018      65642069 
+ 1018      6E7400
+ 1019 00d7 02       		.uleb128 0x2
+ 1020 00d8 04       		.byte	0x4
+ 1021 00d9 05       		.byte	0x5
+ 1022 00da 6C6F6E67 		.ascii "long int\0"
+ 1022      20696E74 
+ 1022      00
+ 1023 00e3 02       		.uleb128 0x2
+ 1024 00e4 08       		.byte	0x8
+ 1025 00e5 05       		.byte	0x5
+ 1026 00e6 6C6F6E67 		.ascii "long long int\0"
+ 1026      206C6F6E 
+ 1026      6720696E 
+ 1026      7400
+ 1027 00f4 04       		.uleb128 0x4
+ 1028 00f5 04       		.byte	0x4
+ 1029 00f6 92000000 		.long	0x92
+ 1030 00fa 04       		.uleb128 0x4
+ 1031 00fb 04       		.byte	0x4
+ 1032 00fc B1000000 		.long	0xb1
+ 1033 0100 04       		.uleb128 0x4
+ 1034 0101 04       		.byte	0x4
+ 1035 0102 AA000000 		.long	0xaa
+ 1036 0106 02       		.uleb128 0x2
+ 1037 0107 04       		.byte	0x4
+ 1038 0108 07       		.byte	0x7
+ 1039 0109 6C6F6E67 		.ascii "long unsigned int\0"
+ 1039      20756E73 
+ 1039      69676E65 
+ 1039      6420696E 
+ 1039      7400
+ 1040 011b 02       		.uleb128 0x2
+ 1041 011c 01       		.byte	0x1
+ 1042 011d 08       		.byte	0x8
+ 1043 011e 756E7369 		.ascii "unsigned char\0"
+ 1043      676E6564 
+ 1043      20636861 
+ 1043      7200
+ 1044 012c 02       		.uleb128 0x2
+ 1045 012d 0C       		.byte	0xc
+ 1046 012e 04       		.byte	0x4
+ 1047 012f 6C6F6E67 		.ascii "long double\0"
+ 1047      20646F75 
+ 1047      626C6500 
+ 1048 013b 02       		.uleb128 0x2
+ 1049 013c 10       		.byte	0x10
+ 1050 013d 04       		.byte	0x4
+ 1051 013e 5F466C6F 		.ascii "_Float128\0"
+ 1051      61743132 
+ 1051      3800
+ 1052 0148 02       		.uleb128 0x2
+ 1053 0149 01       		.byte	0x1
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 24
 
 
- 952 05c2 01       		.byte	0x1
- 953 05c3 38       		.byte	0x38
- 954 05c4 06       		.byte	0x6
- 955 05c5 01       		.byte	0x1
- 956 05c6 10010000 		.long	LFB6
- 957 05ca B0020000 		.long	LFE6
- 958 05ce 38000000 		.secrel32	LLST2
- 959 05d2 01       		.byte	0x1
- 960 05d3 E7050000 		.long	0x5e7
- 961 05d7 0E       		.uleb128 0xe
- 962 05d8 00000000 		.secrel32	LASF0
- 963 05dc 01       		.byte	0x1
- 964 05dd 38       		.byte	0x38
- 965 05de 2C       		.byte	0x2c
- 966 05df E7050000 		.long	0x5e7
- 967 05e3 02       		.byte	0x2
- 968 05e4 91       		.byte	0x91
- 969 05e5 00       		.sleb128 0
- 970 05e6 00       		.byte	0
- 971 05e7 04       		.uleb128 0x4
- 972 05e8 04       		.byte	0x4
- 973 05e9 EB020000 		.long	0x2eb
- 974 05ed 11       		.uleb128 0x11
- 975 05ee 01       		.byte	0x1
- 976 05ef 43726561 		.ascii "Create\0"
- 976      746500
- 977 05f6 01       		.byte	0x1
- 978 05f7 20       		.byte	0x20
- 979 05f8 09       		.byte	0x9
- 980 05f9 01       		.byte	0x1
- 981 05fa 57010000 		.long	0x157
- 982 05fe 41000000 		.long	LFB5
- 983 0602 10010000 		.long	LFE5
- 984 0606 70000000 		.secrel32	LLST1
- 985 060a 01       		.byte	0x1
- 986 060b AC060000 		.long	0x6ac
- 987 060f 0D       		.uleb128 0xd
- 988 0610 696D6757 		.ascii "imgWidth\0"
- 988      69647468 
- 988      00
- 989 0619 01       		.byte	0x1
- 990 061a 20       		.byte	0x20
- 991 061b 14       		.byte	0x14
- 992 061c AA000000 		.long	0xaa
- 993 0620 02       		.byte	0x2
- 994 0621 91       		.byte	0x91
- 995 0622 00       		.sleb128 0
- 996 0623 0D       		.uleb128 0xd
- 997 0624 696D6748 		.ascii "imgHeight\0"
- 997      65696768 
- 997      7400
- 998 062e 01       		.byte	0x1
- 999 062f 20       		.byte	0x20
- 1000 0630 22       		.byte	0x22
- 1001 0631 AA000000 		.long	0xaa
- 1002 0635 02       		.byte	0x2
- 1003 0636 91       		.byte	0x91
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 24
+ 1054 014a 06       		.byte	0x6
+ 1055 014b 7369676E 		.ascii "signed char\0"
+ 1055      65642063 
+ 1055      68617200 
+ 1056 0157 03       		.uleb128 0x3
+ 1057 0158 75696E74 		.ascii "uint8_t\0"
+ 1057      385F7400 
+ 1058 0160 03       		.byte	0x3
+ 1059 0161 24       		.byte	0x24
+ 1060 0162 19       		.byte	0x19
+ 1061 0163 1B010000 		.long	0x11b
+ 1062 0167 02       		.uleb128 0x2
+ 1063 0168 02       		.byte	0x2
+ 1064 0169 05       		.byte	0x5
+ 1065 016a 73686F72 		.ascii "short int\0"
+ 1065      7420696E 
+ 1065      7400
+ 1066 0174 02       		.uleb128 0x2
+ 1067 0175 08       		.byte	0x8
+ 1068 0176 07       		.byte	0x7
+ 1069 0177 6C6F6E67 		.ascii "long long unsigned int\0"
+ 1069      206C6F6E 
+ 1069      6720756E 
+ 1069      7369676E 
+ 1069      65642069 
+ 1070 018e 05       		.uleb128 0x5
+ 1071 018f 08       		.byte	0x8
+ 1072 0190 04       		.byte	0x4
+ 1073 0191 14       		.byte	0x14
+ 1074 0192 09       		.byte	0x9
+ 1075 0193 B2010000 		.long	0x1b2
+ 1076 0197 06       		.uleb128 0x6
+ 1077 0198 7800     		.ascii "x\0"
+ 1078 019a 04       		.byte	0x4
+ 1079 019b 16       		.byte	0x16
+ 1080 019c 08       		.byte	0x8
+ 1081 019d B2010000 		.long	0x1b2
+ 1082 01a1 02       		.byte	0x2
+ 1083 01a2 23       		.byte	0x23
+ 1084 01a3 00       		.uleb128 0
+ 1085 01a4 06       		.uleb128 0x6
+ 1086 01a5 7900     		.ascii "y\0"
+ 1087 01a7 04       		.byte	0x4
+ 1088 01a8 17       		.byte	0x17
+ 1089 01a9 08       		.byte	0x8
+ 1090 01aa B2010000 		.long	0x1b2
+ 1091 01ae 02       		.byte	0x2
+ 1092 01af 23       		.byte	0x23
+ 1093 01b0 04       		.uleb128 0x4
+ 1094 01b1 00       		.byte	0
+ 1095 01b2 02       		.uleb128 0x2
+ 1096 01b3 04       		.byte	0x4
+ 1097 01b4 04       		.byte	0x4
+ 1098 01b5 666C6F61 		.ascii "float\0"
+ 1098      7400
+ 1099 01bb 03       		.uleb128 0x3
+ 1100 01bc 506F696E 		.ascii "PointT_t\0"
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 25
 
 
- 1004 0637 04       		.sleb128 4
- 1005 0638 0D       		.uleb128 0xd
- 1006 0639 746F704C 		.ascii "topLeft\0"
- 1006      65667400 
- 1007 0641 01       		.byte	0x1
- 1008 0642 20       		.byte	0x20
- 1009 0643 41       		.byte	0x41
- 1010 0644 15020000 		.long	0x215
- 1011 0648 02       		.byte	0x2
- 1012 0649 91       		.byte	0x91
- 1013 064a 08       		.sleb128 8
- 1014 064b 0D       		.uleb128 0xd
- 1015 064c 626F7474 		.ascii "bottomLeft\0"
- 1015      6F6D4C65 
- 1015      667400
- 1016 0657 01       		.byte	0x1
- 1017 0658 20       		.byte	0x20
- 1018 0659 5E       		.byte	0x5e
- 1019 065a 15020000 		.long	0x215
- 1020 065e 02       		.byte	0x2
- 1021 065f 91       		.byte	0x91
- 1022 0660 14       		.sleb128 20
- 1023 0661 0D       		.uleb128 0xd
- 1024 0662 746F7052 		.ascii "topRight\0"
- 1024      69676874 
- 1024      00
- 1025 066b 01       		.byte	0x1
- 1026 066c 20       		.byte	0x20
- 1027 066d 7E       		.byte	0x7e
- 1028 066e 15020000 		.long	0x215
- 1029 0672 02       		.byte	0x2
- 1030 0673 91       		.byte	0x91
- 1031 0674 20       		.sleb128 32
- 1032 0675 0D       		.uleb128 0xd
- 1033 0676 626F7474 		.ascii "bottomRight\0"
- 1033      6F6D5269 
- 1033      67687400 
- 1034 0682 01       		.byte	0x1
- 1035 0683 20       		.byte	0x20
- 1036 0684 9C       		.byte	0x9c
- 1037 0685 15020000 		.long	0x215
- 1038 0689 02       		.byte	0x2
- 1039 068a 91       		.byte	0x91
- 1040 068b 2C       		.sleb128 44
- 1041 068c 0E       		.uleb128 0xe
- 1042 068d 00000000 		.secrel32	LASF0
- 1043 0691 01       		.byte	0x1
- 1044 0692 20       		.byte	0x20
- 1045 0693 B9       		.byte	0xb9
- 1046 0694 E7050000 		.long	0x5e7
- 1047 0698 02       		.byte	0x2
- 1048 0699 91       		.byte	0x91
- 1049 069a 38       		.sleb128 56
- 1050 069b 12       		.uleb128 0x12
- 1051 069c 01       		.byte	0x1
- 1052 069d 07000000 		.secrel32	LASF1
- 1053 06a1 01       		.byte	0x1
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 25
+ 1100      74545F74 
+ 1100      00
+ 1101 01c5 04       		.byte	0x4
+ 1102 01c6 18       		.byte	0x18
+ 1103 01c7 02       		.byte	0x2
+ 1104 01c8 8E010000 		.long	0x18e
+ 1105 01cc 05       		.uleb128 0x5
+ 1106 01cd 0C       		.byte	0xc
+ 1107 01ce 04       		.byte	0x4
+ 1108 01cf 1A       		.byte	0x1a
+ 1109 01d0 09       		.byte	0x9
+ 1110 01d1 F8010000 		.long	0x1f8
+ 1111 01d5 07       		.uleb128 0x7
+ 1112 01d6 00000000 		.secrel32	LASF0
+ 1113 01da 04       		.byte	0x4
+ 1114 01db 1C       		.byte	0x1c
+ 1115 01dc 0A       		.byte	0xa
+ 1116 01dd 57010000 		.long	0x157
+ 1117 01e1 02       		.byte	0x2
+ 1118 01e2 23       		.byte	0x23
+ 1119 01e3 00       		.uleb128 0
+ 1120 01e4 06       		.uleb128 0x6
+ 1121 01e5 6D5F7661 		.ascii "m_value\0"
+ 1121      6C756500 
+ 1122 01ed 04       		.byte	0x4
+ 1123 01ee 1D       		.byte	0x1d
+ 1124 01ef 0B       		.byte	0xb
+ 1125 01f0 BB010000 		.long	0x1bb
+ 1126 01f4 02       		.byte	0x2
+ 1127 01f5 23       		.byte	0x23
+ 1128 01f6 04       		.uleb128 0x4
+ 1129 01f7 00       		.byte	0
+ 1130 01f8 03       		.uleb128 0x3
+ 1131 01f9 52657375 		.ascii "ResultPoint_t\0"
+ 1131      6C74506F 
+ 1131      696E745F 
+ 1131      7400
+ 1132 0207 04       		.byte	0x4
+ 1133 0208 1E       		.byte	0x1e
+ 1134 0209 02       		.byte	0x2
+ 1135 020a CC010000 		.long	0x1cc
+ 1136 020e 08       		.uleb128 0x8
+ 1137 020f F8010000 		.long	0x1f8
+ 1138 0213 05       		.uleb128 0x5
+ 1139 0214 48       		.byte	0x48
+ 1140 0215 05       		.byte	0x5
+ 1141 0216 06       		.byte	0x6
+ 1142 0217 09       		.byte	0x9
+ 1143 0218 E4020000 		.long	0x2e4
+ 1144 021c 06       		.uleb128 0x6
+ 1145 021d 5F696D67 		.ascii "_imgWidth\0"
+ 1145      57696474 
+ 1145      6800
+ 1146 0227 05       		.byte	0x5
+ 1147 0228 08       		.byte	0x8
+ 1148 0229 06       		.byte	0x6
+ 1149 022a AA000000 		.long	0xaa
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 26
 
 
- 1054 06a2 32       		.byte	0x32
- 1055 06a3 02       		.byte	0x2
- 1056 06a4 AA000000 		.long	0xaa
- 1057 06a8 01       		.byte	0x1
- 1058 06a9 13       		.uleb128 0x13
- 1059 06aa 00       		.byte	0
- 1060 06ab 00       		.byte	0
- 1061 06ac 14       		.uleb128 0x14
- 1062 06ad 426F756E 		.ascii "BoundingBox_Init\0"
- 1062      64696E67 
- 1062      426F785F 
- 1062      496E6974 
- 1062      00
- 1063 06be 01       		.byte	0x1
- 1064 06bf 16       		.byte	0x16
- 1065 06c0 0D       		.byte	0xd
- 1066 06c1 01       		.byte	0x1
- 1067 06c2 00000000 		.long	LFB4
- 1068 06c6 41000000 		.long	LFE4
- 1069 06ca A8000000 		.secrel32	LLST0
- 1070 06ce 01       		.byte	0x1
- 1071 06cf 0E       		.uleb128 0xe
- 1072 06d0 00000000 		.secrel32	LASF0
- 1073 06d4 01       		.byte	0x1
- 1074 06d5 16       		.byte	0x16
- 1075 06d6 2E       		.byte	0x2e
- 1076 06d7 E7050000 		.long	0x5e7
- 1077 06db 02       		.byte	0x2
- 1078 06dc 91       		.byte	0x91
- 1079 06dd 00       		.sleb128 0
- 1080 06de 00       		.byte	0
- 1081 06df 00       		.byte	0
- 1082              		.section	.debug_abbrev,"dr"
- 1083              	Ldebug_abbrev0:
- 1084 0000 01       		.uleb128 0x1
- 1085 0001 11       		.uleb128 0x11
- 1086 0002 01       		.byte	0x1
- 1087 0003 25       		.uleb128 0x25
- 1088 0004 08       		.uleb128 0x8
- 1089 0005 13       		.uleb128 0x13
- 1090 0006 0B       		.uleb128 0xb
- 1091 0007 03       		.uleb128 0x3
- 1092 0008 08       		.uleb128 0x8
- 1093 0009 1B       		.uleb128 0x1b
- 1094 000a 08       		.uleb128 0x8
- 1095 000b 11       		.uleb128 0x11
- 1096 000c 01       		.uleb128 0x1
- 1097 000d 12       		.uleb128 0x12
- 1098 000e 01       		.uleb128 0x1
- 1099 000f 10       		.uleb128 0x10
- 1100 0010 06       		.uleb128 0x6
- 1101 0011 00       		.byte	0
- 1102 0012 00       		.byte	0
- 1103 0013 02       		.uleb128 0x2
- 1104 0014 24       		.uleb128 0x24
- 1105 0015 00       		.byte	0
- 1106 0016 0B       		.uleb128 0xb
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 26
+ 1150 022e 02       		.byte	0x2
+ 1151 022f 23       		.byte	0x23
+ 1152 0230 00       		.uleb128 0
+ 1153 0231 06       		.uleb128 0x6
+ 1154 0232 5F696D67 		.ascii "_imgHeight\0"
+ 1154      48656967 
+ 1154      687400
+ 1155 023d 05       		.byte	0x5
+ 1156 023e 09       		.byte	0x9
+ 1157 023f 06       		.byte	0x6
+ 1158 0240 AA000000 		.long	0xaa
+ 1159 0244 02       		.byte	0x2
+ 1160 0245 23       		.byte	0x23
+ 1161 0246 04       		.uleb128 0x4
+ 1162 0247 06       		.uleb128 0x6
+ 1163 0248 5F746F70 		.ascii "_topLeft\0"
+ 1163      4C656674 
+ 1163      00
+ 1164 0251 05       		.byte	0x5
+ 1165 0252 0A       		.byte	0xa
+ 1166 0253 10       		.byte	0x10
+ 1167 0254 F8010000 		.long	0x1f8
+ 1168 0258 02       		.byte	0x2
+ 1169 0259 23       		.byte	0x23
+ 1170 025a 08       		.uleb128 0x8
+ 1171 025b 06       		.uleb128 0x6
+ 1172 025c 5F626F74 		.ascii "_bottomLeft\0"
+ 1172      746F6D4C 
+ 1172      65667400 
+ 1173 0268 05       		.byte	0x5
+ 1174 0269 0B       		.byte	0xb
+ 1175 026a 10       		.byte	0x10
+ 1176 026b F8010000 		.long	0x1f8
+ 1177 026f 02       		.byte	0x2
+ 1178 0270 23       		.byte	0x23
+ 1179 0271 14       		.uleb128 0x14
+ 1180 0272 06       		.uleb128 0x6
+ 1181 0273 5F746F70 		.ascii "_topRight\0"
+ 1181      52696768 
+ 1181      7400
+ 1182 027d 05       		.byte	0x5
+ 1183 027e 0C       		.byte	0xc
+ 1184 027f 10       		.byte	0x10
+ 1185 0280 F8010000 		.long	0x1f8
+ 1186 0284 02       		.byte	0x2
+ 1187 0285 23       		.byte	0x23
+ 1188 0286 20       		.uleb128 0x20
+ 1189 0287 06       		.uleb128 0x6
+ 1190 0288 5F626F74 		.ascii "_bottomRight\0"
+ 1190      746F6D52 
+ 1190      69676874 
+ 1190      00
+ 1191 0295 05       		.byte	0x5
+ 1192 0296 0D       		.byte	0xd
+ 1193 0297 10       		.byte	0x10
+ 1194 0298 F8010000 		.long	0x1f8
+ 1195 029c 02       		.byte	0x2
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 27
 
 
- 1107 0017 0B       		.uleb128 0xb
- 1108 0018 3E       		.uleb128 0x3e
- 1109 0019 0B       		.uleb128 0xb
- 1110 001a 03       		.uleb128 0x3
- 1111 001b 08       		.uleb128 0x8
- 1112 001c 00       		.byte	0
- 1113 001d 00       		.byte	0
- 1114 001e 03       		.uleb128 0x3
- 1115 001f 16       		.uleb128 0x16
- 1116 0020 00       		.byte	0
- 1117 0021 03       		.uleb128 0x3
- 1118 0022 08       		.uleb128 0x8
- 1119 0023 3A       		.uleb128 0x3a
- 1120 0024 0B       		.uleb128 0xb
- 1121 0025 3B       		.uleb128 0x3b
- 1122 0026 0B       		.uleb128 0xb
- 1123 0027 39       		.uleb128 0x39
- 1124 0028 0B       		.uleb128 0xb
- 1125 0029 49       		.uleb128 0x49
- 1126 002a 13       		.uleb128 0x13
- 1127 002b 00       		.byte	0
- 1128 002c 00       		.byte	0
- 1129 002d 04       		.uleb128 0x4
- 1130 002e 0F       		.uleb128 0xf
- 1131 002f 00       		.byte	0
- 1132 0030 0B       		.uleb128 0xb
- 1133 0031 0B       		.uleb128 0xb
- 1134 0032 49       		.uleb128 0x49
- 1135 0033 13       		.uleb128 0x13
- 1136 0034 00       		.byte	0
- 1137 0035 00       		.byte	0
- 1138 0036 05       		.uleb128 0x5
- 1139 0037 13       		.uleb128 0x13
- 1140 0038 01       		.byte	0x1
- 1141 0039 0B       		.uleb128 0xb
- 1142 003a 0B       		.uleb128 0xb
- 1143 003b 3A       		.uleb128 0x3a
- 1144 003c 0B       		.uleb128 0xb
- 1145 003d 3B       		.uleb128 0x3b
- 1146 003e 0B       		.uleb128 0xb
- 1147 003f 39       		.uleb128 0x39
- 1148 0040 0B       		.uleb128 0xb
- 1149 0041 01       		.uleb128 0x1
- 1150 0042 13       		.uleb128 0x13
- 1151 0043 00       		.byte	0
- 1152 0044 00       		.byte	0
- 1153 0045 06       		.uleb128 0x6
- 1154 0046 0D       		.uleb128 0xd
- 1155 0047 00       		.byte	0
- 1156 0048 03       		.uleb128 0x3
- 1157 0049 08       		.uleb128 0x8
- 1158 004a 3A       		.uleb128 0x3a
- 1159 004b 0B       		.uleb128 0xb
- 1160 004c 3B       		.uleb128 0x3b
- 1161 004d 0B       		.uleb128 0xb
- 1162 004e 39       		.uleb128 0x39
- 1163 004f 0B       		.uleb128 0xb
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 27
+ 1196 029d 23       		.byte	0x23
+ 1197 029e 2C       		.uleb128 0x2c
+ 1198 029f 06       		.uleb128 0x6
+ 1199 02a0 5F6D696E 		.ascii "_minX\0"
+ 1199      5800
+ 1200 02a6 05       		.byte	0x5
+ 1201 02a7 0E       		.byte	0xe
+ 1202 02a8 06       		.byte	0x6
+ 1203 02a9 AA000000 		.long	0xaa
+ 1204 02ad 02       		.byte	0x2
+ 1205 02ae 23       		.byte	0x23
+ 1206 02af 38       		.uleb128 0x38
+ 1207 02b0 06       		.uleb128 0x6
+ 1208 02b1 5F6D6178 		.ascii "_maxX\0"
+ 1208      5800
+ 1209 02b7 05       		.byte	0x5
+ 1210 02b8 0F       		.byte	0xf
+ 1211 02b9 06       		.byte	0x6
+ 1212 02ba AA000000 		.long	0xaa
+ 1213 02be 02       		.byte	0x2
+ 1214 02bf 23       		.byte	0x23
+ 1215 02c0 3C       		.uleb128 0x3c
+ 1216 02c1 06       		.uleb128 0x6
+ 1217 02c2 5F6D696E 		.ascii "_minY\0"
+ 1217      5900
+ 1218 02c8 05       		.byte	0x5
+ 1219 02c9 10       		.byte	0x10
+ 1220 02ca 06       		.byte	0x6
+ 1221 02cb AA000000 		.long	0xaa
+ 1222 02cf 02       		.byte	0x2
+ 1223 02d0 23       		.byte	0x23
+ 1224 02d1 40       		.uleb128 0x40
+ 1225 02d2 06       		.uleb128 0x6
+ 1226 02d3 5F6D6178 		.ascii "_maxY\0"
+ 1226      5900
+ 1227 02d9 05       		.byte	0x5
+ 1228 02da 11       		.byte	0x11
+ 1229 02db 06       		.byte	0x6
+ 1230 02dc AA000000 		.long	0xaa
+ 1231 02e0 02       		.byte	0x2
+ 1232 02e1 23       		.byte	0x23
+ 1233 02e2 44       		.uleb128 0x44
+ 1234 02e3 00       		.byte	0
+ 1235 02e4 03       		.uleb128 0x3
+ 1236 02e5 426F756E 		.ascii "BoundingBox_val_t\0"
+ 1236      64696E67 
+ 1236      426F785F 
+ 1236      76616C5F 
+ 1236      7400
+ 1237 02f7 05       		.byte	0x5
+ 1238 02f8 12       		.byte	0x12
+ 1239 02f9 02       		.byte	0x2
+ 1240 02fa 13020000 		.long	0x213
+ 1241 02fe 05       		.uleb128 0x5
+ 1242 02ff 4C       		.byte	0x4c
+ 1243 0300 05       		.byte	0x5
+ 1244 0301 14       		.byte	0x14
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 28
 
 
- 1164 0050 49       		.uleb128 0x49
- 1165 0051 13       		.uleb128 0x13
- 1166 0052 38       		.uleb128 0x38
- 1167 0053 0A       		.uleb128 0xa
- 1168 0054 00       		.byte	0
- 1169 0055 00       		.byte	0
- 1170 0056 07       		.uleb128 0x7
- 1171 0057 26       		.uleb128 0x26
- 1172 0058 00       		.byte	0
- 1173 0059 49       		.uleb128 0x49
- 1174 005a 13       		.uleb128 0x13
- 1175 005b 00       		.byte	0
- 1176 005c 00       		.byte	0
- 1177 005d 08       		.uleb128 0x8
- 1178 005e 34       		.uleb128 0x34
- 1179 005f 00       		.byte	0
- 1180 0060 03       		.uleb128 0x3
- 1181 0061 08       		.uleb128 0x8
- 1182 0062 3A       		.uleb128 0x3a
- 1183 0063 0B       		.uleb128 0xb
- 1184 0064 3B       		.uleb128 0x3b
- 1185 0065 0B       		.uleb128 0xb
- 1186 0066 39       		.uleb128 0x39
- 1187 0067 0B       		.uleb128 0xb
- 1188 0068 49       		.uleb128 0x49
- 1189 0069 13       		.uleb128 0x13
- 1190 006a 3F       		.uleb128 0x3f
- 1191 006b 0C       		.uleb128 0xc
- 1192 006c 3C       		.uleb128 0x3c
- 1193 006d 0C       		.uleb128 0xc
- 1194 006e 00       		.byte	0
- 1195 006f 00       		.byte	0
- 1196 0070 09       		.uleb128 0x9
- 1197 0071 01       		.uleb128 0x1
- 1198 0072 01       		.byte	0x1
- 1199 0073 49       		.uleb128 0x49
- 1200 0074 13       		.uleb128 0x13
- 1201 0075 01       		.uleb128 0x1
- 1202 0076 13       		.uleb128 0x13
- 1203 0077 00       		.byte	0
- 1204 0078 00       		.byte	0
- 1205 0079 0A       		.uleb128 0xa
- 1206 007a 21       		.uleb128 0x21
- 1207 007b 00       		.byte	0
- 1208 007c 49       		.uleb128 0x49
- 1209 007d 13       		.uleb128 0x13
- 1210 007e 2F       		.uleb128 0x2f
- 1211 007f 0B       		.uleb128 0xb
- 1212 0080 00       		.byte	0
- 1213 0081 00       		.byte	0
- 1214 0082 0B       		.uleb128 0xb
- 1215 0083 34       		.uleb128 0x34
- 1216 0084 00       		.byte	0
- 1217 0085 03       		.uleb128 0x3
- 1218 0086 08       		.uleb128 0x8
- 1219 0087 3A       		.uleb128 0x3a
- 1220 0088 0B       		.uleb128 0xb
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 28
+ 1245 0302 09       		.byte	0x9
+ 1246 0303 2A030000 		.long	0x32a
+ 1247 0307 07       		.uleb128 0x7
+ 1248 0308 00000000 		.secrel32	LASF0
+ 1249 030c 05       		.byte	0x5
+ 1250 030d 16       		.byte	0x16
+ 1251 030e 0A       		.byte	0xa
+ 1252 030f 57010000 		.long	0x157
+ 1253 0313 02       		.byte	0x2
+ 1254 0314 23       		.byte	0x23
+ 1255 0315 00       		.uleb128 0
+ 1256 0316 06       		.uleb128 0x6
+ 1257 0317 6D5F7661 		.ascii "m_value\0"
+ 1257      6C756500 
+ 1258 031f 05       		.byte	0x5
+ 1259 0320 17       		.byte	0x17
+ 1260 0321 14       		.byte	0x14
+ 1261 0322 E4020000 		.long	0x2e4
+ 1262 0326 02       		.byte	0x2
+ 1263 0327 23       		.byte	0x23
+ 1264 0328 04       		.uleb128 0x4
+ 1265 0329 00       		.byte	0
+ 1266 032a 03       		.uleb128 0x3
+ 1267 032b 426F756E 		.ascii "BoundingBox_t\0"
+ 1267      64696E67 
+ 1267      426F785F 
+ 1267      7400
+ 1268 0339 05       		.byte	0x5
+ 1269 033a 18       		.byte	0x18
+ 1270 033b 02       		.byte	0x2
+ 1271 033c FE020000 		.long	0x2fe
+ 1272 0340 08       		.uleb128 0x8
+ 1273 0341 2A030000 		.long	0x32a
+ 1274 0345 02       		.uleb128 0x2
+ 1275 0346 08       		.byte	0x8
+ 1276 0347 04       		.byte	0x4
+ 1277 0348 646F7562 		.ascii "double\0"
+ 1277      6C6500
+ 1278 034f 09       		.uleb128 0x9
+ 1279 0350 5F696D70 		.ascii "_imp____mb_cur_max\0"
+ 1279      5F5F5F5F 
+ 1279      6D625F63 
+ 1279      75725F6D 
+ 1279      617800
+ 1280 0363 06       		.byte	0x6
+ 1281 0364 73       		.byte	0x73
+ 1282 0365 10       		.byte	0x10
+ 1283 0366 00010000 		.long	0x100
+ 1284 036a 01       		.byte	0x1
+ 1285 036b 01       		.byte	0x1
+ 1286 036c 0A       		.uleb128 0xa
+ 1287 036d F4000000 		.long	0xf4
+ 1288 0371 7C030000 		.long	0x37c
+ 1289 0375 0B       		.uleb128 0xb
+ 1290 0376 9A000000 		.long	0x9a
+ 1291 037a 00       		.byte	0
+ 1292 037b 00       		.byte	0
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 29
 
 
- 1221 0089 3B       		.uleb128 0x3b
- 1222 008a 05       		.uleb128 0x5
- 1223 008b 39       		.uleb128 0x39
- 1224 008c 0B       		.uleb128 0xb
- 1225 008d 49       		.uleb128 0x49
- 1226 008e 13       		.uleb128 0x13
- 1227 008f 3F       		.uleb128 0x3f
- 1228 0090 0C       		.uleb128 0xc
- 1229 0091 3C       		.uleb128 0x3c
- 1230 0092 0C       		.uleb128 0xc
- 1231 0093 00       		.byte	0
- 1232 0094 00       		.byte	0
- 1233 0095 0C       		.uleb128 0xc
- 1234 0096 2E       		.uleb128 0x2e
- 1235 0097 01       		.byte	0x1
- 1236 0098 3F       		.uleb128 0x3f
- 1237 0099 0C       		.uleb128 0xc
- 1238 009a 03       		.uleb128 0x3
- 1239 009b 08       		.uleb128 0x8
- 1240 009c 3A       		.uleb128 0x3a
- 1241 009d 0B       		.uleb128 0xb
- 1242 009e 3B       		.uleb128 0x3b
- 1243 009f 0B       		.uleb128 0xb
- 1244 00a0 39       		.uleb128 0x39
- 1245 00a1 0B       		.uleb128 0xb
- 1246 00a2 27       		.uleb128 0x27
- 1247 00a3 0C       		.uleb128 0xc
- 1248 00a4 49       		.uleb128 0x49
- 1249 00a5 13       		.uleb128 0x13
- 1250 00a6 11       		.uleb128 0x11
- 1251 00a7 01       		.uleb128 0x1
- 1252 00a8 12       		.uleb128 0x12
- 1253 00a9 01       		.uleb128 0x1
- 1254 00aa 40       		.uleb128 0x40
- 1255 00ab 06       		.uleb128 0x6
- 1256 00ac 9742     		.uleb128 0x2117
- 1257 00ae 0C       		.uleb128 0xc
- 1258 00af 01       		.uleb128 0x1
- 1259 00b0 13       		.uleb128 0x13
- 1260 00b1 00       		.byte	0
- 1261 00b2 00       		.byte	0
- 1262 00b3 0D       		.uleb128 0xd
- 1263 00b4 05       		.uleb128 0x5
- 1264 00b5 00       		.byte	0
- 1265 00b6 03       		.uleb128 0x3
- 1266 00b7 08       		.uleb128 0x8
- 1267 00b8 3A       		.uleb128 0x3a
- 1268 00b9 0B       		.uleb128 0xb
- 1269 00ba 3B       		.uleb128 0x3b
- 1270 00bb 0B       		.uleb128 0xb
- 1271 00bc 39       		.uleb128 0x39
- 1272 00bd 0B       		.uleb128 0xb
- 1273 00be 49       		.uleb128 0x49
- 1274 00bf 13       		.uleb128 0x13
- 1275 00c0 02       		.uleb128 0x2
- 1276 00c1 0A       		.uleb128 0xa
- 1277 00c2 00       		.byte	0
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 29
+ 1293 037c 09       		.uleb128 0x9
+ 1294 037d 5F737973 		.ascii "_sys_errlist\0"
+ 1294      5F657272 
+ 1294      6C697374 
+ 1294      00
+ 1295 038a 06       		.byte	0x6
+ 1296 038b AC       		.byte	0xac
+ 1297 038c 26       		.byte	0x26
+ 1298 038d 6C030000 		.long	0x36c
+ 1299 0391 01       		.byte	0x1
+ 1300 0392 01       		.byte	0x1
+ 1301 0393 09       		.uleb128 0x9
+ 1302 0394 5F737973 		.ascii "_sys_nerr\0"
+ 1302      5F6E6572 
+ 1302      7200
+ 1303 039e 06       		.byte	0x6
+ 1304 039f AD       		.byte	0xad
+ 1305 03a0 24       		.byte	0x24
+ 1306 03a1 AA000000 		.long	0xaa
+ 1307 03a5 01       		.byte	0x1
+ 1308 03a6 01       		.byte	0x1
+ 1309 03a7 0C       		.uleb128 0xc
+ 1310 03a8 5F696D70 		.ascii "_imp____argc\0"
+ 1310      5F5F5F5F 
+ 1310      61726763 
+ 1310      00
+ 1311 03b5 06       		.byte	0x6
+ 1312 03b6 1901     		.word	0x119
+ 1313 03b8 10       		.byte	0x10
+ 1314 03b9 00010000 		.long	0x100
+ 1315 03bd 01       		.byte	0x1
+ 1316 03be 01       		.byte	0x1
+ 1317 03bf 0C       		.uleb128 0xc
+ 1318 03c0 5F696D70 		.ascii "_imp____argv\0"
+ 1318      5F5F5F5F 
+ 1318      61726776 
+ 1318      00
+ 1319 03cd 06       		.byte	0x6
+ 1320 03ce 1D01     		.word	0x11d
+ 1321 03d0 13       		.byte	0x13
+ 1322 03d1 D7030000 		.long	0x3d7
+ 1323 03d5 01       		.byte	0x1
+ 1324 03d6 01       		.byte	0x1
+ 1325 03d7 04       		.uleb128 0x4
+ 1326 03d8 04       		.byte	0x4
+ 1327 03d9 DD030000 		.long	0x3dd
+ 1328 03dd 04       		.uleb128 0x4
+ 1329 03de 04       		.byte	0x4
+ 1330 03df F4000000 		.long	0xf4
+ 1331 03e3 0C       		.uleb128 0xc
+ 1332 03e4 5F696D70 		.ascii "_imp____wargv\0"
+ 1332      5F5F5F5F 
+ 1332      77617267 
+ 1332      7600
+ 1333 03f2 06       		.byte	0x6
+ 1334 03f3 2101     		.word	0x121
+ 1335 03f5 16       		.byte	0x16
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 30
 
 
- 1278 00c3 00       		.byte	0
- 1279 00c4 0E       		.uleb128 0xe
- 1280 00c5 05       		.uleb128 0x5
- 1281 00c6 00       		.byte	0
- 1282 00c7 03       		.uleb128 0x3
- 1283 00c8 0E       		.uleb128 0xe
- 1284 00c9 3A       		.uleb128 0x3a
- 1285 00ca 0B       		.uleb128 0xb
- 1286 00cb 3B       		.uleb128 0x3b
- 1287 00cc 0B       		.uleb128 0xb
- 1288 00cd 39       		.uleb128 0x39
- 1289 00ce 0B       		.uleb128 0xb
- 1290 00cf 49       		.uleb128 0x49
- 1291 00d0 13       		.uleb128 0x13
- 1292 00d1 02       		.uleb128 0x2
- 1293 00d2 0A       		.uleb128 0xa
- 1294 00d3 00       		.byte	0
- 1295 00d4 00       		.byte	0
- 1296 00d5 0F       		.uleb128 0xf
- 1297 00d6 2E       		.uleb128 0x2e
- 1298 00d7 01       		.byte	0x1
- 1299 00d8 3F       		.uleb128 0x3f
- 1300 00d9 0C       		.uleb128 0xc
- 1301 00da 03       		.uleb128 0x3
- 1302 00db 08       		.uleb128 0x8
- 1303 00dc 3A       		.uleb128 0x3a
- 1304 00dd 0B       		.uleb128 0xb
- 1305 00de 3B       		.uleb128 0x3b
- 1306 00df 0B       		.uleb128 0xb
- 1307 00e0 39       		.uleb128 0x39
- 1308 00e1 0B       		.uleb128 0xb
- 1309 00e2 27       		.uleb128 0x27
- 1310 00e3 0C       		.uleb128 0xc
- 1311 00e4 49       		.uleb128 0x49
- 1312 00e5 13       		.uleb128 0x13
- 1313 00e6 11       		.uleb128 0x11
- 1314 00e7 01       		.uleb128 0x1
- 1315 00e8 12       		.uleb128 0x12
- 1316 00e9 01       		.uleb128 0x1
- 1317 00ea 40       		.uleb128 0x40
- 1318 00eb 0A       		.uleb128 0xa
- 1319 00ec 9742     		.uleb128 0x2117
- 1320 00ee 0C       		.uleb128 0xc
- 1321 00ef 01       		.uleb128 0x1
- 1322 00f0 13       		.uleb128 0x13
- 1323 00f1 00       		.byte	0
- 1324 00f2 00       		.byte	0
- 1325 00f3 10       		.uleb128 0x10
- 1326 00f4 2E       		.uleb128 0x2e
- 1327 00f5 01       		.byte	0x1
- 1328 00f6 3F       		.uleb128 0x3f
- 1329 00f7 0C       		.uleb128 0xc
- 1330 00f8 03       		.uleb128 0x3
- 1331 00f9 0E       		.uleb128 0xe
- 1332 00fa 3A       		.uleb128 0x3a
- 1333 00fb 0B       		.uleb128 0xb
- 1334 00fc 3B       		.uleb128 0x3b
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 30
+ 1336 03f6 FC030000 		.long	0x3fc
+ 1337 03fa 01       		.byte	0x1
+ 1338 03fb 01       		.byte	0x1
+ 1339 03fc 04       		.uleb128 0x4
+ 1340 03fd 04       		.byte	0x4
+ 1341 03fe 02040000 		.long	0x402
+ 1342 0402 04       		.uleb128 0x4
+ 1343 0403 04       		.byte	0x4
+ 1344 0404 FA000000 		.long	0xfa
+ 1345 0408 0C       		.uleb128 0xc
+ 1346 0409 5F696D70 		.ascii "_imp___environ\0"
+ 1346      5F5F5F65 
+ 1346      6E766972 
+ 1346      6F6E00
+ 1347 0418 06       		.byte	0x6
+ 1348 0419 2701     		.word	0x127
+ 1349 041b 13       		.byte	0x13
+ 1350 041c D7030000 		.long	0x3d7
+ 1351 0420 01       		.byte	0x1
+ 1352 0421 01       		.byte	0x1
+ 1353 0422 0C       		.uleb128 0xc
+ 1354 0423 5F696D70 		.ascii "_imp___wenviron\0"
+ 1354      5F5F5F77 
+ 1354      656E7669 
+ 1354      726F6E00 
+ 1355 0433 06       		.byte	0x6
+ 1356 0434 2C01     		.word	0x12c
+ 1357 0436 16       		.byte	0x16
+ 1358 0437 FC030000 		.long	0x3fc
+ 1359 043b 01       		.byte	0x1
+ 1360 043c 01       		.byte	0x1
+ 1361 043d 0C       		.uleb128 0xc
+ 1362 043e 5F696D70 		.ascii "_imp___pgmptr\0"
+ 1362      5F5F5F70 
+ 1362      676D7074 
+ 1362      7200
+ 1363 044c 06       		.byte	0x6
+ 1364 044d 3201     		.word	0x132
+ 1365 044f 12       		.byte	0x12
+ 1366 0450 DD030000 		.long	0x3dd
+ 1367 0454 01       		.byte	0x1
+ 1368 0455 01       		.byte	0x1
+ 1369 0456 0C       		.uleb128 0xc
+ 1370 0457 5F696D70 		.ascii "_imp___wpgmptr\0"
+ 1370      5F5F5F77 
+ 1370      70676D70 
+ 1370      747200
+ 1371 0466 06       		.byte	0x6
+ 1372 0467 3701     		.word	0x137
+ 1373 0469 15       		.byte	0x15
+ 1374 046a 02040000 		.long	0x402
+ 1375 046e 01       		.byte	0x1
+ 1376 046f 01       		.byte	0x1
+ 1377 0470 0C       		.uleb128 0xc
+ 1378 0471 5F696D70 		.ascii "_imp___osplatform\0"
+ 1378      5F5F5F6F 
+ 1378      73706C61 
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 31
 
 
- 1335 00fd 0B       		.uleb128 0xb
- 1336 00fe 39       		.uleb128 0x39
- 1337 00ff 0B       		.uleb128 0xb
- 1338 0100 27       		.uleb128 0x27
- 1339 0101 0C       		.uleb128 0xc
- 1340 0102 11       		.uleb128 0x11
- 1341 0103 01       		.uleb128 0x1
- 1342 0104 12       		.uleb128 0x12
- 1343 0105 01       		.uleb128 0x1
- 1344 0106 40       		.uleb128 0x40
- 1345 0107 06       		.uleb128 0x6
- 1346 0108 9742     		.uleb128 0x2117
- 1347 010a 0C       		.uleb128 0xc
- 1348 010b 01       		.uleb128 0x1
- 1349 010c 13       		.uleb128 0x13
- 1350 010d 00       		.byte	0
- 1351 010e 00       		.byte	0
- 1352 010f 11       		.uleb128 0x11
- 1353 0110 2E       		.uleb128 0x2e
- 1354 0111 01       		.byte	0x1
- 1355 0112 3F       		.uleb128 0x3f
- 1356 0113 0C       		.uleb128 0xc
- 1357 0114 03       		.uleb128 0x3
- 1358 0115 08       		.uleb128 0x8
- 1359 0116 3A       		.uleb128 0x3a
- 1360 0117 0B       		.uleb128 0xb
- 1361 0118 3B       		.uleb128 0x3b
- 1362 0119 0B       		.uleb128 0xb
- 1363 011a 39       		.uleb128 0x39
- 1364 011b 0B       		.uleb128 0xb
- 1365 011c 27       		.uleb128 0x27
- 1366 011d 0C       		.uleb128 0xc
- 1367 011e 49       		.uleb128 0x49
- 1368 011f 13       		.uleb128 0x13
- 1369 0120 11       		.uleb128 0x11
- 1370 0121 01       		.uleb128 0x1
- 1371 0122 12       		.uleb128 0x12
- 1372 0123 01       		.uleb128 0x1
- 1373 0124 40       		.uleb128 0x40
- 1374 0125 06       		.uleb128 0x6
- 1375 0126 9642     		.uleb128 0x2116
- 1376 0128 0C       		.uleb128 0xc
- 1377 0129 01       		.uleb128 0x1
- 1378 012a 13       		.uleb128 0x13
- 1379 012b 00       		.byte	0
- 1380 012c 00       		.byte	0
- 1381 012d 12       		.uleb128 0x12
- 1382 012e 2E       		.uleb128 0x2e
- 1383 012f 01       		.byte	0x1
- 1384 0130 3F       		.uleb128 0x3f
- 1385 0131 0C       		.uleb128 0xc
- 1386 0132 03       		.uleb128 0x3
- 1387 0133 0E       		.uleb128 0xe
- 1388 0134 3A       		.uleb128 0x3a
- 1389 0135 0B       		.uleb128 0xb
- 1390 0136 3B       		.uleb128 0x3b
- 1391 0137 0B       		.uleb128 0xb
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 31
+ 1378      74666F72 
+ 1378      6D00
+ 1379 0483 06       		.byte	0x6
+ 1380 0484 3C01     		.word	0x13c
+ 1381 0486 19       		.byte	0x19
+ 1382 0487 8D040000 		.long	0x48d
+ 1383 048b 01       		.byte	0x1
+ 1384 048c 01       		.byte	0x1
+ 1385 048d 04       		.uleb128 0x4
+ 1386 048e 04       		.byte	0x4
+ 1387 048f 9A000000 		.long	0x9a
+ 1388 0493 0C       		.uleb128 0xc
+ 1389 0494 5F696D70 		.ascii "_imp___osver\0"
+ 1389      5F5F5F6F 
+ 1389      73766572 
+ 1389      00
+ 1390 04a1 06       		.byte	0x6
+ 1391 04a2 4101     		.word	0x141
+ 1392 04a4 19       		.byte	0x19
+ 1393 04a5 8D040000 		.long	0x48d
+ 1394 04a9 01       		.byte	0x1
+ 1395 04aa 01       		.byte	0x1
+ 1396 04ab 0C       		.uleb128 0xc
+ 1397 04ac 5F696D70 		.ascii "_imp___winver\0"
+ 1397      5F5F5F77 
+ 1397      696E7665 
+ 1397      7200
+ 1398 04ba 06       		.byte	0x6
+ 1399 04bb 4601     		.word	0x146
+ 1400 04bd 19       		.byte	0x19
+ 1401 04be 8D040000 		.long	0x48d
+ 1402 04c2 01       		.byte	0x1
+ 1403 04c3 01       		.byte	0x1
+ 1404 04c4 0C       		.uleb128 0xc
+ 1405 04c5 5F696D70 		.ascii "_imp___winmajor\0"
+ 1405      5F5F5F77 
+ 1405      696E6D61 
+ 1405      6A6F7200 
+ 1406 04d5 06       		.byte	0x6
+ 1407 04d6 4B01     		.word	0x14b
+ 1408 04d8 19       		.byte	0x19
+ 1409 04d9 8D040000 		.long	0x48d
+ 1410 04dd 01       		.byte	0x1
+ 1411 04de 01       		.byte	0x1
+ 1412 04df 0C       		.uleb128 0xc
+ 1413 04e0 5F696D70 		.ascii "_imp___winminor\0"
+ 1413      5F5F5F77 
+ 1413      696E6D69 
+ 1413      6E6F7200 
+ 1414 04f0 06       		.byte	0x6
+ 1415 04f1 5001     		.word	0x150
+ 1416 04f3 19       		.byte	0x19
+ 1417 04f4 8D040000 		.long	0x48d
+ 1418 04f8 01       		.byte	0x1
+ 1419 04f9 01       		.byte	0x1
+ 1420 04fa 09       		.uleb128 0x9
+ 1421 04fb 5F616D62 		.ascii "_amblksiz\0"
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 32
 
 
- 1392 0138 39       		.uleb128 0x39
- 1393 0139 0B       		.uleb128 0xb
- 1394 013a 49       		.uleb128 0x49
- 1395 013b 13       		.uleb128 0x13
- 1396 013c 3C       		.uleb128 0x3c
- 1397 013d 0C       		.uleb128 0xc
- 1398 013e 00       		.byte	0
- 1399 013f 00       		.byte	0
- 1400 0140 13       		.uleb128 0x13
- 1401 0141 18       		.uleb128 0x18
- 1402 0142 00       		.byte	0
- 1403 0143 00       		.byte	0
- 1404 0144 00       		.byte	0
- 1405 0145 14       		.uleb128 0x14
- 1406 0146 2E       		.uleb128 0x2e
- 1407 0147 01       		.byte	0x1
- 1408 0148 03       		.uleb128 0x3
- 1409 0149 08       		.uleb128 0x8
- 1410 014a 3A       		.uleb128 0x3a
- 1411 014b 0B       		.uleb128 0xb
- 1412 014c 3B       		.uleb128 0x3b
- 1413 014d 0B       		.uleb128 0xb
- 1414 014e 39       		.uleb128 0x39
- 1415 014f 0B       		.uleb128 0xb
- 1416 0150 27       		.uleb128 0x27
- 1417 0151 0C       		.uleb128 0xc
- 1418 0152 11       		.uleb128 0x11
- 1419 0153 01       		.uleb128 0x1
- 1420 0154 12       		.uleb128 0x12
- 1421 0155 01       		.uleb128 0x1
- 1422 0156 40       		.uleb128 0x40
- 1423 0157 06       		.uleb128 0x6
- 1424 0158 9742     		.uleb128 0x2117
- 1425 015a 0C       		.uleb128 0xc
- 1426 015b 00       		.byte	0
- 1427 015c 00       		.byte	0
- 1428 015d 00       		.byte	0
- 1429              		.section	.debug_loc,"dr"
- 1430              	Ldebug_loc0:
- 1431              	LLST3:
- 1432 0000 B2020000 		.long	LFB8-Ltext0
- 1433 0004 B3020000 		.long	LCFI9-Ltext0
- 1434 0008 0200     		.word	0x2
- 1435 000a 74       		.byte	0x74
- 1436 000b 04       		.sleb128 4
- 1437 000c B3020000 		.long	LCFI9-Ltext0
- 1438 0010 B5020000 		.long	LCFI10-Ltext0
- 1439 0014 0200     		.word	0x2
- 1440 0016 74       		.byte	0x74
- 1441 0017 08       		.sleb128 8
- 1442 0018 B5020000 		.long	LCFI10-Ltext0
- 1443 001c C0020000 		.long	LCFI11-Ltext0
- 1444 0020 0200     		.word	0x2
- 1445 0022 75       		.byte	0x75
- 1446 0023 08       		.sleb128 8
- 1447 0024 C0020000 		.long	LCFI11-Ltext0
- 1448 0028 C1020000 		.long	LFE8-Ltext0
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 32
+ 1421      6C6B7369 
+ 1421      7A00
+ 1422 0505 07       		.byte	0x7
+ 1423 0506 35       		.byte	0x35
+ 1424 0507 17       		.byte	0x17
+ 1425 0508 9A000000 		.long	0x9a
+ 1426 050c 01       		.byte	0x1
+ 1427 050d 01       		.byte	0x1
+ 1428 050e 0D       		.uleb128 0xd
+ 1429 050f 01       		.byte	0x1
+ 1430 0510 4164644D 		.ascii "AddMissingRows\0"
+ 1430      69737369 
+ 1430      6E67526F 
+ 1430      777300
+ 1431 051f 01       		.byte	0x1
+ 1432 0520 8D       		.byte	0x8d
+ 1433 0521 09       		.byte	0x9
+ 1434 0522 01       		.byte	0x1
+ 1435 0523 57010000 		.long	0x157
+ 1436 0527 D6040000 		.long	LFB13
+ 1437 052b 16070000 		.long	LFE13
+ 1438 052f 00000000 		.secrel32	LLST9
+ 1439 0533 01       		.byte	0x1
+ 1440 0534 8B060000 		.long	0x68b
+ 1441 0538 0E       		.uleb128 0xe
+ 1442 0539 626F7800 		.ascii "box\0"
+ 1443 053d 01       		.byte	0x1
+ 1444 053e 8D       		.byte	0x8d
+ 1445 053f 2E       		.byte	0x2e
+ 1446 0540 8B060000 		.long	0x68b
+ 1447 0544 02       		.byte	0x2
+ 1448 0545 91       		.byte	0x91
+ 1449 0546 00       		.sleb128 0
+ 1450 0547 0E       		.uleb128 0xe
+ 1451 0548 6D697373 		.ascii "missingStartRows\0"
+ 1451      696E6753 
+ 1451      74617274 
+ 1451      526F7773 
+ 1451      00
+ 1452 0559 01       		.byte	0x1
+ 1453 055a 8D       		.byte	0x8d
+ 1454 055b 37       		.byte	0x37
+ 1455 055c AA000000 		.long	0xaa
+ 1456 0560 02       		.byte	0x2
+ 1457 0561 91       		.byte	0x91
+ 1458 0562 04       		.sleb128 4
+ 1459 0563 0E       		.uleb128 0xe
+ 1460 0564 6D697373 		.ascii "missingEndRows\0"
+ 1460      696E6745 
+ 1460      6E64526F 
+ 1460      777300
+ 1461 0573 01       		.byte	0x1
+ 1462 0574 8D       		.byte	0x8d
+ 1463 0575 4D       		.byte	0x4d
+ 1464 0576 AA000000 		.long	0xaa
+ 1465 057a 02       		.byte	0x2
+ 1466 057b 91       		.byte	0x91
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 33
 
 
- 1449 002c 0200     		.word	0x2
- 1450 002e 74       		.byte	0x74
- 1451 002f 04       		.sleb128 4
- 1452 0030 00000000 		.long	0
- 1453 0034 00000000 		.long	0
- 1454              	LLST2:
- 1455 0038 10010000 		.long	LFB6-Ltext0
- 1456 003c 11010000 		.long	LCFI6-Ltext0
- 1457 0040 0200     		.word	0x2
- 1458 0042 74       		.byte	0x74
- 1459 0043 04       		.sleb128 4
- 1460 0044 11010000 		.long	LCFI6-Ltext0
- 1461 0048 13010000 		.long	LCFI7-Ltext0
- 1462 004c 0200     		.word	0x2
- 1463 004e 74       		.byte	0x74
- 1464 004f 08       		.sleb128 8
- 1465 0050 13010000 		.long	LCFI7-Ltext0
- 1466 0054 AF020000 		.long	LCFI8-Ltext0
- 1467 0058 0200     		.word	0x2
- 1468 005a 75       		.byte	0x75
- 1469 005b 08       		.sleb128 8
- 1470 005c AF020000 		.long	LCFI8-Ltext0
- 1471 0060 B0020000 		.long	LFE6-Ltext0
- 1472 0064 0200     		.word	0x2
- 1473 0066 74       		.byte	0x74
- 1474 0067 04       		.sleb128 4
- 1475 0068 00000000 		.long	0
- 1476 006c 00000000 		.long	0
- 1477              	LLST1:
- 1478 0070 41000000 		.long	LFB5-Ltext0
- 1479 0074 42000000 		.long	LCFI3-Ltext0
- 1480 0078 0200     		.word	0x2
- 1481 007a 74       		.byte	0x74
- 1482 007b 04       		.sleb128 4
- 1483 007c 42000000 		.long	LCFI3-Ltext0
- 1484 0080 44000000 		.long	LCFI4-Ltext0
- 1485 0084 0200     		.word	0x2
- 1486 0086 74       		.byte	0x74
- 1487 0087 08       		.sleb128 8
- 1488 0088 44000000 		.long	LCFI4-Ltext0
- 1489 008c 0F010000 		.long	LCFI5-Ltext0
- 1490 0090 0200     		.word	0x2
- 1491 0092 75       		.byte	0x75
- 1492 0093 08       		.sleb128 8
- 1493 0094 0F010000 		.long	LCFI5-Ltext0
- 1494 0098 10010000 		.long	LFE5-Ltext0
- 1495 009c 0200     		.word	0x2
- 1496 009e 74       		.byte	0x74
- 1497 009f 04       		.sleb128 4
- 1498 00a0 00000000 		.long	0
- 1499 00a4 00000000 		.long	0
- 1500              	LLST0:
- 1501 00a8 00000000 		.long	LFB4-Ltext0
- 1502 00ac 01000000 		.long	LCFI0-Ltext0
- 1503 00b0 0200     		.word	0x2
- 1504 00b2 74       		.byte	0x74
- 1505 00b3 04       		.sleb128 4
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 33
+ 1467 057c 08       		.sleb128 8
+ 1468 057d 0E       		.uleb128 0xe
+ 1469 057e 69734C65 		.ascii "isLeft\0"
+ 1469      667400
+ 1470 0585 01       		.byte	0x1
+ 1471 0586 8D       		.byte	0x8d
+ 1472 0587 65       		.byte	0x65
+ 1473 0588 57010000 		.long	0x157
+ 1474 058c 03       		.byte	0x3
+ 1475 058d 91       		.byte	0x91
+ 1476 058e FC7E     		.sleb128 -132
+ 1477 0590 0F       		.uleb128 0xf
+ 1478 0591 20000000 		.secrel32	LASF1
+ 1479 0595 01       		.byte	0x1
+ 1480 0596 8D       		.byte	0x8d
+ 1481 0597 7D       		.byte	0x7d
+ 1482 0598 91060000 		.long	0x691
+ 1483 059c 02       		.byte	0x2
+ 1484 059d 91       		.byte	0x91
+ 1485 059e 10       		.sleb128 16
+ 1486 059f 10       		.uleb128 0x10
+ 1487 05a0 6E657754 		.ascii "newTopLeft\0"
+ 1487      6F704C65 
+ 1487      667400
+ 1488 05ab 01       		.byte	0x1
+ 1489 05ac 90       		.byte	0x90
+ 1490 05ad 10       		.byte	0x10
+ 1491 05ae F8010000 		.long	0x1f8
+ 1492 05b2 02       		.byte	0x2
+ 1493 05b3 91       		.byte	0x91
+ 1494 05b4 5C       		.sleb128 -36
+ 1495 05b5 10       		.uleb128 0x10
+ 1496 05b6 6E657742 		.ascii "newBottomLeft\0"
+ 1496      6F74746F 
+ 1496      6D4C6566 
+ 1496      7400
+ 1497 05c4 01       		.byte	0x1
+ 1498 05c5 91       		.byte	0x91
+ 1499 05c6 10       		.byte	0x10
+ 1500 05c7 F8010000 		.long	0x1f8
+ 1501 05cb 02       		.byte	0x2
+ 1502 05cc 91       		.byte	0x91
+ 1503 05cd 50       		.sleb128 -48
+ 1504 05ce 10       		.uleb128 0x10
+ 1505 05cf 6E657754 		.ascii "newTopRight\0"
+ 1505      6F705269 
+ 1505      67687400 
+ 1506 05db 01       		.byte	0x1
+ 1507 05dc 92       		.byte	0x92
+ 1508 05dd 10       		.byte	0x10
+ 1509 05de F8010000 		.long	0x1f8
+ 1510 05e2 02       		.byte	0x2
+ 1511 05e3 91       		.byte	0x91
+ 1512 05e4 44       		.sleb128 -60
+ 1513 05e5 10       		.uleb128 0x10
+ 1514 05e6 6E657742 		.ascii "newBottomRight\0"
+ 1514      6F74746F 
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 34
 
 
- 1506 00b4 01000000 		.long	LCFI0-Ltext0
- 1507 00b8 03000000 		.long	LCFI1-Ltext0
- 1508 00bc 0200     		.word	0x2
- 1509 00be 74       		.byte	0x74
- 1510 00bf 08       		.sleb128 8
- 1511 00c0 03000000 		.long	LCFI1-Ltext0
- 1512 00c4 40000000 		.long	LCFI2-Ltext0
- 1513 00c8 0200     		.word	0x2
- 1514 00ca 75       		.byte	0x75
- 1515 00cb 08       		.sleb128 8
- 1516 00cc 40000000 		.long	LCFI2-Ltext0
- 1517 00d0 41000000 		.long	LFE4-Ltext0
- 1518 00d4 0200     		.word	0x2
- 1519 00d6 74       		.byte	0x74
- 1520 00d7 04       		.sleb128 4
- 1521 00d8 00000000 		.long	0
- 1522 00dc 00000000 		.long	0
- 1523              		.section	.debug_aranges,"dr"
- 1524 0000 1C000000 		.long	0x1c
- 1525 0004 0200     		.word	0x2
- 1526 0006 00000000 		.secrel32	Ldebug_info0
- 1527 000a 04       		.byte	0x4
- 1528 000b 00       		.byte	0
- 1529 000c 0000     		.word	0
- 1530 000e 0000     		.word	0
- 1531 0010 00000000 		.long	Ltext0
- 1532 0014 C1020000 		.long	Letext0-Ltext0
- 1533 0018 00000000 		.long	0
- 1534 001c 00000000 		.long	0
- 1535              		.section	.debug_line,"dr"
- 1536              	Ldebug_line0:
- 1537 0000 6A020000 		.section	.debug_str,"dr"
- 1537      0200BE00 
- 1537      00000101 
- 1537      FB0E0D00 
- 1537      01010101 
- 1538              	LASF0:
- 1539 0000 72657375 		.ascii "result\0"
- 1539      6C7400
- 1540              	LASF1:
- 1541 0007 63616C63 		.ascii "calculateMinMaxValues\0"
- 1541      756C6174 
- 1541      654D696E 
- 1541      4D617856 
- 1541      616C7565 
- 1542              		.ident	"GCC: (i686-posix-dwarf-rev0, Built by MinGW-W64 project) 8.1.0"
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s 			page 34
+ 1514      6D526967 
+ 1514      687400
+ 1515 05f5 01       		.byte	0x1
+ 1516 05f6 93       		.byte	0x93
+ 1517 05f7 10       		.byte	0x10
+ 1518 05f8 F8010000 		.long	0x1f8
+ 1519 05fc 03       		.byte	0x3
+ 1520 05fd 91       		.byte	0x91
+ 1521 05fe B87F     		.sleb128 -72
+ 1522 0600 11       		.uleb128 0x11
+ 1523 0601 43050000 		.long	LBB2
+ 1524 0605 E7050000 		.long	LBE2
+ 1525 0609 44060000 		.long	0x644
+ 1526 060d 10       		.uleb128 0x10
+ 1527 060e 746F7000 		.ascii "top\0"
+ 1528 0612 01       		.byte	0x1
+ 1529 0613 97       		.byte	0x97
+ 1530 0614 11       		.byte	0x11
+ 1531 0615 F8010000 		.long	0x1f8
+ 1532 0619 03       		.byte	0x3
+ 1533 061a 91       		.byte	0x91
+ 1534 061b AC7F     		.sleb128 -84
+ 1535 061d 10       		.uleb128 0x10
+ 1536 061e 6E65774D 		.ascii "newMinY\0"
+ 1536      696E5900 
+ 1537 0626 01       		.byte	0x1
+ 1538 0627 98       		.byte	0x98
+ 1539 0628 07       		.byte	0x7
+ 1540 0629 AA000000 		.long	0xaa
+ 1541 062d 02       		.byte	0x2
+ 1542 062e 91       		.byte	0x91
+ 1543 062f 6C       		.sleb128 -20
+ 1544 0630 10       		.uleb128 0x10
+ 1545 0631 6E657754 		.ascii "newTop\0"
+ 1545      6F7000
+ 1546 0638 01       		.byte	0x1
+ 1547 0639 9E       		.byte	0x9e
+ 1548 063a 11       		.byte	0x11
+ 1549 063b F8010000 		.long	0x1f8
+ 1550 063f 03       		.byte	0x3
+ 1551 0640 91       		.byte	0x91
+ 1552 0641 A07F     		.sleb128 -96
+ 1553 0643 00       		.byte	0
+ 1554 0644 12       		.uleb128 0x12
+ 1555 0645 F1050000 		.long	LBB3
+ 1556 0649 A1060000 		.long	LBE3
+ 1557 064d 10       		.uleb128 0x10
+ 1558 064e 626F7474 		.ascii "bottom\0"
+ 1558      6F6D00
+ 1559 0655 01       		.byte	0x1
+ 1560 0656 AF       		.byte	0xaf
+ 1561 0657 11       		.byte	0x11
+ 1562 0658 F8010000 		.long	0x1f8
+ 1563 065c 03       		.byte	0x3
+ 1564 065d 91       		.byte	0x91
+ 1565 065e 947F     		.sleb128 -108
+ 1566 0660 10       		.uleb128 0x10
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 35
+
+
+ 1567 0661 6E65774D 		.ascii "newMaxY\0"
+ 1567      61785900 
+ 1568 0669 01       		.byte	0x1
+ 1569 066a B0       		.byte	0xb0
+ 1570 066b 07       		.byte	0x7
+ 1571 066c AA000000 		.long	0xaa
+ 1572 0670 02       		.byte	0x2
+ 1573 0671 91       		.byte	0x91
+ 1574 0672 68       		.sleb128 -24
+ 1575 0673 10       		.uleb128 0x10
+ 1576 0674 6E657742 		.ascii "newBottom\0"
+ 1576      6F74746F 
+ 1576      6D00
+ 1577 067e 01       		.byte	0x1
+ 1578 067f B6       		.byte	0xb6
+ 1579 0680 11       		.byte	0x11
+ 1580 0681 F8010000 		.long	0x1f8
+ 1581 0685 03       		.byte	0x3
+ 1582 0686 91       		.byte	0x91
+ 1583 0687 887F     		.sleb128 -120
+ 1584 0689 00       		.byte	0
+ 1585 068a 00       		.byte	0
+ 1586 068b 04       		.uleb128 0x4
+ 1587 068c 04       		.byte	0x4
+ 1588 068d 40030000 		.long	0x340
+ 1589 0691 04       		.uleb128 0x4
+ 1590 0692 04       		.byte	0x4
+ 1591 0693 2A030000 		.long	0x32a
+ 1592 0697 0D       		.uleb128 0xd
+ 1593 0698 01       		.byte	0x1
+ 1594 0699 426F756E 		.ascii "Bounding_Merge\0"
+ 1594      64696E67 
+ 1594      5F4D6572 
+ 1594      676500
+ 1595 06a8 01       		.byte	0x1
+ 1596 06a9 73       		.byte	0x73
+ 1597 06aa 09       		.byte	0x9
+ 1598 06ab 01       		.byte	0x1
+ 1599 06ac 57010000 		.long	0x157
+ 1600 06b0 EE030000 		.long	LFB12
+ 1601 06b4 D6040000 		.long	LFE12
+ 1602 06b8 38000000 		.secrel32	LLST8
+ 1603 06bc 01       		.byte	0x1
+ 1604 06bd 08070000 		.long	0x708
+ 1605 06c1 0E       		.uleb128 0xe
+ 1606 06c2 6C656674 		.ascii "leftBox\0"
+ 1606      426F7800 
+ 1607 06ca 01       		.byte	0x1
+ 1608 06cb 73       		.byte	0x73
+ 1609 06cc 2E       		.byte	0x2e
+ 1610 06cd 8B060000 		.long	0x68b
+ 1611 06d1 02       		.byte	0x2
+ 1612 06d2 91       		.byte	0x91
+ 1613 06d3 00       		.sleb128 0
+ 1614 06d4 0E       		.uleb128 0xe
+ 1615 06d5 72696768 		.ascii "rightBox\0"
+ 1615      74426F78 
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 36
+
+
+ 1615      00
+ 1616 06de 01       		.byte	0x1
+ 1617 06df 73       		.byte	0x73
+ 1618 06e0 4D       		.byte	0x4d
+ 1619 06e1 8B060000 		.long	0x68b
+ 1620 06e5 02       		.byte	0x2
+ 1621 06e6 91       		.byte	0x91
+ 1622 06e7 04       		.sleb128 4
+ 1623 06e8 0F       		.uleb128 0xf
+ 1624 06e9 20000000 		.secrel32	LASF1
+ 1625 06ed 01       		.byte	0x1
+ 1626 06ee 73       		.byte	0x73
+ 1627 06ef 67       		.byte	0x67
+ 1628 06f0 91060000 		.long	0x691
+ 1629 06f4 02       		.byte	0x2
+ 1630 06f5 91       		.byte	0x91
+ 1631 06f6 08       		.sleb128 8
+ 1632 06f7 10       		.uleb128 0x10
+ 1633 06f8 626F7800 		.ascii "box\0"
+ 1634 06fc 01       		.byte	0x1
+ 1635 06fd 82       		.byte	0x82
+ 1636 06fe 10       		.byte	0x10
+ 1637 06ff 2A030000 		.long	0x32a
+ 1638 0703 03       		.byte	0x3
+ 1639 0704 91       		.byte	0x91
+ 1640 0705 A47F     		.sleb128 -92
+ 1641 0707 00       		.byte	0
+ 1642 0708 13       		.uleb128 0x13
+ 1643 0709 01       		.byte	0x1
+ 1644 070a 32000000 		.secrel32	LASF2
+ 1645 070e 01       		.byte	0x1
+ 1646 070f 5C       		.byte	0x5c
+ 1647 0710 06       		.byte	0x6
+ 1648 0711 01       		.byte	0x1
+ 1649 0712 4D020000 		.long	LFB11
+ 1650 0716 EE030000 		.long	LFE11
+ 1651 071a 70000000 		.secrel32	LLST7
+ 1652 071e 01       		.byte	0x1
+ 1653 071f 33070000 		.long	0x733
+ 1654 0723 0F       		.uleb128 0xf
+ 1655 0724 20000000 		.secrel32	LASF1
+ 1656 0728 01       		.byte	0x1
+ 1657 0729 5C       		.byte	0x5c
+ 1658 072a 2C       		.byte	0x2c
+ 1659 072b 91060000 		.long	0x691
+ 1660 072f 02       		.byte	0x2
+ 1661 0730 91       		.byte	0x91
+ 1662 0731 00       		.sleb128 0
+ 1663 0732 00       		.byte	0
+ 1664 0733 14       		.uleb128 0x14
+ 1665 0734 01       		.byte	0x1
+ 1666 0735 636F7079 		.ascii "copy\0"
+ 1666      00
+ 1667 073a 01       		.byte	0x1
+ 1668 073b 4D       		.byte	0x4d
+ 1669 073c 06       		.byte	0x6
+ 1670 073d 01       		.byte	0x1
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 37
+
+
+ 1671 073e 94010000 		.long	LFB10
+ 1672 0742 4D020000 		.long	LFE10
+ 1673 0746 A8000000 		.secrel32	LLST6
+ 1674 074a 01       		.byte	0x1
+ 1675 074b 6E070000 		.long	0x76e
+ 1676 074f 0E       		.uleb128 0xe
+ 1677 0750 626F7800 		.ascii "box\0"
+ 1678 0754 01       		.byte	0x1
+ 1679 0755 4D       		.byte	0x4d
+ 1680 0756 1B       		.byte	0x1b
+ 1681 0757 91060000 		.long	0x691
+ 1682 075b 02       		.byte	0x2
+ 1683 075c 91       		.byte	0x91
+ 1684 075d 00       		.sleb128 0
+ 1685 075e 0F       		.uleb128 0xf
+ 1686 075f 20000000 		.secrel32	LASF1
+ 1687 0763 01       		.byte	0x1
+ 1688 0764 4D       		.byte	0x4d
+ 1689 0765 2F       		.byte	0x2f
+ 1690 0766 91060000 		.long	0x691
+ 1691 076a 02       		.byte	0x2
+ 1692 076b 91       		.byte	0x91
+ 1693 076c 04       		.sleb128 4
+ 1694 076d 00       		.byte	0
+ 1695 076e 0D       		.uleb128 0xd
+ 1696 076f 01       		.byte	0x1
+ 1697 0770 43726561 		.ascii "Create\0"
+ 1697      746500
+ 1698 0777 01       		.byte	0x1
+ 1699 0778 34       		.byte	0x34
+ 1700 0779 09       		.byte	0x9
+ 1701 077a 01       		.byte	0x1
+ 1702 077b 57010000 		.long	0x157
+ 1703 077f BE000000 		.long	LFB9
+ 1704 0783 94010000 		.long	LFE9
+ 1705 0787 E0000000 		.secrel32	LLST5
+ 1706 078b 01       		.byte	0x1
+ 1707 078c 19080000 		.long	0x819
+ 1708 0790 0E       		.uleb128 0xe
+ 1709 0791 696D6757 		.ascii "imgWidth\0"
+ 1709      69647468 
+ 1709      00
+ 1710 079a 01       		.byte	0x1
+ 1711 079b 34       		.byte	0x34
+ 1712 079c 14       		.byte	0x14
+ 1713 079d AA000000 		.long	0xaa
+ 1714 07a1 02       		.byte	0x2
+ 1715 07a2 91       		.byte	0x91
+ 1716 07a3 00       		.sleb128 0
+ 1717 07a4 0E       		.uleb128 0xe
+ 1718 07a5 696D6748 		.ascii "imgHeight\0"
+ 1718      65696768 
+ 1718      7400
+ 1719 07af 01       		.byte	0x1
+ 1720 07b0 34       		.byte	0x34
+ 1721 07b1 22       		.byte	0x22
+ 1722 07b2 AA000000 		.long	0xaa
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 38
+
+
+ 1723 07b6 02       		.byte	0x2
+ 1724 07b7 91       		.byte	0x91
+ 1725 07b8 04       		.sleb128 4
+ 1726 07b9 0E       		.uleb128 0xe
+ 1727 07ba 746F704C 		.ascii "topLeft\0"
+ 1727      65667400 
+ 1728 07c2 01       		.byte	0x1
+ 1729 07c3 34       		.byte	0x34
+ 1730 07c4 41       		.byte	0x41
+ 1731 07c5 0E020000 		.long	0x20e
+ 1732 07c9 02       		.byte	0x2
+ 1733 07ca 91       		.byte	0x91
+ 1734 07cb 08       		.sleb128 8
+ 1735 07cc 0F       		.uleb128 0xf
+ 1736 07cd 27000000 		.secrel32	LASF3
+ 1737 07d1 01       		.byte	0x1
+ 1738 07d2 34       		.byte	0x34
+ 1739 07d3 5E       		.byte	0x5e
+ 1740 07d4 0E020000 		.long	0x20e
+ 1741 07d8 02       		.byte	0x2
+ 1742 07d9 91       		.byte	0x91
+ 1743 07da 14       		.sleb128 20
+ 1744 07db 0F       		.uleb128 0xf
+ 1745 07dc 0B000000 		.secrel32	LASF4
+ 1746 07e0 01       		.byte	0x1
+ 1747 07e1 34       		.byte	0x34
+ 1748 07e2 7E       		.byte	0x7e
+ 1749 07e3 0E020000 		.long	0x20e
+ 1750 07e7 02       		.byte	0x2
+ 1751 07e8 91       		.byte	0x91
+ 1752 07e9 20       		.sleb128 32
+ 1753 07ea 0F       		.uleb128 0xf
+ 1754 07eb 14000000 		.secrel32	LASF5
+ 1755 07ef 01       		.byte	0x1
+ 1756 07f0 34       		.byte	0x34
+ 1757 07f1 9C       		.byte	0x9c
+ 1758 07f2 0E020000 		.long	0x20e
+ 1759 07f6 02       		.byte	0x2
+ 1760 07f7 91       		.byte	0x91
+ 1761 07f8 2C       		.sleb128 44
+ 1762 07f9 0F       		.uleb128 0xf
+ 1763 07fa 20000000 		.secrel32	LASF1
+ 1764 07fe 01       		.byte	0x1
+ 1765 07ff 34       		.byte	0x34
+ 1766 0800 B9       		.byte	0xb9
+ 1767 0801 91060000 		.long	0x691
+ 1768 0805 02       		.byte	0x2
+ 1769 0806 91       		.byte	0x91
+ 1770 0807 38       		.sleb128 56
+ 1771 0808 15       		.uleb128 0x15
+ 1772 0809 01       		.byte	0x1
+ 1773 080a 32000000 		.secrel32	LASF2
+ 1774 080e 01       		.byte	0x1
+ 1775 080f 47       		.byte	0x47
+ 1776 0810 02       		.byte	0x2
+ 1777 0811 AA000000 		.long	0xaa
+ 1778 0815 01       		.byte	0x1
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 39
+
+
+ 1779 0816 16       		.uleb128 0x16
+ 1780 0817 00       		.byte	0
+ 1781 0818 00       		.byte	0
+ 1782 0819 17       		.uleb128 0x17
+ 1783 081a 01       		.byte	0x1
+ 1784 081b 14000000 		.secrel32	LASF5
+ 1785 081f 01       		.byte	0x1
+ 1786 0820 2F       		.byte	0x2f
+ 1787 0821 0F       		.byte	0xf
+ 1788 0822 01       		.byte	0x1
+ 1789 0823 F8010000 		.long	0x1f8
+ 1790 0827 9F000000 		.long	LFB8
+ 1791 082b BE000000 		.long	LFE8
+ 1792 082f 18010000 		.secrel32	LLST4
+ 1793 0833 01       		.byte	0x1
+ 1794 0834 48080000 		.long	0x848
+ 1795 0838 0E       		.uleb128 0xe
+ 1796 0839 626F7800 		.ascii "box\0"
+ 1797 083d 01       		.byte	0x1
+ 1798 083e 2F       		.byte	0x2f
+ 1799 083f 2B       		.byte	0x2b
+ 1800 0840 91060000 		.long	0x691
+ 1801 0844 02       		.byte	0x2
+ 1802 0845 91       		.byte	0x91
+ 1803 0846 04       		.sleb128 4
+ 1804 0847 00       		.byte	0
+ 1805 0848 17       		.uleb128 0x17
+ 1806 0849 01       		.byte	0x1
+ 1807 084a 27000000 		.secrel32	LASF3
+ 1808 084e 01       		.byte	0x1
+ 1809 084f 2A       		.byte	0x2a
+ 1810 0850 0F       		.byte	0xf
+ 1811 0851 01       		.byte	0x1
+ 1812 0852 F8010000 		.long	0x1f8
+ 1813 0856 80000000 		.long	LFB7
+ 1814 085a 9F000000 		.long	LFE7
+ 1815 085e 50010000 		.secrel32	LLST3
+ 1816 0862 01       		.byte	0x1
+ 1817 0863 77080000 		.long	0x877
+ 1818 0867 0E       		.uleb128 0xe
+ 1819 0868 626F7800 		.ascii "box\0"
+ 1820 086c 01       		.byte	0x1
+ 1821 086d 2A       		.byte	0x2a
+ 1822 086e 2A       		.byte	0x2a
+ 1823 086f 91060000 		.long	0x691
+ 1824 0873 02       		.byte	0x2
+ 1825 0874 91       		.byte	0x91
+ 1826 0875 04       		.sleb128 4
+ 1827 0876 00       		.byte	0
+ 1828 0877 17       		.uleb128 0x17
+ 1829 0878 01       		.byte	0x1
+ 1830 0879 0B000000 		.secrel32	LASF4
+ 1831 087d 01       		.byte	0x1
+ 1832 087e 25       		.byte	0x25
+ 1833 087f 0F       		.byte	0xf
+ 1834 0880 01       		.byte	0x1
+ 1835 0881 F8010000 		.long	0x1f8
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 40
+
+
+ 1836 0885 61000000 		.long	LFB6
+ 1837 0889 80000000 		.long	LFE6
+ 1838 088d 88010000 		.secrel32	LLST2
+ 1839 0891 01       		.byte	0x1
+ 1840 0892 A6080000 		.long	0x8a6
+ 1841 0896 0E       		.uleb128 0xe
+ 1842 0897 626F7800 		.ascii "box\0"
+ 1843 089b 01       		.byte	0x1
+ 1844 089c 25       		.byte	0x25
+ 1845 089d 28       		.byte	0x28
+ 1846 089e 91060000 		.long	0x691
+ 1847 08a2 02       		.byte	0x2
+ 1848 08a3 91       		.byte	0x91
+ 1849 08a4 04       		.sleb128 4
+ 1850 08a5 00       		.byte	0
+ 1851 08a6 18       		.uleb128 0x18
+ 1852 08a7 01       		.byte	0x1
+ 1853 08a8 746F704C 		.ascii "topLeft\0"
+ 1853      65667400 
+ 1854 08b0 01       		.byte	0x1
+ 1855 08b1 20       		.byte	0x20
+ 1856 08b2 0F       		.byte	0xf
+ 1857 08b3 01       		.byte	0x1
+ 1858 08b4 F8010000 		.long	0x1f8
+ 1859 08b8 42000000 		.long	LFB5
+ 1860 08bc 61000000 		.long	LFE5
+ 1861 08c0 C0010000 		.secrel32	LLST1
+ 1862 08c4 01       		.byte	0x1
+ 1863 08c5 D9080000 		.long	0x8d9
+ 1864 08c9 0E       		.uleb128 0xe
+ 1865 08ca 626F7800 		.ascii "box\0"
+ 1866 08ce 01       		.byte	0x1
+ 1867 08cf 20       		.byte	0x20
+ 1868 08d0 27       		.byte	0x27
+ 1869 08d1 91060000 		.long	0x691
+ 1870 08d5 02       		.byte	0x2
+ 1871 08d6 91       		.byte	0x91
+ 1872 08d7 04       		.sleb128 4
+ 1873 08d8 00       		.byte	0
+ 1874 08d9 19       		.uleb128 0x19
+ 1875 08da 426F756E 		.ascii "BoundingBox_Init\0"
+ 1875      64696E67 
+ 1875      426F785F 
+ 1875      496E6974 
+ 1875      00
+ 1876 08eb 01       		.byte	0x1
+ 1877 08ec 16       		.byte	0x16
+ 1878 08ed 0D       		.byte	0xd
+ 1879 08ee 01       		.byte	0x1
+ 1880 08ef 00000000 		.long	LFB4
+ 1881 08f3 42000000 		.long	LFE4
+ 1882 08f7 F8010000 		.secrel32	LLST0
+ 1883 08fb 01       		.byte	0x1
+ 1884 08fc 0F       		.uleb128 0xf
+ 1885 08fd 20000000 		.secrel32	LASF1
+ 1886 0901 01       		.byte	0x1
+ 1887 0902 16       		.byte	0x16
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 41
+
+
+ 1888 0903 2E       		.byte	0x2e
+ 1889 0904 91060000 		.long	0x691
+ 1890 0908 02       		.byte	0x2
+ 1891 0909 91       		.byte	0x91
+ 1892 090a 00       		.sleb128 0
+ 1893 090b 00       		.byte	0
+ 1894 090c 00       		.byte	0
+ 1895              		.section	.debug_abbrev,"dr"
+ 1896              	Ldebug_abbrev0:
+ 1897 0000 01       		.uleb128 0x1
+ 1898 0001 11       		.uleb128 0x11
+ 1899 0002 01       		.byte	0x1
+ 1900 0003 25       		.uleb128 0x25
+ 1901 0004 08       		.uleb128 0x8
+ 1902 0005 13       		.uleb128 0x13
+ 1903 0006 0B       		.uleb128 0xb
+ 1904 0007 03       		.uleb128 0x3
+ 1905 0008 08       		.uleb128 0x8
+ 1906 0009 1B       		.uleb128 0x1b
+ 1907 000a 08       		.uleb128 0x8
+ 1908 000b 11       		.uleb128 0x11
+ 1909 000c 01       		.uleb128 0x1
+ 1910 000d 12       		.uleb128 0x12
+ 1911 000e 01       		.uleb128 0x1
+ 1912 000f 10       		.uleb128 0x10
+ 1913 0010 06       		.uleb128 0x6
+ 1914 0011 00       		.byte	0
+ 1915 0012 00       		.byte	0
+ 1916 0013 02       		.uleb128 0x2
+ 1917 0014 24       		.uleb128 0x24
+ 1918 0015 00       		.byte	0
+ 1919 0016 0B       		.uleb128 0xb
+ 1920 0017 0B       		.uleb128 0xb
+ 1921 0018 3E       		.uleb128 0x3e
+ 1922 0019 0B       		.uleb128 0xb
+ 1923 001a 03       		.uleb128 0x3
+ 1924 001b 08       		.uleb128 0x8
+ 1925 001c 00       		.byte	0
+ 1926 001d 00       		.byte	0
+ 1927 001e 03       		.uleb128 0x3
+ 1928 001f 16       		.uleb128 0x16
+ 1929 0020 00       		.byte	0
+ 1930 0021 03       		.uleb128 0x3
+ 1931 0022 08       		.uleb128 0x8
+ 1932 0023 3A       		.uleb128 0x3a
+ 1933 0024 0B       		.uleb128 0xb
+ 1934 0025 3B       		.uleb128 0x3b
+ 1935 0026 0B       		.uleb128 0xb
+ 1936 0027 39       		.uleb128 0x39
+ 1937 0028 0B       		.uleb128 0xb
+ 1938 0029 49       		.uleb128 0x49
+ 1939 002a 13       		.uleb128 0x13
+ 1940 002b 00       		.byte	0
+ 1941 002c 00       		.byte	0
+ 1942 002d 04       		.uleb128 0x4
+ 1943 002e 0F       		.uleb128 0xf
+ 1944 002f 00       		.byte	0
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 42
+
+
+ 1945 0030 0B       		.uleb128 0xb
+ 1946 0031 0B       		.uleb128 0xb
+ 1947 0032 49       		.uleb128 0x49
+ 1948 0033 13       		.uleb128 0x13
+ 1949 0034 00       		.byte	0
+ 1950 0035 00       		.byte	0
+ 1951 0036 05       		.uleb128 0x5
+ 1952 0037 13       		.uleb128 0x13
+ 1953 0038 01       		.byte	0x1
+ 1954 0039 0B       		.uleb128 0xb
+ 1955 003a 0B       		.uleb128 0xb
+ 1956 003b 3A       		.uleb128 0x3a
+ 1957 003c 0B       		.uleb128 0xb
+ 1958 003d 3B       		.uleb128 0x3b
+ 1959 003e 0B       		.uleb128 0xb
+ 1960 003f 39       		.uleb128 0x39
+ 1961 0040 0B       		.uleb128 0xb
+ 1962 0041 01       		.uleb128 0x1
+ 1963 0042 13       		.uleb128 0x13
+ 1964 0043 00       		.byte	0
+ 1965 0044 00       		.byte	0
+ 1966 0045 06       		.uleb128 0x6
+ 1967 0046 0D       		.uleb128 0xd
+ 1968 0047 00       		.byte	0
+ 1969 0048 03       		.uleb128 0x3
+ 1970 0049 08       		.uleb128 0x8
+ 1971 004a 3A       		.uleb128 0x3a
+ 1972 004b 0B       		.uleb128 0xb
+ 1973 004c 3B       		.uleb128 0x3b
+ 1974 004d 0B       		.uleb128 0xb
+ 1975 004e 39       		.uleb128 0x39
+ 1976 004f 0B       		.uleb128 0xb
+ 1977 0050 49       		.uleb128 0x49
+ 1978 0051 13       		.uleb128 0x13
+ 1979 0052 38       		.uleb128 0x38
+ 1980 0053 0A       		.uleb128 0xa
+ 1981 0054 00       		.byte	0
+ 1982 0055 00       		.byte	0
+ 1983 0056 07       		.uleb128 0x7
+ 1984 0057 0D       		.uleb128 0xd
+ 1985 0058 00       		.byte	0
+ 1986 0059 03       		.uleb128 0x3
+ 1987 005a 0E       		.uleb128 0xe
+ 1988 005b 3A       		.uleb128 0x3a
+ 1989 005c 0B       		.uleb128 0xb
+ 1990 005d 3B       		.uleb128 0x3b
+ 1991 005e 0B       		.uleb128 0xb
+ 1992 005f 39       		.uleb128 0x39
+ 1993 0060 0B       		.uleb128 0xb
+ 1994 0061 49       		.uleb128 0x49
+ 1995 0062 13       		.uleb128 0x13
+ 1996 0063 38       		.uleb128 0x38
+ 1997 0064 0A       		.uleb128 0xa
+ 1998 0065 00       		.byte	0
+ 1999 0066 00       		.byte	0
+ 2000 0067 08       		.uleb128 0x8
+ 2001 0068 26       		.uleb128 0x26
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 43
+
+
+ 2002 0069 00       		.byte	0
+ 2003 006a 49       		.uleb128 0x49
+ 2004 006b 13       		.uleb128 0x13
+ 2005 006c 00       		.byte	0
+ 2006 006d 00       		.byte	0
+ 2007 006e 09       		.uleb128 0x9
+ 2008 006f 34       		.uleb128 0x34
+ 2009 0070 00       		.byte	0
+ 2010 0071 03       		.uleb128 0x3
+ 2011 0072 08       		.uleb128 0x8
+ 2012 0073 3A       		.uleb128 0x3a
+ 2013 0074 0B       		.uleb128 0xb
+ 2014 0075 3B       		.uleb128 0x3b
+ 2015 0076 0B       		.uleb128 0xb
+ 2016 0077 39       		.uleb128 0x39
+ 2017 0078 0B       		.uleb128 0xb
+ 2018 0079 49       		.uleb128 0x49
+ 2019 007a 13       		.uleb128 0x13
+ 2020 007b 3F       		.uleb128 0x3f
+ 2021 007c 0C       		.uleb128 0xc
+ 2022 007d 3C       		.uleb128 0x3c
+ 2023 007e 0C       		.uleb128 0xc
+ 2024 007f 00       		.byte	0
+ 2025 0080 00       		.byte	0
+ 2026 0081 0A       		.uleb128 0xa
+ 2027 0082 01       		.uleb128 0x1
+ 2028 0083 01       		.byte	0x1
+ 2029 0084 49       		.uleb128 0x49
+ 2030 0085 13       		.uleb128 0x13
+ 2031 0086 01       		.uleb128 0x1
+ 2032 0087 13       		.uleb128 0x13
+ 2033 0088 00       		.byte	0
+ 2034 0089 00       		.byte	0
+ 2035 008a 0B       		.uleb128 0xb
+ 2036 008b 21       		.uleb128 0x21
+ 2037 008c 00       		.byte	0
+ 2038 008d 49       		.uleb128 0x49
+ 2039 008e 13       		.uleb128 0x13
+ 2040 008f 2F       		.uleb128 0x2f
+ 2041 0090 0B       		.uleb128 0xb
+ 2042 0091 00       		.byte	0
+ 2043 0092 00       		.byte	0
+ 2044 0093 0C       		.uleb128 0xc
+ 2045 0094 34       		.uleb128 0x34
+ 2046 0095 00       		.byte	0
+ 2047 0096 03       		.uleb128 0x3
+ 2048 0097 08       		.uleb128 0x8
+ 2049 0098 3A       		.uleb128 0x3a
+ 2050 0099 0B       		.uleb128 0xb
+ 2051 009a 3B       		.uleb128 0x3b
+ 2052 009b 05       		.uleb128 0x5
+ 2053 009c 39       		.uleb128 0x39
+ 2054 009d 0B       		.uleb128 0xb
+ 2055 009e 49       		.uleb128 0x49
+ 2056 009f 13       		.uleb128 0x13
+ 2057 00a0 3F       		.uleb128 0x3f
+ 2058 00a1 0C       		.uleb128 0xc
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 44
+
+
+ 2059 00a2 3C       		.uleb128 0x3c
+ 2060 00a3 0C       		.uleb128 0xc
+ 2061 00a4 00       		.byte	0
+ 2062 00a5 00       		.byte	0
+ 2063 00a6 0D       		.uleb128 0xd
+ 2064 00a7 2E       		.uleb128 0x2e
+ 2065 00a8 01       		.byte	0x1
+ 2066 00a9 3F       		.uleb128 0x3f
+ 2067 00aa 0C       		.uleb128 0xc
+ 2068 00ab 03       		.uleb128 0x3
+ 2069 00ac 08       		.uleb128 0x8
+ 2070 00ad 3A       		.uleb128 0x3a
+ 2071 00ae 0B       		.uleb128 0xb
+ 2072 00af 3B       		.uleb128 0x3b
+ 2073 00b0 0B       		.uleb128 0xb
+ 2074 00b1 39       		.uleb128 0x39
+ 2075 00b2 0B       		.uleb128 0xb
+ 2076 00b3 27       		.uleb128 0x27
+ 2077 00b4 0C       		.uleb128 0xc
+ 2078 00b5 49       		.uleb128 0x49
+ 2079 00b6 13       		.uleb128 0x13
+ 2080 00b7 11       		.uleb128 0x11
+ 2081 00b8 01       		.uleb128 0x1
+ 2082 00b9 12       		.uleb128 0x12
+ 2083 00ba 01       		.uleb128 0x1
+ 2084 00bb 40       		.uleb128 0x40
+ 2085 00bc 06       		.uleb128 0x6
+ 2086 00bd 9642     		.uleb128 0x2116
+ 2087 00bf 0C       		.uleb128 0xc
+ 2088 00c0 01       		.uleb128 0x1
+ 2089 00c1 13       		.uleb128 0x13
+ 2090 00c2 00       		.byte	0
+ 2091 00c3 00       		.byte	0
+ 2092 00c4 0E       		.uleb128 0xe
+ 2093 00c5 05       		.uleb128 0x5
+ 2094 00c6 00       		.byte	0
+ 2095 00c7 03       		.uleb128 0x3
+ 2096 00c8 08       		.uleb128 0x8
+ 2097 00c9 3A       		.uleb128 0x3a
+ 2098 00ca 0B       		.uleb128 0xb
+ 2099 00cb 3B       		.uleb128 0x3b
+ 2100 00cc 0B       		.uleb128 0xb
+ 2101 00cd 39       		.uleb128 0x39
+ 2102 00ce 0B       		.uleb128 0xb
+ 2103 00cf 49       		.uleb128 0x49
+ 2104 00d0 13       		.uleb128 0x13
+ 2105 00d1 02       		.uleb128 0x2
+ 2106 00d2 0A       		.uleb128 0xa
+ 2107 00d3 00       		.byte	0
+ 2108 00d4 00       		.byte	0
+ 2109 00d5 0F       		.uleb128 0xf
+ 2110 00d6 05       		.uleb128 0x5
+ 2111 00d7 00       		.byte	0
+ 2112 00d8 03       		.uleb128 0x3
+ 2113 00d9 0E       		.uleb128 0xe
+ 2114 00da 3A       		.uleb128 0x3a
+ 2115 00db 0B       		.uleb128 0xb
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 45
+
+
+ 2116 00dc 3B       		.uleb128 0x3b
+ 2117 00dd 0B       		.uleb128 0xb
+ 2118 00de 39       		.uleb128 0x39
+ 2119 00df 0B       		.uleb128 0xb
+ 2120 00e0 49       		.uleb128 0x49
+ 2121 00e1 13       		.uleb128 0x13
+ 2122 00e2 02       		.uleb128 0x2
+ 2123 00e3 0A       		.uleb128 0xa
+ 2124 00e4 00       		.byte	0
+ 2125 00e5 00       		.byte	0
+ 2126 00e6 10       		.uleb128 0x10
+ 2127 00e7 34       		.uleb128 0x34
+ 2128 00e8 00       		.byte	0
+ 2129 00e9 03       		.uleb128 0x3
+ 2130 00ea 08       		.uleb128 0x8
+ 2131 00eb 3A       		.uleb128 0x3a
+ 2132 00ec 0B       		.uleb128 0xb
+ 2133 00ed 3B       		.uleb128 0x3b
+ 2134 00ee 0B       		.uleb128 0xb
+ 2135 00ef 39       		.uleb128 0x39
+ 2136 00f0 0B       		.uleb128 0xb
+ 2137 00f1 49       		.uleb128 0x49
+ 2138 00f2 13       		.uleb128 0x13
+ 2139 00f3 02       		.uleb128 0x2
+ 2140 00f4 0A       		.uleb128 0xa
+ 2141 00f5 00       		.byte	0
+ 2142 00f6 00       		.byte	0
+ 2143 00f7 11       		.uleb128 0x11
+ 2144 00f8 0B       		.uleb128 0xb
+ 2145 00f9 01       		.byte	0x1
+ 2146 00fa 11       		.uleb128 0x11
+ 2147 00fb 01       		.uleb128 0x1
+ 2148 00fc 12       		.uleb128 0x12
+ 2149 00fd 01       		.uleb128 0x1
+ 2150 00fe 01       		.uleb128 0x1
+ 2151 00ff 13       		.uleb128 0x13
+ 2152 0100 00       		.byte	0
+ 2153 0101 00       		.byte	0
+ 2154 0102 12       		.uleb128 0x12
+ 2155 0103 0B       		.uleb128 0xb
+ 2156 0104 01       		.byte	0x1
+ 2157 0105 11       		.uleb128 0x11
+ 2158 0106 01       		.uleb128 0x1
+ 2159 0107 12       		.uleb128 0x12
+ 2160 0108 01       		.uleb128 0x1
+ 2161 0109 00       		.byte	0
+ 2162 010a 00       		.byte	0
+ 2163 010b 13       		.uleb128 0x13
+ 2164 010c 2E       		.uleb128 0x2e
+ 2165 010d 01       		.byte	0x1
+ 2166 010e 3F       		.uleb128 0x3f
+ 2167 010f 0C       		.uleb128 0xc
+ 2168 0110 03       		.uleb128 0x3
+ 2169 0111 0E       		.uleb128 0xe
+ 2170 0112 3A       		.uleb128 0x3a
+ 2171 0113 0B       		.uleb128 0xb
+ 2172 0114 3B       		.uleb128 0x3b
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 46
+
+
+ 2173 0115 0B       		.uleb128 0xb
+ 2174 0116 39       		.uleb128 0x39
+ 2175 0117 0B       		.uleb128 0xb
+ 2176 0118 27       		.uleb128 0x27
+ 2177 0119 0C       		.uleb128 0xc
+ 2178 011a 11       		.uleb128 0x11
+ 2179 011b 01       		.uleb128 0x1
+ 2180 011c 12       		.uleb128 0x12
+ 2181 011d 01       		.uleb128 0x1
+ 2182 011e 40       		.uleb128 0x40
+ 2183 011f 06       		.uleb128 0x6
+ 2184 0120 9742     		.uleb128 0x2117
+ 2185 0122 0C       		.uleb128 0xc
+ 2186 0123 01       		.uleb128 0x1
+ 2187 0124 13       		.uleb128 0x13
+ 2188 0125 00       		.byte	0
+ 2189 0126 00       		.byte	0
+ 2190 0127 14       		.uleb128 0x14
+ 2191 0128 2E       		.uleb128 0x2e
+ 2192 0129 01       		.byte	0x1
+ 2193 012a 3F       		.uleb128 0x3f
+ 2194 012b 0C       		.uleb128 0xc
+ 2195 012c 03       		.uleb128 0x3
+ 2196 012d 08       		.uleb128 0x8
+ 2197 012e 3A       		.uleb128 0x3a
+ 2198 012f 0B       		.uleb128 0xb
+ 2199 0130 3B       		.uleb128 0x3b
+ 2200 0131 0B       		.uleb128 0xb
+ 2201 0132 39       		.uleb128 0x39
+ 2202 0133 0B       		.uleb128 0xb
+ 2203 0134 27       		.uleb128 0x27
+ 2204 0135 0C       		.uleb128 0xc
+ 2205 0136 11       		.uleb128 0x11
+ 2206 0137 01       		.uleb128 0x1
+ 2207 0138 12       		.uleb128 0x12
+ 2208 0139 01       		.uleb128 0x1
+ 2209 013a 40       		.uleb128 0x40
+ 2210 013b 06       		.uleb128 0x6
+ 2211 013c 9742     		.uleb128 0x2117
+ 2212 013e 0C       		.uleb128 0xc
+ 2213 013f 01       		.uleb128 0x1
+ 2214 0140 13       		.uleb128 0x13
+ 2215 0141 00       		.byte	0
+ 2216 0142 00       		.byte	0
+ 2217 0143 15       		.uleb128 0x15
+ 2218 0144 2E       		.uleb128 0x2e
+ 2219 0145 01       		.byte	0x1
+ 2220 0146 3F       		.uleb128 0x3f
+ 2221 0147 0C       		.uleb128 0xc
+ 2222 0148 03       		.uleb128 0x3
+ 2223 0149 0E       		.uleb128 0xe
+ 2224 014a 3A       		.uleb128 0x3a
+ 2225 014b 0B       		.uleb128 0xb
+ 2226 014c 3B       		.uleb128 0x3b
+ 2227 014d 0B       		.uleb128 0xb
+ 2228 014e 39       		.uleb128 0x39
+ 2229 014f 0B       		.uleb128 0xb
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 47
+
+
+ 2230 0150 49       		.uleb128 0x49
+ 2231 0151 13       		.uleb128 0x13
+ 2232 0152 3C       		.uleb128 0x3c
+ 2233 0153 0C       		.uleb128 0xc
+ 2234 0154 00       		.byte	0
+ 2235 0155 00       		.byte	0
+ 2236 0156 16       		.uleb128 0x16
+ 2237 0157 18       		.uleb128 0x18
+ 2238 0158 00       		.byte	0
+ 2239 0159 00       		.byte	0
+ 2240 015a 00       		.byte	0
+ 2241 015b 17       		.uleb128 0x17
+ 2242 015c 2E       		.uleb128 0x2e
+ 2243 015d 01       		.byte	0x1
+ 2244 015e 3F       		.uleb128 0x3f
+ 2245 015f 0C       		.uleb128 0xc
+ 2246 0160 03       		.uleb128 0x3
+ 2247 0161 0E       		.uleb128 0xe
+ 2248 0162 3A       		.uleb128 0x3a
+ 2249 0163 0B       		.uleb128 0xb
+ 2250 0164 3B       		.uleb128 0x3b
+ 2251 0165 0B       		.uleb128 0xb
+ 2252 0166 39       		.uleb128 0x39
+ 2253 0167 0B       		.uleb128 0xb
+ 2254 0168 27       		.uleb128 0x27
+ 2255 0169 0C       		.uleb128 0xc
+ 2256 016a 49       		.uleb128 0x49
+ 2257 016b 13       		.uleb128 0x13
+ 2258 016c 11       		.uleb128 0x11
+ 2259 016d 01       		.uleb128 0x1
+ 2260 016e 12       		.uleb128 0x12
+ 2261 016f 01       		.uleb128 0x1
+ 2262 0170 40       		.uleb128 0x40
+ 2263 0171 06       		.uleb128 0x6
+ 2264 0172 9742     		.uleb128 0x2117
+ 2265 0174 0C       		.uleb128 0xc
+ 2266 0175 01       		.uleb128 0x1
+ 2267 0176 13       		.uleb128 0x13
+ 2268 0177 00       		.byte	0
+ 2269 0178 00       		.byte	0
+ 2270 0179 18       		.uleb128 0x18
+ 2271 017a 2E       		.uleb128 0x2e
+ 2272 017b 01       		.byte	0x1
+ 2273 017c 3F       		.uleb128 0x3f
+ 2274 017d 0C       		.uleb128 0xc
+ 2275 017e 03       		.uleb128 0x3
+ 2276 017f 08       		.uleb128 0x8
+ 2277 0180 3A       		.uleb128 0x3a
+ 2278 0181 0B       		.uleb128 0xb
+ 2279 0182 3B       		.uleb128 0x3b
+ 2280 0183 0B       		.uleb128 0xb
+ 2281 0184 39       		.uleb128 0x39
+ 2282 0185 0B       		.uleb128 0xb
+ 2283 0186 27       		.uleb128 0x27
+ 2284 0187 0C       		.uleb128 0xc
+ 2285 0188 49       		.uleb128 0x49
+ 2286 0189 13       		.uleb128 0x13
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 48
+
+
+ 2287 018a 11       		.uleb128 0x11
+ 2288 018b 01       		.uleb128 0x1
+ 2289 018c 12       		.uleb128 0x12
+ 2290 018d 01       		.uleb128 0x1
+ 2291 018e 40       		.uleb128 0x40
+ 2292 018f 06       		.uleb128 0x6
+ 2293 0190 9742     		.uleb128 0x2117
+ 2294 0192 0C       		.uleb128 0xc
+ 2295 0193 01       		.uleb128 0x1
+ 2296 0194 13       		.uleb128 0x13
+ 2297 0195 00       		.byte	0
+ 2298 0196 00       		.byte	0
+ 2299 0197 19       		.uleb128 0x19
+ 2300 0198 2E       		.uleb128 0x2e
+ 2301 0199 01       		.byte	0x1
+ 2302 019a 03       		.uleb128 0x3
+ 2303 019b 08       		.uleb128 0x8
+ 2304 019c 3A       		.uleb128 0x3a
+ 2305 019d 0B       		.uleb128 0xb
+ 2306 019e 3B       		.uleb128 0x3b
+ 2307 019f 0B       		.uleb128 0xb
+ 2308 01a0 39       		.uleb128 0x39
+ 2309 01a1 0B       		.uleb128 0xb
+ 2310 01a2 27       		.uleb128 0x27
+ 2311 01a3 0C       		.uleb128 0xc
+ 2312 01a4 11       		.uleb128 0x11
+ 2313 01a5 01       		.uleb128 0x1
+ 2314 01a6 12       		.uleb128 0x12
+ 2315 01a7 01       		.uleb128 0x1
+ 2316 01a8 40       		.uleb128 0x40
+ 2317 01a9 06       		.uleb128 0x6
+ 2318 01aa 9742     		.uleb128 0x2117
+ 2319 01ac 0C       		.uleb128 0xc
+ 2320 01ad 00       		.byte	0
+ 2321 01ae 00       		.byte	0
+ 2322 01af 00       		.byte	0
+ 2323              		.section	.debug_loc,"dr"
+ 2324              	Ldebug_loc0:
+ 2325              	LLST9:
+ 2326 0000 D6040000 		.long	LFB13-Ltext0
+ 2327 0004 D7040000 		.long	LCFI27-Ltext0
+ 2328 0008 0200     		.word	0x2
+ 2329 000a 74       		.byte	0x74
+ 2330 000b 04       		.sleb128 4
+ 2331 000c D7040000 		.long	LCFI27-Ltext0
+ 2332 0010 D9040000 		.long	LCFI28-Ltext0
+ 2333 0014 0200     		.word	0x2
+ 2334 0016 74       		.byte	0x74
+ 2335 0017 08       		.sleb128 8
+ 2336 0018 D9040000 		.long	LCFI28-Ltext0
+ 2337 001c 15070000 		.long	LCFI29-Ltext0
+ 2338 0020 0200     		.word	0x2
+ 2339 0022 75       		.byte	0x75
+ 2340 0023 08       		.sleb128 8
+ 2341 0024 15070000 		.long	LCFI29-Ltext0
+ 2342 0028 16070000 		.long	LFE13-Ltext0
+ 2343 002c 0200     		.word	0x2
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 49
+
+
+ 2344 002e 74       		.byte	0x74
+ 2345 002f 04       		.sleb128 4
+ 2346 0030 00000000 		.long	0
+ 2347 0034 00000000 		.long	0
+ 2348              	LLST8:
+ 2349 0038 EE030000 		.long	LFB12-Ltext0
+ 2350 003c EF030000 		.long	LCFI24-Ltext0
+ 2351 0040 0200     		.word	0x2
+ 2352 0042 74       		.byte	0x74
+ 2353 0043 04       		.sleb128 4
+ 2354 0044 EF030000 		.long	LCFI24-Ltext0
+ 2355 0048 F1030000 		.long	LCFI25-Ltext0
+ 2356 004c 0200     		.word	0x2
+ 2357 004e 74       		.byte	0x74
+ 2358 004f 08       		.sleb128 8
+ 2359 0050 F1030000 		.long	LCFI25-Ltext0
+ 2360 0054 D5040000 		.long	LCFI26-Ltext0
+ 2361 0058 0200     		.word	0x2
+ 2362 005a 75       		.byte	0x75
+ 2363 005b 08       		.sleb128 8
+ 2364 005c D5040000 		.long	LCFI26-Ltext0
+ 2365 0060 D6040000 		.long	LFE12-Ltext0
+ 2366 0064 0200     		.word	0x2
+ 2367 0066 74       		.byte	0x74
+ 2368 0067 04       		.sleb128 4
+ 2369 0068 00000000 		.long	0
+ 2370 006c 00000000 		.long	0
+ 2371              	LLST7:
+ 2372 0070 4D020000 		.long	LFB11-Ltext0
+ 2373 0074 4E020000 		.long	LCFI21-Ltext0
+ 2374 0078 0200     		.word	0x2
+ 2375 007a 74       		.byte	0x74
+ 2376 007b 04       		.sleb128 4
+ 2377 007c 4E020000 		.long	LCFI21-Ltext0
+ 2378 0080 50020000 		.long	LCFI22-Ltext0
+ 2379 0084 0200     		.word	0x2
+ 2380 0086 74       		.byte	0x74
+ 2381 0087 08       		.sleb128 8
+ 2382 0088 50020000 		.long	LCFI22-Ltext0
+ 2383 008c ED030000 		.long	LCFI23-Ltext0
+ 2384 0090 0200     		.word	0x2
+ 2385 0092 75       		.byte	0x75
+ 2386 0093 08       		.sleb128 8
+ 2387 0094 ED030000 		.long	LCFI23-Ltext0
+ 2388 0098 EE030000 		.long	LFE11-Ltext0
+ 2389 009c 0200     		.word	0x2
+ 2390 009e 74       		.byte	0x74
+ 2391 009f 04       		.sleb128 4
+ 2392 00a0 00000000 		.long	0
+ 2393 00a4 00000000 		.long	0
+ 2394              	LLST6:
+ 2395 00a8 94010000 		.long	LFB10-Ltext0
+ 2396 00ac 95010000 		.long	LCFI18-Ltext0
+ 2397 00b0 0200     		.word	0x2
+ 2398 00b2 74       		.byte	0x74
+ 2399 00b3 04       		.sleb128 4
+ 2400 00b4 95010000 		.long	LCFI18-Ltext0
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 50
+
+
+ 2401 00b8 97010000 		.long	LCFI19-Ltext0
+ 2402 00bc 0200     		.word	0x2
+ 2403 00be 74       		.byte	0x74
+ 2404 00bf 08       		.sleb128 8
+ 2405 00c0 97010000 		.long	LCFI19-Ltext0
+ 2406 00c4 4C020000 		.long	LCFI20-Ltext0
+ 2407 00c8 0200     		.word	0x2
+ 2408 00ca 75       		.byte	0x75
+ 2409 00cb 08       		.sleb128 8
+ 2410 00cc 4C020000 		.long	LCFI20-Ltext0
+ 2411 00d0 4D020000 		.long	LFE10-Ltext0
+ 2412 00d4 0200     		.word	0x2
+ 2413 00d6 74       		.byte	0x74
+ 2414 00d7 04       		.sleb128 4
+ 2415 00d8 00000000 		.long	0
+ 2416 00dc 00000000 		.long	0
+ 2417              	LLST5:
+ 2418 00e0 BE000000 		.long	LFB9-Ltext0
+ 2419 00e4 BF000000 		.long	LCFI15-Ltext0
+ 2420 00e8 0200     		.word	0x2
+ 2421 00ea 74       		.byte	0x74
+ 2422 00eb 04       		.sleb128 4
+ 2423 00ec BF000000 		.long	LCFI15-Ltext0
+ 2424 00f0 C1000000 		.long	LCFI16-Ltext0
+ 2425 00f4 0200     		.word	0x2
+ 2426 00f6 74       		.byte	0x74
+ 2427 00f7 08       		.sleb128 8
+ 2428 00f8 C1000000 		.long	LCFI16-Ltext0
+ 2429 00fc 93010000 		.long	LCFI17-Ltext0
+ 2430 0100 0200     		.word	0x2
+ 2431 0102 75       		.byte	0x75
+ 2432 0103 08       		.sleb128 8
+ 2433 0104 93010000 		.long	LCFI17-Ltext0
+ 2434 0108 94010000 		.long	LFE9-Ltext0
+ 2435 010c 0200     		.word	0x2
+ 2436 010e 74       		.byte	0x74
+ 2437 010f 04       		.sleb128 4
+ 2438 0110 00000000 		.long	0
+ 2439 0114 00000000 		.long	0
+ 2440              	LLST4:
+ 2441 0118 9F000000 		.long	LFB8-Ltext0
+ 2442 011c A0000000 		.long	LCFI12-Ltext0
+ 2443 0120 0200     		.word	0x2
+ 2444 0122 74       		.byte	0x74
+ 2445 0123 04       		.sleb128 4
+ 2446 0124 A0000000 		.long	LCFI12-Ltext0
+ 2447 0128 A2000000 		.long	LCFI13-Ltext0
+ 2448 012c 0200     		.word	0x2
+ 2449 012e 74       		.byte	0x74
+ 2450 012f 08       		.sleb128 8
+ 2451 0130 A2000000 		.long	LCFI13-Ltext0
+ 2452 0134 BD000000 		.long	LCFI14-Ltext0
+ 2453 0138 0200     		.word	0x2
+ 2454 013a 75       		.byte	0x75
+ 2455 013b 08       		.sleb128 8
+ 2456 013c BD000000 		.long	LCFI14-Ltext0
+ 2457 0140 BE000000 		.long	LFE8-Ltext0
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 51
+
+
+ 2458 0144 0200     		.word	0x2
+ 2459 0146 74       		.byte	0x74
+ 2460 0147 04       		.sleb128 4
+ 2461 0148 00000000 		.long	0
+ 2462 014c 00000000 		.long	0
+ 2463              	LLST3:
+ 2464 0150 80000000 		.long	LFB7-Ltext0
+ 2465 0154 81000000 		.long	LCFI9-Ltext0
+ 2466 0158 0200     		.word	0x2
+ 2467 015a 74       		.byte	0x74
+ 2468 015b 04       		.sleb128 4
+ 2469 015c 81000000 		.long	LCFI9-Ltext0
+ 2470 0160 83000000 		.long	LCFI10-Ltext0
+ 2471 0164 0200     		.word	0x2
+ 2472 0166 74       		.byte	0x74
+ 2473 0167 08       		.sleb128 8
+ 2474 0168 83000000 		.long	LCFI10-Ltext0
+ 2475 016c 9E000000 		.long	LCFI11-Ltext0
+ 2476 0170 0200     		.word	0x2
+ 2477 0172 75       		.byte	0x75
+ 2478 0173 08       		.sleb128 8
+ 2479 0174 9E000000 		.long	LCFI11-Ltext0
+ 2480 0178 9F000000 		.long	LFE7-Ltext0
+ 2481 017c 0200     		.word	0x2
+ 2482 017e 74       		.byte	0x74
+ 2483 017f 04       		.sleb128 4
+ 2484 0180 00000000 		.long	0
+ 2485 0184 00000000 		.long	0
+ 2486              	LLST2:
+ 2487 0188 61000000 		.long	LFB6-Ltext0
+ 2488 018c 62000000 		.long	LCFI6-Ltext0
+ 2489 0190 0200     		.word	0x2
+ 2490 0192 74       		.byte	0x74
+ 2491 0193 04       		.sleb128 4
+ 2492 0194 62000000 		.long	LCFI6-Ltext0
+ 2493 0198 64000000 		.long	LCFI7-Ltext0
+ 2494 019c 0200     		.word	0x2
+ 2495 019e 74       		.byte	0x74
+ 2496 019f 08       		.sleb128 8
+ 2497 01a0 64000000 		.long	LCFI7-Ltext0
+ 2498 01a4 7F000000 		.long	LCFI8-Ltext0
+ 2499 01a8 0200     		.word	0x2
+ 2500 01aa 75       		.byte	0x75
+ 2501 01ab 08       		.sleb128 8
+ 2502 01ac 7F000000 		.long	LCFI8-Ltext0
+ 2503 01b0 80000000 		.long	LFE6-Ltext0
+ 2504 01b4 0200     		.word	0x2
+ 2505 01b6 74       		.byte	0x74
+ 2506 01b7 04       		.sleb128 4
+ 2507 01b8 00000000 		.long	0
+ 2508 01bc 00000000 		.long	0
+ 2509              	LLST1:
+ 2510 01c0 42000000 		.long	LFB5-Ltext0
+ 2511 01c4 43000000 		.long	LCFI3-Ltext0
+ 2512 01c8 0200     		.word	0x2
+ 2513 01ca 74       		.byte	0x74
+ 2514 01cb 04       		.sleb128 4
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 52
+
+
+ 2515 01cc 43000000 		.long	LCFI3-Ltext0
+ 2516 01d0 45000000 		.long	LCFI4-Ltext0
+ 2517 01d4 0200     		.word	0x2
+ 2518 01d6 74       		.byte	0x74
+ 2519 01d7 08       		.sleb128 8
+ 2520 01d8 45000000 		.long	LCFI4-Ltext0
+ 2521 01dc 60000000 		.long	LCFI5-Ltext0
+ 2522 01e0 0200     		.word	0x2
+ 2523 01e2 75       		.byte	0x75
+ 2524 01e3 08       		.sleb128 8
+ 2525 01e4 60000000 		.long	LCFI5-Ltext0
+ 2526 01e8 61000000 		.long	LFE5-Ltext0
+ 2527 01ec 0200     		.word	0x2
+ 2528 01ee 74       		.byte	0x74
+ 2529 01ef 04       		.sleb128 4
+ 2530 01f0 00000000 		.long	0
+ 2531 01f4 00000000 		.long	0
+ 2532              	LLST0:
+ 2533 01f8 00000000 		.long	LFB4-Ltext0
+ 2534 01fc 01000000 		.long	LCFI0-Ltext0
+ 2535 0200 0200     		.word	0x2
+ 2536 0202 74       		.byte	0x74
+ 2537 0203 04       		.sleb128 4
+ 2538 0204 01000000 		.long	LCFI0-Ltext0
+ 2539 0208 03000000 		.long	LCFI1-Ltext0
+ 2540 020c 0200     		.word	0x2
+ 2541 020e 74       		.byte	0x74
+ 2542 020f 08       		.sleb128 8
+ 2543 0210 03000000 		.long	LCFI1-Ltext0
+ 2544 0214 41000000 		.long	LCFI2-Ltext0
+ 2545 0218 0200     		.word	0x2
+ 2546 021a 75       		.byte	0x75
+ 2547 021b 08       		.sleb128 8
+ 2548 021c 41000000 		.long	LCFI2-Ltext0
+ 2549 0220 42000000 		.long	LFE4-Ltext0
+ 2550 0224 0200     		.word	0x2
+ 2551 0226 74       		.byte	0x74
+ 2552 0227 04       		.sleb128 4
+ 2553 0228 00000000 		.long	0
+ 2554 022c 00000000 		.long	0
+ 2555              		.section	.debug_aranges,"dr"
+ 2556 0000 1C000000 		.long	0x1c
+ 2557 0004 0200     		.word	0x2
+ 2558 0006 00000000 		.secrel32	Ldebug_info0
+ 2559 000a 04       		.byte	0x4
+ 2560 000b 00       		.byte	0
+ 2561 000c 0000     		.word	0
+ 2562 000e 0000     		.word	0
+ 2563 0010 00000000 		.long	Ltext0
+ 2564 0014 16070000 		.long	Letext0-Ltext0
+ 2565 0018 00000000 		.long	0
+ 2566 001c 00000000 		.long	0
+ 2567              		.section	.debug_line,"dr"
+ 2568              	Ldebug_line0:
+ 2569 0000 86030000 		.section	.debug_str,"dr"
+ 2569      0200BE00 
+ 2569      00000101 
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 53
+
+
+ 2569      FB0E0D00 
+ 2569      01010101 
+ 2570              	LASF0:
+ 2571 0000 6D5F6861 		.ascii "m_hasValue\0"
+ 2571      7356616C 
+ 2571      756500
+ 2572              	LASF4:
+ 2573 000b 746F7052 		.ascii "topRight\0"
+ 2573      69676874 
+ 2573      00
+ 2574              	LASF5:
+ 2575 0014 626F7474 		.ascii "bottomRight\0"
+ 2575      6F6D5269 
+ 2575      67687400 
+ 2576              	LASF1:
+ 2577 0020 72657375 		.ascii "result\0"
+ 2577      6C7400
+ 2578              	LASF3:
+ 2579 0027 626F7474 		.ascii "bottomLeft\0"
+ 2579      6F6D4C65 
+ 2579      667400
+ 2580              	LASF2:
+ 2581 0032 63616C63 		.ascii "calculateMinMaxValues\0"
+ 2581      756C6174 
+ 2581      654D696E 
+ 2581      4D617856 
+ 2581      616C7565 
+ 2582              		.ident	"GCC: (i686-posix-dwarf-rev0, Built by MinGW-W64 project) 8.1.0"
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s 			page 54
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 PDFBoundingBox.c
-C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s:5      .text:00000000 _BoundingBox_Init
-C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s:46     .text:00000041 _Create
-C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s:167    .text:00000110 _calculateMinMaxValues
-C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s:392    .text:000002b0 _Merge
-C:\Users\jisu8\AppData\Local\Temp\ccfTcNY5.s:403    .text:000002b2 _AddMissingRows
+C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s:5      .text:00000000 _BoundingBox_Init
+C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s:46     .text:00000042 _topLeft
+C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s:77     .text:00000061 _topRight
+C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s:108    .text:00000080 _bottomLeft
+C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s:139    .text:0000009f _bottomRight
+C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s:170    .text:000000be _Create
+C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s:294    .text:00000194 _copy
+C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s:394    .text:0000024d _calculateMinMaxValues
+C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s:619    .text:000003ee _Bounding_Merge
+C:\Users\jisu8\AppData\Local\Temp\cc4hs1hU.s:726    .text:000004d6 _AddMissingRows
 
 NO UNDEFINED SYMBOLS

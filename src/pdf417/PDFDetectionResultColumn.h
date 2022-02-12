@@ -3,6 +3,7 @@
 
 #include "PDFBoundingBox.h"
 #include "PDFCodeword.h"
+#include "PDFBarcodeMetadata.h"
 
 typedef enum  
 {
@@ -16,8 +17,14 @@ typedef struct
 	BoundingBox_t _boundingBox;
 	Codeword_t _codewords[500];
 	RowIndicator_t _rowIndicator;
+}DetectionResultColumn_val_t;
+typedef struct 
+{
+	uint8_t m_hasValue;
+	DetectionResultColumn_val_t m_value;
 }DetectionResultColumn_t;
 
-extern void DetectionResultColumn(const BoundingBox_t * boundingBox, RowIndicator_t rowIndicator);
-
+extern void DetectionResultColumn(const BoundingBox_t * boundingBox, RowIndicator_t rowInd, DetectionResultColumn_t * RowIndicatorColumn);
+extern uint8_t getBarcodeMetadata(DetectionResultColumn_t * RowIndicatorColumn, BarcodeMetadata_t * result, int length);
+extern uint8_t getRowHeights(DetectionResultColumn_t * rowIndicatorColumn,int * result,int length,int * size);
 #endif

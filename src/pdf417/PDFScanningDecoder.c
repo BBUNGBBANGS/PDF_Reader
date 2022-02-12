@@ -11,8 +11,9 @@
 static const int CODEWORD_SKEW_SIZE = 2;
 static const int MAX_ERRORS = 3;
 static const int MAX_EC_CODEWORDS = 512;
+static const int BARCODE_ROW_UNKNOWN = -1;
 
-result_bits[8];
+int result_bits[8];
 
 Codeword_t CodeWord;
 DetectionResultColumn_t rowIndicatorColumn;
@@ -114,10 +115,12 @@ static int GetCodewordBucketNumber(int codeword)
 
 static Codeword_t * Codeword(int startX, int endX, int bucket, int value)
 {
-	CodeWord._startX = startX;
-	CodeWord._endX = endX;
-	CodeWord._bucket = bucket;
-	CodeWord._value = value;	
+	CodeWord.m_hasValue = 1;
+	CodeWord.m_value._startX = startX;
+	CodeWord.m_value._endX = endX;
+	CodeWord.m_value._bucket = bucket;
+	CodeWord.m_value._value = value;
+	CodeWord.m_value._rowNumber = BARCODE_ROW_UNKNOWN;	
 
 	return &CodeWord;
 }
@@ -171,64 +174,119 @@ static Codeword_t * DetectCodeword(const BitMatrix_t * image, int minColumn, int
 
 	return NULL;
 }
-
-static DetectionResultColumn_t * GetRowIndicatorColumn(const BitMatrix_t * image, const BoundingBox_t * boundingBox, const ResultPoint_t * startPoint, uint8_t leftToRight, int minCodewordWidth, int maxCodewordWidth)
+static void setCodeword(int imageRow, Codeword_t * codeword, DetectionResultColumn_t * RowIndicatorColumn,uint8_t empty)
 {
+	int idx = imageRow - RowIndicatorColumn->m_value._boundingBox.m_value._minY;
+	if(empty == 0)
+	{
+		RowIndicatorColumn->m_value._codewords[idx].m_hasValue = codeword->m_hasValue;
+		RowIndicatorColumn->m_value._codewords[idx].m_value._bucket = codeword->m_value._bucket;
+		RowIndicatorColumn->m_value._codewords[idx].m_value._endX = codeword->m_value._endX;
+		RowIndicatorColumn->m_value._codewords[idx].m_value._rowNumber = codeword->m_value._rowNumber;
+		RowIndicatorColumn->m_value._codewords[idx].m_value._startX = codeword->m_value._startX;
+		RowIndicatorColumn->m_value._codewords[idx].m_value._value = codeword->m_value._value;
+	}
+	else
+	{
+		RowIndicatorColumn->m_value._codewords[idx].m_hasValue = 0;
+		RowIndicatorColumn->m_value._codewords[idx].m_value._bucket = 0;
+		RowIndicatorColumn->m_value._codewords[idx].m_value._endX = 0;
+		RowIndicatorColumn->m_value._codewords[idx].m_value._rowNumber = 0;
+		RowIndicatorColumn->m_value._codewords[idx].m_value._startX = 0;
+		RowIndicatorColumn->m_value._codewords[idx].m_value._value = 0;
+	}
+}
+
+static int GetRowIndicatorColumn(const BitMatrix_t * image, const BoundingBox_t * boundingBox, const ResultPoint_t * startPoint, uint8_t leftToRight, int minCodewordWidth, int maxCodewordWidth, DetectionResultColumn_t * RowIndicatorColumn)
+{
+	int length = 0;
 	printf("GetRowIndicatorColumn \n");
-	
-	DetectionResultColumn(boundingBox, leftToRight ? Left : Right);
+
+	DetectionResultColumn(boundingBox,leftToRight ? Left : Right,RowIndicatorColumn);
+
 	for (int i = 0; i < 2; i++) 
 	{
 		int increment = i == 0 ? 1 : -1;
 		int startColumn = (int)startPoint->m_value.x;
-		for (int imageRow = (int)startPoint->m_value.y; imageRow <= boundingBox->_maxY && imageRow >= boundingBox->_minY; imageRow += increment) 
+		for (int imageRow = (int)startPoint->m_value.y; imageRow <= boundingBox->m_value._maxY && imageRow >= boundingBox->m_value._minY; imageRow += increment) 
 		{
 			Codeword_t * codeword = DetectCodeword(image, 0, image->_width, leftToRight, startColumn, imageRow, minCodewordWidth, maxCodewordWidth);
+
 			if (codeword != NULL) 
 			{
-				rowIndicatorColumn._codewords[imageRow] = codeword;
+				setCodeword(imageRow, codeword, RowIndicatorColumn,0);
 				if (leftToRight) 
 				{
-					startColumn = codeword->_startX;
+					startColumn = codeword->m_value._startX;
 				}
 				else 
 				{
-					startColumn = codeword->_endX;
+					startColumn = codeword->m_value._endX;
 				}
 			}
+			else
+			{
+				setCodeword(imageRow, codeword, RowIndicatorColumn,1);
+			}
+			length++;
 		}
 	}
-	return rowIndicatorColumn;
+	return length-1;
 }
-
-#if 0
-static bool GetBarcodeMetadata(Nullable<DetectionResultColumn>& leftRowIndicatorColumn, Nullable<DetectionResultColumn>& rightRowIndicatorColumn, BarcodeMetadata& result)
+static void Metadata_Init(BarcodeMetadata_t * Metadata)
 {
-#ifdef HK_DEBUG
+	Metadata->_columnCount = 0;
+	Metadata->_errorCorrectionLevel = 0;
+	Metadata->_rowCountUpperPart = 0;
+	Metadata->_rowCountLowerPart = 0;
+}
+int columnCount(BarcodeMetadata_t * Metadata)
+{
+	return (Metadata->_columnCount);
+}
+static int errorCorrectionLevel(BarcodeMetadata_t * Metadata)
+{
+	return (Metadata->_errorCorrectionLevel);
+}
+int rowCount(BarcodeMetadata_t * Metadata)
+{
+	return (Metadata->_rowCountUpperPart + Metadata->_rowCountLowerPart);
+}
+static uint8_t GetBarcodeMetadata(DetectionResultColumn_t * leftRowIndicatorColumn, DetectionResultColumn_t * rightRowIndicatorColumn, BarcodeMetadata_t * result, int length)
+{
 	printf("GetBarcodeMetadata \n");
-#endif
-	
-	BarcodeMetadata leftBarcodeMetadata;
-	if (leftRowIndicatorColumn == nullptr || !leftRowIndicatorColumn.value().getBarcodeMetadata(leftBarcodeMetadata)) {
-		return rightRowIndicatorColumn != nullptr && rightRowIndicatorColumn.value().getBarcodeMetadata(result);
+
+	BarcodeMetadata_t leftBarcodeMetadata;
+	Metadata_Init(&leftBarcodeMetadata);
+	if ((leftRowIndicatorColumn == NULL) || (!getBarcodeMetadata(leftRowIndicatorColumn,&leftBarcodeMetadata,length))) 
+	{
+		return (rightRowIndicatorColumn != NULL) && (getBarcodeMetadata(rightRowIndicatorColumn,result,length));
 	}
 
-	BarcodeMetadata rightBarcodeMetadata;
-	if (rightRowIndicatorColumn == nullptr || !rightRowIndicatorColumn.value().getBarcodeMetadata(rightBarcodeMetadata)) {
-		result = leftBarcodeMetadata;
-		return true;
+	BarcodeMetadata_t rightBarcodeMetadata;
+	Metadata_Init(&rightBarcodeMetadata);
+	if ((rightRowIndicatorColumn == NULL) || (!getBarcodeMetadata(rightRowIndicatorColumn,&rightBarcodeMetadata,length))) 
+	{
+		result->_columnCount = leftBarcodeMetadata._columnCount;
+		result->_errorCorrectionLevel = leftBarcodeMetadata._errorCorrectionLevel;
+		result->_rowCountUpperPart = leftBarcodeMetadata._rowCountUpperPart;
+		result->_rowCountLowerPart = leftBarcodeMetadata._rowCountLowerPart;
+		return 1;
 	}
 
-	if (leftBarcodeMetadata.columnCount() != rightBarcodeMetadata.columnCount() &&
-		leftBarcodeMetadata.errorCorrectionLevel() != rightBarcodeMetadata.errorCorrectionLevel() &&
-		leftBarcodeMetadata.rowCount() != rightBarcodeMetadata.rowCount()) {
-		return false;
+	if (columnCount(&leftBarcodeMetadata) != columnCount(&rightBarcodeMetadata) &&
+		errorCorrectionLevel(&leftBarcodeMetadata) != errorCorrectionLevel(&rightBarcodeMetadata) &&
+		rowCount(&leftBarcodeMetadata) != rowCount(&rightBarcodeMetadata)) 
+	{
+		return 0;
 	}
-	result = leftBarcodeMetadata;
-	return true;
+	result->_columnCount = leftBarcodeMetadata._columnCount;
+	result->_errorCorrectionLevel = leftBarcodeMetadata._errorCorrectionLevel;
+	result->_rowCountUpperPart = leftBarcodeMetadata._rowCountUpperPart;
+	result->_rowCountLowerPart = leftBarcodeMetadata._rowCountLowerPart;
+	return 1;
 }
 
-#endif
 #if 0
 template <typename Iter>
 static auto GetMax(Iter start, Iter end) -> typename std::remove_reference<decltype(*start)>::type
@@ -238,124 +296,141 @@ static auto GetMax(Iter start, Iter end) -> typename std::remove_reference<declt
 }
 
 #endif
-#if 0
-static bool AdjustBoundingBox(Nullable<DetectionResultColumn>& rowIndicatorColumn, Nullable<BoundingBox>& result)
+static int GetMax(int * buffer, int length)
 {
-#ifdef HK_DEBUG
+	int ret_max = 0;
+
+	for(int i=0;i<length;i++)
+	{
+		if(buffer[i]>ret_max)
+		{
+			ret_max = buffer[i];
+		}
+	}
+
+	return ret_max;
+}
+static uint8_t AdjustBoundingBox(DetectionResultColumn_t * rowIndicatorColumn, BoundingBox_t * result,int length)
+{
 	printf("AdjustBoundingBox \n");
-#endif
 	
-	if (rowIndicatorColumn == nullptr)
+	if (rowIndicatorColumn->m_hasValue == 0)
 	{
-		result = nullptr;
-		return true;
+		result->m_hasValue = 0;
+		return 1;
 	}
 
-	std::vector<int> rowHeights;
-	if (!rowIndicatorColumn.value().getRowHeights(rowHeights)) 
+	int rowHeights[100];
+	int size = 0;
+	if (!getRowHeights(rowIndicatorColumn,&rowHeights,length,&size)) 
 	{
-		result = nullptr;
-		return true;
+		result = NULL;
+		return 1;
 	}
 
-	int maxRowHeight = GetMax(rowHeights.begin(), rowHeights.end());
+	int maxRowHeight = GetMax(rowHeights,size);
 	int missingStartRows = 0;
-	for (int rowHeight : rowHeights) {
-		missingStartRows += maxRowHeight - rowHeight;
-		if (rowHeight > 0) 
+	for (int i=0;i<size;i++) 
+	{
+		missingStartRows += maxRowHeight - rowHeights[i];
+		if (rowHeights[i] > 0) 
 		{
 			break;
 		}
 	}
-	auto& codewords = rowIndicatorColumn.value().allCodewords();
-	for (int row = 0; missingStartRows > 0 && codewords[row] == nullptr; row++) 
+
+	Codeword_t * codewords = rowIndicatorColumn->m_value._codewords;
+	for (int row = 0; (missingStartRows > 0) && ((codewords+row)->m_hasValue == 0); row++) 
 	{
 		missingStartRows--;
 	}
 
 	int missingEndRows = 0;
-	for (int row = Size(rowHeights) - 1; row >= 0; row--) 
+	for (int row = size - 1; row >= 0; row--) 
 	{
 		missingEndRows += maxRowHeight - rowHeights[row];
-		if (rowHeights[row] > 0) {
+		if (rowHeights[row] > 0) 
+		{
 			break;
 		}
 	}
-	for (int row = Size(codewords) - 1; missingEndRows > 0 && codewords[row] == nullptr; row--) {
+	for (int row = length - 1; missingEndRows > 0 && ((codewords+row)->m_hasValue == 0); row--) 
+	{
 		missingEndRows--;
 	}
-	BoundingBox box;
-	if (BoundingBox::AddMissingRows(rowIndicatorColumn.value().boundingBox(), missingStartRows, missingEndRows, rowIndicatorColumn.value().isLeftRowIndicator(), box)) {
-		result = box;
-		return true;
+	BoundingBox_t box;
+	BoundingBox_t boundingBox = rowIndicatorColumn->m_value._boundingBox;
+	if (AddMissingRows(&boundingBox, missingStartRows, missingEndRows, isLeftRowIndicator(rowIndicatorColumn), &box)) 
+	{
+		copy(&box,result);
+		return 1;
 	}
-	return false;
+
+	return 0;
 }
 
-#endif
-#if 0
-static bool Merge(Nullable<DetectionResultColumn>& leftRowIndicatorColumn, Nullable<DetectionResultColumn>& rightRowIndicatorColumn, DetectionResult& result)
+
+static uint8_t Merge(DetectionResultColumn_t * leftRowIndicatorColumn, DetectionResultColumn_t * rightRowIndicatorColumn, DetectionResult_t * result,int length)
 {
-	if (leftRowIndicatorColumn != nullptr || rightRowIndicatorColumn != nullptr) 
+	if (leftRowIndicatorColumn != NULL || rightRowIndicatorColumn != NULL) 
 	{
-		BarcodeMetadata barcodeMetadata;
-		if (GetBarcodeMetadata(leftRowIndicatorColumn, rightRowIndicatorColumn, barcodeMetadata)) 
+		BarcodeMetadata_t barcodeMetadata;
+		Metadata_Init(&barcodeMetadata);
+		if (GetBarcodeMetadata(leftRowIndicatorColumn, rightRowIndicatorColumn, &barcodeMetadata,length)) 
 		{
-			Nullable<BoundingBox> leftBox, rightBox, mergedBox;
-			if (AdjustBoundingBox(leftRowIndicatorColumn, leftBox) && AdjustBoundingBox(rightRowIndicatorColumn, rightBox) && BoundingBox::Merge(leftBox, rightBox, mergedBox)) 
+			BoundingBox_t leftBox, rightBox, mergedBox;
+			if (AdjustBoundingBox(leftRowIndicatorColumn, &leftBox,length) && AdjustBoundingBox(rightRowIndicatorColumn, &rightBox,length) && Bounding_Merge(&leftBox, &rightBox, &mergedBox)) 
 			{
-				result.init(barcodeMetadata, mergedBox);
-				return true;
+				Detection_Result_init(&barcodeMetadata, &mergedBox,result);
+				return 1;
 			}
 		}
 	}
-	return false;
+	return 0;
 }
 
-#endif
-#if 0
-static bool IsValidBarcodeColumn(const DetectionResult& detectionResult, int barcodeColumn)
+
+
+static uint8_t IsValidBarcodeColumn(const DetectionResult_t * detectionResult, int barcodeColumn)
 {
-	return barcodeColumn >= 0 && barcodeColumn <= detectionResult.barcodeColumnCount() + 1;
+	return barcodeColumn >= 0 && barcodeColumn <= detectionResult->_barcodeMetadata._columnCount + 1;
 }
 
-#endif
-#if 0
-static int GetStartColumn(const DetectionResult& detectionResult, int barcodeColumn, int imageRow, bool leftToRight)
+
+static int GetStartColumn(const DetectionResult_t * detectionResult, int barcodeColumn, int imageRow, uint8_t leftToRight)
 {
-#ifdef HK_DEBUG
 	printf("GetStartColumn barcodeColumn=%d, imageRow=%d, leftToRight=%d \n", barcodeColumn, imageRow, leftToRight);
-#endif
 
 	int offset = leftToRight ? 1 : -1;
-	Nullable<Codeword> codeword;
+	Codeword_t * codeword;
 	if (IsValidBarcodeColumn(detectionResult, barcodeColumn - offset)) 
 	{
-		codeword = detectionResult.column(barcodeColumn - offset).value().codeword(imageRow);
+		*codeword = detectionResult->_detectionResultColumns[barcodeColumn - offset].m_value._codewords[imageRow];
 	}
 
-	if (codeword != nullptr) 
+	if (codeword->m_hasValue != 0) 
 	{
-		return leftToRight ? codeword.value().endX() : codeword.value().startX();
+		return leftToRight ? codeword->m_value._endX : codeword->m_value._startX;
 	}
 
-	codeword = detectionResult.column(barcodeColumn).value().codewordNearby(imageRow);
-	if (codeword != nullptr) 
+	//codeword = detectionResult->_detectionResultColumns[barcodeColumn].m_value.codewordNearby(imageRow);
+	if (codeword->m_hasValue != 0) 
 	{
-		return leftToRight ? codeword.value().startX() : codeword.value().endX();
+		return leftToRight ? codeword->m_value._startX : codeword->m_value._endX;
 	}
 
-	if (IsValidBarcodeColumn(detectionResult, barcodeColumn - offset)) {
-		codeword = detectionResult.column(barcodeColumn - offset).value().codewordNearby(imageRow);
-	}
-
-	if (codeword != nullptr)
+	if (IsValidBarcodeColumn(detectionResult, barcodeColumn - offset)) 
 	{
-		return leftToRight ? codeword.value().endX() : codeword.value().startX();
+		//codeword = detectionResult->_detectionResultColumns[barcodeColumn - offset].m_value.codewordNearby(imageRow);
+	}
+
+	if (codeword->m_hasValue != 0)
+	{
+		return leftToRight ? codeword->m_value._endX : codeword->m_value._startX;
 	}
 
 	int skippedColumns = 0;
-
+	#if 0
 	while (IsValidBarcodeColumn(detectionResult, barcodeColumn - offset)) 
 	{
 		barcodeColumn -= offset;
@@ -371,11 +446,10 @@ static int GetStartColumn(const DetectionResult& detectionResult, int barcodeCol
 		}
 		skippedColumns++;
 	}
-
-	return leftToRight ? detectionResult.getBoundingBox().value().minX() : detectionResult.getBoundingBox().value().maxX();
+	#endif
+	return leftToRight ? detectionResult->_boundingBox.m_value._minX : detectionResult->_boundingBox.m_value._maxX;
 }
 
-#endif
 #if 0
 static std::vector<std::vector<BarcodeValue>> CreateBarcodeMatrix(DetectionResult& detectionResult)
 {
@@ -819,68 +893,85 @@ DecoderResult_t * Decode(const BitMatrix_t * image, ResultPoint_t imageTopLeft, 
 	{
 		return NotFound;
 	}
+	int length = 0;
 
-	DetectionResultColumn_t * leftRowIndicatorColumn;
-	DetectionResultColumn_t * rightRowIndicatorColumn;
+	DetectionResultColumn_t leftRowIndicatorColumn;
+	DetectionResultColumn_t rightRowIndicatorColumn;
 	DetectionResult_t detectionResult;
 	for (int i = 0; i < 2; i++) 
 	{
 		if (imageTopLeft.m_hasValue != 0) 
 		{
-			leftRowIndicatorColumn = GetRowIndicatorColumn(image, &boundingBox, &imageTopLeft, 1, minCodewordWidth, maxCodewordWidth);
+			length = GetRowIndicatorColumn(image, &boundingBox, &imageTopLeft, 1, minCodewordWidth, maxCodewordWidth,&leftRowIndicatorColumn);
 		}
 		if (imageTopRight.m_hasValue != 0) 
 		{
-			rightRowIndicatorColumn = GetRowIndicatorColumn(image, &boundingBox, &imageTopRight, 0, minCodewordWidth, maxCodewordWidth);
+			length = GetRowIndicatorColumn(image, &boundingBox, &imageTopRight, 0, minCodewordWidth, maxCodewordWidth,&rightRowIndicatorColumn);
 		}
-		//if (!Merge(leftRowIndicatorColumn, rightRowIndicatorColumn, detectionResult)) 
-		//{
-			//return NotFound;
-		//}
-		if (i == 0 && (detectionResult._boundingBox != NULL) && (detectionResult._boundingBox->_minY < boundingBox._minY || detectionResult._boundingBox->_maxY > boundingBox._maxY)) 
+		if (!Merge(&leftRowIndicatorColumn, &rightRowIndicatorColumn, &detectionResult,length)) 
 		{
-			boundingBox = *detectionResult._boundingBox;
+			return NotFound;
+		}
+		if (i == 0 && (detectionResult._boundingBox.m_hasValue != 0) && (detectionResult._boundingBox.m_value._minY < boundingBox.m_value._minY || detectionResult._boundingBox.m_value._maxY > boundingBox.m_value._maxY)) 
+		{
+			boundingBox = detectionResult._boundingBox;
 		}
 		else 
 		{
-			detectionResult._boundingBox = &boundingBox;
+			detectionResult._boundingBox = boundingBox;
 			break;
 		}
 	}
-	#if 0
-	int maxBarcodeColumn = detectionResult.barcodeColumnCount() + 1;
-	detectionResult.setColumn(0, leftRowIndicatorColumn);
-	detectionResult.setColumn(maxBarcodeColumn, rightRowIndicatorColumn);
 
-	bool leftToRight = leftRowIndicatorColumn != nullptr;
-	for (int barcodeColumnCount = 1; barcodeColumnCount <= maxBarcodeColumn; barcodeColumnCount++) {
+	int maxBarcodeColumn = detectionResult._barcodeMetadata._columnCount + 1;
+	detectionResult._detectionResultColumns[0] = leftRowIndicatorColumn;
+	detectionResult._detectionResultColumns[maxBarcodeColumn] = rightRowIndicatorColumn;
+
+	uint8_t leftToRight;
+
+	if(leftRowIndicatorColumn.m_hasValue != 0)
+	{
+		leftToRight = 1;
+	}
+	else
+	{
+		leftToRight = 0;
+	}
+
+	for (int barcodeColumnCount = 1; barcodeColumnCount <= maxBarcodeColumn; barcodeColumnCount++) 
+	{
 		int barcodeColumn = leftToRight ? barcodeColumnCount : maxBarcodeColumn - barcodeColumnCount;
-		if (detectionResult.column(barcodeColumn) != nullptr) {
+		if (detectionResult._detectionResultColumns[barcodeColumn].m_hasValue != 0) 
+		{
 			// This will be the case for the opposite row indicator column, which doesn't need to be decoded again.
 			continue;
 		}
-		DetectionResultColumn::RowIndicator rowIndicator = barcodeColumn == 0 ? DetectionResultColumn::RowIndicator::Left : (barcodeColumn == maxBarcodeColumn ? DetectionResultColumn::RowIndicator::Right : DetectionResultColumn::RowIndicator::None);
-		detectionResult.setColumn(barcodeColumn, DetectionResultColumn(boundingBox, rowIndicator));
+		RowIndicator_t rowIndicator = barcodeColumn == 0 ? Left : (barcodeColumn == maxBarcodeColumn ? Right : None);
+		DetectionResultColumn(&boundingBox, rowIndicator,&(detectionResult._detectionResultColumns[barcodeColumn]));
 		int startColumn = -1;
 		int previousStartColumn = startColumn;
 		// TODO start at a row for which we know the start position, then detect upwards and downwards from there.
-		for (int imageRow = boundingBox.minY(); imageRow <= boundingBox.maxY(); imageRow++) {
-			startColumn = GetStartColumn(detectionResult, barcodeColumn, imageRow, leftToRight);
-			if (startColumn < 0 || startColumn > boundingBox.maxX()) {
-				if (previousStartColumn == -1) {
+		for (int imageRow = boundingBox.m_value._minY; imageRow <= boundingBox.m_value._maxY; imageRow++) 
+		{
+			startColumn = GetStartColumn(&detectionResult, barcodeColumn, imageRow, leftToRight);
+			if (startColumn < 0 || startColumn > boundingBox.m_value._maxX) 
+			{
+				if (previousStartColumn == -1) 
+				{
 					continue;
 				}
 				startColumn = previousStartColumn;
 			}
-			Nullable<Codeword> codeword = DetectCodeword(image, boundingBox.minX(), boundingBox.maxX(), leftToRight, startColumn, imageRow, minCodewordWidth, maxCodewordWidth);
-			if (codeword != nullptr) {
-				detectionResult.column(barcodeColumn).value().setCodeword(imageRow, codeword);
+			Codeword_t * codeword = DetectCodeword(image, boundingBox.m_value._minX, boundingBox.m_value._maxX, leftToRight, startColumn, imageRow, minCodewordWidth, maxCodewordWidth);
+			if (codeword->m_hasValue != 0) 
+			{
+				detectionResult._detectionResultColumns[barcodeColumn].m_value._codewords[imageRow - detectionResult._detectionResultColumns[barcodeColumn].m_value._boundingBox.m_value._minY] = *codeword;
 				previousStartColumn = startColumn;
-				minCodewordWidth = std::min(minCodewordWidth, codeword.value().width());
-				maxCodewordWidth = std::max(maxCodewordWidth, codeword.value().width());
+				minCodewordWidth = __min(minCodewordWidth, (codeword->m_value._endX - codeword->m_value._startX));
+				maxCodewordWidth = __max(maxCodewordWidth, (codeword->m_value._endX - codeword->m_value._startX));
 			}
 		}
 	}
-	return CreateDecoderResult(detectionResult, characterSet);
-	#endif
+	//return CreateDecoderResult(detectionResult, characterSet);
+
 }

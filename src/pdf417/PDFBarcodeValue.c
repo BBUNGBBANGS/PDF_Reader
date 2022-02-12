@@ -4,34 +4,46 @@
 /**
 * Add an occurrence of a value
 */
-void setValue(int value)
+void BarcodeSetValue(BarcodeValue_t * BarcodeValue , int value)
 {
-	//_values[value] += 1;
+	BarcodeValue->_values[value] += 1;
 }
-#if 0
+
 /**
 * Determines the maximum occurrence of a set value and returns all values which were set with this occurrence.
 * @return an array of int, containing the values with the highest occurrence, or null, if no value was set
 */
-std::vector<int>
-BarcodeValue::value() const
+static int max_element(int length,BarcodeValue_t * BarcodeValue,int * idx)
 {
-	std::vector<int> result;
-	if (!_values.empty()) 
+	int ret_max = 0;
+	for(int i=0;i<length;i++)
 	{
-		int maxConfidence = std::max_element(_values.begin(), _values.end(), [](auto& l, auto& r) { return l.second < r.second; })->second;
-		for (auto [value, count] : _values)
-			if (count == maxConfidence)
-				result.push_back(value);
+		if(BarcodeValue->_values[i]>ret_max)
+		{
+			ret_max = BarcodeValue->_values[i];
+			*idx = i;
+		}
+		
 	}
+	return ret_max; 
+}
+int BarcodeValue(BarcodeValue_t * BarcodeValue,int length) 
+{
+	int result = 0;
+
+	//if (!result->_values.empty()) 
+	//{
+		int maxConfidence = max_element(length,BarcodeValue->_values,&result);
+	//}
+
 	return result;
 }
 
-int
-BarcodeValue::confidence(int value) const
+int confidence(int value) 
 {
+	#if 0
 	auto it = _values.find(value);
 	return it != _values.end() ? it->second : 0;
+	#endif
 }
 
-#endif

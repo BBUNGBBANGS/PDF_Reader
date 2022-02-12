@@ -1,25 +1,17 @@
 
 #include "PDFDetectionResult.h"
 #include "PDFCodewordDecoder.h"
-#if 0
+
 static const int ADJUST_ROW_NUMBER_SKIP = 2;
 
-DetectionResult::DetectionResult(const BarcodeMetadata& barcodeMetadata, const Nullable<BoundingBox>& boundingBox) :
-	_barcodeMetadata(barcodeMetadata),
-	_detectionResultColumns(barcodeMetadata.columnCount() + 2),
-	_boundingBox(boundingBox)
+void Detection_Result_init(const BarcodeMetadata_t * barcodeMetadata, const BoundingBox_t * boundingBox, DetectionResult_t * result)
 {
+	result->_barcodeMetadata = *barcodeMetadata;
+	result->_boundingBox = *boundingBox;
+	result->_detectionResultColumns[barcodeMetadata->_columnCount + 2];
+	//std::fill(_detectionResultColumns.begin(), _detectionResultColumns.end(), nullptr);
 }
-
-void
-DetectionResult::init(const BarcodeMetadata& barcodeMetadata, const Nullable<BoundingBox>& boundingBox)
-{
-	_barcodeMetadata = barcodeMetadata;
-	_boundingBox = boundingBox;
-	_detectionResultColumns.resize(barcodeMetadata.columnCount() + 2);
-	std::fill(_detectionResultColumns.begin(), _detectionResultColumns.end(), nullptr);
-}
-
+#if 0
 static void AdjustIndicatorColumnRowNumbers(Nullable<DetectionResultColumn>& detectionResultColumn, const BarcodeMetadata& barcodeMetadata)
 {
 	if (detectionResultColumn != nullptr) {
