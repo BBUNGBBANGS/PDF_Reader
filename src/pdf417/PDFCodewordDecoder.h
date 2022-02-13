@@ -28,6 +28,7 @@ public:
 
 extern const int MODULES_IN_CODEWORD;
 extern const int BARS_IN_MODULE;
+extern const int MAX_CODEWORDS_IN_BARCODE;
 extern int GetDecodedValue(const int * moduleBitCount);
 extern int GetCodeword(int symbol);
 #endif

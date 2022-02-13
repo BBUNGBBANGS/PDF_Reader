@@ -67,6 +67,7 @@
         "stdio.h": "c",
         "pdfcodeworddecoder.h": "c",
         "map": "c",
-        "pdfdetectionresultcolumn.h": "c"
+        "pdfdetectionresultcolumn.h": "c",
+        "pdfbarcodevalue.h": "c"
     }
 }

@@ -4,6 +4,7 @@
 #include "PDFDetectionResultColumn.h"
 #include "PDFDetectionResult.h"
 #include "PDFCodewordDecoder.h"
+#include "PDFBarcodeValue.h"
 #include "DecodeStatus.h"
 #include "library.h"
 #include <stdlib.h>
@@ -11,7 +12,7 @@
 static const int CODEWORD_SKEW_SIZE = 2;
 static const int MAX_ERRORS = 3;
 static const int MAX_EC_CODEWORDS = 512;
-static const int BARCODE_ROW_UNKNOWN = -1;
+const int BARCODE_ROW_UNKNOWN = -1;
 
 int result_bits[8];
 
@@ -244,7 +245,7 @@ int columnCount(BarcodeMetadata_t * Metadata)
 {
 	return (Metadata->_columnCount);
 }
-static int errorCorrectionLevel(BarcodeMetadata_t * Metadata)
+int errorCorrectionLevel(BarcodeMetadata_t * Metadata)
 {
 	return (Metadata->_errorCorrectionLevel);
 }
@@ -397,36 +398,36 @@ static uint8_t IsValidBarcodeColumn(const DetectionResult_t * detectionResult, i
 }
 
 
-static int GetStartColumn(const DetectionResult_t * detectionResult, int barcodeColumn, int imageRow, uint8_t leftToRight)
+static int GetStartColumn(const DetectionResult_t * detectionResult, int barcodeColumn, int imageRow, uint8_t leftToRight,int size)
 {
 	printf("GetStartColumn barcodeColumn=%d, imageRow=%d, leftToRight=%d \n", barcodeColumn, imageRow, leftToRight);
 
 	int offset = leftToRight ? 1 : -1;
-	Codeword_t * codeword;
+	Codeword_t codeword;
 	if (IsValidBarcodeColumn(detectionResult, barcodeColumn - offset)) 
 	{
-		*codeword = detectionResult->_detectionResultColumns[barcodeColumn - offset].m_value._codewords[imageRow];
+		codeword = detectionResult->_detectionResultColumns[barcodeColumn - offset].m_value._codewords[imageRow-detectionResult->_boundingBox.m_value._minY];
 	}
 
-	if (codeword->m_hasValue != 0) 
+	if (codeword.m_hasValue != 0) 
 	{
-		return leftToRight ? codeword->m_value._endX : codeword->m_value._startX;
+		return leftToRight ? codeword.m_value._endX : codeword.m_value._startX;
 	}
 
-	//codeword = detectionResult->_detectionResultColumns[barcodeColumn].m_value.codewordNearby(imageRow);
-	if (codeword->m_hasValue != 0) 
+	codeword = codewordNearby(&(detectionResult->_detectionResultColumns[barcodeColumn]),imageRow,size);
+	if (codeword.m_hasValue != 0) 
 	{
-		return leftToRight ? codeword->m_value._startX : codeword->m_value._endX;
+		return leftToRight ? codeword.m_value._startX : codeword.m_value._endX;
 	}
 
 	if (IsValidBarcodeColumn(detectionResult, barcodeColumn - offset)) 
 	{
-		//codeword = detectionResult->_detectionResultColumns[barcodeColumn - offset].m_value.codewordNearby(imageRow);
+		codeword = codewordNearby(&(detectionResult->_detectionResultColumns[barcodeColumn - offset]),imageRow,size);
 	}
 
-	if (codeword->m_hasValue != 0)
+	if (codeword.m_hasValue != 0)
 	{
-		return leftToRight ? codeword->m_value._endX : codeword->m_value._startX;
+		return leftToRight ? codeword.m_value._endX : codeword.m_value._startX;
 	}
 
 	int skippedColumns = 0;
@@ -450,71 +451,77 @@ static int GetStartColumn(const DetectionResult_t * detectionResult, int barcode
 	return leftToRight ? detectionResult->_boundingBox.m_value._minX : detectionResult->_boundingBox.m_value._maxX;
 }
 
-#if 0
-static std::vector<std::vector<BarcodeValue>> CreateBarcodeMatrix(DetectionResult& detectionResult)
-{
-#ifdef HK_DEBUG
-	printf("CreateBarcodeMatrix\n");
-#endif
-	
-	std::vector<std::vector<BarcodeValue>> barcodeMatrix(detectionResult.barcodeRowCount());
-	for (auto& row : barcodeMatrix) {
-		row.resize(detectionResult.barcodeColumnCount() + 2);
-	}
 
-	int column = 0;
-	for (auto& resultColumn : detectionResult.allColumns()) {
-		if (resultColumn != nullptr) {
-			for (auto& codeword : resultColumn.value().allCodewords()) {
-				if (codeword != nullptr) {
-					int rowNumber = codeword.value().rowNumber();
-					if (rowNumber >= 0) {
-						if (rowNumber >= Size(barcodeMatrix)) {
+static BarcodeValue_t * CreateBarcodeMatrix(DetectionResult_t * detectionResult,int size)
+{
+	printf("CreateBarcodeMatrix\n");
+
+	int column = (detectionResult->_barcodeMetadata._rowCountLowerPart)+(detectionResult->_barcodeMetadata._rowCountUpperPart);
+	int row = detectionResult->_barcodeMetadata._columnCount + 2;
+	BarcodeValue_t barcodeMatrix[column][row];
+	fill(row*column*1000,barcodeMatrix,0);
+	int columnNum = 0;
+
+	DetectionResultColumn_t resultColumn = allColumns(detectionResult,row,size);
+	
+	for (int i = 0;i<row;i++) 
+	{
+		if (resultColumn.m_hasValue != 0) 
+		{
+			for (int j=0;j<size;j++) 
+			{
+				Codeword_t codeword = (resultColumn.m_value._codewords[j]);
+				if (codeword.m_hasValue != 0) 
+				{
+					int rowNumber = codeword.m_value._rowNumber;
+					if (rowNumber >= 0) 
+					{
+						if (rowNumber >= column * row) 
+						{
 							// We have more rows than the barcode metadata allows for, ignore them.
 							continue;
 						}
-						barcodeMatrix[rowNumber][column].setValue(codeword.value().value());
+						BarcodeSetValue(&barcodeMatrix[rowNumber][columnNum],codeword.m_value._value);
 					}
 				}
 			}
 		}
-		column++;
+		columnNum++;
 	}
+
 	return barcodeMatrix;
 }
 
-#endif
-#if 0
 static int GetNumberOfECCodeWords(int barcodeECLevel)
 {
 	return 2 << barcodeECLevel;
 }
 
-#endif
-#if 0
-static bool AdjustCodewordCount(const DetectionResult& detectionResult, std::vector<std::vector<BarcodeValue>>& barcodeMatrix)
+
+static uint8_t AdjustCodewordCount(const DetectionResult_t * detectionResult, BarcodeValue_t * barcodeMatrix,int size)
 {
-#ifdef HK_DEBUG
 	printf("AdjustCodewordCount\n");
-#endif
-	
-	auto numberOfCodewords = barcodeMatrix[0][1].value();
-	int calculatedNumberOfCodewords = detectionResult.barcodeColumnCount() * detectionResult.barcodeRowCount() - GetNumberOfECCodeWords(detectionResult.barcodeECLevel());
-	if (numberOfCodewords.empty()) {
-		if (calculatedNumberOfCodewords < 1 || calculatedNumberOfCodewords > CodewordDecoder::MAX_CODEWORDS_IN_BARCODE) {
-			return false;
+	#if 0
+	int numberOfCodewords = BarcodeValue(barcodeMatrix[0][1],size);
+	int calculatedNumberOfCodewords = detectionResult->_barcodeMetadata._columnCount * rowCount(&detectionResult->_barcodeMetadata) - GetNumberOfECCodeWords(detectionResult->_barcodeMetadata._errorCorrectionLevel);
+	if (numberOfCodewords==0) 
+	{
+		if (calculatedNumberOfCodewords < 1 || calculatedNumberOfCodewords > MAX_CODEWORDS_IN_BARCODE) 
+		{
+			return 0;
 		}
-		barcodeMatrix[0][1].setValue(calculatedNumberOfCodewords);
+		(barcodeMatrix[0][1],calculatedNumberOfCodewords);
 	}
-	else if (numberOfCodewords[0] != calculatedNumberOfCodewords) {
+	else if (numberOfCodewords[0] != calculatedNumberOfCodewords) 
+	{
 		// The calculated one is more reliable as it is derived from the row indicator columns
-		barcodeMatrix[0][1].setValue(calculatedNumberOfCodewords);
+		BarcodeSetValue(barcodeMatrix[0][1],calculatedNumberOfCodewords);
 	}
-	return true;
+	#endif
+	return 1;
 }
 // +++++++++++++++++++++++++++++++++++ Error Correction
 
-#endif
 #if 0
 static const ModulusGF& GetModulusGF()
 {
@@ -797,7 +804,7 @@ DecoderResult DecodeCodewords(std::vector<int>& codewords, int ecLevel, const st
 
 
 #endif
-#if 0
+
 /**
 * This method deals with the fact, that the decoding process doesn't always yield a single most likely value. The
 * current error correction implementation doesn't deal with erasures very well, so it's better to provide a value
@@ -811,74 +818,94 @@ DecoderResult DecodeCodewords(std::vector<int>& codewords, int ecLevel, const st
 * @param ambiguousIndexValues two dimensional array that contains the ambiguous values. The first dimension must
 * be the same length as the ambiguousIndexes array
 */
-static DecoderResult CreateDecoderResultFromAmbiguousValues(int ecLevel, std::vector<int>& codewords,
-	const std::vector<int>& erasureArray, const std::vector<int>& ambiguousIndexes,
-	const std::vector<std::vector<int>>& ambiguousIndexValues, const std::string& characterSet)
-{
-	std::vector<int> ambiguousIndexCount(ambiguousIndexes.size(), 0);
+static DecoderResult_t * CreateDecoderResultFromAmbiguousValues(int ecLevel, int * codewords,
+	const int * erasureArray, const int * ambiguousIndexes,
+	const int * ambiguousIndexValues, const char * characterSet)
+{	
+	#if 0
+	int ambiguousIndexCount[ambiguousIndexes.size()] = 0;
 
 	int tries = 100;
-	while (tries-- > 0) {
-		for (size_t i = 0; i < ambiguousIndexCount.size(); i++) {
+	while (tries-- > 0) 
+	{
+		for (size_t i = 0; i < ambiguousIndexCount.size(); i++) 
+		{
 			codewords[ambiguousIndexes[i]] = ambiguousIndexValues[i][ambiguousIndexCount[i]];
 		}
 		auto result = DecodeCodewords(codewords, ecLevel, erasureArray, characterSet);
-		if (result.errorCode() != DecodeStatus::ChecksumError) {
+		if (result.errorCode() != ChecksumError) 
+		{
 			return result;
 		}
 
-		if (ambiguousIndexCount.empty()) {
-			return DecodeStatus::ChecksumError;
+		if (ambiguousIndexCount.empty()) 
+		{
+			return ChecksumError;
 		}
-		for (size_t i = 0; i < ambiguousIndexCount.size(); i++) {
-			if (ambiguousIndexCount[i] < Size(ambiguousIndexValues[i]) - 1) {
+		for (size_t i = 0; i < ambiguousIndexCount.size(); i++) 
+		{
+			if (ambiguousIndexCount[i] < Size(ambiguousIndexValues[i]) - 1) 
+			{
 				ambiguousIndexCount[i]++;
 				break;
 			}
-			else {
+			else 
+			{
 				ambiguousIndexCount[i] = 0;
-				if (i == ambiguousIndexCount.size() - 1) {
-					return DecodeStatus::ChecksumError;
+				if (i == ambiguousIndexCount.size() - 1) 
+				{
+					return ChecksumError;
 				}
 			}
 		}
 	}
-	return DecodeStatus::ChecksumError;
+	#endif
+	return ChecksumError;
 }
 
 
-#endif
-#if 0
-static DecoderResult CreateDecoderResult(DetectionResult& detectionResult, const std::string& characterSet)
+static DecoderResult_t * CreateDecoderResult(DetectionResult_t * detectionResult, const unsigned char * characterSet,int size)
 {
-	auto barcodeMatrix = CreateBarcodeMatrix(detectionResult);
-	if (!AdjustCodewordCount(detectionResult, barcodeMatrix)) {
-		return DecodeStatus::NotFound;
+	BarcodeValue_t * barcodeMatrix = CreateBarcodeMatrix(detectionResult,size);
+	if (!AdjustCodewordCount(detectionResult, barcodeMatrix,size)) 
+	{
+		return NotFound;
 	}
-	std::vector<int> erasures;
-	std::vector<int> codewords(detectionResult.barcodeRowCount() * detectionResult.barcodeColumnCount(), 0);
-	std::vector<std::vector<int>> ambiguousIndexValues;
-	std::vector<int> ambiguousIndexesList;
-	for (int row = 0; row < detectionResult.barcodeRowCount(); row++) {
-		for (int column = 0; column < detectionResult.barcodeColumnCount(); column++) {
+	
+	int erasures;
+	int codewords[rowCount(&detectionResult->_barcodeMetadata) * columnCount(&detectionResult->_barcodeMetadata)];
+	int ambiguousIndexValues;
+	int ambiguousIndexesList;
+	int rowCount = detectionResult->_barcodeMetadata._rowCountUpperPart + detectionResult->_barcodeMetadata._rowCountLowerPart;
+	int columnCount = detectionResult->_barcodeMetadata._columnCount;
+	#if 0
+	for (int row = 0; row < rowCount; row++) 
+	{
+		for (int column = 0; column < columnCount; column++) 
+		{
 			auto values = barcodeMatrix[row][column + 1].value();
-			int codewordIndex = row * detectionResult.barcodeColumnCount() + column;
-			if (values.empty()) {
+			int codewordIndex = row * columnCount + column;
+			if (values.empty()) 
+			{
 				erasures.push_back(codewordIndex);
 			}
-			else if (values.size() == 1) {
+			else if (values.size() == 1) 
+			{
 				codewords[codewordIndex] = values[0];
 			}
-			else {
+			else 
+			{
 				ambiguousIndexesList.push_back(codewordIndex);
 				ambiguousIndexValues.push_back(values);
 			}
 		}
 	}
-	return CreateDecoderResultFromAmbiguousValues(detectionResult.barcodeECLevel(), codewords, erasures,
+
+	return CreateDecoderResultFromAmbiguousValues(errorCorrectionLevel(&detectionResult->_barcodeMetadata), codewords, erasures,
 												  ambiguousIndexesList, ambiguousIndexValues, characterSet);
+												  #endif
 }
-#endif
+
 
 // TODO don't pass in minCodewordWidth and maxCodewordWidth, pass in barcode columns for start and stop pattern
 // columns. That way width can be deducted from the pattern column.
@@ -953,7 +980,7 @@ DecoderResult_t * Decode(const BitMatrix_t * image, ResultPoint_t imageTopLeft, 
 		// TODO start at a row for which we know the start position, then detect upwards and downwards from there.
 		for (int imageRow = boundingBox.m_value._minY; imageRow <= boundingBox.m_value._maxY; imageRow++) 
 		{
-			startColumn = GetStartColumn(&detectionResult, barcodeColumn, imageRow, leftToRight);
+			startColumn = GetStartColumn(&detectionResult, barcodeColumn, imageRow, leftToRight,length);
 			if (startColumn < 0 || startColumn > boundingBox.m_value._maxX) 
 			{
 				if (previousStartColumn == -1) 
@@ -963,7 +990,7 @@ DecoderResult_t * Decode(const BitMatrix_t * image, ResultPoint_t imageTopLeft, 
 				startColumn = previousStartColumn;
 			}
 			Codeword_t * codeword = DetectCodeword(image, boundingBox.m_value._minX, boundingBox.m_value._maxX, leftToRight, startColumn, imageRow, minCodewordWidth, maxCodewordWidth);
-			if (codeword->m_hasValue != 0) 
+			if (codeword != NULL) 
 			{
 				detectionResult._detectionResultColumns[barcodeColumn].m_value._codewords[imageRow - detectionResult._detectionResultColumns[barcodeColumn].m_value._boundingBox.m_value._minY] = *codeword;
 				previousStartColumn = startColumn;
@@ -972,6 +999,5 @@ DecoderResult_t * Decode(const BitMatrix_t * image, ResultPoint_t imageTopLeft, 
 			}
 		}
 	}
-	//return CreateDecoderResult(detectionResult, characterSet);
-
+	return CreateDecoderResult(&detectionResult, characterSet,length);
 }

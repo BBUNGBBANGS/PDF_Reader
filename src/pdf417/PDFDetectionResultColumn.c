@@ -60,51 +60,49 @@ uint8_t isLeftRowIndicator(DetectionResultColumn_t * RowIndicatorColumn)
 {
 	return RowIndicatorColumn->m_value._rowIndicator == Left;
 }
-#if 0
-Nullable<Codeword>
-DetectionResultColumn::codewordNearby(int imageRow) const
+
+Codeword_t codewordNearby(DetectionResultColumn_t * RowIndicatorColumn,int imageRow,int size) 
 {
-	int index = imageRowToCodewordIndex(imageRow);
-	if (_codewords[index] != nullptr) 
+	int index = imageRow - RowIndicatorColumn->m_value._boundingBox.m_value._minY;
+	if (RowIndicatorColumn->m_value._codewords[index].m_hasValue != 0) 
 	{
-		return _codewords[index];
+		return RowIndicatorColumn->m_value._codewords[index];
 	}
 
 	for (int i = 1; i < MAX_NEARBY_DISTANCE; i++) 
 	{
-		int nearImageRow = imageRowToCodewordIndex(imageRow) - i;
+		int nearImageRow = imageRow - RowIndicatorColumn->m_value._boundingBox.m_value._minY - i;
 		if (nearImageRow >= 0) 
 		{
-			if (_codewords[nearImageRow] != nullptr) 
+			if (RowIndicatorColumn->m_value._codewords[nearImageRow].m_hasValue != 0) 
 			{
-				return _codewords[nearImageRow];
+				return RowIndicatorColumn->m_value._codewords[nearImageRow];
 			}
 		}
-		nearImageRow = imageRowToCodewordIndex(imageRow) + i;
-		if (nearImageRow < Size(_codewords)) 
+		nearImageRow = imageRow - RowIndicatorColumn->m_value._boundingBox.m_value._minY + i;
+		if (nearImageRow < size) 
 		{
-			if (_codewords[nearImageRow] != nullptr) 
+			if (RowIndicatorColumn->m_value._codewords[nearImageRow].m_hasValue != 0) 
 			{
-				return _codewords[nearImageRow];
+				return RowIndicatorColumn->m_value._codewords[nearImageRow];
 			}
 		}
 	}
 
-	return nullptr;
+	return RowIndicatorColumn->m_value._codewords[index];
 }
 
-void
-DetectionResultColumn::setRowNumbers()
+void setRowNumbers(Codeword_t * codewords,int size)
 {
-	for (auto& codeword : allCodewords()) 
+	for (int i = 0;i<size;i++) 
 	{
-		if (codeword != nullptr) 
+		if (codewords->m_hasValue != 0) 
 		{
-			codeword.value().setRowNumberAsRowIndicatorColumn();
+			setRowNumberAsRowIndicatorColumn(codewords+i);
 		}
 	}
 }
-#endif
+
 static void clear_var(Codeword_t * codewords)
 {
 	codewords->m_hasValue = 0;
@@ -166,50 +164,46 @@ static void RemoveIncorrectCodewords(uint8_t isLeft, Codeword_t * codewords, con
 	}
 
 }
-#if 0
+
 // TODO implement properly
 // TODO maybe we should add missing codewords to store the correct row number to make
 // finding row numbers for other columns easier
 // use row height count to make detection of invalid row numbers more reliable
-void
-DetectionResultColumn::adjustCompleteIndicatorColumnRowNumbers(const BarcodeMetadata& barcodeMetadata)
+void adjustCompleteIndicatorColumnRowNumbers(DetectionResultColumn_t * detectionResultColumn,const BarcodeMetadata_t * barcodeMetadata)
 {
-#ifdef HK_DEBUG
 	printf("DetectionResultColumn::adjustCompleteIndicatorColumnRowNumbers: \n");
-#endif
 	
-	if (!isRowIndicator())
+	if (!isRowIndicator(detectionResultColumn))
 	{
 		return;
 	}
-
-	auto& codewords = allCodewords();
-	setRowNumbers();
-	RemoveIncorrectCodewords(isLeftRowIndicator(), codewords, barcodeMetadata);
-	const auto& bb = boundingBox();
-	auto top = isLeftRowIndicator() ? bb.topLeft() : bb.topRight();
-	auto bottom = isLeftRowIndicator() ? bb.bottomLeft() : bb.bottomRight();
-	int firstRow = imageRowToCodewordIndex((int)top.value().y());
-	int lastRow = imageRowToCodewordIndex((int)bottom.value().y());
+	int size = 137;
+	Codeword_t * codewords = allCodewords(detectionResultColumn);
+	setRowNumbers(codewords,size);
+	RemoveIncorrectCodewords(isLeftRowIndicator(detectionResultColumn), codewords, barcodeMetadata,size);
+	const BoundingBox_t bb = detectionResultColumn->m_value._boundingBox;
+	ResultPoint_t top = isLeftRowIndicator(detectionResultColumn) ? topLeft(&bb) : topRight(&bb);
+	ResultPoint_t bottom = isLeftRowIndicator(detectionResultColumn) ? bottomLeft(&bb) : bottomRight(&bb);
+	int firstRow = (int)top.m_value.y - detectionResultColumn->m_value._boundingBox.m_value._minY;
+	int lastRow = (int)bottom.m_value.y - detectionResultColumn->m_value._boundingBox.m_value._minY;
 	// We need to be careful using the average row height. Barcode could be skewed so that we have smaller and
 	// taller rows
-	//float averageRowHeight = (lastRow - firstRow) / (float)barcodeMetadata.rowCount();
 	int barcodeRow = -1;
 	int maxRowHeight = 1;
 	int currentRowHeight = 0;
 	int increment = 1;
 	for (int codewordsRow = firstRow; codewordsRow < lastRow; codewordsRow++) 
 	{
-		if (codewords[codewordsRow] == nullptr) 
+		if (codewords[codewordsRow].m_hasValue == 0) 
 		{
 			continue;
 		}
 
-		Codeword codeword = codewords[codewordsRow];
-		if (barcodeRow == -1 && codeword.rowNumber() == barcodeMetadata.rowCount() - 1) 
+		Codeword_t codeword = codewords[codewordsRow];
+		if (barcodeRow == -1 && codeword.m_value._rowNumber == rowCount(barcodeMetadata) - 1) 
 		{
 			increment = -1;
-			barcodeRow = barcodeMetadata.rowCount();
+			barcodeRow = rowCount(barcodeMetadata);
 		}
 		//      float expectedRowNumber = (codewordsRow - firstRow) / averageRowHeight;
 		//      if (Math.abs(codeword.getRowNumber() - expectedRowNumber) > 2) {
@@ -219,24 +213,22 @@ DetectionResultColumn::adjustCompleteIndicatorColumnRowNumbers(const BarcodeMeta
 		//        codewords[codewordsRow] = null;
 		//      }
 
-		int rowDifference = codeword.rowNumber() - barcodeRow;
+		int rowDifference = codeword.m_value._rowNumber - barcodeRow;
 
 		if (rowDifference == 0) 
 		{
 			currentRowHeight++;
 		}
-		else 
-		if (rowDifference == increment) 
+		else if (rowDifference == increment) 
 		{
-			maxRowHeight = std::max(maxRowHeight, currentRowHeight);
+			maxRowHeight = __max(maxRowHeight, currentRowHeight);
 			currentRowHeight = 1;
-			barcodeRow = codeword.rowNumber();
+			barcodeRow = codeword.m_value._rowNumber;
 		}
-		else 
-		if (rowDifference < 0 || codeword.rowNumber() >= barcodeMetadata.rowCount() ||
+		else if (rowDifference < 0 || codeword.m_value._rowNumber >= rowCount(barcodeMetadata) ||
 			rowDifference > codewordsRow) 
 		{
-			codewords[codewordsRow] = nullptr;
+			codewords[codewordsRow].m_hasValue = 0;
 		}
 		else 
 		{
@@ -250,29 +242,43 @@ DetectionResultColumn::adjustCompleteIndicatorColumnRowNumbers(const BarcodeMeta
 				checkedRows = rowDifference;
 			}
 
-			bool closePreviousCodewordFound = checkedRows >= codewordsRow;
+			uint8_t closePreviousCodewordFound;
+			if(checkedRows >= codewordsRow)
+			{
+				closePreviousCodewordFound = 1;
+			}
+			else
+			{
+				closePreviousCodewordFound = 0;
+			}
 			for (int i = 1; i <= checkedRows && !closePreviousCodewordFound; i++) 
 			{
 				// there must be (height * rowDifference) number of codewords missing. For now we assume height = 1.
 				// This should hopefully get rid of most problems already.
-				closePreviousCodewordFound = codewords[codewordsRow - i] != nullptr;
+				if(codewords[codewordsRow - i].m_hasValue != 0)
+				{
+					closePreviousCodewordFound = 1;
+				}
+				else
+				{
+					closePreviousCodewordFound = 0;
+				}
 			}
 
 			if (closePreviousCodewordFound) 
 			{
-				codewords[codewordsRow] = nullptr;
+				codewords[codewordsRow].m_hasValue = 0;
 			}
 			else 
 			{
-				barcodeRow = codeword.rowNumber();
+				barcodeRow = codeword.m_value._rowNumber;
 				currentRowHeight = 1;
 			}
 		}
 	}
-	//return static_cast<int>(averageRowHeight + 0.5);
+
 }
 
-#endif
 // TODO maybe we should add missing codewords to store the correct row number to make
 // finding row numbers for other columns easier
 // use row height count to make detection of invalid row numbers more reliable

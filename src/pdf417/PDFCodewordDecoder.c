@@ -19,8 +19,9 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-static const int SYMBOL_COUNT = 2787;
-static const int NUMBER_OF_CODEWORDS = 929;
+const int SYMBOL_COUNT = 2787;
+const int NUMBER_OF_CODEWORDS = 929;
+const int MAX_CODEWORDS_IN_BARCODE = NUMBER_OF_CODEWORDS - 1;
 const int MODULES_IN_CODEWORD = 17;
 const int BARS_IN_MODULE = 8;
 int Sample_result[8];

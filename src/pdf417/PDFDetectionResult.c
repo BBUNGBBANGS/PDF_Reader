@@ -1,6 +1,7 @@
 
 #include "PDFDetectionResult.h"
 #include "PDFCodewordDecoder.h"
+#include "PDFScanningDecoder.h"
 
 static const int ADJUST_ROW_NUMBER_SKIP = 2;
 
@@ -11,75 +12,100 @@ void Detection_Result_init(const BarcodeMetadata_t * barcodeMetadata, const Boun
 	result->_detectionResultColumns[barcodeMetadata->_columnCount + 2];
 	//std::fill(_detectionResultColumns.begin(), _detectionResultColumns.end(), nullptr);
 }
-#if 0
-static void AdjustIndicatorColumnRowNumbers(Nullable<DetectionResultColumn>& detectionResultColumn, const BarcodeMetadata& barcodeMetadata)
+
+static void AdjustIndicatorColumnRowNumbers(DetectionResultColumn_t * detectionResultColumn, const BarcodeMetadata_t * barcodeMetadata)
 {
-	if (detectionResultColumn != nullptr) {
-		detectionResultColumn.value().adjustCompleteIndicatorColumnRowNumbers(barcodeMetadata);
+	if (detectionResultColumn->m_hasValue != 0) 
+	{
+		adjustCompleteIndicatorColumnRowNumbers(detectionResultColumn,barcodeMetadata);
 	}
 }
 
-static void AdjustRowNumbersFromBothRI(std::vector<Nullable<DetectionResultColumn>>& detectionResultColumns)
+static void AdjustRowNumbersFromBothRI(DetectionResultColumn_t * detectionResultColumns,int row,int size)
 {
-	if (detectionResultColumns.front() == nullptr || detectionResultColumns.back() == nullptr) {
+	if ((detectionResultColumns[0].m_hasValue == 0) || detectionResultColumns[row-1].m_hasValue == 0) 
+	{
 		return;
 	}
-	auto& LRIcodewords = detectionResultColumns.front().value().allCodewords();
-	auto& RRIcodewords = detectionResultColumns.back().value().allCodewords();
-	for (size_t codewordsRow = 0; codewordsRow < LRIcodewords.size(); codewordsRow++) {
-		if (LRIcodewords[codewordsRow] != nullptr && RRIcodewords[codewordsRow] != nullptr &&
-			LRIcodewords[codewordsRow].value().rowNumber() == RRIcodewords[codewordsRow].value().rowNumber()) {
-			auto lastColumn = detectionResultColumns.end() - 1;
-			for (auto columnIter = detectionResultColumns.begin() + 1; columnIter != lastColumn; ++columnIter) {
-				if (!columnIter->hasValue()) {
+
+	Codeword_t * LRIcodewords = allCodewords(&detectionResultColumns[0]);
+	Codeword_t * RRIcodewords = allCodewords(&detectionResultColumns[row-1]);
+	for (size_t codewordsRow = 0; codewordsRow < size; codewordsRow++) 
+	{
+
+		if ((LRIcodewords[codewordsRow].m_hasValue != 0) && (RRIcodewords[codewordsRow].m_hasValue != 0) &&
+			(LRIcodewords[codewordsRow].m_value._rowNumber == RRIcodewords[codewordsRow].m_value._rowNumber)) 
+		{
+
+			DetectionResultColumn_t * lastColumn = &detectionResultColumns[row-1] - 1;
+			for (DetectionResultColumn_t * columnIter = (&detectionResultColumns[0] + 1); columnIter != lastColumn; ++columnIter) 
+			{
+				if (!(columnIter->m_hasValue)) 
+				{
 					continue;
 				}
-				auto& codeword = columnIter->value().allCodewords()[codewordsRow];
-				if (codeword != nullptr) {
-					codeword.value().setRowNumber(LRIcodewords[codewordsRow].value().rowNumber());
-					if (!codeword.value().hasValidRowNumber()) {
-						columnIter->value().allCodewords()[codewordsRow] = nullptr;
+				Codeword_t codeword = columnIter->m_value._codewords[codewordsRow];
+				if (codeword.m_hasValue != 0) 
+				{
+					codeword.m_value._rowNumber = LRIcodewords[codewordsRow].m_value._rowNumber;
+					if (!(codeword.m_value._rowNumber != BARCODE_ROW_UNKNOWN && codeword.m_value._bucket == (codeword.m_value._rowNumber % 3) * 3)) 
+					{
+						columnIter->m_value._codewords[codewordsRow].m_hasValue = 0;
 					}
 				}
 			}
+
 		}
+
 	}
 }
 
-static int AdjustRowNumberIfValid(int rowIndicatorRowNumber, int invalidRowCounts, Codeword& codeword) {
-	if (!codeword.hasValidRowNumber()) {
-		if (codeword.isValidRowNumber(rowIndicatorRowNumber)) {
-			codeword.setRowNumber(rowIndicatorRowNumber);
+static int AdjustRowNumberIfValid(int rowIndicatorRowNumber, int invalidRowCounts, Codeword_t * codeword) 
+{
+	if (!(codeword->m_value._rowNumber != BARCODE_ROW_UNKNOWN && codeword->m_value._bucket == (codeword->m_value._rowNumber % 3) * 3)) 
+	{
+		if (rowIndicatorRowNumber != BARCODE_ROW_UNKNOWN && codeword->m_value._bucket == (rowIndicatorRowNumber % 3) * 3) 
+		{
+			rowIndicatorRowNumber = codeword->m_value._rowNumber;
 			invalidRowCounts = 0;
 		}
-		else {
+		else 
+		{
 			++invalidRowCounts;
 		}
 	}
 	return invalidRowCounts;
 }
 
-static int AdjustRowNumbersFromLRI(std::vector<Nullable<DetectionResultColumn>>& detectionResultColumns) {
-	if (detectionResultColumns.front() == nullptr) {
+static int AdjustRowNumbersFromLRI(DetectionResultColumn_t * detectionResultColumns,int row,int size) 
+{
+	if (detectionResultColumns[0].m_hasValue == 0) 
+	{
 		return 0;
 	}
 	int unadjustedCount = 0;
-	auto& codewords = detectionResultColumns.front().value().allCodewords();
-	for (size_t codewordsRow = 0; codewordsRow < codewords.size(); codewordsRow++) {
-		if (codewords[codewordsRow] == nullptr) {
+	Codeword_t * codewords = detectionResultColumns[0].m_value._codewords;
+	for (size_t codewordsRow = 0; codewordsRow < size; codewordsRow++) 
+	{
+		if (codewords[codewordsRow].m_hasValue == 0) 
+		{
 			continue;
 		}
-		int rowIndicatorRowNumber = codewords[codewordsRow].value().rowNumber();
+		int rowIndicatorRowNumber = codewords[codewordsRow].m_value._rowNumber;
 		int invalidRowCounts = 0;
-		auto lastColumn = detectionResultColumns.end() - 1;
-		for (auto columnIter = detectionResultColumns.begin() + 1; columnIter != lastColumn && invalidRowCounts < ADJUST_ROW_NUMBER_SKIP; ++columnIter) {
-			if (!columnIter->hasValue()) {
+		DetectionResultColumn_t * lastColumn = &detectionResultColumns[row-1] - 1;
+		for (DetectionResultColumn_t * columnIter = &detectionResultColumns[0] + 1; columnIter != lastColumn && invalidRowCounts < ADJUST_ROW_NUMBER_SKIP; ++columnIter) 
+		{
+			if (!(columnIter->m_hasValue)) 
+			{
 				continue;
 			}
-			auto& codeword = columnIter->value().allCodewords()[codewordsRow];
-			if (codeword != nullptr) {
-				invalidRowCounts = AdjustRowNumberIfValid(rowIndicatorRowNumber, invalidRowCounts, codeword.value());
-				if (!codeword.value().hasValidRowNumber()) {
+			Codeword_t codeword = columnIter->m_value._codewords[codewordsRow];
+			if (codeword.m_hasValue != 0) 
+			{
+				invalidRowCounts = AdjustRowNumberIfValid(rowIndicatorRowNumber, invalidRowCounts, &codeword);
+				if (!(codeword.m_value._rowNumber != BARCODE_ROW_UNKNOWN && codeword.m_value._bucket == (codeword.m_value._rowNumber % 3) * 3)) 
+				{
 					unadjustedCount++;
 				}
 			}
@@ -88,33 +114,34 @@ static int AdjustRowNumbersFromLRI(std::vector<Nullable<DetectionResultColumn>>&
 	return unadjustedCount;
 }
 
-static int AdjustRowNumbersFromRRI(std::vector<Nullable<DetectionResultColumn>>& detectionResultColumns) 
+static int AdjustRowNumbersFromRRI(DetectionResultColumn_t *detectionResultColumns,int row,int size) 
 {
-	if (detectionResultColumns.back() == nullptr) 
+	if (detectionResultColumns[row-1].m_hasValue == 0) 
 	{
 		return 0;
 	}
 	int unadjustedCount = 0;
-	auto& codewords = detectionResultColumns.back().value().allCodewords();
-	for (size_t codewordsRow = 0; codewordsRow < codewords.size(); codewordsRow++) 
+	Codeword_t * codewords = detectionResultColumns[row-1].m_value._codewords;
+	for (size_t codewordsRow = 0; codewordsRow < size; codewordsRow++) 
 	{
-		if (codewords[codewordsRow] == nullptr) 
+		if (codewords[codewordsRow].m_hasValue == 0) 
 		{
 			continue;
 		}
-		int rowIndicatorRowNumber = codewords[codewordsRow].value().rowNumber();
+		int rowIndicatorRowNumber = codewords[codewordsRow].m_value._rowNumber;
 		int invalidRowCounts = 0;
-		auto lastColumn = detectionResultColumns.end() - 1;
-		for (auto columnIter = detectionResultColumns.begin() + 1; columnIter != lastColumn && invalidRowCounts < ADJUST_ROW_NUMBER_SKIP; ++columnIter) {
-			if (!columnIter->hasValue()) 
+		DetectionResultColumn_t * lastColumn = &detectionResultColumns[row-1] - 1;
+		for (DetectionResultColumn_t * columnIter = &detectionResultColumns[0] + 1; columnIter != lastColumn && invalidRowCounts < ADJUST_ROW_NUMBER_SKIP; ++columnIter) 
+		{
+			if (!(columnIter->m_hasValue)) 
 			{
 				continue;
 			}
-			auto& codeword = columnIter->value().allCodewords()[codewordsRow];
-			if (codeword != nullptr) 
+			Codeword_t codeword = columnIter->m_value._codewords[codewordsRow];
+			if (codeword.m_hasValue != 0) 
 			{
-				invalidRowCounts = AdjustRowNumberIfValid(rowIndicatorRowNumber, invalidRowCounts, codeword.value());
-				if (!codeword.value().hasValidRowNumber()) 
+				invalidRowCounts = AdjustRowNumberIfValid(rowIndicatorRowNumber, invalidRowCounts, &codewordNearby);
+				if (!(codeword.m_value._rowNumber != BARCODE_ROW_UNKNOWN && codeword.m_value._bucket == (codeword.m_value._rowNumber % 3) * 3)) 
 				{
 					unadjustedCount++;
 				}
@@ -125,62 +152,77 @@ static int AdjustRowNumbersFromRRI(std::vector<Nullable<DetectionResultColumn>>&
 	return unadjustedCount;
 }
 
+static int AdjustRowNumbersByRow(DetectionResultColumn_t * detectionResultColumns,int row,int size) 
+{
 
-static int AdjustRowNumbersByRow(std::vector<Nullable<DetectionResultColumn>>& detectionResultColumns) {
-	AdjustRowNumbersFromBothRI(detectionResultColumns);
+	AdjustRowNumbersFromBothRI(detectionResultColumns,row,size);
 	// TODO we should only do full row adjustments if row numbers of left and right row indicator column match.
 	// Maybe it's even better to calculated the height (in codeword rows) and divide it by the number of barcode
 	// rows. This, together with the LRI and RRI row numbers should allow us to get a good estimate where a row
 	// number starts and ends.
-	int unadjustedCount = AdjustRowNumbersFromLRI(detectionResultColumns);
-	return unadjustedCount + AdjustRowNumbersFromRRI(detectionResultColumns);
-}
+	int unadjustedCount = AdjustRowNumbersFromLRI(detectionResultColumns,row,size);
+	return unadjustedCount + AdjustRowNumbersFromRRI(detectionResultColumns,row,size);
 
+}
 
 /**
 * @return true, if row number was adjusted, false otherwise
 */
-static bool AdjustRowNumber(Nullable<Codeword>& codeword, const Nullable<Codeword>& otherCodeword) {
-	if (codeword != nullptr && otherCodeword != nullptr
-		&& otherCodeword.value().hasValidRowNumber() && otherCodeword.value().bucket() == codeword.value().bucket()) {
-		codeword.value().setRowNumber(otherCodeword.value().rowNumber());
-		return true;
+static uint8_t AdjustRowNumber(Codeword_t * codeword, const Codeword_t * otherCodeword) 
+{
+	if ((codeword->m_hasValue != 0) && (otherCodeword->m_hasValue != 0) && 
+	   ((otherCodeword->m_value._rowNumber != BARCODE_ROW_UNKNOWN) && (otherCodeword->m_value._bucket == (otherCodeword->m_value._rowNumber % 3) * 3)) && 
+	   (otherCodeword->m_value._bucket == codeword->m_value._bucket)) 
+	{
+		codeword->m_value._rowNumber = (otherCodeword->m_value._rowNumber);
+		return 1;
 	}
-	return false;
+	return 0;
 }
 
-static void AdjustRowNumbers(const std::vector<Nullable<DetectionResultColumn>>& detectionResultColumns, int barcodeColumn, int codewordsRow, std::vector<Nullable<Codeword>>& codewords) {
-	auto& codeword = codewords[codewordsRow];
-	auto& previousColumnCodewords = detectionResultColumns[barcodeColumn - 1].value().allCodewords();
-	auto& nextColumnCodewords = detectionResultColumns[barcodeColumn + 1] != nullptr ? detectionResultColumns[barcodeColumn + 1].value().allCodewords() : previousColumnCodewords;
 
-	std::array<Nullable<Codeword>, 14> otherCodewords;
+static void AdjustRowNumbers_internal(const DetectionResultColumn_t * detectionResultColumns, int barcodeColumn, int codewordsRow, Codeword_t * codewords,int size) 
+{
+	Codeword_t codeword = codewords[codewordsRow];
+	Codeword_t * previousColumnCodewords = allCodewords(&detectionResultColumns[barcodeColumn - 1]);
+	Codeword_t * nextColumnCodewords = detectionResultColumns[barcodeColumn + 1].m_hasValue != 0 ? allCodewords(&detectionResultColumns[barcodeColumn + 1]) : previousColumnCodewords;
+
+	Codeword_t otherCodewords[14];
+	int size1 = sizeof(otherCodewords)/sizeof(otherCodewords[0]);
 
 	otherCodewords[2] = previousColumnCodewords[codewordsRow];
 	otherCodewords[3] = nextColumnCodewords[codewordsRow];
 
-	if (codewordsRow > 0) {
+	if (codewordsRow > 0) 
+	{
 		otherCodewords[0] = codewords[codewordsRow - 1];
 		otherCodewords[4] = previousColumnCodewords[codewordsRow - 1];
 		otherCodewords[5] = nextColumnCodewords[codewordsRow - 1];
 	}
-	if (codewordsRow > 1) {
+	if (codewordsRow > 1) 
+	{
 		otherCodewords[8] = codewords[codewordsRow - 2];
 		otherCodewords[10] = previousColumnCodewords[codewordsRow - 2];
 		otherCodewords[11] = nextColumnCodewords[codewordsRow - 2];
 	}
-	if (codewordsRow < Size(codewords) - 1) {
+	#if 0
+	if (codewordsRow < Size(codewords) - 1) 
+	{
 		otherCodewords[1] = codewords[codewordsRow + 1];
 		otherCodewords[6] = previousColumnCodewords[codewordsRow + 1];
 		otherCodewords[7] = nextColumnCodewords[codewordsRow + 1];
 	}
-	if (codewordsRow < Size(codewords) - 2) {
+	if (codewordsRow < Size(codewords) - 2) 
+	{
 		otherCodewords[9] = codewords[codewordsRow + 2];
 		otherCodewords[12] = previousColumnCodewords[codewordsRow + 2];
 		otherCodewords[13] = nextColumnCodewords[codewordsRow + 2];
 	}
-	for (const auto& otherCodeword : otherCodewords) {
-		if (AdjustRowNumber(codeword, otherCodeword)) {
+	#endif
+	for (int i=0;i<size1;i++) 
+	{
+		if (AdjustRowNumber(&codeword, otherCodewords)) 
+		{
 			return;
 		}
 	}
@@ -194,41 +236,47 @@ static void AdjustRowNumbers(const std::vector<Nullable<DetectionResultColumn>>&
 * @return number of codewords which don't have a valid row number. Note that the count is not accurate as codewords
 * will be counted several times. It just serves as an indicator to see when we can stop adjusting row numbers
 */
-static int AdjustRowNumbers(std::vector<Nullable<DetectionResultColumn>>& detectionResultColumns) {
-	int unadjustedCount = AdjustRowNumbersByRow(detectionResultColumns);
-	if (unadjustedCount == 0) {
+static int AdjustRowNumbers(DetectionResultColumn_t * detectionResultColumns,int row,int size) 
+{
+	int unadjustedCount = AdjustRowNumbersByRow(detectionResultColumns,row,size);
+	if (unadjustedCount == 0) 
+	{
 		return 0;
 	}
-	for (int barcodeColumn = 1; barcodeColumn < Size(detectionResultColumns) - 1; barcodeColumn++) {
-		if (detectionResultColumns[barcodeColumn] == nullptr) {
+	
+	for (int barcodeColumn = 1; barcodeColumn <row; barcodeColumn++) 
+	{
+		if (detectionResultColumns[barcodeColumn].m_hasValue == 0) 
+		{
 			continue;
 		}
-		auto& codewords = detectionResultColumns[barcodeColumn].value().allCodewords();
-		for (int codewordsRow = 0; codewordsRow < Size(codewords); codewordsRow++) {
-			if (codewords[codewordsRow] == nullptr) {
+		Codeword_t * codewords = detectionResultColumns[barcodeColumn].m_value._codewords;
+		for (int codewordsRow = 0; codewordsRow < size; codewordsRow++) 
+		{
+			if (codewords[codewordsRow].m_hasValue == 0) 
+			{
 				continue;
 			}
-			if (!codewords[codewordsRow].value().hasValidRowNumber()) {
-				AdjustRowNumbers(detectionResultColumns, barcodeColumn, codewordsRow, codewords);
+			if (!codewords[codewordsRow].m_value._rowNumber != BARCODE_ROW_UNKNOWN && codewords[codewordsRow].m_value._bucket == (codewords[codewordsRow].m_value._rowNumber % 3) * 3) 
+			{
+				AdjustRowNumbers_internal(detectionResultColumns, barcodeColumn, codewordsRow, codewords,size);
 			}
 		}
 	}
 	return unadjustedCount;
 }
 
-
-const std::vector<Nullable<DetectionResultColumn>> &
-DetectionResult::allColumns()
+const DetectionResultColumn_t allColumns(DetectionResult_t * detectionResult,int row,int size)
 {
-	AdjustIndicatorColumnRowNumbers(_detectionResultColumns.front(), _barcodeMetadata);
-	AdjustIndicatorColumnRowNumbers(_detectionResultColumns.back(), _barcodeMetadata);
-	int unadjustedCodewordCount = CodewordDecoder::MAX_CODEWORDS_IN_BARCODE;
+	AdjustIndicatorColumnRowNumbers(&(detectionResult->_detectionResultColumns[0]), &(detectionResult->_barcodeMetadata));
+	AdjustIndicatorColumnRowNumbers(&(detectionResult->_detectionResultColumns[row-1]), &(detectionResult->_barcodeMetadata));//back
+	int unadjustedCodewordCount = MAX_CODEWORDS_IN_BARCODE;
 	int previousUnadjustedCount;
-	do {
+	do 
+	{
 		previousUnadjustedCount = unadjustedCodewordCount;
-		unadjustedCodewordCount = AdjustRowNumbers(_detectionResultColumns);
+		unadjustedCodewordCount = AdjustRowNumbers(detectionResult->_detectionResultColumns,row,size);
 	} while (unadjustedCodewordCount > 0 && unadjustedCodewordCount < previousUnadjustedCount);
-	return _detectionResultColumns;
+	return *(detectionResult->_detectionResultColumns);
 }
 
-#endif
