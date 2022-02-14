@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 1
 
 
    1              		.file	"GenericLuminanceSource.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
   21              		.loc 1 34 34
   22 000c 8B450C   		movl	12(%ebp), %eax
   23 000f 69C05902 		imull	$601, %eax, %eax
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 2
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 2
 
 
   23      0000
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
   68              		.loc 1 43 10
   69 0047 8B4508   		movl	8(%ebp), %eax
   70 004a EB60     		jmp	L5
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 3
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 3
 
 
   71              	L4:
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  111              		.loc 1 50 64 discriminator 3
  112 009b 8B4518   		movl	24(%ebp), %eax
  113 009e 0145F0   		addl	%eax, -16(%ebp)
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 4
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 4
 
 
  114              	L6:
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  156 00b6 C745F400 		movl	$0, -12(%ebp)
  156      000000
   61:src/GenericLuminanceSource.c **** 	if ((left < 0) || (top < 0) || (width < 0) || (height < 0)) 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 5
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 5
 
 
  157              		.loc 1 61 5
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  196 011d 8B450C   		movl	12(%ebp), %eax
  197 0120 0FAF451C 		imull	28(%ebp), %eax
  198 0124 89C2     		movl	%eax, %edx
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 6
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 6
 
 
  199              		.loc 1 72 18
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  241 0177 8B5D24   		movl	36(%ebp), %ebx
  242 017a 8B45E4   		movl	-28(%ebp), %eax
  243 017d 01D8     		addl	%ebx, %eax
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 7
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 7
 
 
  244 017f 0FB600   		movzbl	(%eax), %eax
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  285      000000
  286              	L12:
  287              	LBE4:
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 8
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 8
 
 
   84:src/GenericLuminanceSource.c **** 	}
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  335 0204 89C2     		movl	%eax, %edx
  336 0206 B8100000 		movl	$16, %eax
  336      00
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 9
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 9
 
 
  337 020b 83E801   		subl	$1, %eax
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
   99:src/GenericLuminanceSource.c **** 	*outRowBytes = source->width;
  381              		.loc 1 99 23
  382 0269 8B4508   		movl	8(%ebp), %eax
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 10
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 10
 
 
  383 026c 8B500C   		movl	12(%eax), %edx
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  424 02bd 3945F4   		cmpl	%eax, -12(%ebp)
  425 02c0 7CC1     		jl	L22
  426              	LBE8:
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 11
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 11
 
 
  104:src/GenericLuminanceSource.c **** 	}
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  468 02e8 837D0C00 		cmpl	$0, 12(%ebp)
  469 02ec 7406     		je	L29
  118:src/GenericLuminanceSource.c **** 			{ // note that we avoid an extra ++_First here to allow istream_iterator to work,
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 12
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 12
 
 
  119:src/GenericLuminanceSource.c ****                                // see LWG-2471
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  502      6A656374 
  502      5F776F72 
  502      6B737061 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 13
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 13
 
 
  503 0087 00000000 		.long	Ltext0
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  540 0106 02       		.uleb128 0x2
  541 0107 01       		.byte	0x1
  542 0108 08       		.byte	0x8
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 14
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 14
 
 
  543 0109 756E7369 		.ascii "unsigned char\0"
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  580 018f 5F707472 		.ascii "_ptr\0"
  580      00
  581 0194 02       		.byte	0x2
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 15
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 15
 
 
  582 0195 1B       		.byte	0x1b
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  630 01f2 02       		.byte	0x2
  631 01f3 23       		.byte	0x23
  632 01f4 14       		.uleb128 0x14
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 16
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 16
 
 
  633 01f5 07       		.uleb128 0x7
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  681 025b 10000000 		.secrel32	LASF0
  682 025f 04       		.byte	0x4
  683 0260 08       		.byte	0x8
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 17
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 17
 
 
  684 0261 15       		.byte	0x15
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  736 02b9 04       		.byte	0x4
  737 02ba 06010000 		.long	0x106
  738 02be 04       		.uleb128 0x4
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 18
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 18
 
 
  739 02bf 47656E65 		.ascii "GenericLuminanceSource_t\0"
@@ -1078,7 +1078,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  785 0345 6C       		.byte	0x6c
  786 0346 35       		.byte	0x35
  787 0347 9B000000 		.long	0x9b
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 19
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 19
 
 
  788 034b 02       		.byte	0x2
@@ -1138,7 +1138,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  836      6F774279 
  836      74657300 
  837 03bc 01       		.byte	0x1
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 20
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 20
 
 
  838 03bd 58       		.byte	0x58
@@ -1198,7 +1198,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  888 041b 0B       		.byte	0xb
  889 041c AB000000 		.long	0xab
  890 0420 02       		.byte	0x2
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 21
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 21
 
 
  891 0421 91       		.byte	0x91
@@ -1258,7 +1258,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  940 0493 91       		.byte	0x91
  941 0494 04       		.sleb128 4
  942 0495 10       		.uleb128 0x10
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 22
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 22
 
 
  943 0496 77696474 		.ascii "width\0"
@@ -1318,7 +1318,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  991 04f7 8B       		.byte	0x8b
  992 04f8 AB000000 		.long	0xab
  993 04fc 02       		.byte	0x2
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 23
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 23
 
 
  994 04fd 91       		.byte	0x91
@@ -1378,7 +1378,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  1041 0567 02       		.byte	0x2
  1042 0568 91       		.byte	0x91
  1043 0569 64       		.sleb128 -28
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 24
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 24
 
 
  1044 056a 13       		.uleb128 0x13
@@ -1438,7 +1438,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  1096 05d2 8C060000 		.long	0x68c
  1097 05d6 15       		.uleb128 0x15
  1098 05d7 10000000 		.secrel32	LASF0
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 25
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 25
 
 
  1099 05db 01       		.byte	0x1
@@ -1498,7 +1498,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  1151 0633 12       		.uleb128 0x12
  1152 0634 72657375 		.ascii "result\0"
  1152      6C7400
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 26
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 26
 
 
  1153 063b 01       		.byte	0x1
@@ -1558,7 +1558,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  1203 069f 00000000 		.long	LFB13
  1204 06a3 29000000 		.long	LFE13
  1205 06a7 E0000000 		.secrel32	LLST0
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 27
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 27
 
 
  1206 06ab 01       		.byte	0x1
@@ -1618,7 +1618,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  1260 0016 0B       		.uleb128 0xb
  1261 0017 0B       		.uleb128 0xb
  1262 0018 3E       		.uleb128 0x3e
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 28
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 28
 
 
  1263 0019 0B       		.uleb128 0xb
@@ -1678,7 +1678,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  1317 004f 0D       		.uleb128 0xd
  1318 0050 00       		.byte	0
  1319 0051 03       		.uleb128 0x3
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 29
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 29
 
 
  1320 0052 08       		.uleb128 0x8
@@ -1738,7 +1738,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  1374 0088 0B       		.uleb128 0xb
  1375 0089 39       		.uleb128 0x39
  1376 008a 0B       		.uleb128 0xb
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 30
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 30
 
 
  1377 008b 01       		.uleb128 0x1
@@ -1798,7 +1798,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  1431 00c1 3A       		.uleb128 0x3a
  1432 00c2 0B       		.uleb128 0xb
  1433 00c3 3B       		.uleb128 0x3b
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 31
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 31
 
 
  1434 00c4 0B       		.uleb128 0xb
@@ -1858,7 +1858,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  1488 00fb 01       		.uleb128 0x1
  1489 00fc 12       		.uleb128 0x12
  1490 00fd 01       		.uleb128 0x1
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 32
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 32
 
 
  1491 00fe 40       		.uleb128 0x40
@@ -1918,7 +1918,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  1545 0135 49       		.uleb128 0x49
  1546 0136 13       		.uleb128 0x13
  1547 0137 02       		.uleb128 0x2
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 33
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 33
 
 
  1548 0138 0A       		.uleb128 0xa
@@ -1978,7 +1978,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  1602 0170 00       		.byte	0
  1603 0171 00       		.byte	0
  1604              		.section	.debug_loc,"dr"
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 34
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 34
 
 
  1605              	Ldebug_loc0:
@@ -2038,7 +2038,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  1659 0080 B1000000 		.long	LCFI7-Ltext0
  1660 0084 0200     		.word	0x2
  1661 0086 74       		.byte	0x74
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 35
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 35
 
 
  1662 0087 08       		.sleb128 8
@@ -2098,7 +2098,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  1716 010c 0200     		.word	0x2
  1717 010e 74       		.byte	0x74
  1718 010f 04       		.sleb128 4
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 36
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 36
 
 
  1719 0110 00000000 		.long	0
@@ -2133,17 +2133,17 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 1
  1741 0010 70697865 		.ascii "pixels\0"
  1741      6C7300
  1742              		.ident	"GCC: (i686-posix-dwarf-rev0, Built by MinGW-W64 project) 8.1.0"
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s 			page 37
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s 			page 37
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 GenericLuminanceSource.c
                             *COM*:0001c200 _pixels
-C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s:6      .text:00000000 _RGBToGray
-C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s:44     .text:00000029 _MakeCopy
-C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s:139    .text:000000ae _GenericLuminanceSource
-C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s:305    .text:000001de _getMatrix
-C:\Users\jisu8\AppData\Local\Temp\ccQxspZg.s:442    .text:000002cc _copy_n
+C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s:6      .text:00000000 _RGBToGray
+C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s:44     .text:00000029 _MakeCopy
+C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s:139    .text:000000ae _GenericLuminanceSource
+C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s:305    .text:000001de _getMatrix
+C:\Users\jisu8\AppData\Local\Temp\ccVxwHQA.s:442    .text:000002cc _copy_n
 
 UNDEFINED SYMBOLS
 ___chkstk_ms

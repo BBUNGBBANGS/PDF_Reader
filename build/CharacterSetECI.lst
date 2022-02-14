@@ -1,0 +1,96 @@
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccNHfpvV.s 			page 1
+
+
+   1              		.file	"CharacterSetECI.c"
+   2              		.text
+   3              	Ltext0:
+   4              	Letext0:
+   5              		.section	.debug_info,"dr"
+   6              	Ldebug_info0:
+   7 0000 91000000 		.long	0x91
+   8 0004 0200     		.word	0x2
+   9 0006 00000000 		.secrel32	Ldebug_abbrev0
+  10 000a 04       		.byte	0x4
+  11 000b 01       		.uleb128 0x1
+  12 000c 474E5520 		.ascii "GNU C17 8.1.0 -mtune=generic -march=i686 -g -gdwarf-2 -O0\0"
+  12      43313720 
+  12      382E312E 
+  12      30202D6D 
+  12      74756E65 
+  13 0046 0C       		.byte	0xc
+  14 0047 7372632F 		.ascii "src/CharacterSetECI.c\0"
+  14      43686172 
+  14      61637465 
+  14      72536574 
+  14      4543492E 
+  15 005d 443A5C31 		.ascii "D:\\1.Project_workspace\\PDF_BARCODE\0"
+  15      2E50726F 
+  15      6A656374 
+  15      5F776F72 
+  15      6B737061 
+  16 0080 00000000 		.secrel32	Ldebug_line0
+  17 0084 02       		.uleb128 0x2
+  18 0085 04       		.byte	0x4
+  19 0086 07       		.byte	0x7
+  20 0087 756E7369 		.ascii "unsigned int\0"
+  20      676E6564 
+  20      20696E74 
+  20      00
+  21 0094 00       		.byte	0
+  22              		.section	.debug_abbrev,"dr"
+  23              	Ldebug_abbrev0:
+  24 0000 01       		.uleb128 0x1
+  25 0001 11       		.uleb128 0x11
+  26 0002 01       		.byte	0x1
+  27 0003 25       		.uleb128 0x25
+  28 0004 08       		.uleb128 0x8
+  29 0005 13       		.uleb128 0x13
+  30 0006 0B       		.uleb128 0xb
+  31 0007 03       		.uleb128 0x3
+  32 0008 08       		.uleb128 0x8
+  33 0009 1B       		.uleb128 0x1b
+  34 000a 08       		.uleb128 0x8
+  35 000b 10       		.uleb128 0x10
+  36 000c 06       		.uleb128 0x6
+  37 000d 00       		.byte	0
+  38 000e 00       		.byte	0
+  39 000f 02       		.uleb128 0x2
+  40 0010 24       		.uleb128 0x24
+  41 0011 00       		.byte	0
+  42 0012 0B       		.uleb128 0xb
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccNHfpvV.s 			page 2
+
+
+  43 0013 0B       		.uleb128 0xb
+  44 0014 3E       		.uleb128 0x3e
+  45 0015 0B       		.uleb128 0xb
+  46 0016 03       		.uleb128 0x3
+  47 0017 08       		.uleb128 0x8
+  48 0018 00       		.byte	0
+  49 0019 00       		.byte	0
+  50 001a 00       		.byte	0
+  51              		.section	.debug_aranges,"dr"
+  52 0000 14000000 		.long	0x14
+  53 0004 0200     		.word	0x2
+  54 0006 00000000 		.secrel32	Ldebug_info0
+  55 000a 04       		.byte	0x4
+  56 000b 00       		.byte	0
+  57 000c 0000     		.word	0
+  58 000e 0000     		.word	0
+  59 0010 00000000 		.long	0
+  60 0014 00000000 		.long	0
+  61              		.section	.debug_line,"dr"
+  62              	Ldebug_line0:
+  63 0000 19000000 		.section	.debug_str,"dr"
+  63      02001300 
+  63      00000101 
+  63      FB0E0D00 
+  63      01010101 
+  64              		.ident	"GCC: (i686-posix-dwarf-rev0, Built by MinGW-W64 project) 8.1.0"
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccNHfpvV.s 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 CharacterSetECI.c
+
+NO UNDEFINED SYMBOLS

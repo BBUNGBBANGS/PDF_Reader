@@ -31,9 +31,12 @@ src/HybridBinarizer.c \
 src/BitMatrix.c \
 src/ResultPoint.c \
 src/Library.c \
+src/CharacterSetECI.c \
+src/TextDecoder.c \
 src/pdf417/PDFBarcodeValue.c \
 src/pdf417/PDFBoundingBox.c \
 src/pdf417/PDFCodewordDecoder.c \
+src/pdf417/PDFDecodedBitStreamParser.c \
 src/pdf417/PDFDetectionResult.c \
 src/pdf417/PDFDetectionResultColumn.c \
 src/pdf417/PDFDetector.c \

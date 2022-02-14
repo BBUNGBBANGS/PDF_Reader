@@ -68,6 +68,8 @@
         "pdfcodeworddecoder.h": "c",
         "map": "c",
         "pdfdetectionresultcolumn.h": "c",
-        "pdfbarcodevalue.h": "c"
+        "pdfbarcodevalue.h": "c",
+        "iomanip": "cpp",
+        "pdfdecoderresultextra.h": "c"
     }
 }

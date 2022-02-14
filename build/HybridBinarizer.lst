@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 1
 
 
    1              		.file	"HybridBinarizer.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
   21:src/HybridBinarizer.c **** static int * CalculateBlackPoints(const uint8_t* luminances, int subWidth, int subHeight, int width
   22:src/HybridBinarizer.c **** {
   28              		.loc 1 22 1
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 2
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 2
 
 
   29              		.cfi_startproc
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
   67 0052 BA080000 		movl	$8, %edx
   67      00
   68 0057 8B4518   		movl	24(%ebp), %eax
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 3
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 3
 
 
   69 005a 29D0     		subl	%edx, %eax
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  109 00b7 8B45CC   		movl	-52(%ebp), %eax
  110 00ba 01D0     		addl	%edx, %eax
  111 00bc 8945E0   		movl	%eax, -32(%ebp)
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 4
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 4
 
 
  112              		.loc 1 39 4
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
   41:src/HybridBinarizer.c **** 				{
  154              		.loc 1 41 5 discriminator 1
  155 0114 3945DC   		cmpl	%eax, -36(%ebp)
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 5
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 5
 
 
  156 0117 7CB4     		jl	L6
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
   54:src/HybridBinarizer.c **** 						{
  197              		.loc 1 54 27 discriminator 1
  198 015f B8080000 		movl	$8, %eax
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 6
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 6
 
 
  198      00
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  231 01a1 0FAFD8   		imull	%eax, %ebx
  232              		.loc 1 63 8
  233 01a4 8B45EC   		movl	-20(%ebp), %eax
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 7
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 7
 
 
  234 01a7 99       		cltd
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  265      0000
  266 01e9 01D0     		addl	%edx, %eax
  267 01eb 8B048500 		movl	_blackpoints_data(,%eax,4), %eax
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 8
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 8
 
 
  267      000000
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  307 0240 8B45D4   		movl	-44(%ebp), %eax
  308 0243 8B55F0   		movl	-16(%ebp), %edx
  309 0246 69CAE803 		imull	$1000, %edx, %ecx
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 9
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 9
 
 
  309      0000
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  344 02a1 5B       		popl	%ebx
  345              		.cfi_restore 3
  346 02a2 5D       		popl	%ebp
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 10
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 10
 
 
  347              	LCFI2:
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  390      64203A20 
  390      2564200A 
  390      00
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 11
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 11
 
 
  391              		.text
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  431 02f6 8B451C   		movl	28(%ebp), %eax
  432 02f9 8B00     		movl	(%eax), %eax
  433              		.loc 1 121 47
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 12
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 12
 
 
  434 02fb 0FAF45F4 		imull	-12(%ebp), %eax
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  479 0346 BA080000 		movl	$8, %edx
  479      00
  480 034b 8B4510   		movl	16(%ebp), %eax
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 13
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 13
 
 
  481 034e 01D0     		addl	%edx, %eax
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  516              		.cfi_def_cfa_register 5
  517 036e 83EC58   		subl	$88, %esp
  137:src/HybridBinarizer.c **** 	printf("static void CalculateThresholdForBlock : Calls ThresholdBlock \n");
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 14
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 14
 
 
  518              		.loc 1 137 2
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  555 03c9 0F4EC2   		cmovle	%edx, %eax
  556 03cc 8945DC   		movl	%eax, -36(%ebp)
  145:src/HybridBinarizer.c **** 			int left = clamp(x, 2, subWidth - 3);
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 15
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 15
 
 
  557              		.loc 1 145 15
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  597              		.loc 1 152 40 discriminator 3
  598 0439 69C1E803 		imull	$1000, %ecx, %eax
  598      0000
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 16
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 16
 
 
  599 043f 01D0     		addl	%edx, %eax
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  642 04a5 890424   		movl	%eax, (%esp)
  643 04a8 E813FEFF 		call	_ThresholdBlock
  643      FF
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 17
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 17
 
 
  644              	LBE17:
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  682              		.cfi_def_cfa_register 5
  683 04d3 83EC48   		subl	$72, %esp
  169:src/HybridBinarizer.c **** 	BitMatrix_t * matrix = outMatrix;
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 18
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 18
 
 
  684              		.loc 1 169 16
@@ -1078,7 +1078,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  723 053d 8B45EC   		movl	-20(%ebp), %eax
  724 0540 01D0     		addl	%edx, %eax
  725              		.loc 1 177 39
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 19
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 19
 
 
  726 0542 83E801   		subl	$1, %eax
@@ -1138,7 +1138,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  771 05ba C3       		ret
  772              		.cfi_endproc
  773              	LFE20:
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 20
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 20
 
 
  774              		.globl	_getBlackMatrix
@@ -1198,7 +1198,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  812              		.loc 1 193 43 discriminator 1
  813 05ff B8280000 		movl	$40, %eax
  813      00
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 21
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 21
 
 
  814              		.loc 1 193 33 discriminator 1
@@ -1258,7 +1258,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  853 000a 04       		.byte	0x4
  854 000b 01       		.uleb128 0x1
  855 000c 474E5520 		.ascii "GNU C17 8.1.0 -mtune=generic -march=i686 -g -gdwarf-2 -O0\0"
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 22
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 22
 
 
  855      43313720 
@@ -1318,7 +1318,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  889 00d9 6C6F6E67 		.ascii "long int\0"
  889      20696E74 
  889      00
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 23
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 23
 
 
  890 00e2 02       		.uleb128 0x2
@@ -1378,7 +1378,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  927 0161 19       		.byte	0x19
  928 0162 1A010000 		.long	0x11a
  929 0166 03       		.uleb128 0x3
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 24
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 24
 
 
  930 0167 56010000 		.long	0x156
@@ -1438,7 +1438,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  974 01d4 5F666C61 		.ascii "_flag\0"
  974      6700
  975 01da 04       		.byte	0x4
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 25
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 25
 
 
  976 01db 1E       		.byte	0x1e
@@ -1498,7 +1498,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  1023 023a 19       		.byte	0x19
  1024 023b 92010000 		.long	0x192
  1025 023f 08       		.uleb128 0x8
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 26
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 26
 
 
  1026 0240 32020000 		.long	0x232
@@ -1558,7 +1558,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  1076 02a4 05       		.byte	0x5
  1077 02a5 0B       		.byte	0xb
  1078 02a6 09       		.byte	0x9
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 27
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 27
 
 
  1079 02a7 A4000000 		.long	0xa4
@@ -1618,7 +1618,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  1126 0314 07       		.uleb128 0x7
  1127 0315 5F686569 		.ascii "_height\0"
  1127      67687400 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 28
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 28
 
 
  1128 031d 06       		.byte	0x6
@@ -1678,7 +1678,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  1177 0380 02       		.byte	0x2
  1178 0381 23       		.byte	0x23
  1179 0382 00       		.uleb128 0
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 29
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 29
 
 
  1180 0383 0C       		.uleb128 0xc
@@ -1738,7 +1738,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  1225 03eb F3000000 		.long	0xf3
  1226 03ef FA030000 		.long	0x3fa
  1227 03f3 0D       		.uleb128 0xd
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 30
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 30
 
 
  1228 03f4 94000000 		.long	0x94
@@ -1798,7 +1798,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  1270      5F5F5F5F 
  1270      77617267 
  1270      7600
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 31
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 31
 
 
  1271 0470 08       		.byte	0x8
@@ -1858,7 +1858,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  1313 04ec 01       		.byte	0x1
  1314 04ed 01       		.byte	0x1
  1315 04ee 0E       		.uleb128 0xe
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 32
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 32
 
 
  1316 04ef 5F696D70 		.ascii "_imp___osplatform\0"
@@ -1918,7 +1918,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  1354 0571 01       		.byte	0x1
  1355 0572 0A       		.uleb128 0xa
  1356 0573 5F616D62 		.ascii "_amblksiz\0"
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 33
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 33
 
 
  1356      6C6B7369 
@@ -1978,7 +1978,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  1401 05ed 11       		.uleb128 0x11
  1402 05ee 4D494E5F 		.ascii "MIN_DYNAMIC_RANGE\0"
  1402      44594E41 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 34
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 34
 
 
  1402      4D49435F 
@@ -2038,7 +2038,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  1448 0674 01       		.byte	0x1
  1449 0675 67657442 		.ascii "getBlackMatrix\0"
  1449      6C61636B 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 35
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 35
 
 
  1449      4D617472 
@@ -2098,7 +2098,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  1498 06ec BB050000 		.long	LFE20
  1499 06f0 38000000 		.secrel32	LLST4
  1500 06f4 01       		.byte	0x1
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 36
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 36
 
 
  1501 06f5 9C070000 		.long	0x79c
@@ -2158,7 +2158,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  1551 0757 0C       		.byte	0xc
  1552 0758 4C030000 		.long	0x34c
  1553 075c 02       		.byte	0x2
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 37
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 37
 
 
  1554 075d 91       		.byte	0x91
@@ -2218,7 +2218,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  1604 07ca 70000000 		.secrel32	LLST3
  1605 07ce 01       		.byte	0x1
  1606 07cf 0E090000 		.long	0x90e
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 38
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 38
 
 
  1607 07d3 18       		.uleb128 0x18
@@ -2278,7 +2278,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  1661 082d 18       		.uleb128 0x18
  1662 082e 29000000 		.secrel32	LASF2
  1663 0832 01       		.byte	0x1
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 39
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 39
 
 
  1664 0833 87       		.byte	0x87
@@ -2338,7 +2338,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  1718 0898 11       		.uleb128 0x11
  1719 0899 6C656674 		.ascii "left\0"
  1719      00
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 40
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 40
 
 
  1720 089e 01       		.byte	0x1
@@ -2398,7 +2398,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  1773 08ff 0E       		.byte	0xe
  1774 0900 A4000000 		.long	0xa4
  1775 0904 02       		.byte	0x2
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 41
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 41
 
 
  1776 0905 91       		.byte	0x91
@@ -2458,7 +2458,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  1827 0967 74687265 		.ascii "threshold\0"
  1827      73686F6C 
  1827      6400
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 42
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 42
 
 
  1828 0971 01       		.byte	0x1
@@ -2518,7 +2518,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  1880 09d2 79       		.byte	0x79
  1881 09d3 13       		.byte	0x13
  1882 09d4 52030000 		.long	0x352
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 43
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 43
 
 
  1883 09d8 02       		.byte	0x2
@@ -2578,7 +2578,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  1933      00
  1934 0a3e 01       		.byte	0x1
  1935 0a3f 68       		.byte	0x68
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 44
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 44
 
 
  1936 0a40 40       		.byte	0x40
@@ -2638,7 +2638,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  1986 0aad 02       		.byte	0x2
  1987 0aae 91       		.byte	0x91
  1988 0aaf 0C       		.sleb128 12
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 45
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 45
 
 
  1989 0ab0 18       		.uleb128 0x18
@@ -2698,7 +2698,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  2043 0b12 19       		.uleb128 0x19
  2044 0b13 7B000000 		.long	LBB5
  2045 0b17 79020000 		.long	LBE5
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 46
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 46
 
 
  2046 0b1b 16       		.uleb128 0x16
@@ -2758,7 +2758,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  2099 0b7d 0D       		.byte	0xd
  2100 0b7e A4000000 		.long	0xa4
  2101 0b82 02       		.byte	0x2
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 47
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 47
 
 
  2102 0b83 91       		.byte	0x91
@@ -2818,7 +2818,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  2154 0be7 19       		.uleb128 0x19
  2155 0be8 DA010000 		.long	LBB10
  2156 0bec 40020000 		.long	LBE10
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 48
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 48
 
 
  2157 0bf0 11       		.uleb128 0x11
@@ -2878,7 +2878,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  2207 0020 00       		.byte	0
  2208 0021 49       		.uleb128 0x49
  2209 0022 13       		.uleb128 0x13
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 49
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 49
 
 
  2210 0023 00       		.byte	0
@@ -2938,7 +2938,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  2264 0059 49       		.uleb128 0x49
  2265 005a 13       		.uleb128 0x13
  2266 005b 38       		.uleb128 0x38
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 50
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 50
 
 
  2267 005c 0A       		.uleb128 0xa
@@ -2998,7 +2998,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  2321 0092 03       		.uleb128 0x3
  2322 0093 0E       		.uleb128 0xe
  2323 0094 3A       		.uleb128 0x3a
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 51
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 51
 
 
  2324 0095 0B       		.uleb128 0xb
@@ -3058,7 +3058,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  2378 00cb 02       		.uleb128 0x2
  2379 00cc 0A       		.uleb128 0xa
  2380 00cd 00       		.byte	0
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 52
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 52
 
 
  2381 00ce 00       		.byte	0
@@ -3118,7 +3118,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  2435 0104 00       		.byte	0
  2436 0105 14       		.uleb128 0x14
  2437 0106 2E       		.uleb128 0x2e
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 53
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 53
 
 
  2438 0107 01       		.byte	0x1
@@ -3178,7 +3178,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  2492 013e 0B       		.uleb128 0xb
  2493 013f 49       		.uleb128 0x49
  2494 0140 13       		.uleb128 0x13
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 54
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 54
 
 
  2495 0141 02       		.uleb128 0x2
@@ -3238,7 +3238,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  2549 0178 00       		.byte	0
  2550 0179 1A       		.uleb128 0x1a
  2551 017a 2E       		.uleb128 0x2e
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 55
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 55
 
 
  2552 017b 01       		.byte	0x1
@@ -3298,7 +3298,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  2606 01b3 01       		.uleb128 0x1
  2607 01b4 12       		.uleb128 0x12
  2608 01b5 01       		.uleb128 0x1
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 56
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 56
 
 
  2609 01b6 01       		.uleb128 0x1
@@ -3358,7 +3358,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  2663 0070 6B030000 		.long	LFB19-Ltext0
  2664 0074 6C030000 		.long	LCFI9-Ltext0
  2665 0078 0200     		.word	0x2
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 57
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 57
 
 
  2666 007a 74       		.byte	0x74
@@ -3418,7 +3418,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  2720 00fc BF020000 		.long	LCFI5-Ltext0
  2721 0100 0200     		.word	0x2
  2722 0102 75       		.byte	0x75
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 58
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 58
 
 
  2723 0103 08       		.sleb128 8
@@ -3478,7 +3478,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  2772 0007 68656967 		.ascii "height\0"
  2772      687400
  2773              	LASF7:
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 59
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 59
 
 
  2774 000e 796F6666 		.ascii "yoffset\0"
@@ -3505,24 +3505,24 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 1
  2786 0041 786F6666 		.ascii "xoffset\0"
  2786      73657400 
  2787              		.ident	"GCC: (i686-posix-dwarf-rev0, Built by MinGW-W64 project) 8.1.0"
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s 			page 60
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s 			page 60
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 HybridBinarizer.c
                             *COM*:0000000c _blackPoints
                             *COM*:00000010 _matrix
-C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s:8      .rdata:00000000 _BLOCK_SIZE
-C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s:11     .rdata:00000004 _MINIMUM_DIMENSION
-C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s:14     .rdata:00000008 _MIN_DYNAMIC_RANGE
+C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s:8      .rdata:00000000 _BLOCK_SIZE
+C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s:11     .rdata:00000004 _MINIMUM_DIMENSION
+C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s:14     .rdata:00000008 _MIN_DYNAMIC_RANGE
                             *COM*:003d0900 _blackpoints_data
                             *COM*:0001c200 _matrix_bits
-C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s:25     .text:00000000 _CalculateBlackPoints
-C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s:354    .text:000002a4 _clamp
-C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s:393    .text:000002c0 _ThresholdBlock
-C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s:506    .text:0000036b _CalculateThresholdForBlock
-C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s:672    .text:000004d0 _InitBlackMatrix
-C:\Users\jisu8\AppData\Local\Temp\cc16jkFA.s:776    .text:000005bb _getBlackMatrix
+C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s:25     .text:00000000 _CalculateBlackPoints
+C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s:354    .text:000002a4 _clamp
+C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s:393    .text:000002c0 _ThresholdBlock
+C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s:506    .text:0000036b _CalculateThresholdForBlock
+C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s:672    .text:000004d0 _InitBlackMatrix
+C:\Users\jisu8\AppData\Local\Temp\ccDs21v3.s:776    .text:000005bb _getBlackMatrix
 
 UNDEFINED SYMBOLS
 _printf

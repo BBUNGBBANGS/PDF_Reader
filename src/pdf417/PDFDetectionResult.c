@@ -13,23 +13,24 @@ void Detection_Result_init(const BarcodeMetadata_t * barcodeMetadata, const Boun
 	//std::fill(_detectionResultColumns.begin(), _detectionResultColumns.end(), nullptr);
 }
 
-static void AdjustIndicatorColumnRowNumbers(DetectionResultColumn_t * detectionResultColumn, const BarcodeMetadata_t * barcodeMetadata)
+static void AdjustIndicatorColumnRowNumbers(DetectionResultColumn_t * detectionResultColumn, const BarcodeMetadata_t * barcodeMetadata,int size)
 {
 	if (detectionResultColumn->m_hasValue != 0) 
 	{
-		adjustCompleteIndicatorColumnRowNumbers(detectionResultColumn,barcodeMetadata);
+		adjustCompleteIndicatorColumnRowNumbers(detectionResultColumn,barcodeMetadata,size);
 	}
 }
 
-static void AdjustRowNumbersFromBothRI(DetectionResultColumn_t * detectionResultColumns,int row,int size)
+static void AdjustRowNumbersFromBothRI(DetectionResultColumn_t * detectionResultColumns,int column,int size)
 {
-	if ((detectionResultColumns[0].m_hasValue == 0) || detectionResultColumns[row-1].m_hasValue == 0) 
+	if ((detectionResultColumns[0].m_hasValue == 0) || detectionResultColumns[column-1].m_hasValue == 0) 
 	{
 		return;
 	}
 
 	Codeword_t * LRIcodewords = allCodewords(&detectionResultColumns[0]);
-	Codeword_t * RRIcodewords = allCodewords(&detectionResultColumns[row-1]);
+	Codeword_t * RRIcodewords = allCodewords(&detectionResultColumns[column-1]);
+
 	for (size_t codewordsRow = 0; codewordsRow < size; codewordsRow++) 
 	{
 
@@ -37,7 +38,7 @@ static void AdjustRowNumbersFromBothRI(DetectionResultColumn_t * detectionResult
 			(LRIcodewords[codewordsRow].m_value._rowNumber == RRIcodewords[codewordsRow].m_value._rowNumber)) 
 		{
 
-			DetectionResultColumn_t * lastColumn = &detectionResultColumns[row-1] - 1;
+			DetectionResultColumn_t * lastColumn = &detectionResultColumns[column-1];
 			for (DetectionResultColumn_t * columnIter = (&detectionResultColumns[0] + 1); columnIter != lastColumn; ++columnIter) 
 			{
 				if (!(columnIter->m_hasValue)) 
@@ -50,8 +51,9 @@ static void AdjustRowNumbersFromBothRI(DetectionResultColumn_t * detectionResult
 					codeword.m_value._rowNumber = LRIcodewords[codewordsRow].m_value._rowNumber;
 					if (!(codeword.m_value._rowNumber != BARCODE_ROW_UNKNOWN && codeword.m_value._bucket == (codeword.m_value._rowNumber % 3) * 3)) 
 					{
-						columnIter->m_value._codewords[codewordsRow].m_hasValue = 0;
+						clear_Codewords(&codeword);
 					}
+					columnIter->m_value._codewords[codewordsRow] = codeword;
 				}
 			}
 
@@ -66,7 +68,7 @@ static int AdjustRowNumberIfValid(int rowIndicatorRowNumber, int invalidRowCount
 	{
 		if (rowIndicatorRowNumber != BARCODE_ROW_UNKNOWN && codeword->m_value._bucket == (rowIndicatorRowNumber % 3) * 3) 
 		{
-			rowIndicatorRowNumber = codeword->m_value._rowNumber;
+			codeword->m_value._rowNumber = rowIndicatorRowNumber;
 			invalidRowCounts = 0;
 		}
 		else 
@@ -77,7 +79,7 @@ static int AdjustRowNumberIfValid(int rowIndicatorRowNumber, int invalidRowCount
 	return invalidRowCounts;
 }
 
-static int AdjustRowNumbersFromLRI(DetectionResultColumn_t * detectionResultColumns,int row,int size) 
+static int AdjustRowNumbersFromLRI(DetectionResultColumn_t * detectionResultColumns,int column,int size) 
 {
 	if (detectionResultColumns[0].m_hasValue == 0) 
 	{
@@ -93,7 +95,7 @@ static int AdjustRowNumbersFromLRI(DetectionResultColumn_t * detectionResultColu
 		}
 		int rowIndicatorRowNumber = codewords[codewordsRow].m_value._rowNumber;
 		int invalidRowCounts = 0;
-		DetectionResultColumn_t * lastColumn = &detectionResultColumns[row-1] - 1;
+		DetectionResultColumn_t * lastColumn = &detectionResultColumns[column-1];
 		for (DetectionResultColumn_t * columnIter = &detectionResultColumns[0] + 1; columnIter != lastColumn && invalidRowCounts < ADJUST_ROW_NUMBER_SKIP; ++columnIter) 
 		{
 			if (!(columnIter->m_hasValue)) 
@@ -109,19 +111,20 @@ static int AdjustRowNumbersFromLRI(DetectionResultColumn_t * detectionResultColu
 					unadjustedCount++;
 				}
 			}
+			columnIter->m_value._codewords[codewordsRow] = codeword;
 		}
 	}
 	return unadjustedCount;
 }
 
-static int AdjustRowNumbersFromRRI(DetectionResultColumn_t *detectionResultColumns,int row,int size) 
+static int AdjustRowNumbersFromRRI(DetectionResultColumn_t *detectionResultColumns,int column,int size) 
 {
-	if (detectionResultColumns[row-1].m_hasValue == 0) 
+	if (detectionResultColumns[column-1].m_hasValue == 0) 
 	{
 		return 0;
 	}
 	int unadjustedCount = 0;
-	Codeword_t * codewords = detectionResultColumns[row-1].m_value._codewords;
+	Codeword_t * codewords = detectionResultColumns[column-1].m_value._codewords;
 	for (size_t codewordsRow = 0; codewordsRow < size; codewordsRow++) 
 	{
 		if (codewords[codewordsRow].m_hasValue == 0) 
@@ -130,7 +133,7 @@ static int AdjustRowNumbersFromRRI(DetectionResultColumn_t *detectionResultColum
 		}
 		int rowIndicatorRowNumber = codewords[codewordsRow].m_value._rowNumber;
 		int invalidRowCounts = 0;
-		DetectionResultColumn_t * lastColumn = &detectionResultColumns[row-1] - 1;
+		DetectionResultColumn_t * lastColumn = &detectionResultColumns[column-1];
 		for (DetectionResultColumn_t * columnIter = &detectionResultColumns[0] + 1; columnIter != lastColumn && invalidRowCounts < ADJUST_ROW_NUMBER_SKIP; ++columnIter) 
 		{
 			if (!(columnIter->m_hasValue)) 
@@ -140,28 +143,29 @@ static int AdjustRowNumbersFromRRI(DetectionResultColumn_t *detectionResultColum
 			Codeword_t codeword = columnIter->m_value._codewords[codewordsRow];
 			if (codeword.m_hasValue != 0) 
 			{
-				invalidRowCounts = AdjustRowNumberIfValid(rowIndicatorRowNumber, invalidRowCounts, &codewordNearby);
+				invalidRowCounts = AdjustRowNumberIfValid(rowIndicatorRowNumber, invalidRowCounts, &codeword);
 				if (!(codeword.m_value._rowNumber != BARCODE_ROW_UNKNOWN && codeword.m_value._bucket == (codeword.m_value._rowNumber % 3) * 3)) 
 				{
 					unadjustedCount++;
 				}
 			}
+			columnIter->m_value._codewords[codewordsRow] = codeword;
 		}
 	}
 
 	return unadjustedCount;
 }
 
-static int AdjustRowNumbersByRow(DetectionResultColumn_t * detectionResultColumns,int row,int size) 
+static int AdjustRowNumbersByRow(DetectionResultColumn_t * detectionResultColumns,int column,int size) 
 {
 
-	AdjustRowNumbersFromBothRI(detectionResultColumns,row,size);
+	AdjustRowNumbersFromBothRI(detectionResultColumns,column,size);
 	// TODO we should only do full row adjustments if row numbers of left and right row indicator column match.
 	// Maybe it's even better to calculated the height (in codeword rows) and divide it by the number of barcode
 	// rows. This, together with the LRI and RRI row numbers should allow us to get a good estimate where a row
 	// number starts and ends.
-	int unadjustedCount = AdjustRowNumbersFromLRI(detectionResultColumns,row,size);
-	return unadjustedCount + AdjustRowNumbersFromRRI(detectionResultColumns,row,size);
+	int unadjustedCount = AdjustRowNumbersFromLRI(detectionResultColumns,column,size);
+	return unadjustedCount + AdjustRowNumbersFromRRI(detectionResultColumns,column,size);
 
 }
 
@@ -205,20 +209,20 @@ static void AdjustRowNumbers_internal(const DetectionResultColumn_t * detectionR
 		otherCodewords[10] = previousColumnCodewords[codewordsRow - 2];
 		otherCodewords[11] = nextColumnCodewords[codewordsRow - 2];
 	}
-	#if 0
-	if (codewordsRow < Size(codewords) - 1) 
+
+	if (codewordsRow < size - 1) 
 	{
 		otherCodewords[1] = codewords[codewordsRow + 1];
 		otherCodewords[6] = previousColumnCodewords[codewordsRow + 1];
 		otherCodewords[7] = nextColumnCodewords[codewordsRow + 1];
 	}
-	if (codewordsRow < Size(codewords) - 2) 
+	if (codewordsRow < size - 2) 
 	{
 		otherCodewords[9] = codewords[codewordsRow + 2];
 		otherCodewords[12] = previousColumnCodewords[codewordsRow + 2];
 		otherCodewords[13] = nextColumnCodewords[codewordsRow + 2];
 	}
-	#endif
+
 	for (int i=0;i<size1;i++) 
 	{
 		if (AdjustRowNumber(&codeword, otherCodewords)) 
@@ -236,15 +240,15 @@ static void AdjustRowNumbers_internal(const DetectionResultColumn_t * detectionR
 * @return number of codewords which don't have a valid row number. Note that the count is not accurate as codewords
 * will be counted several times. It just serves as an indicator to see when we can stop adjusting row numbers
 */
-static int AdjustRowNumbers(DetectionResultColumn_t * detectionResultColumns,int row,int size) 
+static int AdjustRowNumbers(DetectionResultColumn_t * detectionResultColumns,int column,int size) 
 {
-	int unadjustedCount = AdjustRowNumbersByRow(detectionResultColumns,row,size);
+	int unadjustedCount = AdjustRowNumbersByRow(detectionResultColumns,column,size);
 	if (unadjustedCount == 0) 
 	{
 		return 0;
 	}
 	
-	for (int barcodeColumn = 1; barcodeColumn <row; barcodeColumn++) 
+	for (int barcodeColumn = 1; barcodeColumn <column; barcodeColumn++) 
 	{
 		if (detectionResultColumns[barcodeColumn].m_hasValue == 0) 
 		{
@@ -266,17 +270,17 @@ static int AdjustRowNumbers(DetectionResultColumn_t * detectionResultColumns,int
 	return unadjustedCount;
 }
 
-const DetectionResultColumn_t allColumns(DetectionResult_t * detectionResult,int row,int size)
+const DetectionResultColumn_t * allColumns(DetectionResult_t * detectionResult,int column,int size)
 {
-	AdjustIndicatorColumnRowNumbers(&(detectionResult->_detectionResultColumns[0]), &(detectionResult->_barcodeMetadata));
-	AdjustIndicatorColumnRowNumbers(&(detectionResult->_detectionResultColumns[row-1]), &(detectionResult->_barcodeMetadata));//back
+	AdjustIndicatorColumnRowNumbers(&(detectionResult->_detectionResultColumns[0]), &(detectionResult->_barcodeMetadata),size);
+	AdjustIndicatorColumnRowNumbers(&(detectionResult->_detectionResultColumns[column-1]), &(detectionResult->_barcodeMetadata),size);//back
 	int unadjustedCodewordCount = MAX_CODEWORDS_IN_BARCODE;
 	int previousUnadjustedCount;
 	do 
 	{
 		previousUnadjustedCount = unadjustedCodewordCount;
-		unadjustedCodewordCount = AdjustRowNumbers(detectionResult->_detectionResultColumns,row,size);
+		unadjustedCodewordCount = AdjustRowNumbers(detectionResult->_detectionResultColumns,column,size);
 	} while (unadjustedCodewordCount > 0 && unadjustedCodewordCount < previousUnadjustedCount);
-	return *(detectionResult->_detectionResultColumns);
+	return (detectionResult->_detectionResultColumns);
 }
 

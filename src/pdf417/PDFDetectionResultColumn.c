@@ -19,6 +19,8 @@
 #include "PDFBarcodeValue.h"
 #include "PDFScanningDecoder.h"
 #include <stdlib.h>
+#include <stdio.h>
+#include "Library.h"
 
 static const int MAX_NEARBY_DISTANCE = 5;
 static const int MIN_ROWS_IN_BARCODE = 3;
@@ -103,7 +105,7 @@ void setRowNumbers(Codeword_t * codewords,int size)
 	}
 }
 
-static void clear_var(Codeword_t * codewords)
+void clear_Codewords(Codeword_t * codewords)
 {
 	codewords->m_hasValue = 0;
 	codewords->m_value._startX = 0;
@@ -130,7 +132,7 @@ static void RemoveIncorrectCodewords(uint8_t isLeft, Codeword_t * codewords, con
 		int codewordRowNumber = codewords[i].m_value._rowNumber;
 		if (codewordRowNumber > rowCount(barcodeMetadata)) 
 		{
-			clear_var(codewords+i);
+			clear_Codewords(codewords+i);
 			continue;
 		}
 
@@ -144,20 +146,20 @@ static void RemoveIncorrectCodewords(uint8_t isLeft, Codeword_t * codewords, con
 			case 0:
 			if (rowIndicatorValue * 3 + 1 != barcodeMetadata->_rowCountUpperPart) 
 			{
-				clear_var(codewords+i);
+				clear_Codewords(codewords+i);
 			}
 			break;
 			case 1:
 			if (rowIndicatorValue / 3 != barcodeMetadata->_errorCorrectionLevel ||
 				rowIndicatorValue % 3 != barcodeMetadata->_rowCountLowerPart) 
 			{
-				clear_var(codewords+i);
+				clear_Codewords(codewords+i);
 			}
 			break;
 			case 2:
 			if (rowIndicatorValue + 1 != barcodeMetadata->_columnCount) 
 			{
-				clear_var(codewords+i);
+				clear_Codewords(codewords+i);
 			}
 			break;
 		}
@@ -169,7 +171,7 @@ static void RemoveIncorrectCodewords(uint8_t isLeft, Codeword_t * codewords, con
 // TODO maybe we should add missing codewords to store the correct row number to make
 // finding row numbers for other columns easier
 // use row height count to make detection of invalid row numbers more reliable
-void adjustCompleteIndicatorColumnRowNumbers(DetectionResultColumn_t * detectionResultColumn,const BarcodeMetadata_t * barcodeMetadata)
+void adjustCompleteIndicatorColumnRowNumbers(DetectionResultColumn_t * detectionResultColumn,const BarcodeMetadata_t * barcodeMetadata,int size)
 {
 	printf("DetectionResultColumn::adjustCompleteIndicatorColumnRowNumbers: \n");
 	
@@ -177,7 +179,7 @@ void adjustCompleteIndicatorColumnRowNumbers(DetectionResultColumn_t * detection
 	{
 		return;
 	}
-	int size = 137;
+
 	Codeword_t * codewords = allCodewords(detectionResultColumn);
 	setRowNumbers(codewords,size);
 	RemoveIncorrectCodewords(isLeftRowIndicator(detectionResultColumn), codewords, barcodeMetadata,size);
@@ -339,7 +341,6 @@ void adjustIncompleteIndicatorColumnRowNumbers(DetectionResultColumn_t * rowIndi
 // This is example of bad design, a getter should not modify object's state
 uint8_t getRowHeights(DetectionResultColumn_t * rowIndicatorColumn,int * result,int length,int * size)
 {
-
 	printf("DetectionResultColumn::getRowHeights : \n");
 
 	BarcodeMetadata_t barcodeMetadata;

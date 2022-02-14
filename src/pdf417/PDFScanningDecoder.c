@@ -5,7 +5,9 @@
 #include "PDFDetectionResult.h"
 #include "PDFCodewordDecoder.h"
 #include "PDFBarcodeValue.h"
+#include "PDFDecodedBitStreamParser.h"
 #include "DecodeStatus.h"
+#include "DecoderResult.h"
 #include "library.h"
 #include <stdlib.h>
 
@@ -452,25 +454,19 @@ static int GetStartColumn(const DetectionResult_t * detectionResult, int barcode
 }
 
 
-static BarcodeValue_t * CreateBarcodeMatrix(DetectionResult_t * detectionResult,int size)
+static void CreateBarcodeMatrix(BarcodeValue_t * barcodeMatrix,DetectionResult_t * detectionResult,int size,int row,int column)
 {
 	printf("CreateBarcodeMatrix\n");
 
-	int column = (detectionResult->_barcodeMetadata._rowCountLowerPart)+(detectionResult->_barcodeMetadata._rowCountUpperPart);
-	int row = detectionResult->_barcodeMetadata._columnCount + 2;
-	BarcodeValue_t barcodeMatrix[column][row];
-	fill(row*column*1000,barcodeMatrix,0);
-	int columnNum = 0;
-
-	DetectionResultColumn_t resultColumn = allColumns(detectionResult,row,size);
+	DetectionResultColumn_t * resultColumn = allColumns(detectionResult,column,size);
 	
-	for (int i = 0;i<row;i++) 
+	for (int columnNum = 0;columnNum<column;columnNum++) 
 	{
-		if (resultColumn.m_hasValue != 0) 
+		if ((resultColumn+columnNum)->m_hasValue != 0) 
 		{
 			for (int j=0;j<size;j++) 
 			{
-				Codeword_t codeword = (resultColumn.m_value._codewords[j]);
+				Codeword_t codeword = (resultColumn+columnNum)->m_value._codewords[j];
 				if (codeword.m_hasValue != 0) 
 				{
 					int rowNumber = codeword.m_value._rowNumber;
@@ -481,15 +477,12 @@ static BarcodeValue_t * CreateBarcodeMatrix(DetectionResult_t * detectionResult,
 							// We have more rows than the barcode metadata allows for, ignore them.
 							continue;
 						}
-						BarcodeSetValue(&barcodeMatrix[rowNumber][columnNum],codeword.m_value._value);
+						BarcodeSetValue(barcodeMatrix + rowNumber*column + columnNum,codeword.m_value._value);
 					}
 				}
 			}
 		}
-		columnNum++;
 	}
-
-	return barcodeMatrix;
 }
 
 static int GetNumberOfECCodeWords(int barcodeECLevel)
@@ -636,7 +629,7 @@ static std::vector<int> FindErrorMagnitudes(const ModulusPoly& errorEvaluator, c
 	}
 	return result;
 }
-
+#endif
 /**
 * @param received received codewords
 * @param numECCodewords number of those codewords used for EC
@@ -644,34 +637,35 @@ static std::vector<int> FindErrorMagnitudes(const ModulusPoly& errorEvaluator, c
 * @return number of errors
 * @throws ChecksumException if errors cannot be corrected, maybe because of too many errors
 */
-ZXING_EXPORT_TEST_ONLY
-bool DecodeErrorCorrection(std::vector<int>& received, int numECCodewords, const std::vector<int>& erasures, int& nbErrors)
+
+uint8_t DecodeErrorCorrection(int * received, int numECCodewords, const int * erasures, int * nbErrors)
 {
-#ifdef HK_DEBUG
+	#if 0
 	printf("DecodeErrorCorrection  numECCodewords=%d, nbErrors=%d\n", numECCodewords, nbErrors);
-#endif
 	
 	const ModulusGF& field = GetModulusGF();
 	ModulusPoly poly(field, received);
 	std::vector<int> S(numECCodewords);
-	bool error = false;
+	uint8_t error = 0;
 	for (int i = numECCodewords; i > 0; i--) 
 	{
 		int eval = poly.evaluateAt(field.exp(i));
 		S[numECCodewords - i] = eval;
-		if (eval != 0) {
-			error = true;
+		if (eval != 0) 
+		{
+			error = 1;
 		}
 	}
 
 	if (!error) 
 	{
 		nbErrors = 0;
-		return true;
+		return 1;
 	}
 
 	ModulusPoly knownErrors = field.one();
-	for (int erasure : erasures) {
+	for (int erasure : erasures) 
+	{
 		int b = field.exp(Size(received) - 1 - erasure);
 		// Add (1 - bx) term:
 		ModulusPoly term(field, { field.subtract(0, b), 1 });
@@ -682,33 +676,38 @@ bool DecodeErrorCorrection(std::vector<int>& received, int numECCodewords, const
 	//syndrome = syndrome.multiply(knownErrors);
 
 	ModulusPoly sigma, omega;
-	if (!RunEuclideanAlgorithm(field.buildMonomial(numECCodewords, 1), syndrome, numECCodewords, sigma, omega)) {
-		return false;
+	if (!RunEuclideanAlgorithm(field.buildMonomial(numECCodewords, 1), syndrome, numECCodewords, sigma, omega)) 
+	{
+		return 0;
 	}
 
 	//sigma = sigma.multiply(knownErrors);
 
 	std::vector<int> errorLocations;
-	if (!FindErrorLocations(sigma, errorLocations)) {
-		return false;
+	if (!FindErrorLocations(sigma, errorLocations)) 
+	{
+		return 0;
 	}
 
 	std::vector<int> errorMagnitudes = FindErrorMagnitudes(omega, sigma, errorLocations);
 
 	int receivedSize = Size(received);
-	for (size_t i = 0; i < errorLocations.size(); i++) {
+	for (size_t i = 0; i < errorLocations.size(); i++) 
+	{
 		int position = receivedSize - 1 - field.log(errorLocations[i]);
-		if (position < 0) {
-			return false;
+		if (position < 0) 
+		{
+			return 0;
 		}
 		received[position] = field.subtract(received[position], errorMagnitudes[i]);
 	}
 	nbErrors = Size(errorLocations);
-	return true;
+	#endif
+	return 1;
 }
 
-#endif
-#if 0
+
+
 // --------------------------------------- Error Correction
 
 /**
@@ -720,90 +719,112 @@ bool DecodeErrorCorrection(std::vector<int>& received, int numECCodewords, const
 * @param numECCodewords number of error correction codewords that are available in codewords
 * @throws ChecksumException if error correction fails
 */
-static bool CorrectErrors(std::vector<int>& codewords, const std::vector<int>& erasures, int numECCodewords, int& errorCount)
+static uint8_t CorrectErrors(int * codewords, const int * erasures, int numECCodewords, int * errorCount,int erasure_size)
 {
-#ifdef HK_DEBUG
+
 	printf("CorrectErrors  numECCodewords=%d, errorCount=%d\n", numECCodewords, errorCount);
-#endif
-	
-	if (Size(erasures) > numECCodewords / 2 + MAX_ERRORS ||
+
+	if (erasure_size > numECCodewords / 2 + MAX_ERRORS ||
 		numECCodewords < 0 ||
-		numECCodewords > MAX_EC_CODEWORDS) {
+		numECCodewords > MAX_EC_CODEWORDS) 
+	{
 		// Too many errors or EC Codewords is corrupted
-		return false;
+		return 0;
 	}
 	return DecodeErrorCorrection(codewords, numECCodewords, erasures, errorCount);
 }
 
-#endif
-#if 0
+
 /**
 * Verify that all is OK with the codeword array.
 */
-static bool VerifyCodewordCount(std::vector<int>& codewords, int numECCodewords)
+static uint8_t VerifyCodewordCount(int * codewords, int numECCodewords,int codewordsNum)
 {
-	if (codewords.size() < 4) 
+	if (codewordsNum < 4) 
 	{
 		// Codeword array size should be at least 4 allowing for
 		// Count CW, At least one Data CW, Error Correction CW, Error Correction CW
-		return false;
+		return 0;
 	}
 	// The first codeword, the Symbol Length Descriptor, shall always encode the total number of data
 	// codewords in the symbol, including the Symbol Length Descriptor itself, data codewords and pad
 	// codewords, but excluding the number of error correction codewords.
 	int numberOfCodewords = codewords[0];
 
-	if (numberOfCodewords > Size(codewords)) 
+	if (numberOfCodewords > codewordsNum) 
 	{
-		return false;
+		return 0;
 	}
 
 	if (numberOfCodewords == 0) 
 	{
 		// Reset to the length of the array - 8 (Allow for at least level 3 Error Correction (8 Error Codewords)
-		if (numECCodewords < Size(codewords)) 
+		if (numECCodewords < codewordsNum) 
 		{
-			codewords[0] = Size(codewords) - numECCodewords;
+			codewords[0] = codewordsNum - numECCodewords;
 		}
 		else 
 		{
-			return false;
+			return 0;
 		}
 	}
-	return true;
+	return 1;
+}
+static void result_init(DecoderResult_t * result)
+{
+	result->status = NoError;
+	result->_rawBytes = NULL;
+	result->_numBits = 0;
+	result->_text = NULL; //wstring
+	result->_ecLevel = NULL; //wstring
+	result->_errorsCorrected = 0;
+	result->_erasures = 0;
+	//result->_structuredAppend = 0;
+	result->_readerInit = 0; // bool
+	result->_extra = NULL; //custom data
 }
 
-#endif
-#if 0
-DecoderResult DecodeCodewords(std::vector<int>& codewords, int ecLevel, const std::vector<int>& erasures,
-							  const std::string& characterSet)
+DecoderResult_t DecodeCodewords(int * codewords, int ecLevel, const int * erasures,
+							  const unsigned char * characterSet,int erasure_size,int codewordsNum)
 {
+	DecoderResult_t result;
+	result_init(&result);
+	#if 0
 	if (codewords.empty()) 
 	{
-		return DecodeStatus::FormatError;
+		return FormatError;
 	}
-
+	#endif
+	
 	int numECCodewords = 1 << (ecLevel + 1);
 	int correctedErrorsCount = 0;
-	if (!CorrectErrors(codewords, erasures, numECCodewords, correctedErrorsCount))
-		return DecodeStatus::ChecksumError;
 
-	if (!VerifyCodewordCount(codewords, numECCodewords))
-		return DecodeStatus::FormatError;
+	if (!CorrectErrors(codewords, erasures, numECCodewords, correctedErrorsCount,erasure_size))
+	{
+		result.status = ChecksumError;
+		return result;
+	}
+
+
+	if (!VerifyCodewordCount(codewords, numECCodewords,codewordsNum))
+	{
+		result.status = FormatError;
+		return result;
+	}
 
 	// Decode the codewords
-	auto result = DecodedBitStreamParser::Decode(codewords, ecLevel, characterSet);
-	if (result.isValid()) 
+	result = BitStreamDecode(codewords, ecLevel, characterSet);
+
+	if (result.status == NoError) 
 	{
-		result.setErrorsCorrected(correctedErrorsCount);
-		result.setErasures(Size(erasures));
+		result._errorsCorrected = correctedErrorsCount;
+		result._erasures = erasure_size;
 	}
+
 
 	return result;
 }
 
-
-#endif
 
 /**
 * This method deals with the fact, that the decoding process doesn't always yield a single most likely value. The
@@ -820,28 +841,34 @@ DecoderResult DecodeCodewords(std::vector<int>& codewords, int ecLevel, const st
 */
 static DecoderResult_t * CreateDecoderResultFromAmbiguousValues(int ecLevel, int * codewords,
 	const int * erasureArray, const int * ambiguousIndexes,
-	const int * ambiguousIndexValues, const char * characterSet)
+	const int * ambiguousIndexValues, const char * characterSet,int erasure_size,int codewordsNum)
 {	
-	#if 0
-	int ambiguousIndexCount[ambiguousIndexes.size()] = 0;
+
+	//int ambiguousIndexCount[ambiguousIndexes.size()] = 0; size 계산 필요
 
 	int tries = 100;
 	while (tries-- > 0) 
 	{
+		#if 0
 		for (size_t i = 0; i < ambiguousIndexCount.size(); i++) 
 		{
 			codewords[ambiguousIndexes[i]] = ambiguousIndexValues[i][ambiguousIndexCount[i]];
 		}
-		auto result = DecodeCodewords(codewords, ecLevel, erasureArray, characterSet);
-		if (result.errorCode() != ChecksumError) 
+		#endif
+
+		DecoderResult_t result = DecodeCodewords(codewords, ecLevel, erasureArray, characterSet,erasure_size,codewordsNum);
+		if (result.status != ChecksumError) 
 		{
-			return result;
+			return &result;
 		}
 
+		#if 0
 		if (ambiguousIndexCount.empty()) 
 		{
 			return ChecksumError;
 		}
+		#endif
+		#if 0
 		for (size_t i = 0; i < ambiguousIndexCount.size(); i++) 
 		{
 			if (ambiguousIndexCount[i] < Size(ambiguousIndexValues[i]) - 1) 
@@ -858,52 +885,74 @@ static DecoderResult_t * CreateDecoderResultFromAmbiguousValues(int ecLevel, int
 				}
 			}
 		}
+		#endif
 	}
-	#endif
+
 	return ChecksumError;
 }
+static int find_idx(BarcodeValue_t * buffer)
+{
+	int idx = 0;
+	for(int i=0;i<1000;i++)
+	{
+		if(buffer->_values[i]!=0)
+		{
+			idx = i;
+			break;
+		}
+	}
 
-
+	return idx;
+}
 static DecoderResult_t * CreateDecoderResult(DetectionResult_t * detectionResult, const unsigned char * characterSet,int size)
 {
-	BarcodeValue_t * barcodeMatrix = CreateBarcodeMatrix(detectionResult,size);
+	int rowNum = detectionResult->_barcodeMetadata._rowCountUpperPart + detectionResult->_barcodeMetadata._rowCountLowerPart;
+	int columnNum = detectionResult->_barcodeMetadata._columnCount + 2;
+	BarcodeValue_t barcodeMatrix[rowNum][columnNum];
+	fill(rowNum*columnNum*1000,barcodeMatrix,0);
+	CreateBarcodeMatrix(barcodeMatrix[0],detectionResult,size,rowNum,columnNum);
 	if (!AdjustCodewordCount(detectionResult, barcodeMatrix,size)) 
 	{
 		return NotFound;
 	}
 	
-	int erasures;
-	int codewords[rowCount(&detectionResult->_barcodeMetadata) * columnCount(&detectionResult->_barcodeMetadata)];
+	int erasures[10];
+	int codewordsNum = rowCount(&detectionResult->_barcodeMetadata) * columnCount(&detectionResult->_barcodeMetadata);
+	int codewords[codewordsNum];
 	int ambiguousIndexValues;
 	int ambiguousIndexesList;
-	int rowCount = detectionResult->_barcodeMetadata._rowCountUpperPart + detectionResult->_barcodeMetadata._rowCountLowerPart;
-	int columnCount = detectionResult->_barcodeMetadata._columnCount;
-	#if 0
-	for (int row = 0; row < rowCount; row++) 
+	fill(10,erasures,0);
+	fill(codewordsNum,codewords,0);
+
+	int idx = 0;
+
+	for (int row = 0; row < rowCount(&(detectionResult->_barcodeMetadata)); row++) 
 	{
-		for (int column = 0; column < columnCount; column++) 
+		for (int column = 0; column < columnCount(&(detectionResult->_barcodeMetadata)); column++) 
 		{
-			auto values = barcodeMatrix[row][column + 1].value();
-			int codewordIndex = row * columnCount + column;
-			if (values.empty()) 
+			int values[1] = {0};
+			values[0] = find_idx(&barcodeMatrix[row][column + 1]);
+			int codewordIndex = row * columnCount(&(detectionResult->_barcodeMetadata)) + column;
+			if (values[0] == 0) 
 			{
-				erasures.push_back(codewordIndex);
+				erasures[idx] = codewordIndex;
+				idx++;
 			}
-			else if (values.size() == 1) 
+			else if (values[0] != 0) 
 			{
 				codewords[codewordIndex] = values[0];
 			}
 			else 
 			{
-				ambiguousIndexesList.push_back(codewordIndex);
-				ambiguousIndexValues.push_back(values);
+				//ambiguousIndexesList.push_back(codewordIndex);
+				//ambiguousIndexValues.push_back(values);
 			}
 		}
 	}
 
 	return CreateDecoderResultFromAmbiguousValues(errorCorrectionLevel(&detectionResult->_barcodeMetadata), codewords, erasures,
-												  ambiguousIndexesList, ambiguousIndexValues, characterSet);
-												  #endif
+												  ambiguousIndexesList, ambiguousIndexValues, characterSet,idx,codewordsNum);
+
 }
 
 

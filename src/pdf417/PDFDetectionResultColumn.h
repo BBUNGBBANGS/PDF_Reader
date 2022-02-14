@@ -25,8 +25,9 @@ typedef struct
 }DetectionResultColumn_t;
 extern Codeword_t * allCodewords(DetectionResultColumn_t * RowIndicatorColumn);
 extern void DetectionResultColumn(const BoundingBox_t * boundingBox, RowIndicator_t rowInd, DetectionResultColumn_t * RowIndicatorColumn);
-extern void adjustCompleteIndicatorColumnRowNumbers(DetectionResultColumn_t * detectionResultColumn,const BarcodeMetadata_t * barcodeMetadata);
+extern void adjustCompleteIndicatorColumnRowNumbers(DetectionResultColumn_t * detectionResultColumn,const BarcodeMetadata_t * barcodeMetadata,int size);
 extern Codeword_t codewordNearby(DetectionResultColumn_t * RowIndicatorColumn,int imageRow,int size);
 extern uint8_t getBarcodeMetadata(DetectionResultColumn_t * RowIndicatorColumn, BarcodeMetadata_t * result, int length);
 extern uint8_t getRowHeights(DetectionResultColumn_t * rowIndicatorColumn,int * result,int length,int * size);
+extern void clear_Codewords(Codeword_t * codewords);
 #endif
