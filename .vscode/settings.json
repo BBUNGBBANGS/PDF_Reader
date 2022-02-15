@@ -70,6 +70,7 @@
         "pdfdetectionresultcolumn.h": "c",
         "pdfbarcodevalue.h": "c",
         "iomanip": "cpp",
-        "pdfdecoderresultextra.h": "c"
+        "pdfdecoderresultextra.h": "c",
+        "stdint.h": "c"
     }
 }

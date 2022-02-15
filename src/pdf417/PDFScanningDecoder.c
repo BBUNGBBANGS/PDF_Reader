@@ -770,8 +770,8 @@ static uint8_t VerifyCodewordCount(int * codewords, int numECCodewords,int codew
 	}
 	return 1;
 }
-static void result_init(DecoderResult_t * result)
-{
+void result_init(DecoderResult_t * result)
+{		
 	result->status = NoError;
 	result->_rawBytes = NULL;
 	result->_numBits = 0;
@@ -813,7 +813,7 @@ DecoderResult_t DecodeCodewords(int * codewords, int ecLevel, const int * erasur
 	}
 
 	// Decode the codewords
-	result = BitStreamDecode(codewords, ecLevel, characterSet);
+	BitStreamDecode(&result,codewords, ecLevel, characterSet);
 
 	if (result.status == NoError) 
 	{
@@ -839,39 +839,40 @@ DecoderResult_t DecodeCodewords(int * codewords, int ecLevel, const int * erasur
 * @param ambiguousIndexValues two dimensional array that contains the ambiguous values. The first dimension must
 * be the same length as the ambiguousIndexes array
 */
-static DecoderResult_t * CreateDecoderResultFromAmbiguousValues(int ecLevel, int * codewords,
+static DecoderResult_t CreateDecoderResultFromAmbiguousValues(int ecLevel, int * codewords,
 	const int * erasureArray, const int * ambiguousIndexes,
-	const int * ambiguousIndexValues, const char * characterSet,int erasure_size,int codewordsNum)
+	const int * ambiguousIndexValues, const char * characterSet,int erasure_size,int codewordsNum,int ambiguousSize)
 {	
-
-	//int ambiguousIndexCount[ambiguousIndexes.size()] = 0; size 계산 필요
+	DecoderResult_t result;
+	result_init(&result);
+	int ambiguousIndexCount[ambiguousSize];
+	fill(ambiguousSize,ambiguousIndexCount,0);
 
 	int tries = 100;
 	while (tries-- > 0) 
 	{
-		#if 0
-		for (size_t i = 0; i < ambiguousIndexCount.size(); i++) 
+		for (size_t i = 0; i < ambiguousSize; i++) 
 		{
-			codewords[ambiguousIndexes[i]] = ambiguousIndexValues[i][ambiguousIndexCount[i]];
+			//codewords[ambiguousIndexes[i]] = ambiguousIndexValues[i][ambiguousIndexCount[i]];
 		}
-		#endif
 
-		DecoderResult_t result = DecodeCodewords(codewords, ecLevel, erasureArray, characterSet,erasure_size,codewordsNum);
+		result = DecodeCodewords(codewords, ecLevel, erasureArray, characterSet,erasure_size,codewordsNum);
+
 		if (result.status != ChecksumError) 
 		{
-			return &result;
+			return result;
 		}
 
-		#if 0
-		if (ambiguousIndexCount.empty()) 
+
+		if (ambiguousSize == 0) 
 		{
-			return ChecksumError;
+			result.status = ChecksumError;
+			return result;
 		}
-		#endif
-		#if 0
-		for (size_t i = 0; i < ambiguousIndexCount.size(); i++) 
+
+		for (size_t i = 0; i < ambiguousSize; i++) 
 		{
-			if (ambiguousIndexCount[i] < Size(ambiguousIndexValues[i]) - 1) 
+			if (ambiguousIndexCount[i] < ambiguousSize - 1) 
 			{
 				ambiguousIndexCount[i]++;
 				break;
@@ -879,16 +880,18 @@ static DecoderResult_t * CreateDecoderResultFromAmbiguousValues(int ecLevel, int
 			else 
 			{
 				ambiguousIndexCount[i] = 0;
-				if (i == ambiguousIndexCount.size() - 1) 
+				if (i == ambiguousSize - 1) 
 				{
-					return ChecksumError;
+					result.status = ChecksumError;
+					return result;
 				}
 			}
 		}
-		#endif
 	}
 
-	return ChecksumError;
+	result.status = ChecksumError;
+	
+	return result;
 }
 static int find_idx(BarcodeValue_t * buffer)
 {
@@ -904,8 +907,10 @@ static int find_idx(BarcodeValue_t * buffer)
 
 	return idx;
 }
-static DecoderResult_t * CreateDecoderResult(DetectionResult_t * detectionResult, const unsigned char * characterSet,int size)
+static DecoderResult_t CreateDecoderResult(DetectionResult_t * detectionResult, const unsigned char * characterSet,int size)
 {
+	DecoderResult_t result_fault;
+	result_init(&result_fault);
 	int rowNum = detectionResult->_barcodeMetadata._rowCountUpperPart + detectionResult->_barcodeMetadata._rowCountLowerPart;
 	int columnNum = detectionResult->_barcodeMetadata._columnCount + 2;
 	BarcodeValue_t barcodeMatrix[rowNum][columnNum];
@@ -913,18 +918,19 @@ static DecoderResult_t * CreateDecoderResult(DetectionResult_t * detectionResult
 	CreateBarcodeMatrix(barcodeMatrix[0],detectionResult,size,rowNum,columnNum);
 	if (!AdjustCodewordCount(detectionResult, barcodeMatrix,size)) 
 	{
-		return NotFound;
+		result_fault.status = NotFound;
+		return result_fault;
 	}
 	
-	int erasures[10];
+	int erasures[10] = {0,};
 	int codewordsNum = rowCount(&detectionResult->_barcodeMetadata) * columnCount(&detectionResult->_barcodeMetadata);
 	int codewords[codewordsNum];
-	int ambiguousIndexValues;
-	int ambiguousIndexesList;
-	fill(10,erasures,0);
+	int ambiguousIndexValues[10] = {0,};
+	int ambiguousIndexesList[10] = {0,};
 	fill(codewordsNum,codewords,0);
 
 	int idx = 0;
+	int ambiguousSize = 0;
 
 	for (int row = 0; row < rowCount(&(detectionResult->_barcodeMetadata)); row++) 
 	{
@@ -944,14 +950,15 @@ static DecoderResult_t * CreateDecoderResult(DetectionResult_t * detectionResult
 			}
 			else 
 			{
-				//ambiguousIndexesList.push_back(codewordIndex);
-				//ambiguousIndexValues.push_back(values);
+				ambiguousIndexesList[ambiguousSize]=codewordIndex;
+				ambiguousIndexValues[ambiguousSize]=values;
+				ambiguousSize++;
 			}
 		}
 	}
 
 	return CreateDecoderResultFromAmbiguousValues(errorCorrectionLevel(&detectionResult->_barcodeMetadata), codewords, erasures,
-												  ambiguousIndexesList, ambiguousIndexValues, characterSet,idx,codewordsNum);
+												  ambiguousIndexesList, ambiguousIndexValues, characterSet,idx,codewordsNum,ambiguousSize);
 
 }
 
@@ -960,14 +967,17 @@ static DecoderResult_t * CreateDecoderResult(DetectionResult_t * detectionResult
 // columns. That way width can be deducted from the pattern column.
 // This approach also allows to detect more details about the barcode, e.g. if a bar type (white or black) is wider 
 // than it should be. This can happen if the scanner used a bad blackpoint.
-DecoderResult_t * Decode(const BitMatrix_t * image, ResultPoint_t imageTopLeft, ResultPoint_t imageBottomLeft,
+DecoderResult_t Decode(const BitMatrix_t * image, ResultPoint_t imageTopLeft, ResultPoint_t imageBottomLeft,
 	ResultPoint_t imageTopRight, ResultPoint_t imageBottomRight,
 	int minCodewordWidth, int maxCodewordWidth, const unsigned char * characterSet)
 {
+	DecoderResult_t result_fault;
+	result_init(&result_fault);
 	BoundingBox_t boundingBox;
 	if (!Create(image->_width, image->_height, imageTopLeft, imageBottomLeft, imageTopRight, imageBottomRight, &boundingBox)) 
 	{
-		return NotFound;
+		result_fault.status = NotFound;
+		return result_fault;
 	}
 	int length = 0;
 
@@ -986,7 +996,8 @@ DecoderResult_t * Decode(const BitMatrix_t * image, ResultPoint_t imageTopLeft, 
 		}
 		if (!Merge(&leftRowIndicatorColumn, &rightRowIndicatorColumn, &detectionResult,length)) 
 		{
-			return NotFound;
+			result_fault.status = NotFound;
+			return result_fault;
 		}
 		if (i == 0 && (detectionResult._boundingBox.m_hasValue != 0) && (detectionResult._boundingBox.m_value._minY < boundingBox.m_value._minY || detectionResult._boundingBox.m_value._maxY > boundingBox.m_value._maxY)) 
 		{

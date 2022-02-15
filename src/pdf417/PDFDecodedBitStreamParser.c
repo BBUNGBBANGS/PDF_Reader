@@ -153,6 +153,7 @@ static void DecodeTextCompaction(const int * textCompactionData, int length, uns
 	Mode_t priorToShiftMode = ALPHA;
 
 	int i = 0;
+	int character_idx = 0;
 	while (i < length) 
 	{
 		int subModeCh = textCompactionData[i];
@@ -288,7 +289,8 @@ static void DecodeTextCompaction(const int * textCompactionData, int length, uns
 		if (ch != 0) 
 		{
 			// Append decoded character to result
-			result=ch;
+			result[character_idx] = ch;
+			character_idx++;
 		}
 		i++;
 	}
@@ -338,7 +340,7 @@ static int TextCompaction(DecodeStatus_t status, const int * codewords, int code
 	printf("TextCompaction\n");
 
 	// 2 characters per codeword
-	int size = codewords[0] - codeIndex * 2;
+	int size = (codewords[0] - codeIndex) * 2;
 	int textCompactionData[size];
 	fill(size,textCompactionData,0);
 
@@ -918,14 +920,18 @@ static void DecoderResultExtra_init(DecoderResultExtra_t * result)
 	result->_timestamp = -1;
 	result->_checksum = -1;
 }
-
-DecoderResult_t BitStreamDecode(const int * codewords, int ecLevel, const unsigned char * characterSet)
+static void StructuredAppendInfo_Init(StructuredAppendInfo_t * sai)
 {
+	sai->index = -1;
+	sai->count = -1;
+	sai->id = NULL;
+}
 
+void BitStreamDecode(DecoderResult_t * DecoderResult, const int * codewords, int ecLevel, const unsigned char * characterSet)
+{
 	unsigned char resultEncoded[100] = {0,};
 	unsigned char result[100] = {0,};
-	unsigned char encoding[50] = {0,}; //= CharacterSetECI::InitEncoding(characterSet);
-	sprintf(encoding,"ISO8859_1");
+	CharacterSet_t encoding = ISO8859_1; //= CharacterSetECI::InitEncoding(characterSet);
 	uint8_t readerInit = 0;
 	DecoderResultExtra_t resultMetadata;
 	DecoderResultExtra_init(&resultMetadata);
@@ -938,24 +944,24 @@ DecoderResult_t BitStreamDecode(const int * codewords, int ecLevel, const unsign
 		switch (code) 
 		{
 			case TEXT_COMPACTION_MODE_LATCH:
-				codeIndex = TextCompaction(status, codewords, codeIndex, resultEncoded, result, encoding);
+				codeIndex = TextCompaction(status, codewords, codeIndex, resultEncoded, result, &encoding);
 			break;
 			case MODE_SHIFT_TO_BYTE_COMPACTION_MODE:
 				// This should only be encountered once in this loop, when default Text Compaction mode applies
 				// (see default case below)
-				codeIndex = TextCompaction(status, codewords, codeIndex - 1, resultEncoded, result, encoding);
+				codeIndex = TextCompaction(status, codewords, codeIndex - 1, resultEncoded, result, &encoding);
 			break;
 			case BYTE_COMPACTION_MODE_LATCH:
 			case BYTE_COMPACTION_MODE_LATCH_6:
-				codeIndex = ByteCompaction(status, code, codewords, codeIndex, resultEncoded, result, encoding);
+				codeIndex = ByteCompaction(status, code, codewords, codeIndex, resultEncoded, result, &encoding);
 			break;
 			case NUMERIC_COMPACTION_MODE_LATCH:
-				codeIndex = NumericCompaction(status, codewords, codeIndex, resultEncoded, result, encoding);
+				codeIndex = NumericCompaction(status, codewords, codeIndex, resultEncoded, result, &encoding);
 			break;
 			case ECI_CHARSET:
 			case ECI_GENERAL_PURPOSE:
 			case ECI_USER_DEFINED:
-				codeIndex = ProcessECI(codewords, codeIndex, codewords[0], code, resultEncoded, result, encoding);
+				codeIndex = ProcessECI(codewords, codeIndex, codewords[0], code, resultEncoded, result, &encoding);
 			break;
 			case BEGIN_MACRO_PDF417_CONTROL_BLOCK:
 				status = DecodeMacroBlock(codewords, codeIndex, &resultMetadata, codeIndex);
@@ -998,41 +1004,57 @@ DecoderResult_t BitStreamDecode(const int * codewords, int ecLevel, const unsign
 				else 
 				{
 					// Default mode is Text Compaction mode Alpha sub-mode (ISO/IEC 15438:2015 5.4.2.1)
-					codeIndex = TextCompaction(status, codewords, codeIndex - 1, resultEncoded, result, encoding);
+					codeIndex = TextCompaction(status, codewords, codeIndex - 1, resultEncoded, result, &encoding);
 				}
 			break;
 		}
 	}
-	#if 0
-	TextDecoder::Append(resultEncoded, reinterpret_cast<const uint8_t*>(result.data()), result.size(), encoding);
 
-	if (resultEncoded.empty() && resultMetadata->segmentIndex() == -1)
+	Append(resultEncoded, (const uint8_t*)(result), strlen(result), encoding);
+
+	if ((strlen(resultEncoded) == 0) && (resultMetadata._segmentIndex == -1))
 	{
-		return FormatError;
+		DecoderResult->status = FormatError;
 	}
 
 
 	if (StatusIsError(status))
 	{
-		return status;
+		DecoderResult->status = status;
 	}
 
 
-	StructuredAppendInfo sai;
-	if (resultMetadata->segmentIndex() > -1) 
+	StructuredAppendInfo_t sai;
+	StructuredAppendInfo_Init(&sai);
+	if (resultMetadata._segmentIndex > -1) 
 	{
-		sai.count = resultMetadata->segmentCount() != -1
-						? resultMetadata->segmentCount()
-						: (resultMetadata->isLastSegment() ? resultMetadata->segmentIndex() + 1 : 0);
-		sai.index = resultMetadata->segmentIndex();
-		sai.id    = resultMetadata->fileId();
+		sai.count = resultMetadata._segmentCount != -1
+						? resultMetadata._segmentCount
+						: (resultMetadata._lastSegment ? resultMetadata._segmentIndex + 1 : 0);
+		sai.index = resultMetadata._segmentIndex;
+		sai.id    = resultMetadata._fileId;
 	}
 
-	return DecoderResult(ByteArray(), std::move(resultEncoded))
-		.setEcLevel(std::to_wstring(ecLevel))
-		.setStructuredAppend(sai)
-		.setReaderInit(readerInit)
-		.setExtra(resultMetadata);
-	#endif
+	int ecLevelChar[2];
+	if(ecLevel<10)
+	{
+		ecLevelChar[0] = ecLevel+48;
+	}
+	else if(ecLevel<100)
+	{
+		
+		ecLevelChar[0] = (ecLevel%10)+48;
+		ecLevelChar[1] = (ecLevel%100)/10+48;	
+	}
+	else{}
+
+	//DecoderResult->_rawBytes = ;
+	//DecoderResult->_numBits;
+	DecoderResult->_text = result;
+	DecoderResult->_ecLevel = ecLevelChar;
+	DecoderResult->_structuredAppend = sai;
+	DecoderResult->_readerInit = readerInit;
+	DecoderResult->_extra = &resultMetadata;
+
 }
 

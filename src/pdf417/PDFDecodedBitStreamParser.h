@@ -3,6 +3,6 @@
 
 #include "DecoderResult.h"
 
-extern DecoderResult_t BitStreamDecode(const int * codewords, int ecLevel, const unsigned char * characterSet);
+extern void BitStreamDecode(DecoderResult_t * DecoderResult, const int * codewords, int ecLevel, const unsigned char * characterSet);
 
 #endif

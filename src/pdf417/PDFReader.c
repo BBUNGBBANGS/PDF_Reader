@@ -58,7 +58,8 @@ DecodeStatus_t DoDecode(GenericLuminanceSource_t * image, unsigned char multiple
 	}
 
 	ResultPoint_t * points = detectorResult.points;
-	DecoderResult_t * decoderResult = NULL;
+	DecoderResult_t decoderResult;
+	result_init(&decoderResult);
 	//for (const auto& points : detectorResult.points) 
 	//{
 		decoderResult = Decode(detectorResult.bits, points[4], points[5], points[6], points[7],
