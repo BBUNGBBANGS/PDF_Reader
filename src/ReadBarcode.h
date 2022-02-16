@@ -1,6 +1,7 @@
 #ifndef _READBARCODE_H
 #define _READBARCODE_H
 
+#include "Result.h"
 #include <stdint.h>
 #include <stdio.h>
 #include "GenericLuminanceSource.h"
@@ -26,8 +27,7 @@ typedef struct
 	int pixStride;
 }ImageView_t;
 
-
-extern unsigned int * ReadBarcode(unsigned char *iv, int width,int height, unsigned int ImageFormat);
+extern result_t ReadBarcode(unsigned char *iv, int width,int height, unsigned int ImageFormat);
 #endif
 
 

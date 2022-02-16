@@ -22,7 +22,16 @@ typedef struct
 	float x;
 	float y;
 }PointT_t;
-
+typedef struct 
+{
+	int x;
+	int y;
+}PointI_t;
+typedef struct 
+{
+	double x;
+	double y;
+}PointF_t;
 typedef struct 
 {
 	uint8_t m_hasValue;

@@ -198,7 +198,7 @@ static uint8_t * FindRowsWithPattern(const BitMatrix_t * matrix, int height, int
 	}
 	if (stopRow - startRow < BARCODE_MIN_HEIGHT) 
 	{
-		for(uint8_t i = 0;i<8;i++)
+		for(uint8_t i = 0;i<4;i++)
 		{
 			result[i].m_hasValue = 0;
 			result[i].m_value.x = 0;

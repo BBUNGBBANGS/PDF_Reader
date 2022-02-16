@@ -24,6 +24,7 @@ BUILD_DIR = build
 C_SOURCES =  \
 PDF.c \
 thirdparty/stb_image.c \
+src/BarcodeFormat.c \
 src/ReadBarcode.c \
 src/GenericLuminanceSource.c \
 src/MultiFormatReader.c \
@@ -33,6 +34,7 @@ src/ResultPoint.c \
 src/Library.c \
 src/CharacterSetECI.c \
 src/TextDecoder.c \
+src/Result.c \
 src/pdf417/PDFBarcodeValue.c \
 src/pdf417/PDFBoundingBox.c \
 src/pdf417/PDFCodewordDecoder.c \

@@ -4,5 +4,5 @@
 #include "GenericLuminanceSource.h"
 #include "BitMatrix.h"
 
-extern unsigned char * getBlackMatrix(GenericLuminanceSource_t * image);
+extern BitMatrix_t * getBlackMatrix(GenericLuminanceSource_t * image);
 #endif

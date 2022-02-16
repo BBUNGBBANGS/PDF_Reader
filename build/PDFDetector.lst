@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 1
 
 
    1              		.file	"PDFDetector.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
   51              	_SKIPPED_ROW_COUNT_MAX:
   52 008c 19000000 		.long	25
   53              		.align 4
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 2
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 2
 
 
   54              	_ROW_STEP:
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
   38:src/pdf417/PDFDetector.c **** 								  return IsPattern(window, pattern, spaceInPixel, minQuiteZone);
   39:src/pdf417/PDFDetector.c **** 							  });
   40:src/pdf417/PDFDetector.c **** }
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 3
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 3
 
 
   41:src/pdf417/PDFDetector.c **** #endif
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  104 004e 8B450C   		movl	12(%ebp), %eax
  105 0051 01D0     		addl	%edx, %eax
  106 0053 8B00     		movl	(%eax), %eax
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 4
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 4
 
 
  107              		.loc 1 51 17 discriminator 3
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
   67:src/pdf417/PDFDetector.c **** 	for (size_t x = 0; x < length; x++) 
  141              		.loc 1 67 14
  142 0090 C745E400 		movl	$0, -28(%ebp)
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 5
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 5
 
 
  142      000000
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
   72:src/pdf417/PDFDetector.c **** 		if (variance > maxIndividualVariance) {
  190              		.loc 1 72 6 discriminator 4
  191 00ed D94514   		flds	20(%ebp)
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 6
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 6
 
 
  192 00f0 D945D4   		flds	-44(%ebp)
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  231              		.text
  233              	_FindGuardPattern:
  234              	LFB17:
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 7
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 7
 
 
   80:src/pdf417/PDFDetector.c **** 
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  275              	L18:
   86:src/pdf417/PDFDetector.c **** 	{
  276              		.loc 1 86 2 discriminator 1
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 8
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 8
 
 
  277 017b 807DF707 		cmpb	$7, -9(%ebp)
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  314 01be 7E12     		jle	L21
   96:src/pdf417/PDFDetector.c **** 		patternStart--;
  315              		.loc 1 96 96 discriminator 2
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 9
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 9
 
 
  316 01c0 8B45EC   		movl	-20(%ebp), %eax
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  357      000000
  358 0215 8B4524   		movl	36(%ebp), %eax
  359 0218 01D0     		addl	%edx, %eax
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 10
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 10
 
 
  360 021a 8B10     		movl	(%eax), %edx
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  112:src/pdf417/PDFDetector.c **** 				}
  113:src/pdf417/PDFDetector.c **** 				patternStart += counters[0] + counters[1];
  400              		.loc 1 113 29
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 11
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 11
 
 
  401 027e 8B4524   		movl	36(%ebp), %eax
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  446              	LBE7:
  117:src/pdf417/PDFDetector.c **** 				}
  118:src/pdf417/PDFDetector.c **** 				counters[patternLength - 2] = 0;
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 12
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 12
 
 
  447              		.loc 1 118 13
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  484              		.loc 1 101 21
  485 0332 8345E801 		addl	$1, -24(%ebp)
  486              	L23:
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 13
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 13
 
 
  101:src/pdf417/PDFDetector.c **** 		uint8_t pixel = matrix->bits[(row * matrix->_width + x)];
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  135:src/pdf417/PDFDetector.c **** 	}
  136:src/pdf417/PDFDetector.c **** 	return 0;
  527              		.loc 1 136 9
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 14
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 14
 
 
  528 0396 B8000000 		movl	$0, %eax
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  145:src/pdf417/PDFDetector.c **** 	int startPos, endPos;
  146:src/pdf417/PDFDetector.c **** 
  147:src/pdf417/PDFDetector.c **** 	int counters[patternlength];
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 15
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 15
 
 
  568              		.loc 1 147 2
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  612              		.loc 1 149 6
  613 044f 84C0     		testb	%al, %al
  614 0451 0F84AC00 		je	L41
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 16
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 16
 
 
  614      0000
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  657              		.loc 1 157 24
  658 04be 8B45D4   		movl	-44(%ebp), %eax
  659 04c1 8945C0   		movl	%eax, -64(%ebp)
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 17
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 17
 
 
  660 04c4 DB45C0   		fildl	-64(%ebp)
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  701              		.loc 1 166 6
  702 0517 8B4514   		movl	20(%ebp), %eax
  703 051a 83C001   		addl	$1, %eax
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 18
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 18
 
 
  704 051d 8945F0   		movl	%eax, -16(%ebp)
@@ -1078,7 +1078,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  746      00000000 
  747 0590 8B4510   		movl	16(%ebp), %eax
  748 0593 8944240C 		movl	%eax, 12(%esp)
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 19
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 19
 
 
  749 0597 8B45F0   		movl	-16(%ebp), %eax
@@ -1138,7 +1138,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  793 05f2 8945E4   		movl	%eax, -28(%ebp)
  182:src/pdf417/PDFDetector.c **** 				skippedRowCount = 0;
  794              		.loc 1 182 21
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 20
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 20
 
 
  795 05f5 C745EC00 		movl	$0, -20(%ebp)
@@ -1198,7 +1198,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  832 0631 8B4524   		movl	36(%ebp), %eax
  833 0634 83C018   		addl	$24, %eax
  834              		.loc 1 193 23
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 21
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 21
 
 
  835 0637 DB45E8   		fildl	-24(%ebp)
@@ -1245,7 +1245,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  869 0677 7D5F     		jge	L54
  870              	LBB11:
  200:src/pdf417/PDFDetector.c **** 	{
- 201:src/pdf417/PDFDetector.c **** 		for(uint8_t i = 0;i<8;i++)
+ 201:src/pdf417/PDFDetector.c **** 		for(uint8_t i = 0;i<4;i++)
  871              		.loc 1 201 15
  872 0679 C645E300 		movb	$0, -29(%ebp)
  873              		.loc 1 201 3
@@ -1258,7 +1258,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  878 0683 89D0     		movl	%edx, %eax
  879 0685 01C0     		addl	%eax, %eax
  880 0687 01D0     		addl	%edx, %eax
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 22
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 22
 
 
  881 0689 C1E002   		sall	$2, %eax
@@ -1301,7 +1301,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  915              	L55:
  201:src/pdf417/PDFDetector.c **** 		{
  916              		.loc 1 201 3 discriminator 1
- 917 06d2 807DE307 		cmpb	$7, -29(%ebp)
+ 917 06d2 807DE303 		cmpb	$3, -29(%ebp)
  918 06d6 76A7     		jbe	L56
  919              	L54:
  920              	LBE11:
@@ -1318,7 +1318,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  925 06dd 8B5DFC   		movl	-4(%ebp), %ebx
  926 06e0 C9       		leave
  927              	LCFI8:
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 23
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 23
 
 
  928              		.cfi_restore 5
@@ -1378,7 +1378,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  974 0724 89C2     		movl	%eax, %edx
  975 0726 8B4508   		movl	8(%ebp), %eax
  976 0729 01C2     		addl	%eax, %edx
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 24
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 24
 
 
  977              		.loc 1 217 58 discriminator 3
@@ -1438,7 +1438,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  1027 0794 01C0     		addl	%eax, %eax
  1028 0796 01C8     		addl	%ecx, %eax
  1029 0798 C1E002   		sall	$2, %eax
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 25
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 25
 
 
  1030 079b 89C1     		movl	%eax, %ecx
@@ -1498,7 +1498,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  227:src/pdf417/PDFDetector.c **** 
  228:src/pdf417/PDFDetector.c **** 	ResultPoint_t tmp[4];
  229:src/pdf417/PDFDetector.c **** 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 26
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 26
 
 
  230:src/pdf417/PDFDetector.c **** 	for(uint8_t i=0;i<4;i++)
@@ -1558,7 +1558,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  1122 082e 76A6     		jbe	L64
  1123              	LBE13:
  1124              	LBB14:
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 27
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 27
 
 
  235:src/pdf417/PDFDetector.c **** 	}
@@ -1618,7 +1618,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  1167              	LBE14:
  242:src/pdf417/PDFDetector.c **** 	}
  243:src/pdf417/PDFDetector.c **** 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 28
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 28
 
 
  244:src/pdf417/PDFDetector.c **** 	CopyToResult(Vertice_Result, FindRowsWithPattern(matrix, height, width, startRow, startColumn, STA
@@ -1678,7 +1678,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  1206              		.loc 1 249 15
  1207 090f D96DB4   		fldcw	-76(%ebp)
  1208 0912 DB5D0C   		fistpl	12(%ebp)
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 29
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 29
 
 
  1209 0915 D96DB6   		fldcw	-74(%ebp)
@@ -1738,7 +1738,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  1247              	_DetectBarcode:
  1248              	LFB21:
  256:src/pdf417/PDFDetector.c **** 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 30
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 30
 
 
  257:src/pdf417/PDFDetector.c **** static ResultPoint_t * DetectBarcode(const BitMatrix_t * bitMatrix, uint8_t multiple)
@@ -1798,7 +1798,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  1284 09c8 8B4508   		movl	8(%ebp), %eax
  1285 09cb 890424   		movl	%eax, (%esp)
  1286 09ce E8E6FDFF 		call	_FindVertices
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 31
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 31
 
 
  1286      FF
@@ -1858,7 +1858,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  1307 09f7 C645EF01 		movb	$1, -17(%ebp)
  301:src/pdf417/PDFDetector.c **** 		barcodeCoordinates = vertices;
  1308              		.loc 1 301 22
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 32
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 32
 
 
  1309 09fb 8B45E4   		movl	-28(%ebp), %eax
@@ -1918,7 +1918,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  1347 0a4c 8B45E4   		movl	-28(%ebp), %eax
  1348 0a4f 83C030   		addl	$48, %eax
  1349              		.loc 1 316 33
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 33
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 33
 
 
  1350 0a52 D94004   		flds	4(%eax)
@@ -1978,7 +1978,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  1393              	LFE21:
  1394              		.section .rdata,"dr"
  1395              	LC9:
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 34
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 34
 
 
  1396 013e 48617353 		.ascii "HasStartPattern \0"
@@ -2038,7 +2038,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  1427 0ae9 C745EC00 		movl	$0, -20(%ebp)
  1427      000000
  1428              	LBB15:
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 35
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 35
 
 
  332:src/pdf417/PDFDetector.c **** 
@@ -2098,7 +2098,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  1462              	LFE22:
  1464              	_Empty_Check:
  1465              	LFB23:
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 36
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 36
 
 
  346:src/pdf417/PDFDetector.c **** static uint8_t Empty_Check(ResultPoint_t * barcodeCoordinates)
@@ -2158,7 +2158,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  350:src/pdf417/PDFDetector.c **** 	{
  1509              		.loc 1 350 2 discriminator 1
  1510 0b6e 807DFD07 		cmpb	$7, -3(%ebp)
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 37
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 37
 
 
  1511 0b72 76CC     		jbe	L86
@@ -2218,7 +2218,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  1546              		.cfi_offset 5, -8
  1547 0b8b 89E5     		movl	%esp, %ebp
  1548              	LCFI25:
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 38
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 38
 
 
  1549              		.cfi_def_cfa_register 5
@@ -2278,7 +2278,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  1579              		.loc 1 387 23
  1580 0bd6 0FB645E4 		movzbl	-28(%ebp), %eax
  1581 0bda 89442404 		movl	%eax, 4(%esp)
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 39
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 39
 
 
  1582 0bde 8B45F4   		movl	-12(%ebp), %eax
@@ -2338,7 +2338,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  1618 0c33 895004   		movl	%edx, 4(%eax)
  401:src/pdf417/PDFDetector.c **** 	result->bits = binImg;
  1619              		.loc 1 401 15
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 40
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 40
 
 
  1620 0c36 8B4510   		movl	16(%ebp), %eax
@@ -2398,7 +2398,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  1663      74756E65 
  1664 0046 0C       		.byte	0xc
  1665 0047 7372632F 		.ascii "src/pdf417/PDFDetector.c\0"
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 41
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 41
 
 
  1665      70646634 
@@ -2458,7 +2458,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  1698 00f2 09       		.byte	0x9
  1699 00f3 02       		.byte	0x2
  1700 00f4 8F000000 		.long	0x8f
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 42
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 42
 
 
  1701 00f8 04       		.uleb128 0x4
@@ -2518,7 +2518,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  1743 016c 0F010000 		.long	0x10f
  1744 0170 04       		.uleb128 0x4
  1745 0171 04       		.byte	0x4
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 43
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 43
 
 
  1746 0172 07       		.byte	0x7
@@ -2578,7 +2578,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  1782 01f1 07       		.byte	0x7
  1783 01f2 6C6F6E67 		.ascii "long long unsigned int\0"
  1783      206C6F6E 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 44
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 44
 
 
  1783      6720756E 
@@ -2638,7 +2638,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  1829 0262 05       		.byte	0x5
  1830 0263 1F       		.byte	0x1f
  1831 0264 09       		.byte	0x9
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 45
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 45
 
 
  1832 0265 0F010000 		.long	0x10f
@@ -2698,7 +2698,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  1878 02ce 5C       		.byte	0x5c
  1879 02cf 10       		.byte	0x10
  1880 02d0 D6020000 		.long	0x2d6
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 46
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 46
 
 
  1881 02d4 01       		.byte	0x1
@@ -2758,7 +2758,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  1933 032d 0F010000 		.long	0x10f
  1934 0331 02       		.byte	0x2
  1935 0332 23       		.byte	0x23
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 47
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 47
 
 
  1936 0333 10       		.uleb128 0x10
@@ -2818,7 +2818,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  1981      53697A65 
  1981      00
  1982 03a8 07       		.byte	0x7
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 48
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 48
 
 
  1983 03a9 0A       		.byte	0xa
@@ -2878,7 +2878,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2034 0405 00       		.byte	0
  2035 0406 04       		.uleb128 0x4
  2036 0407 04       		.byte	0x4
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 49
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 49
 
 
  2037 0408 04       		.byte	0x4
@@ -2894,96 +2894,96 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2044 041f 18       		.byte	0x18
  2045 0420 02       		.byte	0x2
  2046 0421 E2030000 		.long	0x3e2
- 2047 0425 0D       		.uleb128 0xd
- 2048 0426 0C       		.byte	0xc
- 2049 0427 08       		.byte	0x8
- 2050 0428 1A       		.byte	0x1a
- 2051 0429 09       		.byte	0x9
- 2052 042a 58040000 		.long	0x458
- 2053 042e 09       		.uleb128 0x9
- 2054 042f 6D5F6861 		.ascii "m_hasValue\0"
- 2054      7356616C 
- 2054      756500
- 2055 043a 08       		.byte	0x8
- 2056 043b 1C       		.byte	0x1c
- 2057 043c 0A       		.byte	0xa
- 2058 043d C1010000 		.long	0x1c1
- 2059 0441 02       		.byte	0x2
- 2060 0442 23       		.byte	0x23
- 2061 0443 00       		.uleb128 0
- 2062 0444 09       		.uleb128 0x9
- 2063 0445 6D5F7661 		.ascii "m_value\0"
- 2063      6C756500 
- 2064 044d 08       		.byte	0x8
- 2065 044e 1D       		.byte	0x1d
- 2066 044f 0B       		.byte	0xb
- 2067 0450 14040000 		.long	0x414
- 2068 0454 02       		.byte	0x2
- 2069 0455 23       		.byte	0x23
- 2070 0456 04       		.uleb128 0x4
- 2071 0457 00       		.byte	0
- 2072 0458 05       		.uleb128 0x5
- 2073 0459 52657375 		.ascii "ResultPoint_t\0"
- 2073      6C74506F 
- 2073      696E745F 
- 2073      7400
- 2074 0467 08       		.byte	0x8
- 2075 0468 1E       		.byte	0x1e
- 2076 0469 02       		.byte	0x2
- 2077 046a 25040000 		.long	0x425
- 2078 046e 06       		.uleb128 0x6
- 2079 046f 58040000 		.long	0x458
- 2080 0473 0D       		.uleb128 0xd
- 2081 0474 08       		.byte	0x8
- 2082 0475 09       		.byte	0x9
- 2083 0476 09       		.byte	0x9
- 2084 0477 09       		.byte	0x9
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 50
+ 2047 0425 04       		.uleb128 0x4
+ 2048 0426 08       		.byte	0x8
+ 2049 0427 04       		.byte	0x4
+ 2050 0428 646F7562 		.ascii "double\0"
+ 2050      6C6500
+ 2051 042f 0D       		.uleb128 0xd
+ 2052 0430 0C       		.byte	0xc
+ 2053 0431 08       		.byte	0x8
+ 2054 0432 23       		.byte	0x23
+ 2055 0433 09       		.byte	0x9
+ 2056 0434 62040000 		.long	0x462
+ 2057 0438 09       		.uleb128 0x9
+ 2058 0439 6D5F6861 		.ascii "m_hasValue\0"
+ 2058      7356616C 
+ 2058      756500
+ 2059 0444 08       		.byte	0x8
+ 2060 0445 25       		.byte	0x25
+ 2061 0446 0A       		.byte	0xa
+ 2062 0447 C1010000 		.long	0x1c1
+ 2063 044b 02       		.byte	0x2
+ 2064 044c 23       		.byte	0x23
+ 2065 044d 00       		.uleb128 0
+ 2066 044e 09       		.uleb128 0x9
+ 2067 044f 6D5F7661 		.ascii "m_value\0"
+ 2067      6C756500 
+ 2068 0457 08       		.byte	0x8
+ 2069 0458 26       		.byte	0x26
+ 2070 0459 0B       		.byte	0xb
+ 2071 045a 14040000 		.long	0x414
+ 2072 045e 02       		.byte	0x2
+ 2073 045f 23       		.byte	0x23
+ 2074 0460 04       		.uleb128 0x4
+ 2075 0461 00       		.byte	0
+ 2076 0462 05       		.uleb128 0x5
+ 2077 0463 52657375 		.ascii "ResultPoint_t\0"
+ 2077      6C74506F 
+ 2077      696E745F 
+ 2077      7400
+ 2078 0471 08       		.byte	0x8
+ 2079 0472 27       		.byte	0x27
+ 2080 0473 02       		.byte	0x2
+ 2081 0474 2F040000 		.long	0x42f
+ 2082 0478 06       		.uleb128 0x6
+ 2083 0479 62040000 		.long	0x462
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 50
 
 
- 2085 0478 9F040000 		.long	0x49f
- 2086 047c 09       		.uleb128 0x9
- 2087 047d 62697473 		.ascii "bits\0"
- 2087      00
- 2088 0482 09       		.byte	0x9
- 2089 0483 0B       		.byte	0xb
- 2090 0484 10       		.byte	0x10
- 2091 0485 9F040000 		.long	0x49f
- 2092 0489 02       		.byte	0x2
- 2093 048a 23       		.byte	0x23
- 2094 048b 00       		.uleb128 0
- 2095 048c 09       		.uleb128 0x9
- 2096 048d 706F696E 		.ascii "points\0"
- 2096      747300
- 2097 0494 09       		.byte	0x9
- 2098 0495 0C       		.byte	0xc
- 2099 0496 12       		.byte	0x12
- 2100 0497 A5040000 		.long	0x4a5
- 2101 049b 02       		.byte	0x2
- 2102 049c 23       		.byte	0x23
- 2103 049d 04       		.uleb128 0x4
- 2104 049e 00       		.byte	0
- 2105 049f 07       		.uleb128 0x7
- 2106 04a0 04       		.byte	0x4
- 2107 04a1 C9030000 		.long	0x3c9
- 2108 04a5 07       		.uleb128 0x7
- 2109 04a6 04       		.byte	0x4
- 2110 04a7 58040000 		.long	0x458
- 2111 04ab 05       		.uleb128 0x5
- 2112 04ac 44657465 		.ascii "Detector_Result_t\0"
- 2112      63746F72 
- 2112      5F526573 
- 2112      756C745F 
- 2112      7400
- 2113 04be 09       		.byte	0x9
- 2114 04bf 0D       		.byte	0xd
- 2115 04c0 02       		.byte	0x2
- 2116 04c1 73040000 		.long	0x473
- 2117 04c5 04       		.uleb128 0x4
- 2118 04c6 08       		.byte	0x8
- 2119 04c7 04       		.byte	0x4
- 2120 04c8 646F7562 		.ascii "double\0"
- 2120      6C6500
+ 2084 047d 0D       		.uleb128 0xd
+ 2085 047e 08       		.byte	0x8
+ 2086 047f 09       		.byte	0x9
+ 2087 0480 09       		.byte	0x9
+ 2088 0481 09       		.byte	0x9
+ 2089 0482 A9040000 		.long	0x4a9
+ 2090 0486 09       		.uleb128 0x9
+ 2091 0487 62697473 		.ascii "bits\0"
+ 2091      00
+ 2092 048c 09       		.byte	0x9
+ 2093 048d 0B       		.byte	0xb
+ 2094 048e 10       		.byte	0x10
+ 2095 048f A9040000 		.long	0x4a9
+ 2096 0493 02       		.byte	0x2
+ 2097 0494 23       		.byte	0x23
+ 2098 0495 00       		.uleb128 0
+ 2099 0496 09       		.uleb128 0x9
+ 2100 0497 706F696E 		.ascii "points\0"
+ 2100      747300
+ 2101 049e 09       		.byte	0x9
+ 2102 049f 0C       		.byte	0xc
+ 2103 04a0 12       		.byte	0x12
+ 2104 04a1 AF040000 		.long	0x4af
+ 2105 04a5 02       		.byte	0x2
+ 2106 04a6 23       		.byte	0x23
+ 2107 04a7 04       		.uleb128 0x4
+ 2108 04a8 00       		.byte	0
+ 2109 04a9 07       		.uleb128 0x7
+ 2110 04aa 04       		.byte	0x4
+ 2111 04ab C9030000 		.long	0x3c9
+ 2112 04af 07       		.uleb128 0x7
+ 2113 04b0 04       		.byte	0x4
+ 2114 04b1 62040000 		.long	0x462
+ 2115 04b5 05       		.uleb128 0x5
+ 2116 04b6 44657465 		.ascii "Detector_Result_t\0"
+ 2116      63746F72 
+ 2116      5F526573 
+ 2116      756C745F 
+ 2116      7400
+ 2117 04c8 09       		.byte	0x9
+ 2118 04c9 0D       		.byte	0xd
+ 2119 04ca 02       		.byte	0x2
+ 2120 04cb 7D040000 		.long	0x47d
  2121 04cf 0C       		.uleb128 0xc
  2122 04d0 5F696D70 		.ascii "_imp____mb_cur_max\0"
  2122      5F5F5F5F 
@@ -2998,7 +2998,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2128 04eb 01       		.byte	0x1
  2129 04ec 0A       		.uleb128 0xa
  2130 04ed 5E010000 		.long	0x15e
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 51
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 51
 
 
  2131 04f1 FC040000 		.long	0x4fc
@@ -3058,7 +3058,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2174 0563 10       		.uleb128 0x10
  2175 0564 5F696D70 		.ascii "_imp____wargv\0"
  2175      5F5F5F5F 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 52
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 52
 
 
  2175      77617267 
@@ -3118,7 +3118,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2216 05e9 15       		.byte	0x15
  2217 05ea 82050000 		.long	0x582
  2218 05ee 01       		.byte	0x1
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 53
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 53
 
 
  2219 05ef 01       		.byte	0x1
@@ -3178,7 +3178,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2257 0670 0A       		.byte	0xa
  2258 0671 5001     		.word	0x150
  2259 0673 19       		.byte	0x19
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 54
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 54
 
 
  2260 0674 0D060000 		.long	0x60d
@@ -3238,7 +3238,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2300 06fc 01       		.byte	0x1
  2301 06fd 0D       		.byte	0xd
  2302 06fe 14       		.byte	0x14
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 55
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 55
 
 
  2303 06ff 0F040000 		.long	0x40f
@@ -3298,7 +3298,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2350 0781 03       		.byte	0x3
  2351 0782 60000000 		.long	_STOP_PATTERN
  2352 0786 11       		.uleb128 0x11
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 56
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 56
 
 
  2353 0787 4D41585F 		.ascii "MAX_PIXEL_DRIFT\0"
@@ -3358,7 +3358,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2390 0813 01       		.byte	0x1
  2391 0814 1D       		.byte	0x1d
  2392 0815 12       		.byte	0x12
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 57
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 57
 
 
  2393 0816 16010000 		.long	0x116
@@ -3366,7 +3366,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2395 081b 03       		.byte	0x3
  2396 081c 94000000 		.long	_BARCODE_MIN_HEIGHT
  2397 0820 0A       		.uleb128 0xa
- 2398 0821 58040000 		.long	0x458
+ 2398 0821 62040000 		.long	0x462
  2399 0825 30080000 		.long	0x830
  2400 0829 0F       		.uleb128 0xf
  2401 082a D1000000 		.long	0xd1
@@ -3418,7 +3418,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2442 0890 91       		.byte	0x91
  2443 0891 5C       		.sleb128 -36
  2444 0892 15       		.uleb128 0x15
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 58
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 58
 
 
  2445 0893 59000000 		.secrel32	LASF4
@@ -3435,7 +3435,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2455 08aa 01       		.byte	0x1
  2456 08ab 7401     		.word	0x174
  2457 08ad 10       		.byte	0x10
- 2458 08ae 9F040000 		.long	0x49f
+ 2458 08ae A9040000 		.long	0x4a9
  2459 08b2 02       		.byte	0x2
  2460 08b3 91       		.byte	0x91
  2461 08b4 6C       		.sleb128 -20
@@ -3444,7 +3444,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2464 08ba 01       		.byte	0x1
  2465 08bb 7501     		.word	0x175
  2466 08bd 12       		.byte	0x12
- 2467 08be A5040000 		.long	0x4a5
+ 2467 08be AF040000 		.long	0x4af
  2468 08c2 02       		.byte	0x2
  2469 08c3 91       		.byte	0x91
  2470 08c4 68       		.sleb128 -24
@@ -3464,7 +3464,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2483 08dc 4F030000 		.long	0x34f
  2484 08e0 07       		.uleb128 0x7
  2485 08e1 04       		.byte	0x4
- 2486 08e2 AB040000 		.long	0x4ab
+ 2486 08e2 B5040000 		.long	0x4b5
  2487 08e6 18       		.uleb128 0x18
  2488 08e7 456D7074 		.ascii "Empty_Check\0"
  2488      795F4368 
@@ -3478,7 +3478,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2495 0900 8A0B0000 		.long	LFE23
  2496 0904 38000000 		.secrel32	LLST7
  2497 0908 01       		.byte	0x1
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 59
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 59
 
 
  2498 0909 59090000 		.long	0x959
@@ -3487,7 +3487,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2501 0912 01       		.byte	0x1
  2502 0913 5A01     		.word	0x15a
  2503 0915 2C       		.byte	0x2c
- 2504 0916 A5040000 		.long	0x4a5
+ 2504 0916 AF040000 		.long	0x4af
  2505 091a 02       		.byte	0x2
  2506 091b 91       		.byte	0x91
  2507 091c 00       		.sleb128 0
@@ -3538,7 +3538,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2548 0974 980A0000 		.long	LFB22
  2549 0978 2C0B0000 		.long	LFE22
  2550 097c 70000000 		.secrel32	LLST6
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 60
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 60
 
 
  2551 0980 01       		.byte	0x1
@@ -3598,7 +3598,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2602 09e6 00       		.byte	0
  2603 09e7 07       		.uleb128 0x7
  2604 09e8 04       		.byte	0x4
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 61
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 61
 
 
  2605 09e9 DD030000 		.long	0x3dd
@@ -3621,7 +3621,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2619 0a13 0101     		.word	0x101
  2620 0a15 18       		.byte	0x18
  2621 0a16 01       		.byte	0x1
- 2622 0a17 A5040000 		.long	0x4a5
+ 2622 0a17 AF040000 		.long	0x4af
  2623 0a1b 75090000 		.long	LFB21
  2624 0a1f 980A0000 		.long	LFE21
  2625 0a23 A8000000 		.secrel32	LLST5
@@ -3658,7 +3658,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2654 0a61 6C       		.sleb128 -20
  2655 0a62 16       		.uleb128 0x16
  2656 0a63 636F6C75 		.ascii "column\0"
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 62
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 62
 
 
  2656      6D6E00
@@ -3687,7 +3687,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2675 0a98 01       		.byte	0x1
  2676 0a99 0701     		.word	0x107
  2677 0a9b 12       		.byte	0x12
- 2678 0a9c A5040000 		.long	0x4a5
+ 2678 0a9c AF040000 		.long	0x4af
  2679 0aa0 02       		.byte	0x2
  2680 0aa1 91       		.byte	0x91
  2681 0aa2 60       		.sleb128 -32
@@ -3698,7 +3698,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2684 0aad 01       		.byte	0x1
  2685 0aae 0801     		.word	0x108
  2686 0ab0 12       		.byte	0x12
- 2687 0ab1 A5040000 		.long	0x4a5
+ 2687 0ab1 AF040000 		.long	0x4af
  2688 0ab5 02       		.byte	0x2
  2689 0ab6 91       		.byte	0x91
  2690 0ab7 5C       		.sleb128 -36
@@ -3712,13 +3712,13 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2695 0ac8 DF       		.byte	0xdf
  2696 0ac9 18       		.byte	0x18
  2697 0aca 01       		.byte	0x1
- 2698 0acb A5040000 		.long	0x4a5
+ 2698 0acb AF040000 		.long	0x4af
  2699 0acf B9070000 		.long	LFB20
  2700 0ad3 75090000 		.long	LFE20
  2701 0ad7 E0000000 		.secrel32	LLST4
  2702 0adb 01       		.byte	0x1
  2703 0adc 6E0B0000 		.long	0xb6e
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 63
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 63
 
 
  2704 0ae0 1C       		.uleb128 0x1c
@@ -3778,7 +3778,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2758 0b3b 1D       		.uleb128 0x1d
  2759 0b3c D0070000 		.long	LBB13
  2760 0b40 30080000 		.long	LBE13
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 64
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 64
 
 
  2761 0b44 560B0000 		.long	0xb56
@@ -3807,7 +3807,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2784 0b6c 00       		.byte	0
  2785 0b6d 00       		.byte	0
  2786 0b6e 0A       		.uleb128 0xa
- 2787 0b6f 58040000 		.long	0x458
+ 2787 0b6f 62040000 		.long	0x462
  2788 0b73 7E0B0000 		.long	0xb7e
  2789 0b77 0F       		.uleb128 0xf
  2790 0b78 D1000000 		.long	0xd1
@@ -3832,13 +3832,13 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2806 0ba6 01       		.byte	0x1
  2807 0ba7 D5       		.byte	0xd5
  2808 0ba8 2A       		.byte	0x2a
- 2809 0ba9 A5040000 		.long	0x4a5
+ 2809 0ba9 AF040000 		.long	0x4af
  2810 0bad 02       		.byte	0x2
  2811 0bae 91       		.byte	0x91
  2812 0baf 00       		.sleb128 0
  2813 0bb0 1F       		.uleb128 0x1f
  2814 0bb1 746D7052 		.ascii "tmpResult\0"
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 65
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 65
 
 
  2814      6573756C 
@@ -3879,7 +3879,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2844 0bfa 00       		.byte	0
  2845 0bfb 07       		.uleb128 0x7
  2846 0bfc 04       		.byte	0x4
- 2847 0bfd 6E040000 		.long	0x46e
+ 2847 0bfd 78040000 		.long	0x478
  2848 0c01 07       		.uleb128 0x7
  2849 0c02 04       		.byte	0x4
  2850 0c03 16010000 		.long	0x116
@@ -3898,7 +3898,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2859 0c28 E2060000 		.long	LFE18
  2860 0c2c 50010000 		.secrel32	LLST2
  2861 0c30 01       		.byte	0x1
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 66
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 66
 
 
  2862 0c31 A40D0000 		.long	0xda4
@@ -3958,7 +3958,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2916 0c8e 14       		.sleb128 20
  2917 0c8f 1F       		.uleb128 0x1f
  2918 0c90 70617474 		.ascii "patternlength\0"
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 67
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 67
 
 
  2918      65726E6C 
@@ -3976,7 +3976,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2928 0cad 01       		.byte	0x1
  2929 0cae 8B       		.byte	0x8b
  2930 0caf B0       		.byte	0xb0
- 2931 0cb0 A5040000 		.long	0x4a5
+ 2931 0cb0 AF040000 		.long	0x4af
  2932 0cb4 02       		.byte	0x2
  2933 0cb5 91       		.byte	0x91
  2934 0cb6 1C       		.sleb128 28
@@ -4018,7 +4018,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  2969 0cf3 91       		.byte	0x91
  2970 0cf4 50       		.sleb128 -48
  2971 0cf5 06       		.byte	0x6
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 68
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 68
 
 
  2972 0cf6 11       		.uleb128 0x11
@@ -4078,7 +4078,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  3015 0d6d 2F000000 		.secrel32	LASF10
  3016 0d71 01       		.byte	0x1
  3017 0d72 AD       		.byte	0xad
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 69
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 69
 
 
  3018 0d73 08       		.byte	0x8
@@ -4138,7 +4138,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  3068 0ddd 01       		.byte	0x1
  3069 0dde 390F0000 		.long	0xf39
  3070 0de2 1C       		.uleb128 0x1c
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 70
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 70
 
 
  3071 0de3 60000000 		.secrel32	LASF6
@@ -4198,7 +4198,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  3122 0e44 91       		.byte	0x91
  3123 0e45 14       		.sleb128 20
  3124 0e46 1C       		.uleb128 0x1c
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 71
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 71
 
 
  3125 0e47 0E000000 		.secrel32	LASF13
@@ -4258,7 +4258,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  3175 0eaa 02       		.byte	0x2
  3176 0eab 91       		.byte	0x91
  3177 0eac 68       		.sleb128 -24
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 72
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 72
 
 
  3178 0ead 11       		.uleb128 0x11
@@ -4318,7 +4318,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  3226 0f18 0B       		.byte	0xb
  3227 0f19 C1010000 		.long	0x1c1
  3228 0f1d 02       		.byte	0x2
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 73
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 73
 
 
  3229 0f1e 91       		.byte	0x91
@@ -4378,7 +4378,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  3278 0f8b 2A       		.byte	0x2a
  3279 0f8c 51       		.byte	0x51
  3280 0f8d 0F010000 		.long	0x10f
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 74
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 74
 
 
  3281 0f91 02       		.byte	0x2
@@ -4438,7 +4438,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  3324 0ffe 08       		.byte	0x8
  3325 0fff 06040000 		.long	0x406
  3326 1003 02       		.byte	0x2
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 75
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 75
 
 
  3327 1004 91       		.byte	0x91
@@ -4498,7 +4498,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  3377 106d 76617269 		.ascii "variance\0"
  3377      616E6365 
  3377      00
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 76
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 76
 
 
  3378 1076 01       		.byte	0x1
@@ -4558,7 +4558,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  3432 0029 03       		.uleb128 0x3
  3433 002a 08       		.uleb128 0x8
  3434 002b 1C       		.uleb128 0x1c
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 77
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 77
 
 
  3435 002c 0B       		.uleb128 0xb
@@ -4618,7 +4618,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  3489 0062 3B       		.uleb128 0x3b
  3490 0063 0B       		.uleb128 0xb
  3491 0064 39       		.uleb128 0x39
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 78
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 78
 
 
  3492 0065 0B       		.uleb128 0xb
@@ -4678,7 +4678,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  3546 009b 00       		.byte	0
  3547 009c 0D       		.uleb128 0xd
  3548 009d 13       		.uleb128 0x13
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 79
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 79
 
 
  3549 009e 01       		.byte	0x1
@@ -4738,7 +4738,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  3603 00d4 3C       		.uleb128 0x3c
  3604 00d5 0C       		.uleb128 0xc
  3605 00d6 00       		.byte	0
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 80
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 80
 
 
  3606 00d7 00       		.byte	0
@@ -4798,7 +4798,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  3660 010d 12       		.uleb128 0x12
  3661 010e 01       		.uleb128 0x1
  3662 010f 40       		.uleb128 0x40
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 81
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 81
 
 
  3663 0110 06       		.uleb128 0x6
@@ -4858,7 +4858,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  3717 0147 02       		.uleb128 0x2
  3718 0148 0A       		.uleb128 0xa
  3719 0149 00       		.byte	0
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 82
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 82
 
 
  3720 014a 00       		.byte	0
@@ -4918,7 +4918,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  3774 0181 1A       		.uleb128 0x1a
  3775 0182 2E       		.uleb128 0x2e
  3776 0183 01       		.byte	0x1
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 83
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 83
 
 
  3777 0184 03       		.uleb128 0x3
@@ -4978,7 +4978,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  3831 01bc 03       		.uleb128 0x3
  3832 01bd 0E       		.uleb128 0xe
  3833 01be 3A       		.uleb128 0x3a
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 84
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 84
 
 
  3834 01bf 0B       		.uleb128 0xb
@@ -5038,7 +5038,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  3888 01f6 3B       		.uleb128 0x3b
  3889 01f7 0B       		.uleb128 0xb
  3890 01f8 39       		.uleb128 0x39
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 85
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 85
 
 
  3891 01f9 0B       		.uleb128 0xb
@@ -5098,7 +5098,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  3945 0008 0200     		.word	0x2
  3946 000a 74       		.byte	0x74
  3947 000b 04       		.sleb128 4
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 86
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 86
 
 
  3948 000c 8B0B0000 		.long	LCFI24-Ltext0
@@ -5158,7 +5158,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  4002 0092 75       		.byte	0x75
  4003 0093 08       		.sleb128 8
  4004 0094 2B0B0000 		.long	LCFI20-Ltext0
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 87
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 87
 
 
  4005 0098 2C0B0000 		.long	LFE22-Ltext0
@@ -5218,7 +5218,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  4059 011c E3060000 		.long	LCFI9-Ltext0
  4060 0120 0200     		.word	0x2
  4061 0122 74       		.byte	0x74
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 88
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 88
 
 
  4062 0123 04       		.sleb128 4
@@ -5278,7 +5278,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  4116 01a8 0200     		.word	0x2
  4117 01aa 75       		.byte	0x75
  4118 01ab 08       		.sleb128 8
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 89
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 89
 
 
  4119 01ac 9C030000 		.long	LCFI5-Ltext0
@@ -5338,7 +5338,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  4171      00000101 
  4171      FB0E0D00 
  4171      01010101 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 90
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 90
 
 
  4172              	LASF2:
@@ -5396,32 +5396,32 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 1
  4199      69706C65 
  4199      00
  4200              		.ident	"GCC: (i686-posix-dwarf-rev0, Built by MinGW-W64 project) 8.1.0"
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s 			page 91
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s 			page 91
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 PDFDetector.c
-C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s:6      .rdata:00000000 _INDEXES_START_PATTERN
-C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s:12     .rdata:00000010 _INDEXES_STOP_PATTERN
-C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s:18     .rdata:00000020 _MAX_AVG_VARIANCE
-C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s:21     .rdata:00000024 _MAX_INDIVIDUAL_VARIANCE
-C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s:24     .rdata:00000040 _START_PATTERN
-C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s:34     .rdata:00000060 _STOP_PATTERN
-C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s:45     .rdata:00000084 _MAX_PIXEL_DRIFT
-C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s:48     .rdata:00000088 _MAX_PATTERN_DRIFT
-C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s:51     .rdata:0000008c _SKIPPED_ROW_COUNT_MAX
-C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s:54     .rdata:00000090 _ROW_STEP
-C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s:57     .rdata:00000094 _BARCODE_MIN_HEIGHT
-C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s:59     .bss:00000000 _Vertice_Result
-C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s:65     .text:00000000 _PatternMatchVariance
-C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s:233    .text:00000120 _FindGuardPattern
-C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s:544    .text:0000039d _FindRowsWithPattern
-C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s:935    .text:000006e2 _CopyToResult
-C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s:1054   .text:000007b9 _FindVertices
-C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s:1247   .text:00000975 _DetectBarcode
-C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s:1400   .text:00000a98 _HasStartPattern
-C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s:1464   .text:00000b2c _Empty_Check
-C:\Users\jisu8\AppData\Local\Temp\ccbO2aqh.s:1539   .text:00000b8a _Detect
+C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s:6      .rdata:00000000 _INDEXES_START_PATTERN
+C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s:12     .rdata:00000010 _INDEXES_STOP_PATTERN
+C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s:18     .rdata:00000020 _MAX_AVG_VARIANCE
+C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s:21     .rdata:00000024 _MAX_INDIVIDUAL_VARIANCE
+C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s:24     .rdata:00000040 _START_PATTERN
+C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s:34     .rdata:00000060 _STOP_PATTERN
+C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s:45     .rdata:00000084 _MAX_PIXEL_DRIFT
+C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s:48     .rdata:00000088 _MAX_PATTERN_DRIFT
+C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s:51     .rdata:0000008c _SKIPPED_ROW_COUNT_MAX
+C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s:54     .rdata:00000090 _ROW_STEP
+C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s:57     .rdata:00000094 _BARCODE_MIN_HEIGHT
+C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s:59     .bss:00000000 _Vertice_Result
+C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s:65     .text:00000000 _PatternMatchVariance
+C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s:233    .text:00000120 _FindGuardPattern
+C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s:544    .text:0000039d _FindRowsWithPattern
+C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s:935    .text:000006e2 _CopyToResult
+C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s:1054   .text:000007b9 _FindVertices
+C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s:1247   .text:00000975 _DetectBarcode
+C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s:1400   .text:00000a98 _HasStartPattern
+C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s:1464   .text:00000b2c _Empty_Check
+C:\Users\jisu8\AppData\Local\Temp\ccQpQ9wZ.s:1539   .text:00000b8a _Detect
 
 UNDEFINED SYMBOLS
 ___chkstk_ms

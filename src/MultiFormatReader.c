@@ -17,23 +17,31 @@
 
 #include "MultiFormatReader.h"
 #include "pdf417/PDFReader.h"
+#include "DecodeStatus.h"
+#include "Result.h"
 
-unsigned char * MultiFormatReader(GenericLuminanceSource_t * image,DecodeHints_t * hints) 
+result_t MultiFormatReader(GenericLuminanceSource_t * image,DecodeHints_t * hints) 
 {
+	result_t result;
 	uint8_t readers = 1;
 	// If we have only one reader in our list, just return whatever that decoded.
 	// This preserves information (e.g. ChecksumError) instead of just returning 'NotFound'.
 	if (readers == 1)//readers 사이즈가 1일때 진입
 	{
-		return decode(image,hints);
+		result = decode(image,hints);
+		return result;
 	}
 
-	#if 0
-	for (const auto& reader : _readers) {
-		Result r = reader->decode(image);
-  		if (r.isValid())
-			return r;
+	for (uint8_t i=0;i<readers;i++) 
+	{
+		result = decode(image,hints);
+  		if (result._status == NoError)
+		{
+			return result;
+		}
 	}
-	#endif
-	return NULL;
+
+	result._status = NotFound;
+
+	return result;
 }

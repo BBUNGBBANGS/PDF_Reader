@@ -71,6 +71,7 @@
         "pdfbarcodevalue.h": "c",
         "iomanip": "cpp",
         "pdfdecoderresultextra.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "result.h": "c"
     }
 }

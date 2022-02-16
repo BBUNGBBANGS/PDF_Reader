@@ -16,19 +16,28 @@
 
 #include <stdio.h>
 #include <time.h>
+#include "Result.h"
 
 #include "thirdparty/stb_image.h"
 #include "src/ReadBarcode.h"
 
 char filepath[200];
-#define FILE_TEST 		(1)
+#define FILE_TEST 		(7) 
+// 1 - OK
+// 2 - Array Overflow
+// 3 - OK
+// 4 - OK지만, text utf8 변환 필요
+// 5 - OK지만, text utf8 변환 필요
+// 6 - NULL 변환(CPP 프로그램도 에러 반환)
+// 7 - CreateDecoderResult trap
 
 int main()
 {
 	double startClock;
     int width, height, channels;
 	unsigned char *buffer = NULL;
-    const unsigned int *result;
+    uint8_t angleEscape = 0;
+    int ret = 0;
     // need to Test 7 images
     #if   (FILE_TEST == 1)
     sprintf(filepath,"./images/01.png");
@@ -59,16 +68,38 @@ int main()
 	printf("======TIME to decode=====\n");
 	startClock = clock();
 
-    result = ReadBarcode(buffer,width,height,RGBX);
+    result_t result = ReadBarcode(buffer,width,height,RGBX);
     printf("address : %x \n",result);
 
 	printf("Total Time = %3.2f msec.\r\n", clock() - startClock);
 	printf("=========================\n\n");
-    //while(1)
-    //{
-    printf("%s",filepath);
-        system("pause");
-    //}
-    return 0;
+
+    ret |= result._status; 
+
+    char printarray[20] = {0,};
+    printf("Text:     \"%s\"\n",result._text, angleEscape);
+    printf("Format:   %s\n",ToString_Format(result._format,printarray));
+    printf("Position: %dx%d %dx%d %dx%d %dx%d\n",result._position[0].x,result._position[0].y,result._position[1].x,result._position[1].y,result._position[2].x,result._position[2].y,result._position[3].x,result._position[3].y);
+    printf("Rotation: %d",Result_Orientation(&result));
+    printf(" deg\n");
+    printf("Error:    %s\n",ToString_Status(result._status,printarray));
+    #if 0
+	auto printOptional = [](const char* key, const std::string& v)
+	{
+		if (!v.empty())
+				std::cout << key << v << "\n";
+	};
+    #endif
+
+	printf("EC Level: %s\n", result._ecLevel);
+
+	if (result._readerInit)
+    {
+        printf("Reader Initialisation/Programming\n");
+    }
+
+    system("pause");
+
+    return ret;
 }
 

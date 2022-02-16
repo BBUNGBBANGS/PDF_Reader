@@ -255,13 +255,15 @@ static int AdjustRowNumbers(DetectionResultColumn_t * detectionResultColumns,int
 			continue;
 		}
 		Codeword_t * codewords = detectionResultColumns[barcodeColumn].m_value._codewords;
+		Codeword_t codewordst;
 		for (int codewordsRow = 0; codewordsRow < size; codewordsRow++) 
 		{
+			codewordst = codewords[codewordsRow];
 			if (codewords[codewordsRow].m_hasValue == 0) 
 			{
 				continue;
 			}
-			if (!codewords[codewordsRow].m_value._rowNumber != BARCODE_ROW_UNKNOWN && codewords[codewordsRow].m_value._bucket == (codewords[codewordsRow].m_value._rowNumber % 3) * 3) 
+			if (!((codewords[codewordsRow].m_value._rowNumber) != BARCODE_ROW_UNKNOWN && codewords[codewordsRow].m_value._bucket == (codewords[codewordsRow].m_value._rowNumber % 3) * 3)) 
 			{
 				AdjustRowNumbers_internal(detectionResultColumns, barcodeColumn, codewordsRow, codewords,size);
 			}

@@ -16,6 +16,7 @@
 
 #include "ReadBarcode.h"
 #include "MultiFormatReader.h"
+
 ImageView_t ImageView;
 DecodeHints_t DecodeHints;
 GenericLuminanceSource_t GenericLuminanceSource_;
@@ -25,10 +26,24 @@ static int PixStride(unsigned int format);
 static int RedIndex(unsigned int format);   
 static int GreenIndex(unsigned int format); 
 static int BlueIndex(unsigned int format);  
-static void ReadBarcode_Internal(GenericLuminanceSource_t *source,const DecodeHints_t *hints);
 
-unsigned int * ReadBarcode(unsigned char *iv, int width,int height, unsigned int ImageFormat)
+static result_t ReadBarcode_Internal(GenericLuminanceSource_t *source,const DecodeHints_t *hints)
 {
+	source->pixels = ImageView.data;
+	source->left = 0;
+	source->top = 0;
+	source->width = ImageView.width;
+	source->height = ImageView.height;
+	source->rowBytes = ImageView.width;
+	printf("static Result ReadBarcode : source= %x",source);
+	printf(" hints= %x \n",hints);
+
+	return MultiFormatReader(source,hints);
+}
+
+result_t ReadBarcode(unsigned char *iv, int width,int height, unsigned int ImageFormat)
+{
+	result_t result;
 	DecodeHints_t *hints;
 	unsigned int rowStride,pixStride;
 	uint32_t idxRed,idxGreen,idxBlue;
@@ -53,27 +68,10 @@ unsigned int * ReadBarcode(unsigned char *iv, int width,int height, unsigned int
 	ImageView.format = ImageFormat; 
 	ImageView.rowStride = rowStride; 
 	ImageView.pixStride = pixStride;
-
-	ReadBarcode_Internal(&GenericLuminanceSource_,hints);
 	
-    return (&ImageView);
+    return ReadBarcode_Internal(&GenericLuminanceSource_,hints);
 }
 
-static void ReadBarcode_Internal(GenericLuminanceSource_t *source,const DecodeHints_t *hints)
-{
-	unsigned char * ret_ptr;
-	source->pixels = ImageView.data;
-	source->left = 0;
-	source->top = 0;
-	source->width = ImageView.width;
-	source->height = ImageView.height;
-	source->rowBytes = ImageView.width;
-	printf("static Result ReadBarcode : source= %x",source);
-	printf(" hints= %x \n",hints);
-
-	ret_ptr = MultiFormatReader(source,hints);
-	return;
-}
 
 static void DecodeHints_Init(void)
 {

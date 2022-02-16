@@ -1,5 +1,8 @@
 #ifndef _BARCODEFORMAT_H
 #define _BARCODEFORMAT_H
+
+#include "DecodeStatus.h"
+
 typedef enum  
 {
 	// The values are an implementation detail. The c++ use-case (ZXing::Flags) could have been designed such that it
@@ -27,5 +30,6 @@ typedef enum
 	TwoDCodes = Aztec | DataMatrix | MaxiCode | PDF417 | QRCode,
 	Any       = OneDCodes | TwoDCodes,
 }BarcodeFormats_t;
-
+extern const char* ToString_Format(BarcodeFormats_t format,char * ret);
+extern const char* ToString_Status(DecodeStatus_t status,char * ret);
 #endif

@@ -3,7 +3,8 @@
 
 #include "DecodeHints.h"
 #include "GenericLuminanceSource.h"
+#include "Result.h"
 
-extern unsigned char * decode(GenericLuminanceSource_t * image,DecodeHints_t * hints);
+extern result_t decode(GenericLuminanceSource_t * image,DecodeHints_t * hints);
 
 #endif

@@ -117,13 +117,13 @@ uint8_t Bounding_Merge(const BoundingBox_t * leftBox, const BoundingBox_t * righ
 
 	if (leftBox->m_hasValue == 0) 
 	{
-		result = rightBox;
+		*result = *rightBox;
 		return 1;
 	}
 
 	if (rightBox->m_hasValue == 0) 
 	{
-		result = leftBox;
+		*result = *leftBox;
 		return 1;
 	}
 

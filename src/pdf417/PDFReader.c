@@ -6,6 +6,7 @@
 #include "PDFCodewordDecoder.h"
 #include "PDFScanningDecoder.h"
 #include "DecoderResult.h"
+#include "Result.h"
 #include <stdlib.h>
 
 static const int MODULES_IN_STOP_PATTERN = 18;
@@ -45,7 +46,7 @@ static int GetMaxCodewordWidth(ResultPoint_t * p)
 					__max(GetMaxWidth(p+1, p+5), GetMaxWidth(p+7, p+3) * MODULES_IN_CODEWORD / MODULES_IN_STOP_PATTERN));
 }
 
-DecodeStatus_t DoDecode(GenericLuminanceSource_t * image, unsigned char multiple, unsigned char * results,unsigned char * characterSet)
+DecodeStatus_t DoDecode(GenericLuminanceSource_t * image, unsigned char multiple, result_t * results,unsigned char * characterSet)
 {
 
 	printf(" DoDecode: img=%d, multiple=%d, res=%d, str=%d \n", image, multiple, results, characterSet);
@@ -60,57 +61,71 @@ DecodeStatus_t DoDecode(GenericLuminanceSource_t * image, unsigned char multiple
 	ResultPoint_t * points = detectorResult.points;
 	DecoderResult_t decoderResult;
 	result_init(&decoderResult);
+
 	//for (const auto& points : detectorResult.points) 
 	//{
 		decoderResult = Decode(detectorResult.bits, points[4], points[5], points[6], points[7],
 									GetMinCodewordWidth(points), GetMaxCodewordWidth(points), characterSet);
-		#if 0
-		if (decoderResult.isValid()) 
-		{
-			auto point = [&](int i) { return points[i].value(); };
 
-			Result result(std::move(decoderResult), {point(0), point(2), point(3), point(1)}, BarcodeFormat::PDF417);
-			results.push_back(result);
+		if (decoderResult.status == NoError) 
+		{
+			results->_status = decoderResult.status;
+			results->_format = PDF417;
+			results->_text = decoderResult._text;
+			results->_position[0].x = (int)points[0].m_value.x;
+			results->_position[0].y = (int)points[0].m_value.y;
+			results->_position[1].x = (int)points[2].m_value.x;
+			results->_position[1].y = (int)points[2].m_value.y;
+			results->_position[2].x = (int)points[3].m_value.x;
+			results->_position[2].y = (int)points[3].m_value.y;
+			results->_position[3].x = (int)points[1].m_value.x;
+			results->_position[3].y = (int)points[1].m_value.y;
+			results->_rawBytes = decoderResult._rawBytes;
+			results->_numBits = decoderResult._numBits;
+			results->_ecLevel = decoderResult._ecLevel;
+			//results->_metadata = decoderResult.;
+			results->_sai = decoderResult._structuredAppend;
+			results->_readerInit = decoderResult._readerInit;
 
 			if (!multiple) 
 			{
-				return DecodeStatus::NoError;
+				return NoError;
 			}
 		}
-		else
-		if (!multiple) 
+		else if (!multiple) 
 		{
-			return decoderResult.errorCode();
+			return decoderResult.status;
 		}
-	}
 
-	return results.empty() ? DecodeStatus::NotFound : DecodeStatus::NoError;
-	#endif
+	//}
+
+	return results->_status ? NotFound : NoError;
+
 }
 
-unsigned char * decode(GenericLuminanceSource_t * image,DecodeHints_t * hints)
+result_t decode(GenericLuminanceSource_t * image,DecodeHints_t * hints)
 {
 	unsigned int isPure = hints->isPure;
 	unsigned int characterSet = hints->characterSet;
-	unsigned char result = 0;
-	unsigned char results = 0;
+	result_t results;
 	DecodeStatus_t status;
 	
 	if (isPure) 
 	{
 		//result = DecodePure(image, characterSet);
 		//if (res.status() != DecodeStatus::ChecksumError)
-		return result;
+		return results;
 		// This falls through and tries the non-pure code path if we have a checksum error. This approach is
 		// currently the best option to deal with 'aliased' input like e.g. 03-aliased.png
 	}
 
-	status = DoDecode(image, 0, results, characterSet);
+	status = DoDecode(image, 0, &results, characterSet);
 
 	if (StatusIsOK(status)) 
 	{
-		return result;
+		return results;
 	}
-	return result;
+
+	return results;
 }
 

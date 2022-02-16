@@ -12,7 +12,7 @@ static const int MINIMUM_DIMENSION = BLOCK_SIZE * 5;
 static const int MIN_DYNAMIC_RANGE = 24;
 
 unsigned int blackpoints_data[1000][1000]; //사이즈 조정 필요
-uint8_t matrix_bits[115200];
+uint8_t matrix_bits[150000];
 /**
 * Calculates the final BitMatrix once for all requests. This could be called once from the
 * constructor instead, but there are some advantages to doing it lazily, such as making
@@ -181,7 +181,7 @@ static void InitBlackMatrix(GenericLuminanceSource_t * source, BitMatrix_t * out
 	CalculateThresholdForBlock(luminances, subWidth, subHeight, width, height, stride, matrix);
 }
 
-unsigned char * getBlackMatrix(GenericLuminanceSource_t * image)
+BitMatrix_t * getBlackMatrix(GenericLuminanceSource_t * image)
 {
 	
 	int width = image->width;
