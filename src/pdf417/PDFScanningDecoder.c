@@ -433,26 +433,26 @@ static int GetStartColumn(const DetectionResult_t * detectionResult, int barcode
 	}
 
 	int skippedColumns = 0;
-	#if 0
+
 	while (IsValidBarcodeColumn(detectionResult, barcodeColumn - offset)) 
 	{
 		barcodeColumn -= offset;
-		for (auto& previousRowCodeword : detectionResult.column(barcodeColumn).value().allCodewords()) 
+		for (int i=0;i<size;i++)
 		{
-			if (previousRowCodeword != nullptr) 
+			Codeword_t previousRowCodeword = detectionResult->_detectionResultColumns[barcodeColumn].m_value._codewords[i];
+			if (previousRowCodeword.m_hasValue != 0) 
 			{
-				return (leftToRight ? previousRowCodeword.value().endX() : previousRowCodeword.value().startX()) +
+				return (leftToRight ? previousRowCodeword.m_value._endX : previousRowCodeword.m_value._startX) +
 					offset *
 					skippedColumns *
-					(previousRowCodeword.value().endX() - previousRowCodeword.value().startX());
+					(previousRowCodeword.m_value._endX - previousRowCodeword.m_value._startX);
 			}
 		}
 		skippedColumns++;
 	}
-	#endif
+
 	return leftToRight ? detectionResult->_boundingBox.m_value._minX : detectionResult->_boundingBox.m_value._maxX;
 }
-
 
 static void CreateBarcodeMatrix(BarcodeValue_t * barcodeMatrix,DetectionResult_t * detectionResult,int size,int row,int column)
 {
@@ -477,7 +477,7 @@ static void CreateBarcodeMatrix(BarcodeValue_t * barcodeMatrix,DetectionResult_t
 							// We have more rows than the barcode metadata allows for, ignore them.
 							continue;
 						}
-						BarcodeSetValue(barcodeMatrix + rowNumber*column + columnNum,codeword.m_value._value);
+						BarcodeSetValue((&barcodeMatrix[rowNumber] + rowNumber * (column-1) + columnNum),codeword.m_value._value);
 					}
 				}
 			}
@@ -853,9 +853,9 @@ static DecoderResult_t CreateDecoderResultFromAmbiguousValues(int ecLevel, int *
 	{
 		for (size_t i = 0; i < ambiguousSize; i++) 
 		{
-			//codewords[ambiguousIndexes[i]] = ambiguousIndexValues[i][ambiguousIndexCount[i]];
+			codewords[ambiguousIndexes[i]] = *(&ambiguousIndexValues[i] + ambiguousIndexCount[i]);
 		}
-
+		
 		result = DecodeCodewords(codewords, ecLevel, erasureArray, characterSet,erasure_size,codewordsNum);
 
 		if (result.status != ChecksumError) 
@@ -893,20 +893,49 @@ static DecoderResult_t CreateDecoderResultFromAmbiguousValues(int ecLevel, int *
 	
 	return result;
 }
-static int find_idx(BarcodeValue_t * buffer)
+static int find_idx(BarcodeValue_t * buffer,int * value)
 {
-	int idx = 0;
+	int size = 1;
+	int max_element = 0;
+	int idx;
 	for(int i=0;i<1000;i++)
 	{
 		if(buffer->_values[i]!=0)
 		{
-			idx = i;
-			break;
+			if(buffer->_values[i]>max_element)
+			{	
+				max_element = buffer->_values[i];
+				idx = i;
+			}
+			else
+			{
+				if(buffer->_values[i] == max_element)
+				{
+					value[size] = i;
+					size++;	
+				}
+			}
 		}
 	}
 
-	return idx;
+	if(idx>value[1])
+	{
+		size = 1;
+	}
+
+	if(size > 1)
+	{
+		value[0] = idx;
+		return size;
+	}
+	else
+	{
+		value[0] = idx;
+		return 1;
+	}
+
 }
+
 static DecoderResult_t CreateDecoderResult(DetectionResult_t * detectionResult, const unsigned char * characterSet,int size)
 {
 	DecoderResult_t result_fault;
@@ -936,22 +965,28 @@ static DecoderResult_t CreateDecoderResult(DetectionResult_t * detectionResult, 
 	{
 		for (int column = 0; column < columnCount(&(detectionResult->_barcodeMetadata)); column++) 
 		{
-			int values[1] = {0};
-			values[0] = find_idx(&barcodeMatrix[row][column + 1]);
+			int values[10] = {0};
+			int values_size = 0;
+
+			values_size = find_idx(&barcodeMatrix[row][column + 1],values);
+			
 			int codewordIndex = row * columnCount(&(detectionResult->_barcodeMetadata)) + column;
-			if (values[0] == 0) 
+			if (values_size == 0) 
 			{
 				erasures[idx] = codewordIndex;
 				idx++;
 			}
-			else if (values[0] != 0) 
+			else if (values_size == 1) 
 			{
 				codewords[codewordIndex] = values[0];
 			}
 			else 
 			{
-				ambiguousIndexesList[ambiguousSize]=codewordIndex;
-				ambiguousIndexValues[ambiguousSize]=values;
+				ambiguousIndexesList[ambiguousSize] = codewordIndex;
+				for(int i=0;i<values_size;i++)
+				{
+					ambiguousIndexValues[i]=values[i];
+				}
 				ambiguousSize++;
 			}
 		}

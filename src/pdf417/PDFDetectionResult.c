@@ -66,7 +66,7 @@ static int AdjustRowNumberIfValid(int rowIndicatorRowNumber, int invalidRowCount
 {
 	if (!(codeword->m_value._rowNumber != BARCODE_ROW_UNKNOWN && codeword->m_value._bucket == (codeword->m_value._rowNumber % 3) * 3)) 
 	{
-		if (rowIndicatorRowNumber != BARCODE_ROW_UNKNOWN && codeword->m_value._bucket == (rowIndicatorRowNumber % 3) * 3) 
+		if (rowIndicatorRowNumber != BARCODE_ROW_UNKNOWN && codeword->m_value._bucket == ((rowIndicatorRowNumber % 3) * 3))
 		{
 			codeword->m_value._rowNumber = rowIndicatorRowNumber;
 			invalidRowCounts = 0;
@@ -175,7 +175,7 @@ static int AdjustRowNumbersByRow(DetectionResultColumn_t * detectionResultColumn
 static uint8_t AdjustRowNumber(Codeword_t * codeword, const Codeword_t * otherCodeword) 
 {
 	if ((codeword->m_hasValue != 0) && (otherCodeword->m_hasValue != 0) && 
-	   ((otherCodeword->m_value._rowNumber != BARCODE_ROW_UNKNOWN) && (otherCodeword->m_value._bucket == (otherCodeword->m_value._rowNumber % 3) * 3)) && 
+	   (otherCodeword->m_value._rowNumber != BARCODE_ROW_UNKNOWN && otherCodeword->m_value._bucket == (otherCodeword->m_value._rowNumber % 3) * 3) && 
 	   (otherCodeword->m_value._bucket == codeword->m_value._bucket)) 
 	{
 		codeword->m_value._rowNumber = (otherCodeword->m_value._rowNumber);
@@ -225,8 +225,9 @@ static void AdjustRowNumbers_internal(const DetectionResultColumn_t * detectionR
 
 	for (int i=0;i<size1;i++) 
 	{
-		if (AdjustRowNumber(&codeword, otherCodewords)) 
+		if (AdjustRowNumber(&codeword, &otherCodewords[i])) 
 		{
+			codewords[codewordsRow] = codeword;
 			return;
 		}
 	}
@@ -255,10 +256,8 @@ static int AdjustRowNumbers(DetectionResultColumn_t * detectionResultColumns,int
 			continue;
 		}
 		Codeword_t * codewords = detectionResultColumns[barcodeColumn].m_value._codewords;
-		Codeword_t codewordst;
 		for (int codewordsRow = 0; codewordsRow < size; codewordsRow++) 
 		{
-			codewordst = codewords[codewordsRow];
 			if (codewords[codewordsRow].m_hasValue == 0) 
 			{
 				continue;

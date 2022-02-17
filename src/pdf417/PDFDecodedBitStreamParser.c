@@ -153,7 +153,8 @@ static void DecodeTextCompaction(const int * textCompactionData, int length, uns
 	Mode_t priorToShiftMode = ALPHA;
 
 	int i = 0;
-	int character_idx = 0;
+	int character_idx = strlen(result);
+
 	while (i < length) 
 	{
 		int subModeCh = textCompactionData[i];

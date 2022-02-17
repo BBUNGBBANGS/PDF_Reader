@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 1
 
 
    1              		.file	"PDF.c"
@@ -7,9 +7,9 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
    4              		.comm	_filepath, 200, 5
    6              		.section .rdata,"dr"
    7              	LC0:
-   8 0000 2E2F696D 		.ascii "./images/22.jpg\0"
+   8 0000 2E2F696D 		.ascii "./images/21.jpg\0"
    8      61676573 
-   8      2F32322E 
+   8      2F32312E 
    8      6A706700 
    9              	LC1:
   10 0010 25642C25 		.ascii "%d,%d,%d\0"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
   26              	LC9:
   27 00b0 506F7369 		.ascii "Position: %dx%d %dx%d %dx%d %dx%d\12\0"
   27      74696F6E 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 2
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 2
 
 
   27      3A202564 
@@ -118,20 +118,20 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
   19:PDF.c         **** #include "Result.h"
   20:PDF.c         **** 
   21:PDF.c         **** #include "thirdparty/stb_image.h"
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 3
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 3
 
 
   22:PDF.c         **** #include "src/ReadBarcode.h"
   23:PDF.c         **** 
   24:PDF.c         **** char filepath[200];
-  25:PDF.c         **** #define FILE_TEST 		(7) 
+  25:PDF.c         **** #define FILE_TEST 		(6) 
   26:PDF.c         **** // 1 - OK
   27:PDF.c         **** // 2 - Array Overflow
   28:PDF.c         **** // 3 - OK
-  29:PDF.c         **** // 4 - OK지만, text utf8 변환 필요
-  30:PDF.c         **** // 5 - OK지만, text utf8 변환 필요
+  29:PDF.c         **** // 4 - OK
+  30:PDF.c         **** // 5 - OK
   31:PDF.c         **** // 6 - NULL 변환(CPP 프로그램도 에러 반환)
-  32:PDF.c         **** // 7 - vertical trap
+  32:PDF.c         **** // 7 - CreateDecoderResult trap
   33:PDF.c         **** 
   34:PDF.c         **** int main()
   35:PDF.c         **** {
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
   43:PDF.c         ****     sprintf(filepath,"./images/01.png");
   44:PDF.c         ****     #elif (FILE_TEST == 2)
   45:PDF.c         ****     sprintf(filepath,"./images/07.png");
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 4
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 4
 
 
   46:PDF.c         ****     #elif (FILE_TEST == 3)
@@ -189,15 +189,15 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
   51:PDF.c         ****     sprintf(filepath,"./images/20.bmp");
   52:PDF.c         ****     #elif (FILE_TEST == 6)
   53:PDF.c         ****     sprintf(filepath,"./images/21.jpg"); // Sample of No Decode
-  54:PDF.c         ****     #elif (FILE_TEST == 7)
-  55:PDF.c         ****     sprintf(filepath,"./images/22.jpg"); // Ecc Zero - Error with Trans
-  73              		.loc 1 55 5
+  73              		.loc 1 53 5
   74 0032 C7442404 		movl	$LC0, 4(%esp)
   74      00000000 
   75 003a C7042400 		movl	$_filepath, (%esp)
   75      000000
   76 0041 E8000000 		call	_sprintf
   76      00
+  54:PDF.c         ****     #elif (FILE_TEST == 7)
+  55:PDF.c         ****     sprintf(filepath,"./images/22.jpg"); // Ecc Zero - Error with Trans
   56:PDF.c         ****     #endif
   57:PDF.c         **** 
   58:PDF.c         ****     buffer = stbi_load(filepath,&width, &height, &channels, 4);
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
   61:PDF.c         **** 
   62:PDF.c         **** 	if (buffer == NULL)
   97              		.loc 1 62 5
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 5
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 5
 
 
   98 00af 83BC24EC 		cmpl	$0, 236(%esp)
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  127      00
   72:PDF.c         ****     printf("address : %x \n",result);
  128              		.loc 1 72 5
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 6
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 6
 
 
  129 012f 8D442404 		leal	4(%esp), %eax
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  159      00000000 
  160 01b8 C744247C 		movl	$0, 124(%esp)
  160      00000000 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 7
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 7
 
 
   80:PDF.c         ****     printf("Text:     \"%s\"\n",result._text, angleEscape);
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  196 026a 894C2408 		movl	%ecx, 8(%esp)
  197 026e 89442404 		movl	%eax, 4(%esp)
  198 0272 C70424B0 		movl	$LC9, (%esp)
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 8
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 8
 
 
  198      000000
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  224              		.loc 1 96 12
  225 02e7 0FB68424 		movzbl	200(%esp), %eax
  225      C8000000 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 9
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 9
 
 
  226              		.loc 1 96 5
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  267 031a 9090     		.section	.debug_info,"dr"
  268              	Ldebug_info0:
  269 0000 1E090000 		.long	0x91e
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 10
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 10
 
 
  270 0004 0200     		.word	0x2
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  306 00c4 6C6F6E67 		.ascii "long int\0"
  306      20696E74 
  306      00
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 11
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 11
 
 
  307 00cd 02       		.uleb128 0x2
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  348 013e 09       		.byte	0x9
  349 013f 94000000 		.long	0x94
  350 0143 02       		.byte	0x2
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 12
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 12
 
 
  351 0144 23       		.byte	0x23
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  399 01a1 5F746D70 		.ascii "_tmpfname\0"
  399      666E616D 
  399      6500
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 13
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 13
 
 
  400 01ab 02       		.byte	0x2
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  447 0211 5F74696D 		.ascii "_timezone\0"
  447      657A6F6E 
  447      6500
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 14
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 14
 
 
  448 021b 04       		.byte	0x4
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  496 0283 73686F72 		.ascii "short int\0"
  496      7420696E 
  496      7400
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 15
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 15
 
 
  497 028d 0C       		.uleb128 0xc
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  538 0303 0D       		.uleb128 0xd
  539 0304 436F6461 		.ascii "Codabar\0"
  539      62617200 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 16
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 16
 
 
  540 030c 02       		.byte	0x2
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  578      00
  579 0390 0040     		.word	0x4000
  580 0392 0E       		.uleb128 0xe
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 17
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 17
 
 
  581 0393 55504345 		.ascii "UPCE\0"
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  619 0412 07       		.byte	0x7
  620 0413 6C6F6E67 		.ascii "long long unsigned int\0"
  620      206C6F6E 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 18
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 18
 
 
  620      6720756E 
@@ -1078,7 +1078,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  667      7800
  668 0482 09       		.byte	0x9
  669 0483 06       		.byte	0x6
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 19
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 19
 
 
  670 0484 06       		.byte	0x6
@@ -1138,7 +1138,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  717 04eb 52657375 		.ascii "ResultMetadata_t\0"
  717      6C744D65 
  717      74616461 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 20
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 20
 
 
  717      74615F74 
@@ -1198,7 +1198,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  765 0559 5F726177 		.ascii "_rawBytes\0"
  765      42797465 
  765      7300
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 21
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 21
 
 
  766 0563 0A       		.byte	0xa
@@ -1258,7 +1258,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  811 05c7 0A       		.byte	0xa
  812 05c8 1A       		.byte	0x1a
  813 05c9 0A       		.byte	0xa
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 22
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 22
 
 
  814 05ca 00040000 		.long	0x400
@@ -1318,7 +1318,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  859 0641 01       		.byte	0x1
  860 0642 01       		.byte	0x1
  861 0643 09       		.uleb128 0x9
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 23
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 23
 
 
  862 0644 5F737973 		.ascii "_sys_nerr\0"
@@ -1378,7 +1378,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  905 06b8 0B       		.uleb128 0xb
  906 06b9 5F696D70 		.ascii "_imp___environ\0"
  906      5F5F5F65 
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 24
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 24
 
 
  906      6E766972 
@@ -1438,7 +1438,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  946 073e 04       		.byte	0x4
  947 073f 84000000 		.long	0x84
  948 0743 0B       		.uleb128 0xb
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 25
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 25
 
 
  949 0744 5F696D70 		.ascii "_imp___osver\0"
@@ -1498,7 +1498,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  989 07bf 07       		.byte	0x7
  990 07c0 04       		.byte	0x4
  991 07c1 84000000 		.long	0x84
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 26
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 26
 
 
  992 07c5 0D       		.byte	0xd
@@ -1558,7 +1558,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  1039 0840 01       		.byte	0x1
  1040 0841 6D61696E 		.ascii "main\0"
  1040      00
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 27
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 27
 
 
  1041 0846 01       		.byte	0x1
@@ -1618,7 +1618,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  1088 08b7 01       		.byte	0x1
  1089 08b8 26       		.byte	0x26
  1090 08b9 11       		.byte	0x11
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 28
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 28
 
 
  1091 08ba D2050000 		.long	0x5d2
@@ -1678,7 +1678,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  1140              	Ldebug_abbrev0:
  1141 0000 01       		.uleb128 0x1
  1142 0001 11       		.uleb128 0x11
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 29
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 29
 
 
  1143 0002 01       		.byte	0x1
@@ -1738,7 +1738,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  1197 0038 01       		.byte	0x1
  1198 0039 03       		.uleb128 0x3
  1199 003a 08       		.uleb128 0x8
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 30
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 30
 
 
  1200 003b 0B       		.uleb128 0xb
@@ -1798,7 +1798,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  1254 0071 49       		.uleb128 0x49
  1255 0072 13       		.uleb128 0x13
  1256 0073 3F       		.uleb128 0x3f
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 31
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 31
 
 
  1257 0074 0C       		.uleb128 0xc
@@ -1858,7 +1858,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  1311 00aa 00       		.byte	0
  1312 00ab 03       		.uleb128 0x3
  1313 00ac 08       		.uleb128 0x8
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 32
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 32
 
 
  1314 00ad 1C       		.uleb128 0x1c
@@ -1918,7 +1918,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  1368 00e3 00       		.byte	0
  1369 00e4 00       		.byte	0
  1370 00e5 12       		.uleb128 0x12
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 33
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 33
 
 
  1371 00e6 2E       		.uleb128 0x2e
@@ -1978,7 +1978,7 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  1425 0000 00000000 		.long	LFB19-Ltext0
  1426 0004 01000000 		.long	LCFI0-Ltext0
  1427 0008 0200     		.word	0x2
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 34
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 34
 
 
  1428 000a 74       		.byte	0x74
@@ -2020,13 +2020,13 @@ GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 1
  1461      FB0E0D00 
  1461      01010101 
  1462              		.ident	"GCC: (i686-posix-dwarf-rev0, Built by MinGW-W64 project) 8.1.0"
-GAS LISTING C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s 			page 35
+GAS LISTING C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s 			page 35
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 PDF.c
                             *COM*:000000c8 _filepath
-C:\Users\jisu8\AppData\Local\Temp\cc0XR9sR.s:44     .text:00000000 _main
+C:\Users\jisu8\AppData\Local\Temp\ccpt7O5U.s:44     .text:00000000 _main
 
 UNDEFINED SYMBOLS
 ___main

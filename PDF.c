@@ -22,13 +22,13 @@
 #include "src/ReadBarcode.h"
 
 char filepath[200];
-#define FILE_TEST 		(7) 
+#define FILE_TEST 		(6) 
 // 1 - OK
 // 2 - Array Overflow
 // 3 - OK
-// 4 - OK지만, text utf8 변환 필요
-// 5 - OK지만, text utf8 변환 필요
-// 6 - NULL 변환(CPP 프로그램도 에러 반환)
+// 4 - OK
+// 5 - OK
+// 6 - NULL 변환
 // 7 - CreateDecoderResult trap
 
 int main()
